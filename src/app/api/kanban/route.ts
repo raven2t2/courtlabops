@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 import { readFile } from "fs/promises"
 import path from "path"
 
-// Point to authoritative kanban source in courtlab-crm
-const DATA_FILE = path.join(process.cwd(), "..", "courtlab-crm", "kanban", "board.json")
+// Load CRM kanban (copied from courtlab-crm/kanban/board.json)
+const DATA_FILE = path.join(process.cwd(), "data", "kanban-crm.json")
 
 type CRMTask = {
   title: string
