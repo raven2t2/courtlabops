@@ -39,7 +39,8 @@
         "AFF-005",
         "AFF-006",
         "AFF-007",
-        "AFF-008"
+        "AFF-008",
+        "SETUP-001"
       ]
     },
     {
@@ -400,6 +401,51 @@
           }
         ]
       }
+    },
+    "SETUP-001": {
+      "title": "🔑 Set up Twitter API v2 for automated posting",
+      "description": "Get API credentials from Twitter Developer Portal to enable automated tweet scheduling",
+      "priority": "high",
+      "owner": "Michael",
+      "links": {
+        "internal": [
+          {
+            "label": "Tweet Drafts",
+            "url": "https://courtlabops.vercel.app/tweets"
+          },
+          {
+            "label": "Posting Schedule",
+            "url": "https://courtlabops.vercel.app/data/twitter-posting-schedule.json"
+          }
+        ],
+        "external": [
+          {
+            "label": "Twitter Developer Portal",
+            "url": "https://developer.twitter.com/en/portal/dashboard"
+          },
+          {
+            "label": "Setup Guide",
+            "url": "https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api"
+          }
+        ]
+      },
+      "steps": [
+        "1. Go to https://developer.twitter.com/en/portal/dashboard",
+        "2. Click Create Project + App (or use existing)",
+        "3. Enable OAuth 2.0 User Authentication",
+        "4. Set App permissions to Read and Write",
+        "5. Generate API Key & Secret",
+        "6. Generate Access Token & Secret",
+        "7. Copy Bearer Token (if shown)",
+        "8. Provide all credentials to Esther for setup"
+      ],
+      "credentials_needed": [
+        "API Key (Consumer Key)",
+        "API Secret (Consumer Secret)",
+        "Access Token",
+        "Access Token Secret",
+        "Bearer Token (optional)"
+      ]
     }
   },
   "lastUpdated": "2026-02-08"
