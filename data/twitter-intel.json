@@ -1,0 +1,96 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-08T02:43:00Z",
+  "monitoring": {
+    "keywords": [
+      "basketball training app",
+      "basketball stats",
+      "combine testing",
+      "player development",
+      "basketball technology",
+      "basketball coach",
+      "youth basketball",
+      "Australian basketball",
+      "NBL",
+      "Easter Classic",
+      "HomeCourt app",
+      "Ballogy app",
+      "shooting tracker",
+      "verified stats",
+      "basketball data"
+    ],
+    "accounts_to_watch": [
+      "@BasketballAus",
+      "@BBALLAU_Coaches",
+      "@bouncepassau",
+      "@codebballau",
+      "@AusBballnews",
+      "@herwaysports",
+      "@parkoballtraining",
+      "@FoxBasketball",
+      "@NBL",
+      "@Adelaide36ers"
+    ],
+    "engagement_triggers": {
+      "CRITICAL": [
+        "Looking for basketball training app",
+        "Need stats tracking solution",
+        "Combine testing recommendations",
+        "Basketball app reviews",
+        "Coach technology recommendations"
+      ],
+      "HIGH": [
+        "Basketball development tools",
+        "Player tracking discussions",
+        "Australian basketball coaching",
+        "NBL youth pathways",
+        "Easter Classic mentions"
+      ],
+      "MEDIUM": [
+        "General basketball training",
+        "Youth sports technology",
+        "Coach frustrations with current tools"
+      ]
+    }
+  },
+  "insights": [],
+  "engagement_opportunities": [],
+  "competitor_mentions": [],
+  "strategy": {
+    "jab_jab_right_hook": {
+      "jabs": [
+        "Share training tips",
+        "Highlight player development insights",
+        "Celebrate local basketball moments",
+        "Comment on Australian basketball news",
+        "Engage with coaches' posts"
+      ],
+      "right_hooks": [
+        "DM outreach for partnerships (only after establishing value)",
+        "Club trial offers",
+        "Affiliate program invitations",
+        "Sponsor proposals"
+      ]
+    },
+    "response_guidelines": {
+      "authenticity": "Provide genuine value, not sales pitches",
+      "timing": "Engage within 1-2 hours of relevant posts (early responder advantage)",
+      "tone": "@EstherCourtLab = conversational, personal; @CourtLabApp = helpful, Kenny mascot",
+      "avoid": "Spam, repeated promotional content, arguing with competitors"
+    }
+  },
+  "monitoring_plan": {
+    "frequency": "Every 4 hours during AU business hours (8am-8pm ACDT)",
+    "method": "bird CLI search + account monitoring",
+    "alert_thresholds": {
+      "competitor_comparison": "IMMEDIATE RESPONSE",
+      "coach_pain_point": "RESPOND WITHIN 1 HOUR",
+      "australian_basketball_discussion": "ENGAGE AUTHENTICALLY",
+      "general_basketball": "MONITOR, SELECTIVE ENGAGEMENT"
+    }
+  },
+  "next_scan": {
+    "scheduled": "2026-02-08T06:00:00Z",
+    "focus": "Australian business hours (morning scan)"
+  }
+}
