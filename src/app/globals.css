@@ -1,77 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
-/* ─── Tailwind v4 CSS-First Theme (Oxide Engine) ────────────────────── */
 @theme inline {
-  /* Fonts */
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-display: 'Outfit', 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* ── CourtLab Elite Palette (OKLCH / P3-gamut) ──────────────────── */
-
-  /* Backgrounds */
   --color-bg-primary: oklch(0.145 0.005 285);
   --color-bg-secondary: oklch(0.17 0.005 285);
   --color-bg-tertiary: oklch(0.215 0.006 285);
   --color-bg-elevated: oklch(0.275 0.006 285);
   --color-bg-sidebar: oklch(0.135 0.005 285);
 
-  /* Borders */
   --color-border-subtle: oklch(0.22 0.008 280);
   --color-border-default: oklch(0.275 0.006 285);
   --color-border-hover: oklch(0.355 0.014 286);
 
-  /* Text */
   --color-text-primary: oklch(0.985 0.002 285);
   --color-text-secondary: oklch(0.705 0.015 286);
   --color-text-tertiary: oklch(0.553 0.014 286);
   --color-text-muted: oklch(0.42 0.012 286);
 
-  /* Accent: Hyper-Blue */
   --color-hyper-blue: oklch(0.546 0.245 264);
   --color-hyper-blue-hover: oklch(0.50 0.245 264);
   --color-hyper-blue-muted: oklch(0.546 0.245 264 / 0.12);
 
-  /* Accent: Velocity-Orange */
   --color-velocity-orange: oklch(0.632 0.26 30);
   --color-velocity-orange-hover: oklch(0.58 0.26 30);
   --color-velocity-orange-muted: oklch(0.632 0.26 30 / 0.10);
 
-  /* Accent: Blue */
   --color-accent-blue: oklch(0.623 0.214 259);
   --color-accent-blue-hover: oklch(0.56 0.214 259);
   --color-accent-blue-muted: oklch(0.623 0.214 259 / 0.12);
 
-  /* Accent: Orange */
   --color-accent-orange: oklch(0.702 0.194 41);
   --color-accent-orange-muted: oklch(0.702 0.194 41 / 0.10);
 
-  /* Accent: Green */
   --color-accent-green: oklch(0.723 0.219 149);
   --color-accent-green-muted: oklch(0.723 0.219 149 / 0.10);
 
-  /* Accent: Amber */
   --color-accent-amber: oklch(0.769 0.188 84);
   --color-accent-amber-muted: oklch(0.769 0.188 84 / 0.10);
 
-  /* Accent: Red */
   --color-accent-red: oklch(0.637 0.237 25);
   --color-accent-red-muted: oklch(0.637 0.237 25 / 0.10);
 
-  /* Accent: Violet */
   --color-accent-violet: oklch(0.586 0.22 293);
   --color-accent-violet-muted: oklch(0.586 0.22 293 / 0.10);
-
-  /* Animations */
-  --animate-fade-up: fadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  --animate-slide-in: slideIn 0.35s ease-out forwards;
 }
 
-/* ─── Base Reset ─────────────────────────────────────────────────────── */
-* {
-  margin: 0;
-  padding: 0;
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
@@ -82,32 +60,16 @@ html {
 }
 
 body {
+  min-height: 100dvh;
   background: var(--color-bg-primary);
   color: var(--color-text-primary);
   font-family: var(--font-sans);
-  min-height: 100dvh;
   line-height: 1.5;
-}
-
-/* ─── Scrollbar ──────────────────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-border-default);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-muted);
 }
 
 ::selection {
   background: var(--color-velocity-orange);
-  color: white;
+  color: #fff;
 }
 
 :focus-visible {
@@ -115,86 +77,16 @@ body {
   outline-offset: 2px;
 }
 
-/* ─── Utility Classes ────────────────────────────────────────────────── */
 .line-clamp-1 {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-/* ─── Keyframes ──────────────────────────────────────────────────────── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes slideIn {
-  from { opacity: 0; transform: translateX(-6px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-@keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 0 0 oklch(0.632 0.26 30 / 0.3); }
-  50% { box-shadow: 0 0 12px 4px oklch(0.632 0.26 30 / 0.12); }
-}
-
-.fade-up {
-  animation: var(--animate-fade-up);
-  opacity: 0;
-}
-.slide-in {
-  animation: var(--animate-slide-in);
-  opacity: 0;
-}
-
-/* ─── Premium Interaction Effects ───────────────────────────────────── */
-.hover-lift {
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 0.25s ease;
-}
-.hover-lift:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px -6px oklch(0 0 0 / 0.35),
-              0 0 0 1px oklch(1 0 0 / 0.04);
-}
-
-.hover-glow {
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.hover-glow:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px -4px oklch(0.546 0.245 264 / 0.25);
-}
-
-.pulse-glow {
-  animation: pulseGlow 2.5s ease-in-out infinite;
-}
-
-/* Glass morphism utility */
-.glass {
-  background: oklch(0.17 0.005 285 / 0.85);
-  backdrop-filter: blur(20px) saturate(1.2);
-  -webkit-backdrop-filter: blur(20px) saturate(1.2);
-}
-
-/* ─── Container Query Contexts ───────────────────────────────────────── */
-.cq-widget {
-  container-type: inline-size;
-  container-name: widget;
-}
-
-.cq-card {
-  container-type: inline-size;
-  container-name: card;
 }

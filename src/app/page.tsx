@@ -280,7 +280,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen w-full bg-[radial-gradient(circle_at_12%_-20%,oklch(0.45_0.14_258/.18),transparent_36%),radial-gradient(circle_at_92%_-18%,oklch(0.58_0.17_42/.16),transparent_40%)]">
-      <div className="mx-auto w-full max-w-[1920px] p-4 pb-8 pt-16 sm:p-6 sm:pt-6 lg:px-8">
+      <div className="mx-auto w-full max-w-none p-4 pb-8 pt-4 sm:p-6 lg:px-8">
         <Surface className="mb-4 border-border-default bg-bg-secondary/85">
           <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div>
