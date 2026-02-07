@@ -1,8 +1,9 @@
-import { readJsonFile, CoachesData } from "@/lib/data"
+import coachPartnersData from "../../../assets/coach-partners-australia.json"
+import type { CoachesData } from "@/lib/data"
 import { MapPin, Instagram, Target, Trophy } from "lucide-react"
 
 export default function CoachesPage() {
-  const data = readJsonFile<CoachesData>("./assets/coach-partners-australia.json")
+  const data = coachPartnersData as CoachesData
 
   const sortedProspects = [...data.prospects].sort((a, b) => {
     const priorityOrder = { "Critical": 0, "High": 1, "Medium": 2, "Low": 3 }
