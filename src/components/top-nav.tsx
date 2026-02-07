@@ -41,13 +41,13 @@ export function TopNav() {
         <div className="flex h-16 items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <Link href="/" className="group flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl border border-border-default bg-bg-secondary">
+              <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl border border-border-default bg-bg-secondary p-0.5">
                 <Image
                   src="/courtlab-main-logo.png"
                   alt="CourtLab logo"
-                  width={36}
-                  height={36}
-                  className="h-full w-full object-cover"
+                  width={40}
+                  height={40}
+                  className="h-full w-full object-contain"
                   priority
                 />
               </div>

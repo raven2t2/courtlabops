@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { 
   LayoutDashboard, 
@@ -31,8 +32,14 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-court-accent rounded-xl flex items-center justify-center text-xl">
-              🏀
+            <div className="w-10 h-10 overflow-hidden rounded-xl border border-court-highlight bg-court-secondary p-0.5">
+              <Image
+                src="/courtlab-main-logo.png"
+                alt="CourtLab logo"
+                width={40}
+                height={40}
+                className="h-full w-full object-contain"
+              />
             </div>
             <span className="text-2xl font-extrabold tracking-tight">
               Court<span className="text-court-accent">Lab</span>
