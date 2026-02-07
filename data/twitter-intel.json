@@ -1,96 +1,143 @@
 {
-  "version": "1.0",
-  "lastUpdated": "2026-02-08T02:43:00Z",
-  "monitoring": {
-    "keywords": [
-      "basketball training app",
-      "basketball stats",
-      "combine testing",
-      "player development",
-      "basketball technology",
-      "basketball coach",
-      "youth basketball",
-      "Australian basketball",
-      "NBL",
-      "Easter Classic",
-      "HomeCourt app",
-      "Ballogy app",
-      "shooting tracker",
-      "verified stats",
-      "basketball data"
-    ],
+  "version": "1.1",
+  "lastUpdated": "2026-02-08T03:05:00Z",
+  "insights": [
+    {
+      "date": "2026-02-08",
+      "category": "COMPETITOR_LAUNCH",
+      "priority": "CRITICAL",
+      "tweet_id": "2014367054493614348",
+      "author": "@35KYSportsMedia",
+      "mentions": "@reynesmith",
+      "text": "Louisville basketball great Reyne Smith launching RS Academy training app. Focus: Personalized workouts, real breakdowns, clear plan vs randomness.",
+      "url": "https://twitter.com/35KYSportsMedia/status/2014367054493614348",
+      "relevance": "CRITICAL - Direct competitor launching NOW",
+      "opportunity": "Monitor RS Academy positioning. Differentiate: Verified combine data vs personalized workouts.",
+      "engagement_action": "MONITOR - Don't engage yet, study their messaging first",
+      "notes": "RS Academy = workout-focused (drills, training plans). CourtLab = measurement-focused (verified stats, combine data). Different positioning."
+    },
+    {
+      "date": "2026-02-08",
+      "category": "PLAYER_DEVELOPMENT_APP",
+      "priority": "MEDIUM",
+      "tweet_id": "2016239207677649295",
+      "author": "@MrMrmusiczoo",
+      "text": "just made my #basketball app for #playerdevelopment sign up get your training and skills up",
+      "url": "https://twitter.com/MrMrmusiczoo/status/2016239207677649295",
+      "relevance": "MEDIUM - Indie developer launching basketball app",
+      "opportunity": "Low engagement (0 likes/RTs). Market crowded with small apps.",
+      "engagement_action": "SKIP - Too small",
+      "notes": "Generic player development app. No clear differentiation."
+    },
+    {
+      "date": "2026-02-08",
+      "category": "TRAINING_CONTENT",
+      "priority": "LOW",
+      "tweet_id": "2014813073177972783",
+      "author": "@GalenHarkness",
+      "text": "If this was helpful, we break this down every week and train it in the gym. EYG camps, training programs, and player development",
+      "url": "https://twitter.com/GalenHarkness/status/2014813073177972783",
+      "relevance": "LOW - Training content, not app-related",
+      "opportunity": "Skills coach promoting camps/programs. Potential affiliate target.",
+      "engagement_action": "MONITOR - Skills coaches are affiliate prospects",
+      "notes": "Galen Harkness runs EYG camps. Could be affiliate partner later."
+    },
+    {
+      "date": "2026-02-08",
+      "category": "AUSTRALIAN_BASKETBALL",
+      "priority": "MEDIUM",
+      "tweet_id": "N/A",
+      "author": "@Ayisha_Balogun",
+      "text": "Highlight from Australian Country Junior Basketball Cup - thankful to have competed",
+      "relevance": "MEDIUM - Australian youth basketball player",
+      "opportunity": "Youth player showcasing skills at Australian tournament. Target demographic.",
+      "engagement_action": "ENGAGE - Reply with encouragement, mention verified stats",
+      "notes": "Australian Country Junior Basketball Cup = target event for CourtLab presence"
+    },
+    {
+      "date": "2026-02-08",
+      "category": "AUSTRALIAN_BASKETBALL",
+      "priority": "LOW",
+      "tweet_id": "N/A",
+      "author": "@BJCole10",
+      "text": "The person who can revive the Bullets to be the powerhouse in Australian basketball deserves multiple medals",
+      "relevance": "LOW - NBL nostalgia, not actionable",
+      "opportunity": "Brisbane Bullets revival discussion. Australian basketball passion.",
+      "engagement_action": "SKIP - Not relevant to youth/coach market",
+      "notes": "NBL pro team discussion. CourtLab targets youth/development market."
+    }
+  ],
+  "competitor_mentions": [
+    {
+      "name": "RS Academy",
+      "author": "@reynesmith (Reyne Smith)",
+      "launch_date": "2026-01-22",
+      "positioning": "Personalized workouts, structure vs randomness, shooting focus",
+      "threat_level": "HIGH",
+      "notes": "Louisville basketball great. Credibility + shooting expertise. Workout-focused vs CourtLab's measurement focus."
+    }
+  ],
+  "engagement_queue": [
+    {
+      "priority": "HIGH",
+      "account": "@Ayisha_Balogun",
+      "tweet_id": "N/A",
+      "action": "Reply with encouragement + mention verified stats",
+      "draft": "Great work at the Australian Country Junior Cup! 🏀 Your dedication shows. When you're ready to track verified combine data and prove your progress, CourtLab has your back. Keep grinding! 💪",
+      "account_to_use": "@CourtLabApp",
+      "status": "QUEUED_FOR_APPROVAL"
+    }
+  ],
+  "keywords_tracked": [
+    {
+      "keyword": "basketball training app",
+      "last_scan": "2026-02-08T03:05:00Z",
+      "results_count": 10,
+      "notable_findings": "RS Academy competitor launch, indie apps entering market"
+    },
+    {
+      "keyword": "Australian basketball",
+      "last_scan": "2026-02-08T03:05:00Z",
+      "results_count": 10,
+      "notable_findings": "Youth tournament highlights, NBL discussions, player showcases"
+    },
+    {
+      "keyword": "basketball coach",
+      "last_scan": "2026-02-08T03:05:00Z",
+      "results_count": 10,
+      "notable_findings": "Minimal app/tech mentions. Focus on coaching philosophy."
+    }
+  ],
+  "next_scans": [
+    {
+      "keyword": "combine testing",
+      "scheduled": "2026-02-08T07:00:00Z"
+    },
+    {
+      "keyword": "HomeCourt app",
+      "scheduled": "2026-02-08T07:00:00Z"
+    },
+    {
+      "keyword": "Easter Classic",
+      "scheduled": "2026-02-08T07:00:00Z"
+    },
+    {
+      "keyword": "Adelaide basketball",
+      "scheduled": "2026-02-08T07:00:00Z"
+    }
+  ],
+  "monitoring_plan": {
+    "frequency": "Every 4 hours during AU business hours (8am-8pm ACDT)",
+    "method": "bird CLI search + mentions monitoring",
     "accounts_to_watch": [
       "@BasketballAus",
       "@BBALLAU_Coaches",
       "@bouncepassau",
       "@codebballau",
       "@AusBballnews",
-      "@herwaysports",
-      "@parkoballtraining",
-      "@FoxBasketball",
       "@NBL",
-      "@Adelaide36ers"
-    ],
-    "engagement_triggers": {
-      "CRITICAL": [
-        "Looking for basketball training app",
-        "Need stats tracking solution",
-        "Combine testing recommendations",
-        "Basketball app reviews",
-        "Coach technology recommendations"
-      ],
-      "HIGH": [
-        "Basketball development tools",
-        "Player tracking discussions",
-        "Australian basketball coaching",
-        "NBL youth pathways",
-        "Easter Classic mentions"
-      ],
-      "MEDIUM": [
-        "General basketball training",
-        "Youth sports technology",
-        "Coach frustrations with current tools"
-      ]
-    }
-  },
-  "insights": [],
-  "engagement_opportunities": [],
-  "competitor_mentions": [],
-  "strategy": {
-    "jab_jab_right_hook": {
-      "jabs": [
-        "Share training tips",
-        "Highlight player development insights",
-        "Celebrate local basketball moments",
-        "Comment on Australian basketball news",
-        "Engage with coaches' posts"
-      ],
-      "right_hooks": [
-        "DM outreach for partnerships (only after establishing value)",
-        "Club trial offers",
-        "Affiliate program invitations",
-        "Sponsor proposals"
-      ]
-    },
-    "response_guidelines": {
-      "authenticity": "Provide genuine value, not sales pitches",
-      "timing": "Engage within 1-2 hours of relevant posts (early responder advantage)",
-      "tone": "@EstherCourtLab = conversational, personal; @CourtLabApp = helpful, Kenny mascot",
-      "avoid": "Spam, repeated promotional content, arguing with competitors"
-    }
-  },
-  "monitoring_plan": {
-    "frequency": "Every 4 hours during AU business hours (8am-8pm ACDT)",
-    "method": "bird CLI search + account monitoring",
-    "alert_thresholds": {
-      "competitor_comparison": "IMMEDIATE RESPONSE",
-      "coach_pain_point": "RESPOND WITHIN 1 HOUR",
-      "australian_basketball_discussion": "ENGAGE AUTHENTICALLY",
-      "general_basketball": "MONITOR, SELECTIVE ENGAGEMENT"
-    }
-  },
-  "next_scan": {
-    "scheduled": "2026-02-08T06:00:00Z",
-    "focus": "Australian business hours (morning scan)"
+      "@Adelaide36ers",
+      "@reynesmith (NEW - competitor)"
+    ]
   }
 }
