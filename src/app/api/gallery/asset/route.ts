@@ -1,7 +1,7 @@
 import fs from "fs/promises"
 import path from "path"
 import { NextRequest, NextResponse } from "next/server"
-import { findGalleryAssetById, resolveGalleryFilePath } from "@/lib/gallery-store"
+import { buildRemoteAssetUrl, findGalleryAssetById, resolveGalleryFilePath } from "@/lib/gallery-store"
 
 function guessMimeFromPath(filePath: string): string {
   const ext = path.extname(filePath).toLowerCase()
@@ -22,17 +22,23 @@ export async function GET(request: NextRequest) {
     const file = searchParams.get("file")
 
     let targetFilePath: string | null = null
+    let remoteUrl: string | null = null
 
     if (id) {
       const asset = await findGalleryAssetById(id)
       if (asset) {
+        remoteUrl = asset.url.startsWith("http") ? asset.url : buildRemoteAssetUrl(asset.localPath)
         targetFilePath = await resolveGalleryFilePath(asset.localPath)
       }
     } else if (file) {
+      remoteUrl = buildRemoteAssetUrl(file)
       targetFilePath = await resolveGalleryFilePath(file)
     }
 
     if (!targetFilePath) {
+      if (remoteUrl) {
+        return NextResponse.redirect(remoteUrl, { status: 307 })
+      }
       return NextResponse.json({ error: "Asset not found" }, { status: 404 })
     }
 
