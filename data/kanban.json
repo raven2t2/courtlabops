@@ -1,0 +1,316 @@
+{
+  "version": "2026-02-07",
+  "lastUpdated": "2026-02-07T14:06:00+07:00",
+  "updatedBy": "Esther (CourtLab PM)",
+  "columns": [
+    {
+      "id": "backlog",
+      "title": "Backlog",
+      "hint": "Needs owner or not started",
+      "tone": "blue",
+      "cards": [
+        {
+          "id": "kb-000",
+          "title": "PM: Enforce git commit/push workflow",
+          "description": "Ensure every change is committed and pushed immediately. Verify Vercel deployment sync. No local-only work.",
+          "org": "DevOps",
+          "owner": "Esther",
+          "due": "Ongoing",
+          "priority": "high",
+          "tags": ["git", "deploy", "workflow"],
+          "status": "Active - monitoring"
+        },
+        {
+          "id": "kb-001",
+          "title": "Launch SA winter combine page",
+          "description": "Create landing page for SA Winter Combine with registration form, pricing, and schedule",
+          "org": "Growth",
+          "owner": "Michael",
+          "due": "Feb 10",
+          "priority": "high",
+          "tags": ["website", "events"]
+        },
+        {
+          "id": "kb-002",
+          "title": "Build coach partner FAQ sequence",
+          "description": "Email sequence answering common coach questions about CourtLab partnership",
+          "org": "Lifecycle",
+          "owner": "Esther",
+          "due": "Feb 12",
+          "priority": "medium",
+          "tags": ["email", "affiliates"]
+        },
+        {
+          "id": "kb-003",
+          "title": "Apple Search Ads 7-day review",
+          "description": "Review ASA performance after first week (Feb 13), adjust bids/keywords based on data",
+          "org": "Ads",
+          "owner": "Esther",
+          "due": "Feb 13",
+          "priority": "high",
+          "tags": ["ads", "analytics"]
+        },
+        {
+          "id": "kb-004",
+          "title": "Create Easter Classic sponsorship proposal",
+          "description": "PDF proposal for Easter Classic sponsors with combine activation details",
+          "org": "Sales",
+          "owner": "Esther",
+          "due": "Feb 14",
+          "priority": "critical",
+          "tags": ["sponsors", "easter-classic"]
+        },
+        {
+          "id": "kb-005",
+          "title": "Set up Facebook/Instagram API tokens",
+          "description": "Add FB_APP_ID, FB_APP_SECRET, IG_ACCESS_TOKEN to Vercel env vars",
+          "org": "Ops",
+          "owner": "Michael",
+          "due": "Feb 08",
+          "priority": "critical",
+          "tags": ["api", "social-media"]
+        }
+      ]
+    },
+    {
+      "id": "in-progress",
+      "title": "In Progress",
+      "hint": "Currently executing",
+      "tone": "orange",
+      "cards": [
+        {
+          "id": "ip-001",
+          "title": "Easter Classic booth package",
+          "description": "Finalize booth design, equipment list, staffing schedule for Apr 3-6 event",
+          "org": "Events",
+          "owner": "Michael",
+          "due": "Feb 13",
+          "priority": "critical",
+          "tags": ["easter-classic", "events"]
+        },
+        {
+          "id": "ip-002",
+          "title": "Forestville outreach sprint",
+          "description": "Personalized outreach to Forestville Eagles (warm lead via Zane)",
+          "org": "Sales",
+          "owner": "Esther",
+          "due": "Feb 09",
+          "priority": "warm",
+          "tags": ["outreach", "sa-clubs"]
+        },
+        {
+          "id": "ip-003",
+          "title": "Wire up Gallery to 207 assets",
+          "description": "Connect Gallery page to GitHub-hosted assets, enable preview/selection for posts",
+          "org": "Product",
+          "owner": "Esther",
+          "due": "Feb 07",
+          "priority": "high",
+          "tags": ["crm", "gallery", "content"],
+          "status": "95% complete - deployed"
+        },
+        {
+          "id": "ip-004",
+          "title": "Review first automated content batch",
+          "description": "Review and approve first auto-generated posts (generates 8 PM tonight)",
+          "org": "Content",
+          "owner": "Michael",
+          "due": "Feb 08",
+          "priority": "high",
+          "tags": ["content", "automation"]
+        }
+      ]
+    },
+    {
+      "id": "waiting",
+      "title": "Waiting / Blocked",
+      "hint": "External dependency or approval needed",
+      "tone": "violet",
+      "cards": [
+        {
+          "id": "bl-001",
+          "title": "Nunawading Spectres intro approval",
+          "description": "Waiting for user approval on personalized outreach email",
+          "org": "Leads",
+          "owner": "Esther",
+          "due": "Feb 14",
+          "priority": "contacted",
+          "tags": ["outreach", "vic-clubs"]
+        },
+        {
+          "id": "bl-002",
+          "title": "Twitter profile update (@EstherCourtLab)",
+          "description": "Update bio to CMO positioning - waiting for user to confirm completion",
+          "org": "Social",
+          "owner": "Michael",
+          "due": "Feb 08",
+          "priority": "high",
+          "tags": ["twitter", "branding"]
+        },
+        {
+          "id": "bl-003",
+          "title": "Approve warm Twitter DM templates",
+          "description": "5 warm leads identified from social listening - approve DMs before sending",
+          "org": "Social",
+          "owner": "Michael",
+          "due": "Feb 09",
+          "priority": "high",
+          "tags": ["twitter", "outreach", "dms"]
+        }
+      ]
+    },
+    {
+      "id": "done-recent",
+      "title": "Done This Week",
+      "hint": "Recently completed",
+      "tone": "green",
+      "cards": [
+        {
+          "id": "dn-001",
+          "title": "Deploy CRM to Vercel",
+          "description": "Successfully deployed courtlabops to https://courtlabops.vercel.app/",
+          "org": "DevOps",
+          "owner": "Esther",
+          "completed": "Feb 06",
+          "tags": ["deploy", "vercel"]
+        },
+        {
+          "id": "dn-002",
+          "title": "Build Content Calendar page",
+          "description": "Created /content page with Kenny's Tips queue, posting schedule, stats",
+          "org": "Product",
+          "owner": "Esther",
+          "completed": "Feb 06",
+          "tags": ["crm", "content"]
+        },
+        {
+          "id": "dn-003",
+          "title": "Build Gallery page with MediaViewer",
+          "description": "Created /gallery with full-screen preview, keyboard nav, asset selection",
+          "org": "Product",
+          "owner": "Esther",
+          "completed": "Feb 06",
+          "tags": ["crm", "gallery"]
+        },
+        {
+          "id": "dn-004",
+          "title": "Build Approvals page + auto-posting",
+          "description": "Created /approvals with queue management, approve/reject, Post Now button",
+          "org": "Product",
+          "owner": "Esther",
+          "completed": "Feb 06",
+          "tags": ["crm", "automation"]
+        },
+        {
+          "id": "dn-005",
+          "title": "Build Email Campaigns page",
+          "description": "Created /campaigns with one-click send, recipient selection, preview modal",
+          "org": "Product",
+          "owner": "Esther",
+          "completed": "Feb 06",
+          "tags": ["crm", "email"]
+        },
+        {
+          "id": "dn-006",
+          "title": "Add Instagram/Facebook API integration",
+          "description": "Full IG/FB API implementation with posting, engagement, events support",
+          "org": "Product",
+          "owner": "Esther",
+          "completed": "Feb 06",
+          "tags": ["api", "social-media"]
+        },
+        {
+          "id": "dn-007",
+          "title": "Research 20 Melbourne basketball clubs",
+          "description": "Added VIC-009 to VIC-026 with contact details and outreach strategies",
+          "org": "Research",
+          "owner": "Esther",
+          "completed": "Feb 05",
+          "tags": ["research", "vic-clubs"]
+        }
+      ]
+    }
+  ],
+  "owners": {
+    "Michael": {
+      "role": "Founder",
+      "tasks": {
+        "total": 8,
+        "backlog": 2,
+        "inProgress": 2,
+        "waiting": 2,
+        "done": 0
+      }
+    },
+    "Esther": {
+      "role": "Project Manager / CMO",
+      "tasks": {
+        "total": 12,
+        "backlog": 3,
+        "inProgress": 2,
+        "waiting": 1,
+        "done": 7
+      }
+    }
+  },
+  "archive": {
+    "2026-01": [
+      {
+        "id": "arc-001",
+        "title": "Initial CRM build",
+        "description": "Built lightweight CRM with Kanban, leads, tasks",
+        "completed": "Jan 2026"
+      },
+      {
+        "id": "arc-002",
+        "title": "Research 10 SA basketball clubs",
+        "description": "Personalized intros and outreach strategies for SA clubs",
+        "completed": "Jan 2026"
+      },
+      {
+        "id": "arc-003",
+        "title": "Apple Search Ads setup",
+        "description": "Configured AU ($1K/day) and Global ($1K/day x4) campaigns",
+        "completed": "Jan 2026"
+      },
+      {
+        "id": "arc-004",
+        "title": "Affiliate program framework",
+        "description": "20% recurring commission, 20 prospects identified",
+        "completed": "Jan 2026"
+      }
+    ],
+    "2026-02-week1": [
+      {
+        "id": "arc-005",
+        "title": "Complete SA sponsor database",
+        "description": "40+ sponsors across 4 tiers with contact details and scripts",
+        "completed": "Feb 01-07"
+      },
+      {
+        "id": "arc-006",
+        "title": "Social listening automation",
+        "description": "Built daily Twitter/Reddit monitoring with lead scoring and DM generation",
+        "completed": "Feb 01-07"
+      },
+      {
+        "id": "arc-007",
+        "title": "Bird authentication",
+        "description": "Successfully authenticated as @EstherCourtLab",
+        "completed": "Feb 01-07"
+      },
+      {
+        "id": "arc-008",
+        "title": "Dual Twitter strategy",
+        "description": "Created @EstherCourtLab (CMO) + @CourtLabApp (Brand) positioning",
+        "completed": "Feb 01-07"
+      },
+      {
+        "id": "arc-009",
+        "title": "Kenny's Tips library",
+        "description": "Created 20 basketball tips ready to post",
+        "completed": "Feb 01-07"
+      }
+    ]
+  }
+}
