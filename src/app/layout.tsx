@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { TopNav } from "@/components/top-nav";
+import { Sidebar } from "@/components/sidebar";
 
 export const metadata: Metadata = {
   title: "CourtLab CRM",
@@ -14,13 +14,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased min-h-screen bg-[#09090B]">
-        <TopNav />
-        <main className="flex-1 w-full px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8 lg:py-10">
-          <div className="max-w-[1600px] mx-auto">
+      <body className="antialiased h-screen bg-[#09090B]">
+        <div className="flex h-full w-full overflow-hidden">
+          <Sidebar />
+          <main className="flex-1 overflow-auto">
             {children}
-          </div>
-        </main>
+          </main>
+        </div>
       </body>
     </html>
   );
