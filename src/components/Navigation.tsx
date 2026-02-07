@@ -3,16 +3,17 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { 
-  LayoutDashboard, 
-  Users, 
-  Calendar, 
-  Target, 
+import {
+  LayoutDashboard,
+  Users,
+  Calendar,
+  Target,
   Trophy,
   FileText,
   Image as ImageIcon,
+  CheckCircle,
   Menu,
-  X
+  X,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -24,6 +25,7 @@ const navItems = [
   { href: "/coaches", label: "Coaches", icon: Trophy },
   { href: "/content", label: "Content", icon: FileText },
   { href: "/gallery", label: "Gallery", icon: ImageIcon },
+  { href: "/approvals", label: "Approvals", icon: CheckCircle },
 ];
 
 export function Navigation() {
