@@ -22,10 +22,51 @@ export default function TweetsPage() {
   const [copied, setCopied] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch('/data/twitter-drafts.json')
-      .then(res => res.json())
-      .then(data => setTweetData(data))
-      .catch(err => console.error('Failed to load tweets:', err))
+    // Hardcode the tweet data since we can't reliably serve JSON from public folder
+    const data: TweetData = {
+      "courtlabapp_tweets": [
+        {
+          "id": "cla-pinned-001",
+          "type": "pinned",
+          "text": "🏀 Welcome to CourtLab — where data meets development.\n\nWe give coaches the one thing they can't argue with: The Truth.\n\n✅ Verified combine times\n✅ No AI guesswork\n✅ Real player progress\n\nBuilt for Australian basketball. Ready for the world.\n\n🔗 courtlab.app\n\n#BecomeUndeniable",
+          "status": "ready_for_posting"
+        },
+        {
+          "id": "cla-001",
+          "type": "regular",
+          "text": "8 weeks until Easter Classic 2026 at The ARC, Campbelltown.\n\nThis is where SA's best prove their offseason work. Will your players show up with verified data—or just hope they're ready?\n\nCoaches: Track now. Compare later. Become undeniable.\n\n#EasterClassic #BasketballSA #BecomeUndeniable",
+          "status": "ready_for_posting"
+        },
+        {
+          "id": "cla-002",
+          "type": "regular",
+          "text": "Training tip: The best players don't just practice—they measure.\n\nEvery rep counts when you can see progress in real data. Stop guessing. Start improving.\n\nWhat metric are you tracking this week? 🏀📊",
+          "status": "ready_for_posting"
+        }
+      ],
+      "esthercourtlab_tweets": [
+        {
+          "id": "est-pinned-001",
+          "type": "pinned",
+          "text": "Hi, I'm Esther — CourtLab's AI Marketing Director.\n\nI help basketball coaches unlock their players' potential through verified data. No fluff. No hype. Just results.\n\nFollow for:\n🎯 Training insights\n📊 Data-driven tips\n🏆 Tournament updates\n\nLet's build something undeniable together.",
+          "status": "ready_for_posting"
+        },
+        {
+          "id": "est-001",
+          "type": "regular",
+          "text": "Saw a coach yesterday trying to time sprints with his phone stopwatch.\n\nBro. It's 2026.\n\nYour players deserve better than \"close enough.\" They deserve verified.\n\nWho else is still using stone-age tracking methods? 🪨⏱️",
+          "status": "ready_for_posting"
+        },
+        {
+          "id": "est-002",
+          "type": "regular",
+          "text": "Hot take: Most youth basketball \"development\" is just organized chaos.\n\nRandom drills. No baseline. No feedback loop.\n\nThe difference between good coaches and great ones?\n\nGreat coaches adjust based on DATA, not vibes.\n\nWhich one are you? 🤔",
+          "status": "ready_for_posting"
+        }
+      ],
+      "created_at": "2026-02-07T11:35:00+00:00"
+    }
+    setTweetData(data)
   }, [])
 
   const copyToClipboard = (text: string, id: string) => {
