@@ -1,0 +1,200 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-08T02:40:00Z",
+  "subreddits": [
+    "r/basketball",
+    "r/NBL",
+    "r/ausbasketball",
+    "r/BasketballTips",
+    "r/youthsports"
+  ],
+  "tracking": {
+    "keywords": [
+      "basketball training app",
+      "combine testing",
+      "player development",
+      "stats tracking",
+      "video analysis",
+      "shooting tracker",
+      "Australian basketball",
+      "Easter Classic",
+      "NBL",
+      "youth basketball"
+    ]
+  },
+  "insights": [
+    {
+      "date": "2026-02-08",
+      "subreddit": "r/basketballcoach",
+      "category": "app_recommendations",
+      "topic": "Free basketball stat tracking app feedback request",
+      "url": "https://www.reddit.com/r/basketballcoach/comments/1og4sup/built_a_free_basketball_stat_tracking_app_for/",
+      "relevance": "MEDIUM",
+      "notes": "Coach seeking feedback on stat tracking app. Mentions competitors: EasyStats, BasketballStats. Community actively looking for stat tracking solutions.",
+      "opportunity": "Users want stat tracking + minimal friction. CourtLab's verified combine data fills gap."
+    },
+    {
+      "date": "2026-02-08",
+      "subreddit": "r/basketballcoach",
+      "category": "competitor_mention",
+      "topic": "AI Highlight and Stat App Feedback",
+      "url": "https://www.reddit.com/r/basketballcoach/comments/1ffph3d/feedback_ai_highlight_and_stat_app_for_basketball/",
+      "relevance": "HIGH",
+      "competitor": "hooper.gg",
+      "notes": "AI-based stats and highlight app getting feedback. Coaches are open to AI tools but looking for reliability.",
+      "opportunity": "CourtLab's 'no AI' positioning differentiates. Coaches trust verified data over AI predictions."
+    },
+    {
+      "date": "2026-02-08",
+      "subreddit": "r/basketballcoach",
+      "category": "software_discussion",
+      "topic": "What programs/software do you coaches use?",
+      "url": "https://www.reddit.com/r/basketballcoach/comments/1m81v81/what_programssoftware_do_you_coaches_use/",
+      "relevance": "HIGH",
+      "notes": "Coaches discuss tools: Basketball Coaching (FIBA), Hoops Geek ($100/year), whiteboard recording, play drawing apps. Large pool of coaches seeking better solutions.",
+      "opportunity": "Gap between expensive coaching tools ($100+/year) and free solutions. CourtLab positioned as verified alternative."
+    },
+    {
+      "date": "2026-02-08",
+      "subreddit": "r/basketballcoach",
+      "category": "app_request",
+      "topic": "Best app for lineups and attendance",
+      "url": "https://www.reddit.com/r/basketballcoach/comments/1gio5uj/best_app_for_lineups_and_attendance/",
+      "relevance": "MEDIUM",
+      "notes": "Coaches looking for lineup management. Mentions intelli.coach as solution. Secondary need after stats/training.",
+      "opportunity": "CourtLab could add lineup management as secondary feature, but primary focus should remain verified player data."
+    },
+    {
+      "date": "2026-02-08",
+      "subreddit": "r/basketballcoach",
+      "category": "coaching_tools",
+      "topic": "App suggestions for basketball plays",
+      "url": "https://www.reddit.com/r/basketballcoach/comments/1ev8mzi/app_suggestions_for_basketball_plays/",
+      "relevance": "MEDIUM",
+      "notes": "Coaches discuss play diagramming tools. Basketball Coaching (FIBA), Hoops Geek mentioned again. UI/UX clarity important.",
+      "opportunity": "Coaches want simple, intuitive tools. CourtLab's simplicity (verified data only) vs complex AI = advantage."
+    },
+    {
+      "date": "2026-02-08",
+      "subreddit": "r/basketballcoach",
+      "category": "coaching_infrastructure",
+      "topic": "Coaches - free app to help manage subs",
+      "url": "https://www.reddit.com/r/basketballcoach/comments/1fpg8dh/coaches_a_free_app_to_help_manage_your_subs_great/",
+      "relevance": "LOW",
+      "notes": "Substitution management app. Mentions elite hoops app for practice planning. Different use case than CourtLab.",
+      "opportunity": "Users appreciate free + focused solutions. CourtLab's free tier for basic features could be attractive."
+    }
+  ],
+  "competitors_mentioned": [
+    {
+      "name": "HomeCourt",
+      "mentions": 0,
+      "notes": "Not mentioned in initial scan. May need direct search."
+    },
+    {
+      "name": "Ballogy",
+      "mentions": 0,
+      "notes": "Not mentioned in initial scan. May need direct search."
+    },
+    {
+      "name": "EasyStats",
+      "mentions": 1,
+      "notes": "Used by coaches for stat tracking. Mixed reviews."
+    },
+    {
+      "name": "BasketballStats",
+      "mentions": 1,
+      "notes": "Used by coaches for stat tracking. Mixed reviews."
+    },
+    {
+      "name": "Hoops Geek",
+      "mentions": 2,
+      "notes": "Popular coaching tool. $100/year subscription. Used for plays, stats, analysis."
+    },
+    {
+      "name": "hooper.gg",
+      "mentions": 1,
+      "notes": "AI highlight + stat app. Getting traction in coaching community."
+    },
+    {
+      "name": "intelli.coach",
+      "mentions": 1,
+      "notes": "Lineup management + substitution tool. Multi-sport (soccer, basketball)."
+    },
+    {
+      "name": "Basketball Coaching (FIBA)",
+      "mentions": 2,
+      "notes": "Official FIBA tool for coaches. Mentioned multiple times. Credible authority."
+    }
+  ],
+  "pain_points": [
+    {
+      "issue": "Stat tracking is fragmented",
+      "source": "r/basketballcoach",
+      "frequency": "HIGH",
+      "context": "Coaches use multiple apps (EasyStats, BasketballStats, Hoops Geek). No single source of truth.",
+      "opportunity": "CourtLab could be 'single app for verified player data'"
+    },
+    {
+      "issue": "AI reliability questioned",
+      "source": "r/basketballcoach",
+      "frequency": "MEDIUM",
+      "context": "hooper.gg getting feedback, but coaches skeptical of AI predictions without verification",
+      "opportunity": "CourtLab's 'no AI, just truth' messaging directly addresses this"
+    },
+    {
+      "issue": "Cost vs features tradeoff",
+      "source": "r/basketballcoach",
+      "frequency": "MEDIUM",
+      "context": "Hoops Geek $100/year, but coaches looking for free/cheap alternatives",
+      "opportunity": "Free tier with basic verified stats could attract coach segment"
+    },
+    {
+      "issue": "UI/UX clarity",
+      "source": "r/basketballcoach",
+      "frequency": "LOW",
+      "context": "Older apps require instructions/arrows. Coaches prefer intuitive design.",
+      "opportunity": "CourtLab must prioritize simplicity + clarity in UI"
+    }
+  ],
+  "australian_basketball": [
+    {
+      "date": "2026-02-08",
+      "subreddit": "r/ausbasketball",
+      "status": "NO RESULTS",
+      "notes": "r/ausbasketball may have limited traffic. Consider monitoring weekly rather than daily."
+    },
+    {
+      "date": "2026-02-08",
+      "subreddit": "r/NBL",
+      "status": "NOT SEARCHED",
+      "notes": "Rate limit hit. Will search in next batch."
+    }
+  ],
+  "monitoring_plan": {
+    "frequency": "Daily",
+    "method": "Brave Search + site: queries (respecting rate limits)",
+    "keywords_to_track": [
+      "basketball app",
+      "stats tracking",
+      "combine",
+      "verified data",
+      "training technology",
+      "player development",
+      "Australian basketball",
+      "NBL",
+      "Easter Classic"
+    ],
+    "alert_thresholds": {
+      "homecourt_mention": "CRITICAL",
+      "competitor_comparison": "HIGH",
+      "australian_basketball_discussion": "HIGH",
+      "player_development_tool_discussion": "MEDIUM",
+      "general_coaching_tool_discussion": "LOW"
+    }
+  },
+  "next_scan": {
+    "scheduled": "2026-02-09T00:00:00Z",
+    "focus": "r/NBL, r/ausbasketball, r/youthsports"
+  }
+}
