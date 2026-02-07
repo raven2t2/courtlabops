@@ -1,14 +1,15 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useMemo, useState } from "react"
 import {
+  Calendar,
   Check,
   Clock,
   Edit3,
   Eye,
   Filter,
+  Image as ImageIcon,
   Instagram,
-  MessageSquare,
   Play,
   Search,
   Send,
@@ -16,9 +17,6 @@ import {
   Trash2,
   Twitter,
   X,
-  Calendar,
-  Image as ImageIcon,
-  AlertCircle,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -41,6 +39,27 @@ interface Post {
   postedAt?: string
   postedUrl?: string
   error?: string
+}
+
+interface QueueStats {
+  total: number
+  pending: number
+  approved: number
+  rejected: number
+  posted: number
+  scheduled: number
+}
+
+interface GalleryAsset {
+  id: string
+  type: "image" | "video"
+  category: string
+  title: string
+  prompt: string
+  createdAt: string
+  useCase: string
+  filename: string
+  url: string
 }
 
 const PLATFORM_CONFIG: Record<Platform, { label: string; icon: typeof Twitter; color: string; bg: string }> = {
@@ -77,16 +96,43 @@ function Badge({ children, className = "" }: { children: React.ReactNode; classN
   )
 }
 
+function formatDate(dateString: string): string {
+  return new Date(dateString).toLocaleString("en-AU", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  })
+}
+
+function isVideoUrl(url: string): boolean {
+  const decoded = decodeURIComponent(url).toLowerCase()
+  return decoded.includes(".mp4") || decoded.includes(".mov") || decoded.includes(".webm")
+}
+
+function compact(text: string, max = 90): string {
+  if (text.length <= max) return text
+  return `${text.slice(0, max - 3)}...`
+}
+
 export default function ApprovalsPage() {
   const [posts, setPosts] = useState<Post[]>([])
-  const [selectedPost, setSelectedPost] = useState<Post | null>(null)
+  const [selectedPostId, setSelectedPostId] = useState<string | null>(null)
   const [filterPlatform, setFilterPlatform] = useState<Platform | "all">("all")
   const [filterStatus, setFilterStatus] = useState<PostStatus | "all">("pending")
   const [searchQuery, setSearchQuery] = useState("")
+  const [galleryQuery, setGalleryQuery] = useState("")
+  const [galleryType, setGalleryType] = useState<"all" | "image" | "video">("all")
+  const [galleryAssets, setGalleryAssets] = useState<GalleryAsset[]>([])
+  const [galleryOpen, setGalleryOpen] = useState(false)
   const [editMode, setEditMode] = useState(false)
   const [editedCaption, setEditedCaption] = useState("")
+  const [selectedMediaUrls, setSelectedMediaUrls] = useState<string[]>([])
   const [isLoading, setIsLoading] = useState(false)
-  const [stats, setStats] = useState({
+  const [isGalleryLoading, setIsGalleryLoading] = useState(false)
+  const [statusMessage, setStatusMessage] = useState<string | null>(null)
+  const [stats, setStats] = useState<QueueStats>({
     total: 0,
     pending: 0,
     approved: 0,
@@ -95,155 +141,177 @@ export default function ApprovalsPage() {
     scheduled: 0,
   })
 
-  // Load posts from API
+  const selectedPost = useMemo(() => posts.find((post) => post.id === selectedPostId) || null, [posts, selectedPostId])
+
+  const filteredPosts = useMemo(() => {
+    return posts.filter((post) => {
+      const matchesPlatform = filterPlatform === "all" || post.platform === filterPlatform
+      const matchesStatus = filterStatus === "all" || post.status === filterStatus
+      const searchable = `${post.caption} ${post.id}`.toLowerCase()
+      const matchesSearch = searchable.includes(searchQuery.toLowerCase())
+      return matchesPlatform && matchesStatus && matchesSearch
+    })
+  }, [posts, filterPlatform, filterStatus, searchQuery])
+
   useEffect(() => {
-    loadPosts()
-    loadStats()
+    void loadPosts()
+    void loadStats()
+    void loadGallery()
   }, [])
 
-  const loadPosts = async () => {
+  useEffect(() => {
+    if (!selectedPost) {
+      setEditedCaption("")
+      setSelectedMediaUrls([])
+      setEditMode(false)
+      return
+    }
+
+    setEditedCaption(selectedPost.caption)
+    setSelectedMediaUrls(selectedPost.mediaUrls || [])
+    setEditMode(false)
+  }, [selectedPostId, selectedPost])
+
+  async function loadPosts(): Promise<void> {
     try {
-      const res = await fetch('/api/queue')
-      const data = await res.json()
-      if (data.posts) {
-        setPosts(data.posts)
+      const res = await fetch("/api/queue", { cache: "no-store" })
+      const data = (await res.json()) as { posts?: Post[] }
+      const nextPosts = Array.isArray(data.posts) ? data.posts : []
+      setPosts(nextPosts)
+
+      if (nextPosts.length > 0 && (!selectedPostId || !nextPosts.some((post) => post.id === selectedPostId))) {
+        setSelectedPostId(nextPosts[0].id)
       }
-    } catch (err) {
-      console.error('Failed to load posts:', err)
+
+      if (nextPosts.length === 0) {
+        setSelectedPostId(null)
+      }
+    } catch (error) {
+      console.error("Failed to load posts", error)
+      setStatusMessage("Failed to load review queue.")
     }
   }
 
-  const loadStats = async () => {
+  async function loadStats(): Promise<void> {
     try {
-      const res = await fetch('/api/post/status')
-      const data = await res.json()
+      const res = await fetch("/api/post", { cache: "no-store" })
+      const data = (await res.json()) as { stats?: QueueStats }
       if (data.stats) {
         setStats(data.stats)
       }
-    } catch (err) {
-      console.error('Failed to load stats:', err)
+    } catch (error) {
+      console.error("Failed to load queue stats", error)
     }
   }
 
-  const filteredPosts = posts.filter((post) => {
-    const matchesPlatform = filterPlatform === "all" || post.platform === filterPlatform
-    const matchesStatus = filterStatus === "all" || post.status === filterStatus
-    const matchesSearch = post.caption.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchesPlatform && matchesStatus && matchesSearch
-  })
+  async function loadGallery(query = galleryQuery, type = galleryType): Promise<void> {
+    setIsGalleryLoading(true)
 
-  const handleApprove = async (postId: string) => {
-    setIsLoading(true)
     try {
-      const res = await fetch('/api/queue', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ postId, action: 'approve' }),
+      const params = new URLSearchParams()
+      params.set("limit", "120")
+      if (query.trim().length > 0) params.set("q", query.trim())
+      if (type !== "all") params.set("type", type)
+
+      const res = await fetch(`/api/gallery?${params.toString()}`, { cache: "no-store" })
+      const data = (await res.json()) as { assets?: GalleryAsset[] }
+      setGalleryAssets(Array.isArray(data.assets) ? data.assets : [])
+    } catch (error) {
+      console.error("Failed to load gallery", error)
+      setStatusMessage("Gallery is unavailable right now.")
+    } finally {
+      setIsGalleryLoading(false)
+    }
+  }
+
+  async function updatePost(postId: string, action: "approve" | "reject" | "edit", edits?: Partial<Post>): Promise<void> {
+    setIsLoading(true)
+
+    try {
+      const res = await fetch("/api/queue", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ postId, action, edits }),
       })
-      if (res.ok) {
-        await loadPosts()
-        await loadStats()
-        if (selectedPost?.id === postId) {
-          setSelectedPost({ ...selectedPost, status: "approved" })
-        }
+
+      if (!res.ok) {
+        const payload = (await res.json()) as { error?: string }
+        throw new Error(payload.error || "Failed to update post")
       }
-    } catch (err) {
-      console.error('Failed to approve:', err)
+
+      await loadPosts()
+      await loadStats()
+      setStatusMessage("Post updated.")
+    } catch (error) {
+      console.error("Failed to update post", error)
+      setStatusMessage(error instanceof Error ? error.message : "Failed to update post")
+    } finally {
+      setIsLoading(false)
     }
-    setIsLoading(false)
   }
 
-  const handleReject = async (postId: string) => {
+  async function handlePublishNow(postId: string): Promise<void> {
     setIsLoading(true)
-    try {
-      const res = await fetch('/api/queue', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ postId, action: 'reject' }),
-      })
-      if (res.ok) {
-        await loadPosts()
-        await loadStats()
-        if (selectedPost?.id === postId) {
-          setSelectedPost({ ...selectedPost, status: "rejected" })
-        }
-      }
-    } catch (err) {
-      console.error('Failed to reject:', err)
-    }
-    setIsLoading(false)
-  }
 
-  const handleEditSave = async (postId: string) => {
-    setIsLoading(true)
     try {
-      const res = await fetch('/api/queue', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ postId, action: 'approve', edits: { caption: editedCaption } }),
-      })
-      if (res.ok) {
-        await loadPosts()
-        setEditMode(false)
-        if (selectedPost) {
-          setSelectedPost({ ...selectedPost, caption: editedCaption })
-        }
-      }
-    } catch (err) {
-      console.error('Failed to save edit:', err)
-    }
-    setIsLoading(false)
-  }
-
-  const handlePublishNow = async (postId: string) => {
-    setIsLoading(true)
-    try {
-      const res = await fetch('/api/post', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/post", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ postId }),
       })
-      const data = await res.json()
-      if (data.success) {
-        await loadPosts()
-        await loadStats()
-        alert(`Posted successfully! ${data.posted} items published.`)
-      } else {
-        alert(`Post failed: ${data.results?.[0]?.error || 'Unknown error'}`)
+
+      const data = (await res.json()) as { success?: boolean; posted?: number; results?: Array<{ error?: string }> }
+      if (!data.success) {
+        throw new Error(data.results?.[0]?.error || "Post failed")
       }
-    } catch (err) {
-      console.error('Failed to publish:', err)
+
+      await loadPosts()
+      await loadStats()
+      setStatusMessage(`Published ${data.posted || 0} post(s).`)
+    } catch (error) {
+      console.error("Failed to publish", error)
+      setStatusMessage(error instanceof Error ? error.message : "Failed to publish")
+    } finally {
+      setIsLoading(false)
     }
-    setIsLoading(false)
   }
 
-  const formatTime = (dateString: string) => {
-    return new Date(dateString).toLocaleString("en-AU", {
-      weekday: "short",
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
+  function toggleAsset(asset: GalleryAsset): void {
+    setSelectedMediaUrls((current) => {
+      if (current.includes(asset.url)) {
+        return current.filter((url) => url !== asset.url)
+      }
+      const next = [...current, asset.url]
+      return next.slice(0, 4)
     })
   }
 
+  const mediaChanged = useMemo(() => {
+    if (!selectedPost) return false
+    const existing = selectedPost.mediaUrls || []
+    if (existing.length !== selectedMediaUrls.length) return true
+    return existing.some((url, index) => url !== selectedMediaUrls[index])
+  }, [selectedPost, selectedMediaUrls])
+
+  const captionChanged = useMemo(() => {
+    if (!selectedPost) return false
+    return editedCaption !== selectedPost.caption
+  }, [selectedPost, editedCaption])
+
   return (
     <div className="min-h-screen w-full bg-[radial-gradient(circle_at_12%_-20%,oklch(0.45_0.14_258/.18),transparent_36%),radial-gradient(circle_at_92%_-18%,oklch(0.58_0.17_42/.16),transparent_40%)]">
-      <div className="mx-auto w-full max-w-none p-4 pb-8 pt-4 sm:p-6 lg:px-8">
-        {/* Header */}
+      <div className="mx-auto w-full max-w-[1700px] p-4 pb-8 pt-4 sm:p-6 lg:px-8">
         <Surface className="mb-4 border-border-default bg-bg-secondary/85">
           <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <div className="mb-1 flex items-center gap-2">
                 <p className="text-xs font-semibold uppercase tracking-widest text-text-muted">Content Approval Queue</p>
-                {stats.pending > 0 && (
-                  <Badge className="border-accent-amber/40 bg-accent-amber-muted text-accent-amber">
-                    {stats.pending} Pending
-                  </Badge>
-                )}
+                {stats.pending > 0 ? (
+                  <Badge className="border-accent-amber/40 bg-accent-amber-muted text-accent-amber">{stats.pending} Pending</Badge>
+                ) : null}
               </div>
-              <h1 className="text-2xl font-extrabold tracking-tight text-text-primary sm:text-3xl">Review & Approve Posts</h1>
-              <p className="mt-1 text-sm text-text-secondary">Approve by 8 PM → Auto-posts next day at scheduled times</p>
+              <h1 className="text-2xl font-extrabold tracking-tight text-text-primary sm:text-3xl">Review, Edit, Approve</h1>
+              <p className="mt-1 text-sm text-text-secondary">Swap text and gallery media, then approve for scheduled auto-posting.</p>
             </div>
 
             <div className="flex flex-col gap-2 sm:flex-row">
@@ -253,12 +321,15 @@ export default function ApprovalsPage() {
                   type="text"
                   placeholder="Search posts..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(event) => setSearchQuery(event.target.value)}
                   className="w-full bg-transparent text-sm text-text-primary outline-none placeholder:text-text-muted sm:w-44"
                 />
               </label>
-              <button 
-                onClick={() => loadPosts()}
+              <button
+                onClick={() => {
+                  void loadPosts()
+                  void loadStats()
+                }}
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-hyper-blue px-3 py-2 text-sm font-semibold text-white"
               >
                 <Send size={14} /> Refresh
@@ -266,12 +337,12 @@ export default function ApprovalsPage() {
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
             {[
-              { label: "Total", value: stats.total, icon: MessageSquare, tone: "text-text-primary" },
+              { label: "Total", value: stats.total, icon: Eye, tone: "text-text-primary" },
               { label: "Pending", value: stats.pending, icon: Clock, tone: "text-accent-amber" },
               { label: "Approved", value: stats.approved, icon: Check, tone: "text-accent-green" },
+              { label: "Scheduled", value: stats.scheduled, icon: Calendar, tone: "text-accent-violet" },
               { label: "Posted", value: stats.posted, icon: Send, tone: "text-hyper-blue" },
               { label: "Rejected", value: stats.rejected, icon: X, tone: "text-accent-red" },
             ].map((item) => {
@@ -289,9 +360,10 @@ export default function ApprovalsPage() {
               )
             })}
           </div>
+
+          {statusMessage ? <p className="mt-3 text-xs text-text-secondary">{statusMessage}</p> : null}
         </Surface>
 
-        {/* Filters */}
         <Surface className="mb-4 p-3">
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-2">
@@ -299,7 +371,6 @@ export default function ApprovalsPage() {
               <span className="text-xs font-semibold text-text-muted">Filter:</span>
             </div>
 
-            {/* Platform Filter */}
             <div className="flex gap-1">
               <button
                 onClick={() => setFilterPlatform("all")}
@@ -310,20 +381,20 @@ export default function ApprovalsPage() {
               >
                 All Platforms
               </button>
-              {Object.entries(PLATFORM_CONFIG).map(([key, config]) => {
-                const Icon = config.icon
+              {(Object.keys(PLATFORM_CONFIG) as Platform[]).map((platform) => {
+                const Icon = PLATFORM_CONFIG[platform].icon
                 return (
                   <button
-                    key={key}
-                    onClick={() => setFilterPlatform(key as Platform)}
+                    key={platform}
+                    onClick={() => setFilterPlatform(platform)}
                     className={cn(
                       "flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-all",
-                      filterPlatform === key ? config.bg : "bg-bg-tertiary hover:bg-bg-primary",
-                      filterPlatform === key ? config.color : "text-text-secondary"
+                      filterPlatform === platform ? PLATFORM_CONFIG[platform].bg : "bg-bg-tertiary hover:bg-bg-primary",
+                      filterPlatform === platform ? PLATFORM_CONFIG[platform].color : "text-text-secondary"
                     )}
                   >
                     <Icon size={12} />
-                    {config.label}
+                    {PLATFORM_CONFIG[platform].label}
                   </button>
                 )
               })}
@@ -331,33 +402,29 @@ export default function ApprovalsPage() {
 
             <div className="h-4 w-px bg-border-default" />
 
-            {/* Status Filter */}
             <div className="flex gap-1">
-              {[
-                { key: 'pending', label: 'Pending' },
-                { key: 'approved', label: 'Approved' },
-                { key: 'posted', label: 'Posted' },
-                { key: 'rejected', label: 'Rejected' },
-              ].map(({ key, label }) => (
+              {(["pending", "approved", "posted", "rejected", "all"] as Array<PostStatus | "all">).map((status) => (
                 <button
-                  key={key}
-                  onClick={() => setFilterStatus(key as PostStatus | "all")}
+                  key={status}
+                  onClick={() => setFilterStatus(status)}
                   className={cn(
                     "rounded-lg px-3 py-1.5 text-xs font-medium transition-all",
-                    filterStatus === key ? STATUS_CONFIG[key as PostStatus].tone : "bg-bg-tertiary text-text-secondary hover:bg-bg-primary"
+                    filterStatus === status
+                      ? status === "all"
+                        ? "bg-hyper-blue text-white"
+                        : STATUS_CONFIG[status].tone
+                      : "bg-bg-tertiary text-text-secondary hover:bg-bg-primary"
                   )}
                 >
-                  {label}
+                  {status === "all" ? "All" : STATUS_CONFIG[status].label}
                 </button>
               ))}
             </div>
           </div>
         </Surface>
 
-        {/* Posts List */}
         <div className="grid gap-4 lg:grid-cols-2">
-          {/* Left: Posts List */}
-          <Surface className="max-h-[600px] overflow-auto">
+          <Surface className="max-h-[760px] overflow-auto">
             <div className="mb-3 flex items-center justify-between">
               <h2 className="text-base font-bold text-text-primary">Posts Queue</h2>
               <span className="text-xs text-text-muted">{filteredPosts.length} posts</span>
@@ -377,16 +444,12 @@ export default function ApprovalsPage() {
                   const PlatformIcon = platform.icon
 
                   return (
-                    <div
+                    <button
                       key={post.id}
-                      onClick={() => {
-                        setSelectedPost(post)
-                        setEditMode(false)
-                        setEditedCaption(post.caption)
-                      }}
+                      onClick={() => setSelectedPostId(post.id)}
                       className={cn(
-                        "cursor-pointer rounded-xl border p-3 transition-all",
-                        selectedPost?.id === post.id
+                        "w-full rounded-xl border p-3 text-left transition-all",
+                        selectedPostId === post.id
                           ? "border-hyper-blue bg-hyper-blue/5"
                           : "border-border-subtle bg-bg-primary hover:border-border-default"
                       )}
@@ -396,9 +459,8 @@ export default function ApprovalsPage() {
                           <PlatformIcon size={18} className={platform.color} />
                         </div>
                         <div className="min-w-0 flex-1">
-                          <div className="flex items-center gap-2">
+                          <div className="flex flex-wrap items-center gap-2">
                             <span className={cn("text-xs font-semibold", platform.color)}>{platform.label}</span>
-                            <span className="text-text-muted">·</span>
                             <span className="text-xs text-text-muted">{TYPE_LABELS[post.type]}</span>
                             <Badge className={status.tone}>
                               <StatusIcon size={10} className="mr-1" />
@@ -406,24 +468,25 @@ export default function ApprovalsPage() {
                             </Badge>
                           </div>
                           <p className="mt-1 line-clamp-2 text-sm text-text-primary">{post.caption}</p>
-                          <p className="mt-1 text-xs text-text-muted">{formatTime(post.scheduledTime)}</p>
-                          {post.error && (
-                            <p className="mt-1 text-xs text-accent-red">Error: {post.error}</p>
-                          )}
+                          <div className="mt-1 flex items-center gap-2 text-xs text-text-muted">
+                            <span>{formatDate(post.scheduledTime)}</span>
+                            <span>·</span>
+                            <span>{post.mediaUrls?.length || 0} media</span>
+                          </div>
+                          {post.error ? <p className="mt-1 text-xs text-accent-red">Error: {post.error}</p> : null}
                         </div>
                       </div>
-                    </div>
+                    </button>
                   )
                 })
               )}
             </div>
           </Surface>
 
-          {/* Right: Post Detail / Editor */}
-          <Surface className="max-h-[600px] overflow-auto">
+          <Surface className="max-h-[760px] overflow-auto">
             {selectedPost ? (
               <div>
-                <div className="mb-4 flex items-center justify-between">
+                <div className="mb-4 flex items-start justify-between gap-3">
                   <div className="flex items-center gap-2">
                     <div className={cn("flex h-8 w-8 items-center justify-center rounded-lg", PLATFORM_CONFIG[selectedPost.platform].bg)}>
                       {(() => {
@@ -433,62 +496,154 @@ export default function ApprovalsPage() {
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-text-primary">{PLATFORM_CONFIG[selectedPost.platform].label}</p>
-                      <p className="text-xs text-text-muted">{TYPE_LABELS[selectedPost.type]} · {formatTime(selectedPost.scheduledTime)}</p>
+                      <p className="text-xs text-text-muted">{TYPE_LABELS[selectedPost.type]} · {formatDate(selectedPost.scheduledTime)}</p>
                     </div>
                   </div>
-                  <Badge className={STATUS_CONFIG[selectedPost.status].tone}>
-                    {(() => {
-                      const Icon = STATUS_CONFIG[selectedPost.status].icon
-                      return <Icon size={10} className="mr-1" />
-                    })()}
-                    {STATUS_CONFIG[selectedPost.status].label}
-                  </Badge>
+                  <Badge className={STATUS_CONFIG[selectedPost.status].tone}>{STATUS_CONFIG[selectedPost.status].label}</Badge>
                 </div>
 
-                {/* Media Preview */}
-                {selectedPost.mediaUrls && selectedPost.mediaUrls.length > 0 && (
-                  <div className="mb-4 rounded-xl border border-border-subtle bg-bg-tertiary p-4">
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-text-muted">Media</p>
-                    <div className="flex gap-2">
-                      {selectedPost.mediaUrls.map((url, idx) => (
-                        <div key={idx} className="relative aspect-square w-24 rounded-lg bg-bg-primary">
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            {selectedPost.type === "reel" || url.endsWith(".mp4") ? (
-                              <Play size={20} className="text-hyper-blue" />
-                            ) : (
-                              <ImageIcon size={20} className="text-text-muted" />
-                            )}
-                          </div>
-                          <div className="absolute bottom-1 right-1">
-                            <Badge className="border-border-default bg-bg-secondary text-text-secondary">{url.split(".").pop()}</Badge>
+                <div className="mb-4 rounded-xl border border-border-subtle bg-bg-tertiary p-3">
+                  <div className="mb-2 flex items-center justify-between">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">Media ({selectedMediaUrls.length})</p>
+                    <button
+                      onClick={() => setGalleryOpen((open) => !open)}
+                      className="inline-flex items-center gap-1 rounded-lg border border-border-default bg-bg-primary px-2 py-1 text-xs font-medium text-text-secondary hover:bg-bg-secondary"
+                    >
+                      <ImageIcon size={12} /> {galleryOpen ? "Close Gallery" : "Swap Media"}
+                    </button>
+                  </div>
+
+                  {selectedMediaUrls.length === 0 ? (
+                    <div className="rounded-lg border border-dashed border-border-default bg-bg-primary px-3 py-4 text-center text-xs text-text-muted">
+                      No media attached.
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                      {selectedMediaUrls.map((url) => (
+                        <div key={url} className="overflow-hidden rounded-lg border border-border-subtle bg-bg-primary">
+                          {isVideoUrl(url) ? (
+                            <video src={url} controls className="h-24 w-full object-cover" />
+                          ) : (
+                            <img src={url} alt="Selected media" className="h-24 w-full object-cover" />
+                          )}
+                          <div className="flex items-center justify-between border-t border-border-subtle px-2 py-1">
+                            <p className="line-clamp-1 text-[10px] text-text-muted">{compact(decodeURIComponent(url).split("/").pop() || "media")}</p>
+                            <button
+                              onClick={() => setSelectedMediaUrls((current) => current.filter((item) => item !== url))}
+                              className="rounded-md p-1 text-text-muted hover:bg-bg-tertiary hover:text-text-primary"
+                              aria-label="Remove media"
+                            >
+                              <X size={12} />
+                            </button>
                           </div>
                         </div>
                       ))}
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {/* Caption */}
+                  {selectedPost.status !== "posted" && mediaChanged ? (
+                    <div className="mt-2 flex justify-end">
+                      <button
+                        onClick={() => void updatePost(selectedPost.id, "edit", { mediaUrls: selectedMediaUrls })}
+                        disabled={isLoading}
+                        className="rounded-lg bg-hyper-blue px-3 py-1.5 text-xs font-semibold text-white hover:bg-hyper-blue/90 disabled:opacity-50"
+                      >
+                        {isLoading ? "Saving..." : "Save Media"}
+                      </button>
+                    </div>
+                  ) : null}
+                </div>
+
+                {galleryOpen ? (
+                  <div className="mb-4 rounded-xl border border-border-subtle bg-bg-primary p-3">
+                    <div className="mb-2 flex flex-wrap items-center gap-2">
+                      <label className="flex min-w-[220px] flex-1 items-center gap-2 rounded-lg border border-border-default bg-bg-secondary px-2 py-1.5">
+                        <Search size={12} className="text-text-muted" />
+                        <input
+                          value={galleryQuery}
+                          onChange={(event) => setGalleryQuery(event.target.value)}
+                          placeholder="Search gallery"
+                          className="w-full bg-transparent text-xs text-text-primary outline-none placeholder:text-text-muted"
+                        />
+                      </label>
+
+                      <div className="flex gap-1">
+                        {(["all", "image", "video"] as const).map((type) => (
+                          <button
+                            key={type}
+                            onClick={() => setGalleryType(type)}
+                            className={cn(
+                              "rounded-lg px-2.5 py-1.5 text-xs font-medium",
+                              galleryType === type ? "bg-hyper-blue text-white" : "bg-bg-secondary text-text-secondary"
+                            )}
+                          >
+                            {type}
+                          </button>
+                        ))}
+                      </div>
+
+                      <button
+                        onClick={() => void loadGallery(galleryQuery, galleryType)}
+                        className="rounded-lg border border-border-default bg-bg-secondary px-2.5 py-1.5 text-xs font-semibold text-text-secondary"
+                      >
+                        Apply
+                      </button>
+                    </div>
+
+                    {isGalleryLoading ? (
+                      <div className="py-4 text-center text-xs text-text-muted">Loading gallery...</div>
+                    ) : (
+                      <div className="grid max-h-64 grid-cols-2 gap-2 overflow-auto md:grid-cols-3">
+                        {galleryAssets.map((asset) => {
+                          const selected = selectedMediaUrls.includes(asset.url)
+                          return (
+                            <button
+                              key={asset.id}
+                              onClick={() => toggleAsset(asset)}
+                              className={cn(
+                                "overflow-hidden rounded-lg border text-left",
+                                selected ? "border-hyper-blue" : "border-border-subtle"
+                              )}
+                            >
+                              <div className="relative h-20 w-full bg-bg-tertiary">
+                                {asset.type === "video" ? (
+                                  <video src={asset.url} className="h-full w-full object-cover" muted />
+                                ) : (
+                                  <img src={asset.url} alt={asset.title} className="h-full w-full object-cover" />
+                                )}
+                                <span className="absolute right-1 top-1 rounded bg-black/70 px-1 py-0.5 text-[10px] uppercase text-white">{asset.type}</span>
+                              </div>
+                              <div className="space-y-0.5 p-2">
+                                <p className="line-clamp-1 text-xs font-semibold text-text-primary">{asset.title}</p>
+                                <p className="text-[10px] text-text-muted">{asset.category}</p>
+                              </div>
+                            </button>
+                          )
+                        })}
+                      </div>
+                    )}
+                  </div>
+                ) : null}
+
                 <div className="mb-4">
                   <div className="mb-2 flex items-center justify-between">
                     <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">Caption</p>
-                    {!editMode && selectedPost.status === "pending" && (
+                    {!editMode && selectedPost.status !== "posted" ? (
                       <button
                         onClick={() => setEditMode(true)}
                         className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-hyper-blue hover:bg-hyper-blue/10"
                       >
-                        <Edit3 size={12} />
-                        Edit
+                        <Edit3 size={12} /> Edit
                       </button>
-                    )}
+                    ) : null}
                   </div>
 
                   {editMode ? (
                     <div className="space-y-2">
                       <textarea
                         value={editedCaption}
-                        onChange={(e) => setEditedCaption(e.target.value)}
-                        className="min-h-[150px] w-full rounded-xl border border-border-default bg-bg-primary p-3 text-sm text-text-primary outline-none focus:border-hyper-blue"
+                        onChange={(event) => setEditedCaption(event.target.value)}
+                        className="min-h-[160px] w-full rounded-xl border border-border-default bg-bg-primary p-3 text-sm text-text-primary outline-none focus:border-hyper-blue"
                       />
                       <div className="flex justify-end gap-2">
                         <button
@@ -501,11 +656,11 @@ export default function ApprovalsPage() {
                           Cancel
                         </button>
                         <button
-                          onClick={() => handleEditSave(selectedPost.id)}
-                          disabled={isLoading}
+                          onClick={() => void updatePost(selectedPost.id, "edit", { caption: editedCaption })}
+                          disabled={isLoading || !captionChanged}
                           className="rounded-lg bg-hyper-blue px-3 py-1.5 text-xs font-semibold text-white hover:bg-hyper-blue/90 disabled:opacity-50"
                         >
-                          {isLoading ? 'Saving...' : 'Save Changes'}
+                          {isLoading ? "Saving..." : "Save Caption"}
                         </button>
                       </div>
                     </div>
@@ -516,79 +671,73 @@ export default function ApprovalsPage() {
                   )}
                 </div>
 
-                {/* Hashtags */}
-                {selectedPost.hashtags && selectedPost.hashtags.length > 0 && (
+                {selectedPost.hashtags && selectedPost.hashtags.length > 0 ? (
                   <div className="mb-4">
                     <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-text-muted">Hashtags</p>
                     <div className="flex flex-wrap gap-1">
-                      {selectedPost.hashtags.map((tag, idx) => (
-                        <span key={idx} className="rounded-lg bg-bg-tertiary px-2 py-1 text-xs text-text-secondary">{tag}</span>
+                      {selectedPost.hashtags.map((tag) => (
+                        <span key={tag} className="rounded-lg bg-bg-tertiary px-2 py-1 text-xs text-text-secondary">
+                          {tag}
+                        </span>
                       ))}
                     </div>
                   </div>
-                )}
+                ) : null}
 
-                {/* Posted URL */}
-                {selectedPost.postedUrl && (
-                  <div className="mb-4 rounded-lg border border-accent-green/40 bg-accent-green-muted p-3">
-                    <p className="text-xs text-accent-green">Posted: <a href={selectedPost.postedUrl} target="_blank" className="underline">{selectedPost.postedUrl}</a></p>
+                {selectedPost.postedUrl ? (
+                  <div className="mb-4 rounded-lg border border-accent-green/40 bg-accent-green-muted p-3 text-xs text-accent-green">
+                    Posted: <a href={selectedPost.postedUrl} target="_blank" rel="noreferrer" className="underline">{selectedPost.postedUrl}</a>
                   </div>
-                )}
+                ) : null}
 
-                {/* Actions */}
-                {selectedPost.status === "pending" && (
+                {selectedPost.status === "pending" ? (
                   <div className="flex gap-2">
                     <button
-                      onClick={() => handleApprove(selectedPost.id)}
+                      onClick={() => void updatePost(selectedPost.id, "approve")}
                       disabled={isLoading}
                       className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-accent-green py-3 text-sm font-semibold text-white hover:bg-accent-green/90 disabled:opacity-50"
                     >
-                      <Check size={16} />
-                      {isLoading ? 'Approving...' : 'Approve for Auto-Post'}
+                      <Check size={16} /> {isLoading ? "Approving..." : "Approve"}
                     </button>
                     <button
-                      onClick={() => handleReject(selectedPost.id)}
+                      onClick={() => void updatePost(selectedPost.id, "reject")}
                       disabled={isLoading}
                       className="flex items-center justify-center gap-2 rounded-xl border border-accent-red/40 bg-accent-red-muted px-4 py-3 text-sm font-semibold text-accent-red hover:bg-accent-red/20 disabled:opacity-50"
                     >
-                      <Trash2 size={16} />
-                      Reject
+                      <Trash2 size={16} /> Reject
                     </button>
                   </div>
-                )}
+                ) : null}
 
-                {selectedPost.status === "approved" && (
+                {selectedPost.status === "approved" ? (
                   <div className="flex gap-2">
                     <button
-                      onClick={() => handlePublishNow(selectedPost.id)}
+                      onClick={() => void handlePublishNow(selectedPost.id)}
                       disabled={isLoading}
                       className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-hyper-blue py-3 text-sm font-semibold text-white hover:bg-hyper-blue/90 disabled:opacity-50"
                     >
-                      <Send size={16} />
-                      {isLoading ? 'Posting...' : 'Post Now (Skip Queue)'}
+                      <Send size={16} /> {isLoading ? "Posting..." : "Post Now"}
                     </button>
                     <button
-                      onClick={() => handleReject(selectedPost.id)}
+                      onClick={() => void updatePost(selectedPost.id, "reject")}
                       disabled={isLoading}
                       className="flex items-center justify-center gap-2 rounded-xl border border-border-default bg-bg-primary px-4 py-3 text-sm font-semibold text-text-secondary hover:bg-bg-tertiary disabled:opacity-50"
                     >
-                      <X size={16} />
-                      Unapprove
+                      <X size={16} /> Unapprove
                     </button>
                   </div>
-                )}
+                ) : null}
               </div>
             ) : (
-              <div className="flex h-full flex-col items-center justify-center py-12">
+              <div className="flex h-full flex-col items-center justify-center py-12 text-center">
                 <Eye size={48} className="mb-4 text-text-muted" />
                 <p className="text-sm font-medium text-text-secondary">Select a post to review</p>
-                <p className="text-xs text-text-muted">Click any post from the queue to see details</p>
+                <p className="text-xs text-text-muted">Your queue is ready for caption and media edits.</p>
               </div>
             )}
           </Surface>
         </div>
 
-        {/* Automation Info */}
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <div className="rounded-xl border border-border-subtle bg-bg-secondary/50 p-4">
             <div className="flex items-start gap-3">
@@ -596,25 +745,19 @@ export default function ApprovalsPage() {
                 <Calendar size={20} className="text-accent-green" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-text-primary">Daily Auto-Generation</p>
-                <p className="text-xs text-text-secondary mt-1">
-                  Every night at 8 PM, new posts are generated from your gallery. 
-                  Review and approve by 8 PM for next-day posting.
-                </p>
+                <p className="text-sm font-semibold text-text-primary">Daily Review Window</p>
+                <p className="mt-1 text-xs text-text-secondary">Posts generated from gallery assets arrive as pending items. Approve before publish windows to keep automation flowing.</p>
               </div>
             </div>
           </div>
           <div className="rounded-xl border border-border-subtle bg-bg-secondary/50 p-4">
             <div className="flex items-start gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-hyper-blue/10">
-                <Send size={20} className="text-hyper-blue" />
+                <Play size={20} className="text-hyper-blue" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-text-primary">Auto-Posting Schedule</p>
-                <p className="text-xs text-text-secondary mt-1">
-                  Approved posts auto-post at scheduled times: 9 AM Twitter, 11 AM IG Reel, 
-                  2 PM Facebook, 4 PM Twitter, 6 PM IG Story, 8 PM Twitter.
-                </p>
+                <p className="text-sm font-semibold text-text-primary">Media Swap Enabled</p>
+                <p className="mt-1 text-xs text-text-secondary">Use the gallery panel to replace post media with any of your 207 exported assets, then save without leaving approvals.</p>
               </div>
             </div>
           </div>

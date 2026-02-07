@@ -1,478 +1,524 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import {
-  CalendarDays,
+  CalendarClock,
+  CheckCircle2,
   Clock,
   FileText,
-  MessageSquare,
-  PenTool,
+  Image as ImageIcon,
   Play,
+  Plus,
+  RefreshCcw,
+  Search,
   Send,
+  Sparkles,
   Twitter,
-  User,
-  Users,
+  Video,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-type BadgeTone = "critical" | "high" | "medium" | "warm" | "contacted" | "new" | "live" | "neutral"
+type Platform = "twitter" | "instagram" | "facebook"
+type PostType = "feed" | "story" | "reel" | "thread" | "poll"
 
-// Sample data - in production this would be fetched from API
-const KENNY_TIPS = [
-  { number: 1, title: "The Corner 3", category: "shooting", posted: false },
-  { number: 2, title: "Free Throw Routine", category: "mental", posted: false },
-  { number: 3, title: "Defensive Stance", category: "defense", posted: false },
-  { number: 4, title: "Ball-Handling Basics", category: "skills", posted: false },
-  { number: 5, title: "Rebounding Position", category: "fundamentals", posted: false },
-  { number: 6, title: "The Pick & Roll", category: "iq", posted: false },
-  { number: 7, title: "Transition Offense", category: "offense", posted: false },
-  { number: 8, title: "Pre-Game Routine", category: "mental", posted: false },
-  { number: 9, title: "Film Study", category: "iq", posted: false },
-  { number: 10, title: "Track Your Stats", category: "tracking", posted: false },
-  { number: 11, title: "Set SMART Goals", category: "mental", posted: false },
-  { number: 12, title: "The Mid-Range Game", category: "shooting", posted: false },
-  { number: 13, title: "Communication on Defense", category: "defense", posted: false },
-  { number: 14, title: "Footwork Fundamentals", category: "fundamentals", posted: false },
-  { number: 15, title: "Recovery & Sleep", category: "wellness", posted: false },
-  { number: 16, title: "Shot Fake & Drive", category: "offense", posted: false },
-  { number: 17, title: "Passing Fundamentals", category: "fundamentals", posted: false },
-  { number: 18, title: "Close-Out Technique", category: "defense", posted: false },
-  { number: 19, title: "Post Moves", category: "offense", posted: false },
-  { number: 20, title: "Mental Toughness", category: "mental", posted: false },
-]
+type CaptionTone = "assistant" | "promotion" | "announcement"
 
-const CMO_TWEETS = [
-  {
-    id: "cmo-001",
-    content: "Busy week at CourtLab HQ. Working on partnerships with clubs across Adelaide and Melbourne. The response to verified combines has been incredible...",
-    scheduledFor: "2026-02-08T09:00:00Z",
-    category: "partnership",
-    posted: false,
-  },
-  {
-    id: "cmo-002",
-    content: "Behind the scenes: Just reviewed data from our last combine. Players who tracked their shots for 4+ weeks improved 23% faster...",
-    scheduledFor: "2026-02-09T14:00:00Z",
-    category: "insight",
-    posted: false,
-  },
-]
+interface GalleryAsset {
+  id: string
+  type: "image" | "video"
+  category: string
+  title: string
+  prompt: string
+  createdAt: string
+  useCase: string
+  filename: string
+  url: string
+}
 
-const BRAND_TWEETS = [
-  {
-    id: "brand-001",
-    content: "🏀 Become Undeniable. Track every shot. See real progress. Build your Basketball Resume. Join 500+ players already improving with CourtLab.",
-    scheduledFor: "2026-02-07T10:00:00Z",
-    category: "promotion",
-    posted: false,
-  },
-  {
-    id: "brand-002",
-    content: "🔥 Player Spotlight: 'I used to guess if I was getting better. Now I know.' — Jake, 14. Jake improved his corner 3% from 31% to 47% in 8 weeks...",
-    scheduledFor: "2026-02-08T16:00:00Z",
-    category: "spotlight",
-    posted: false,
-  },
-]
-
-const POSTING_SCHEDULE = [
-  { time: "9:00 AM", account: "CMO", type: "Tweet", status: "scheduled" },
-  { time: "10:00 AM", account: "Brand", type: "Tweet", status: "scheduled" },
-  { time: "11:00 AM", account: "Brand", type: "Kenny's Tip", status: "scheduled" },
-  { time: "2:00 PM", account: "CMO", type: "Tweet", status: "scheduled" },
-  { time: "4:00 PM", account: "Brand", type: "Tweet", status: "scheduled" },
-  { time: "6:00 PM", account: "CMO", type: "Tweet", status: "scheduled" },
-]
-
-const STATS = [
-  { label: "Kenny's Tips", value: 20, sub: "Ready to post", icon: PenTool, tone: "text-accent-green" },
-  { label: "CMO Queue", value: 2, sub: "Scheduled tweets", icon: User, tone: "text-hyper-blue" },
-  { label: "Brand Queue", value: 2, sub: "Scheduled tweets", icon: Users, tone: "text-velocity-orange" },
-  { label: "Posts Today", value: 0, sub: "Automation disabled", icon: Send, tone: "text-text-muted" },
-]
+interface QueuePost {
+  id: string
+  platform: Platform
+  type: PostType
+  status: "pending" | "approved" | "rejected" | "posted" | "scheduled"
+  caption: string
+  scheduledTime: string
+  mediaUrls?: string[]
+  createdAt: string
+}
 
 function Surface({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return <section className={cn("rounded-2xl border border-border-subtle bg-bg-secondary/75 p-4 sm:p-5", className)}>{children}</section>
 }
 
-function Badge({ children, tone = "neutral" }: { children: React.ReactNode; tone?: BadgeTone }) {
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[11px] font-semibold capitalize",
-        tone === "critical" && "border-accent-red/40 bg-accent-red-muted text-accent-red",
-        tone === "high" && "border-accent-amber/40 bg-accent-amber-muted text-accent-amber",
-        tone === "medium" && "border-hyper-blue/40 bg-hyper-blue-muted text-hyper-blue",
-        tone === "warm" && "border-velocity-orange/40 bg-velocity-orange-muted text-velocity-orange",
-        tone === "contacted" && "border-accent-violet/40 bg-accent-violet-muted text-accent-violet",
-        tone === "new" && "border-accent-green/40 bg-accent-green-muted text-accent-green",
-        tone === "live" && "border-accent-green/40 bg-accent-green-muted text-accent-green",
-        tone === "neutral" && "border-border-default bg-bg-tertiary text-text-secondary"
-      )}
-    >
-      {tone === "live" ? <span className="h-1.5 w-1.5 rounded-full bg-accent-green" /> : null}
-      {children}
-    </span>
-  )
+function Badge({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return <span className={cn("inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[11px] font-semibold", className)}>{children}</span>
 }
 
-function getCategoryBadgeTone(category: string): BadgeTone {
-  const map: Record<string, BadgeTone> = {
-    shooting: "high",
-    mental: "medium",
-    defense: "warm",
-    skills: "new",
-    fundamentals: "contacted",
-    iq: "medium",
-    offense: "high",
-    tracking: "new",
-    wellness: "live",
-    promotion: "high",
-    partnership: "medium",
-    insight: "medium",
-    spotlight: "warm",
+function compact(text: string, max = 90): string {
+  if (text.length <= max) return text
+  return `${text.slice(0, max - 3)}...`
+}
+
+function firstLine(prompt: string): string {
+  const line = prompt
+    .split("\n")
+    .map((part) => part.trim())
+    .find((part) => part.length > 0)
+  return line || "CourtLab update"
+}
+
+function composeCaption(asset: GalleryAsset, tone: CaptionTone): string {
+  const headline = firstLine(asset.prompt)
+
+  if (tone === "promotion") {
+    return `${headline}\n\nBuilt for players who want verified improvement, not guesswork.\nBook a demo or trial with CourtLab today.\n\n#CourtLab #BasketballDevelopment #BecomeUndeniable`
   }
-  return map[category] || "neutral"
+
+  if (tone === "announcement") {
+    return `${headline}\n\nNew content is live in CourtLab Ops. Review this asset, tweak the message, and push it to your audience.\n\n#CourtLab #BasketballOps #TeamUpdate`
+  }
+
+  return `${headline}\n\nDrafted from your gallery. Update this text with campaign context and approve when ready.\n\n#CourtLab #BecomeUndeniable #Basketball`
+}
+
+function nextScheduleISO(): string {
+  const next = new Date()
+  next.setMinutes(0, 0, 0)
+  next.setHours(next.getHours() + 1)
+  return next.toISOString()
+}
+
+function toLocalInputValue(isoString: string): string {
+  const date = new Date(isoString)
+  const offset = date.getTimezoneOffset() * 60_000
+  const local = new Date(date.getTime() - offset)
+  return local.toISOString().slice(0, 16)
+}
+
+function fromLocalInputValue(value: string): string {
+  return new Date(value).toISOString()
 }
 
 export default function ContentPage() {
-  const [activeTab, setActiveTab] = useState<"all" | "tips" | "cmo" | "brand">("all")
+  const [galleryAssets, setGalleryAssets] = useState<GalleryAsset[]>([])
+  const [queuePosts, setQueuePosts] = useState<QueuePost[]>([])
+  const [selectedAssetIds, setSelectedAssetIds] = useState<Set<string>>(new Set())
+  const [query, setQuery] = useState("")
+  const [typeFilter, setTypeFilter] = useState<"all" | "image" | "video">("all")
+  const [platform, setPlatform] = useState<Platform>("twitter")
+  const [postType, setPostType] = useState<PostType>("feed")
+  const [captionTone, setCaptionTone] = useState<CaptionTone>("assistant")
+  const [scheduledTime, setScheduledTime] = useState<string>(toLocalInputValue(nextScheduleISO()))
+  const [captionDraft, setCaptionDraft] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const [statusMessage, setStatusMessage] = useState<string | null>(null)
 
-  const remainingTips = KENNY_TIPS.filter((t) => !t.posted).length
-  const cmoQueued = CMO_TWEETS.filter((t) => !t.posted).length
-  const brandQueued = BRAND_TWEETS.filter((t) => !t.posted).length
+  const selectedAssets = useMemo(
+    () => galleryAssets.filter((asset) => selectedAssetIds.has(asset.id)),
+    [galleryAssets, selectedAssetIds]
+  )
+
+  const pendingPosts = useMemo(
+    () => queuePosts.filter((post) => post.status === "pending"),
+    [queuePosts]
+  )
+
+  const imagesCount = useMemo(() => galleryAssets.filter((asset) => asset.type === "image").length, [galleryAssets])
+  const videosCount = useMemo(() => galleryAssets.filter((asset) => asset.type === "video").length, [galleryAssets])
+
+  useEffect(() => {
+    void loadGallery()
+    void loadQueue()
+  }, [])
+
+  async function loadGallery(customQuery = query, customType = typeFilter): Promise<void> {
+    try {
+      const params = new URLSearchParams()
+      params.set("limit", "160")
+      if (customQuery.trim().length > 0) params.set("q", customQuery.trim())
+      if (customType !== "all") params.set("type", customType)
+
+      const res = await fetch(`/api/gallery?${params.toString()}`, { cache: "no-store" })
+      const data = (await res.json()) as { assets?: GalleryAsset[] }
+      setGalleryAssets(Array.isArray(data.assets) ? data.assets : [])
+    } catch (error) {
+      console.error("Failed to load gallery", error)
+      setStatusMessage("Failed to load gallery assets.")
+    }
+  }
+
+  async function loadQueue(): Promise<void> {
+    try {
+      const res = await fetch("/api/queue", { cache: "no-store" })
+      const data = (await res.json()) as { posts?: QueuePost[] }
+      setQueuePosts(Array.isArray(data.posts) ? data.posts : [])
+    } catch (error) {
+      console.error("Failed to load queue", error)
+    }
+  }
+
+  function toggleAsset(id: string): void {
+    setSelectedAssetIds((current) => {
+      const next = new Set(current)
+      if (next.has(id)) {
+        next.delete(id)
+      } else {
+        next.add(id)
+      }
+      return next
+    })
+  }
+
+  function generateDraftFromSelection(): void {
+    const asset = selectedAssets[0]
+    if (!asset) {
+      setStatusMessage("Select at least one asset first.")
+      return
+    }
+    setCaptionDraft(composeCaption(asset, captionTone))
+    setStatusMessage("Caption drafted from selected gallery asset.")
+  }
+
+  async function createPosts(): Promise<void> {
+    if (selectedAssets.length === 0) {
+      setStatusMessage("Select at least one asset to queue posts.")
+      return
+    }
+
+    setIsLoading(true)
+    setStatusMessage(null)
+
+    try {
+      const selectedScheduleIso = fromLocalInputValue(scheduledTime)
+
+      for (const asset of selectedAssets) {
+        const caption = captionDraft.trim().length > 0 ? captionDraft : composeCaption(asset, captionTone)
+
+        const payload = {
+          platform,
+          type: postType,
+          caption,
+          scheduledTime: selectedScheduleIso,
+          mediaUrls: [asset.url],
+          hashtags: ["#CourtLab", "#BecomeUndeniable"],
+        }
+
+        const res = await fetch("/api/posts", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        })
+
+        if (!res.ok) {
+          const data = (await res.json()) as { error?: string }
+          throw new Error(data.error || `Failed to create post for ${asset.title}`)
+        }
+      }
+
+      setCaptionDraft("")
+      setSelectedAssetIds(new Set())
+      await loadQueue()
+      setStatusMessage(`Queued ${selectedAssets.length} post(s) for review.`)
+    } catch (error) {
+      console.error("Failed to create posts", error)
+      setStatusMessage(error instanceof Error ? error.message : "Failed to create posts")
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <div className="min-h-screen w-full bg-[radial-gradient(circle_at_12%_-20%,oklch(0.45_0.14_258/.18),transparent_36%),radial-gradient(circle_at_92%_-18%,oklch(0.58_0.17_42/.16),transparent_40%)]">
-      <div className="mx-auto w-full max-w-none p-4 pb-8 pt-4 sm:p-6 lg:px-8">
-        {/* Header */}
+      <div className="mx-auto w-full max-w-[1700px] p-4 pb-8 pt-4 sm:p-6 lg:px-8">
         <Surface className="mb-4 border-border-default bg-bg-secondary/85">
           <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <div className="mb-1 flex items-center gap-2">
-                <p className="text-xs font-semibold uppercase tracking-widest text-text-muted">Content Calendar</p>
-                <Badge tone="live">Active</Badge>
+                <p className="text-xs font-semibold uppercase tracking-widest text-text-muted">Content Generator</p>
+                <Badge className="border-accent-green/40 bg-accent-green-muted text-accent-green">
+                  <CheckCircle2 size={10} /> Queue Enabled
+                </Badge>
               </div>
-              <h1 className="text-2xl font-extrabold tracking-tight text-text-primary sm:text-3xl">Social Media Command Center</h1>
-              <p className="mt-1 text-sm text-text-secondary">Dual Twitter strategy: @EstherCourtLab (CMO) + @CourtLabApp (Brand)</p>
+              <h1 className="text-2xl font-extrabold tracking-tight text-text-primary sm:text-3xl">Generate Posts From Gallery</h1>
+              <p className="mt-1 text-sm text-text-secondary">Build drafts from real gallery assets, then send them to approvals for final review.</p>
             </div>
 
             <div className="flex flex-col gap-2 sm:flex-row">
-              <button className="inline-flex items-center justify-center gap-2 rounded-xl border border-border-default bg-bg-primary px-3 py-2 text-sm font-semibold text-text-secondary">
-                <Clock size={14} /> Schedule
+              <button
+                onClick={() => {
+                  void loadGallery()
+                  void loadQueue()
+                }}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-border-default bg-bg-primary px-3 py-2 text-sm font-semibold text-text-secondary"
+              >
+                <RefreshCcw size={14} /> Refresh
               </button>
-              <button className="inline-flex items-center justify-center gap-2 rounded-xl bg-hyper-blue px-3 py-2 text-sm font-semibold text-white">
-                <PenTool size={14} /> New Post
-              </button>
+              <Link
+                href="/approvals"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-hyper-blue px-3 py-2 text-sm font-semibold text-white"
+              >
+                <Send size={14} /> Open Approvals
+              </Link>
             </div>
           </div>
 
-          {/* Stats */}
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            {STATS.map((item) => {
-              const Icon = item.icon
-              return (
-                <div key={item.label} className="rounded-xl border border-border-subtle bg-bg-primary p-3">
-                  <div className="mb-2 flex items-start justify-between gap-2">
-                    <p className="text-[11px] font-semibold uppercase tracking-widest text-text-muted">{item.label}</p>
-                    <div className={cn("flex h-8 w-8 items-center justify-center rounded-xl bg-bg-tertiary", item.tone)}>
-                      <Icon size={15} />
-                    </div>
-                  </div>
-                  <p className="text-3xl font-extrabold text-text-primary">{item.value}</p>
-                  <div className="mt-1 flex items-center gap-2 text-xs text-text-secondary">
-                    <span>{item.sub}</span>
-                  </div>
-                </div>
-              )
-            })}
+            <div className="rounded-xl border border-border-subtle bg-bg-primary p-3">
+              <p className="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Gallery Assets</p>
+              <p className="mt-1 text-3xl font-extrabold text-text-primary">{galleryAssets.length}</p>
+              <p className="text-xs text-text-secondary">Loaded for generation</p>
+            </div>
+            <div className="rounded-xl border border-border-subtle bg-bg-primary p-3">
+              <p className="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Images</p>
+              <p className="mt-1 text-3xl font-extrabold text-accent-green">{imagesCount}</p>
+              <p className="text-xs text-text-secondary">Brand + static content</p>
+            </div>
+            <div className="rounded-xl border border-border-subtle bg-bg-primary p-3">
+              <p className="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Videos</p>
+              <p className="mt-1 text-3xl font-extrabold text-velocity-orange">{videosCount}</p>
+              <p className="text-xs text-text-secondary">Reels and motion clips</p>
+            </div>
+            <div className="rounded-xl border border-border-subtle bg-bg-primary p-3">
+              <p className="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Pending Review</p>
+              <p className="mt-1 text-3xl font-extrabold text-accent-amber">{pendingPosts.length}</p>
+              <p className="text-xs text-text-secondary">Waiting approval</p>
+            </div>
           </div>
+
+          {statusMessage ? <p className="mt-3 text-xs text-text-secondary">{statusMessage}</p> : null}
         </Surface>
 
         <div className="grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
-          {/* Main Content */}
           <div className="space-y-4">
-            {/* Tabs */}
-            <Surface className="p-2">
-              <div className="flex flex-wrap gap-1">
-                {[
-                  { id: "all", label: "All Content", count: remainingTips + cmoQueued + brandQueued },
-                  { id: "tips", label: "Kenny's Tips", count: remainingTips },
-                  { id: "cmo", label: "CMO Account", count: cmoQueued },
-                  { id: "brand", label: "Brand Account", count: brandQueued },
-                ].map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                    className={cn(
-                      "flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all",
-                      activeTab === tab.id
-                        ? "bg-hyper-blue text-white"
-                        : "text-text-secondary hover:bg-bg-tertiary hover:text-text-primary"
-                    )}
-                  >
-                    {tab.label}
-                    <span className={cn("rounded-full px-1.5 py-0.5 text-[10px]", activeTab === tab.id ? "bg-white/20" : "bg-bg-tertiary")}>
-                      {tab.count}
-                    </span>
-                  </button>
-                ))}
+            <Surface>
+              <div className="mb-3 flex flex-wrap items-center gap-2">
+                <label className="flex min-w-[240px] flex-1 items-center gap-2 rounded-xl border border-border-default bg-bg-primary px-3 py-2">
+                  <Search size={14} className="text-text-muted" />
+                  <input
+                    value={query}
+                    onChange={(event) => setQuery(event.target.value)}
+                    placeholder="Search gallery assets"
+                    className="w-full bg-transparent text-sm text-text-primary outline-none placeholder:text-text-muted"
+                  />
+                </label>
+
+                <div className="flex gap-1">
+                  {(["all", "image", "video"] as const).map((value) => (
+                    <button
+                      key={value}
+                      onClick={() => setTypeFilter(value)}
+                      className={cn(
+                        "rounded-lg px-3 py-2 text-xs font-medium",
+                        typeFilter === value ? "bg-hyper-blue text-white" : "bg-bg-primary text-text-secondary"
+                      )}
+                    >
+                      {value}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => void loadGallery(query, typeFilter)}
+                  className="inline-flex items-center gap-2 rounded-lg border border-border-default bg-bg-primary px-3 py-2 text-xs font-semibold text-text-secondary"
+                >
+                  <Search size={12} /> Apply
+                </button>
+              </div>
+
+              <div className="grid max-h-[480px] grid-cols-2 gap-3 overflow-auto md:grid-cols-3 lg:grid-cols-4">
+                {galleryAssets.map((asset) => {
+                  const selected = selectedAssetIds.has(asset.id)
+                  return (
+                    <button
+                      key={asset.id}
+                      onClick={() => toggleAsset(asset.id)}
+                      className={cn(
+                        "overflow-hidden rounded-xl border text-left transition-all",
+                        selected ? "border-hyper-blue bg-hyper-blue/5" : "border-border-subtle bg-bg-primary"
+                      )}
+                    >
+                      <div className="relative h-24 w-full bg-bg-tertiary">
+                        {asset.type === "video" ? (
+                          <video src={asset.url} className="h-full w-full object-cover" muted />
+                        ) : (
+                          <img src={asset.url} alt={asset.title} className="h-full w-full object-cover" />
+                        )}
+                        <span className="absolute right-1 top-1 rounded bg-black/70 px-1 py-0.5 text-[10px] uppercase text-white">{asset.type}</span>
+                      </div>
+                      <div className="space-y-1 p-2">
+                        <p className="line-clamp-1 text-xs font-semibold text-text-primary">{asset.title}</p>
+                        <p className="text-[10px] text-text-muted">{asset.category}</p>
+                      </div>
+                    </button>
+                  )
+                })}
               </div>
             </Surface>
 
-            {/* Kenny's Tips */}
-            {(activeTab === "all" || activeTab === "tips") && (
-              <Surface>
-                <div className="mb-3 flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-green-muted text-accent-green">
-                      <PenTool size={15} />
-                    </div>
-                    <div>
-                      <h2 className="text-base font-bold text-text-primary">Kenny's Tips</h2>
-                      <p className="text-xs text-text-muted">Daily basketball tips from our mascot</p>
-                    </div>
-                  </div>
-                  <Badge tone="new">{remainingTips} queued</Badge>
-                </div>
+            <Surface>
+              <div className="mb-3 flex items-center justify-between">
+                <h2 className="text-base font-bold text-text-primary">Selected Assets</h2>
+                <Badge className="border-border-default bg-bg-tertiary text-text-secondary">{selectedAssets.length} selected</Badge>
+              </div>
 
+              {selectedAssets.length === 0 ? (
+                <div className="rounded-xl border border-dashed border-border-subtle bg-bg-primary p-6 text-center text-sm text-text-muted">
+                  Select gallery assets above to start generating posts.
+                </div>
+              ) : (
                 <div className="space-y-2">
-                  {KENNY_TIPS.slice(0, 8).map((tip) => (
-                    <div
-                      key={tip.number}
-                      className="flex items-center justify-between rounded-xl border border-border-subtle bg-bg-primary p-3"
-                    >
+                  {selectedAssets.map((asset) => (
+                    <div key={asset.id} className="flex items-center justify-between rounded-xl border border-border-subtle bg-bg-primary p-3">
                       <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs font-bold text-text-muted">#{tip.number}</span>
-                          <p className="truncate text-sm font-semibold text-text-primary">{tip.title}</p>
-                        </div>
-                        <div className="mt-1 flex items-center gap-2">
-                          <Badge tone={getCategoryBadgeTone(tip.category)}>{tip.category}</Badge>
-                          {tip.posted ? (
-                            <span className="text-[10px] text-text-muted">Posted</span>
-                          ) : (
-                            <span className="text-[10px] text-accent-green">Ready</span>
-                          )}
-                        </div>
+                        <p className="truncate text-sm font-semibold text-text-primary">{asset.title}</p>
+                        <p className="text-xs text-text-muted">{asset.category} · {new Date(asset.createdAt).toLocaleDateString()}</p>
                       </div>
-                      <div className="ml-2 flex items-center gap-1">
-                        <button className="rounded-lg p-1.5 text-text-muted hover:bg-bg-tertiary hover:text-text-primary">
-                          <FileText size={14} />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                  {KENNY_TIPS.length > 8 && (
-                    <button className="w-full rounded-lg border border-border-subtle bg-bg-primary py-2 text-xs font-semibold text-text-secondary hover:bg-bg-tertiary">
-                      View all {KENNY_TIPS.length} tips
-                    </button>
-                  )}
-                </div>
-              </Surface>
-            )}
-
-            {/* CMO Account */}
-            {(activeTab === "all" || activeTab === "cmo") && (
-              <Surface>
-                <div className="mb-3 flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-hyper-blue-muted text-hyper-blue">
-                      <User size={15} />
-                    </div>
-                    <div>
-                      <h2 className="text-base font-bold text-text-primary">@EstherCourtLab (CMO)</h2>
-                      <p className="text-xs text-text-muted">Personal voice, partnerships, building in public</p>
-                    </div>
-                  </div>
-                  <Badge tone="medium">{cmoQueued} queued</Badge>
-                </div>
-
-                <div className="space-y-2">
-                  {CMO_TWEETS.map((tweet) => (
-                    <div
-                      key={tweet.id}
-                      className="rounded-xl border border-border-subtle bg-bg-primary p-3"
-                    >
-                      <p className="text-sm text-text-primary line-clamp-2">{tweet.content}</p>
-                      <div className="mt-2 flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Badge tone={getCategoryBadgeTone(tweet.category)}>{tweet.category}</Badge>
-                          <span className="text-[10px] text-text-muted">
-                            {new Date(tweet.scheduledFor).toLocaleDateString()}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Twitter size={12} className="text-hyper-blue" />
-                          <span className="text-[10px] text-text-muted">CMO</span>
-                        </div>
-                      </div>
+                      <button
+                        onClick={() => toggleAsset(asset.id)}
+                        className="rounded-lg p-1.5 text-text-muted hover:bg-bg-tertiary hover:text-text-primary"
+                        aria-label="Remove asset"
+                      >
+                        <Plus size={14} className="rotate-45" />
+                      </button>
                     </div>
                   ))}
                 </div>
-              </Surface>
-            )}
-
-            {/* Brand Account */}
-            {(activeTab === "all" || activeTab === "brand") && (
-              <Surface>
-                <div className="mb-3 flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-velocity-orange-muted text-velocity-orange">
-                      <Users size={15} />
-                    </div>
-                    <div>
-                      <h2 className="text-base font-bold text-text-primary">@CourtLabApp (Brand)</h2>
-                      <p className="text-xs text-text-muted">Kenny mascot, tips, user spotlights</p>
-                    </div>
-                  </div>
-                  <Badge tone="warm">{brandQueued} queued</Badge>
-                </div>
-
-                <div className="space-y-2">
-                  {BRAND_TWEETS.map((tweet) => (
-                    <div
-                      key={tweet.id}
-                      className="rounded-xl border border-border-subtle bg-bg-primary p-3"
-                    >
-                      <p className="text-sm text-text-primary line-clamp-2">{tweet.content}</p>
-                      <div className="mt-2 flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Badge tone={getCategoryBadgeTone(tweet.category)}>{tweet.category}</Badge>
-                          <span className="text-[10px] text-text-muted">
-                            {new Date(tweet.scheduledFor).toLocaleDateString()}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Twitter size={12} className="text-velocity-orange" />
-                          <span className="text-[10px] text-text-muted">Brand</span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </Surface>
-            )}
+              )}
+            </Surface>
           </div>
 
-          {/* Sidebar */}
           <div className="space-y-4">
-            {/* Posting Schedule */}
-            <Surface>
-              <div className="mb-3 flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-violet-muted text-accent-violet">
-                    <CalendarDays size={15} />
-                  </div>
-                  <h2 className="text-base font-bold text-text-primary">Daily Schedule</h2>
-                </div>
-                <Badge tone="neutral">Disabled</Badge>
-              </div>
-
-              <div className="space-y-1">
-                {POSTING_SCHEDULE.map((slot, idx) => (
-                  <div
-                    key={idx}
-                    className="flex items-center justify-between rounded-lg border border-border-subtle bg-bg-primary px-3 py-2"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="text-xs font-medium text-text-muted w-16">{slot.time}</span>
-                      <div className="flex items-center gap-1.5">
-                        {slot.account === "CMO" ? (
-                          <User size={12} className="text-hyper-blue" />
-                        ) : (
-                          <Users size={12} className="text-velocity-orange" />
-                        )}
-                        <span className="text-xs text-text-primary">{slot.account}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] text-text-muted">{slot.type}</span>
-                      <div className="h-2 w-2 rounded-full bg-accent-amber" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-3 rounded-lg border border-border-subtle bg-bg-tertiary/50 p-3">
-                <p className="text-xs text-text-secondary">
-                  <span className="font-semibold text-accent-amber">Note:</span> Automation is currently disabled. Enable cron jobs to start auto-posting.
-                </p>
-              </div>
-            </Surface>
-
-            {/* Quick Actions */}
             <Surface>
               <div className="mb-3 flex items-center gap-2">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-green-muted text-accent-green">
-                  <Play size={15} />
+                  <Sparkles size={15} />
                 </div>
-                <h2 className="text-base font-bold text-text-primary">Quick Actions</h2>
-              </div>
-
-              <div className="space-y-2">
-                <button className="w-full rounded-lg border border-border-subtle bg-bg-primary px-3 py-2 text-left text-sm font-medium text-text-primary hover:bg-bg-tertiary">
-                  <div className="flex items-center gap-2">
-                    <PenTool size={14} className="text-accent-green" />
-                    <span>Create Kenny's Tip</span>
-                  </div>
-                </button>
-                <button className="w-full rounded-lg border border-border-subtle bg-bg-primary px-3 py-2 text-left text-sm font-medium text-text-primary hover:bg-bg-tertiary">
-                  <div className="flex items-center gap-2">
-                    <MessageSquare size={14} className="text-hyper-blue" />
-                    <span>Draft CMO Tweet</span>
-                  </div>
-                </button>
-                <button className="w-full rounded-lg border border-border-subtle bg-bg-primary px-3 py-2 text-left text-sm font-medium text-text-primary hover:bg-bg-tertiary">
-                  <div className="flex items-center gap-2">
-                    <Twitter size={14} className="text-velocity-orange" />
-                    <span>Draft Brand Tweet</span>
-                  </div>
-                </button>
-                <button className="w-full rounded-lg border border-border-subtle bg-bg-primary px-3 py-2 text-left text-sm font-medium text-text-primary hover:bg-bg-tertiary">
-                  <div className="flex items-center gap-2">
-                    <FileText size={14} className="text-accent-violet" />
-                    <span>View Content Strategy</span>
-                  </div>
-                </button>
-              </div>
-            </Surface>
-
-            {/* Account Info */}
-            <Surface>
-              <div className="mb-3 flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-hyper-blue-muted text-hyper-blue">
-                  <Twitter size={15} />
-                </div>
-                <h2 className="text-base font-bold text-text-primary">Account Status</h2>
+                <h2 className="text-base font-bold text-text-primary">Post Composer</h2>
               </div>
 
               <div className="space-y-3">
-                <div className="rounded-lg border border-border-subtle bg-bg-primary p-3">
-                  <div className="flex items-center gap-2">
-                    <User size={14} className="text-hyper-blue" />
-                    <span className="text-sm font-semibold text-text-primary">@EstherCourtLab</span>
-                  </div>
-                  <p className="mt-1 text-xs text-text-muted">CMO — Personal voice</p>
-                  <div className="mt-2 flex items-center gap-1">
-                    <div className="h-1.5 w-1.5 rounded-full bg-accent-green" />
-                    <span className="text-[10px] text-accent-green">Authenticated</span>
-                  </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <label className="space-y-1 text-xs text-text-muted">
+                    Platform
+                    <select
+                      value={platform}
+                      onChange={(event) => setPlatform(event.target.value as Platform)}
+                      className="w-full rounded-lg border border-border-default bg-bg-primary px-2.5 py-2 text-sm text-text-primary"
+                    >
+                      <option value="twitter">Twitter/X</option>
+                      <option value="instagram">Instagram</option>
+                      <option value="facebook">Facebook</option>
+                    </select>
+                  </label>
+
+                  <label className="space-y-1 text-xs text-text-muted">
+                    Post Type
+                    <select
+                      value={postType}
+                      onChange={(event) => setPostType(event.target.value as PostType)}
+                      className="w-full rounded-lg border border-border-default bg-bg-primary px-2.5 py-2 text-sm text-text-primary"
+                    >
+                      <option value="feed">Feed</option>
+                      <option value="story">Story</option>
+                      <option value="reel">Reel</option>
+                      <option value="thread">Thread</option>
+                      <option value="poll">Poll</option>
+                    </select>
+                  </label>
                 </div>
 
-                <div className="rounded-lg border border-border-subtle bg-bg-primary p-3">
-                  <div className="flex items-center gap-2">
-                    <Users size={14} className="text-velocity-orange" />
-                    <span className="text-sm font-semibold text-text-primary">@CourtLabApp</span>
-                  </div>
-                  <p className="mt-1 text-xs text-text-muted">Brand — Kenny mascot</p>
-                  <div className="mt-2 flex items-center gap-1">
-                    <div className="h-1.5 w-1.5 rounded-full bg-accent-green" />
-                    <span className="text-[10px] text-accent-green">Authenticated</span>
-                  </div>
+                <label className="space-y-1 text-xs text-text-muted">
+                  Caption Tone
+                  <select
+                    value={captionTone}
+                    onChange={(event) => setCaptionTone(event.target.value as CaptionTone)}
+                    className="w-full rounded-lg border border-border-default bg-bg-primary px-2.5 py-2 text-sm text-text-primary"
+                  >
+                    <option value="assistant">Assistant Draft</option>
+                    <option value="promotion">Promotion</option>
+                    <option value="announcement">Announcement</option>
+                  </select>
+                </label>
+
+                <label className="space-y-1 text-xs text-text-muted">
+                  Scheduled Time
+                  <input
+                    type="datetime-local"
+                    value={scheduledTime}
+                    onChange={(event) => setScheduledTime(event.target.value)}
+                    className="w-full rounded-lg border border-border-default bg-bg-primary px-2.5 py-2 text-sm text-text-primary"
+                  />
+                </label>
+
+                <label className="space-y-1 text-xs text-text-muted">
+                  Caption Draft (optional override)
+                  <textarea
+                    value={captionDraft}
+                    onChange={(event) => setCaptionDraft(event.target.value)}
+                    placeholder="Leave blank to auto-generate from each selected asset"
+                    className="min-h-32 w-full rounded-lg border border-border-default bg-bg-primary px-2.5 py-2 text-sm text-text-primary"
+                  />
+                </label>
+
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    onClick={generateDraftFromSelection}
+                    className="inline-flex items-center gap-2 rounded-lg border border-border-default bg-bg-primary px-3 py-2 text-xs font-semibold text-text-secondary"
+                  >
+                    <FileText size={13} /> Draft Caption
+                  </button>
+                  <button
+                    onClick={() => void createPosts()}
+                    disabled={isLoading || selectedAssets.length === 0}
+                    className="inline-flex items-center gap-2 rounded-lg bg-hyper-blue px-3 py-2 text-xs font-semibold text-white disabled:opacity-50"
+                  >
+                    <Send size={13} /> {isLoading ? "Queuing..." : `Queue ${selectedAssets.length || ""} Post(s)`}
+                  </button>
                 </div>
               </div>
+            </Surface>
+
+            <Surface>
+              <div className="mb-3 flex items-center justify-between gap-2">
+                <h2 className="text-base font-bold text-text-primary">Waiting For Review</h2>
+                <Link href="/approvals" className="text-xs font-semibold text-hyper-blue hover:underline">
+                  Open queue
+                </Link>
+              </div>
+
+              <div className="space-y-2">
+                {pendingPosts.length === 0 ? (
+                  <div className="rounded-lg border border-dashed border-border-subtle bg-bg-primary px-3 py-4 text-center text-xs text-text-muted">
+                    No pending posts yet.
+                  </div>
+                ) : (
+                  pendingPosts.slice(0, 8).map((post) => (
+                    <div key={post.id} className="rounded-lg border border-border-subtle bg-bg-primary p-3">
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-xs font-semibold text-text-secondary">{post.platform} · {post.type}</p>
+                        <Badge className="border-accent-amber/40 bg-accent-amber-muted text-accent-amber">
+                          <Clock size={10} /> Pending
+                        </Badge>
+                      </div>
+                      <p className="mt-1 text-sm text-text-primary">{compact(post.caption, 120)}</p>
+                      <p className="mt-1 text-[11px] text-text-muted">{new Date(post.scheduledTime).toLocaleString()}</p>
+                    </div>
+                  ))
+                )}
+              </div>
+            </Surface>
+
+            <Surface>
+              <div className="mb-3 flex items-center gap-2">
+                <CalendarClock size={16} className="text-accent-violet" />
+                <h2 className="text-base font-bold text-text-primary">Generation Notes</h2>
+              </div>
+              <ul className="space-y-2 text-xs text-text-secondary">
+                <li className="flex items-start gap-2"><Twitter size={12} className="mt-0.5 text-hyper-blue" />Twitter drafts are generated as pending and require your approval.</li>
+                <li className="flex items-start gap-2"><ImageIcon size={12} className="mt-0.5 text-accent-green" />Media comes directly from your gallery export via API streaming.</li>
+                <li className="flex items-start gap-2"><Video size={12} className="mt-0.5 text-velocity-orange" />Use `reel` or `story` for video-first assets before approving.</li>
+              </ul>
             </Surface>
           </div>
         </div>

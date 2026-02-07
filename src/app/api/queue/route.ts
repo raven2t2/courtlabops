@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { readFile, writeFile } from 'fs/promises';
+import { mkdir, readFile, writeFile } from 'fs/promises';
 import path from 'path';
 
 const QUEUE_FILE = path.join(process.cwd(), 'data', 'post-queue.json');
@@ -31,13 +31,14 @@ async function getQueue(): Promise<QueuedPost[]> {
 }
 
 async function saveQueue(queue: QueuedPost[]): Promise<void> {
+  await mkdir(path.dirname(QUEUE_FILE), { recursive: true });
   await writeFile(QUEUE_FILE, JSON.stringify(queue, null, 2));
 }
 
 // POST /api/queue/approve - Approve a post
 export async function POST(request: NextRequest) {
   try {
-    const { postId, action, edits }: { postId: string; action: 'approve' | 'reject' | 'schedule'; edits?: Partial<QueuedPost> } = await request.json();
+    const { postId, action, edits }: { postId: string; action: 'approve' | 'reject' | 'schedule' | 'edit'; edits?: Partial<QueuedPost> } = await request.json();
     
     const queue = await getQueue();
     const postIndex = queue.findIndex(p => p.id === postId);
@@ -55,6 +56,11 @@ export async function POST(request: NextRequest) {
       queue[postIndex].status = 'rejected';
     } else if (action === 'schedule') {
       queue[postIndex].status = 'scheduled';
+    } else if (action === 'edit') {
+      if (!edits) {
+        return NextResponse.json({ error: 'No edits provided' }, { status: 400 });
+      }
+      queue[postIndex] = { ...queue[postIndex], ...edits };
     }
 
     await saveQueue(queue);
