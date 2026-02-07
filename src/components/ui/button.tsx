@@ -4,16 +4,16 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F0F11]",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-hyper-blue/50 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-secondary",
   {
     variants: {
       variant: {
-        default: "bg-orange-500 text-white hover:bg-orange-600 shadow-lg shadow-orange-500/20",
-        destructive: "bg-red-600 text-white hover:bg-red-700 shadow-lg shadow-red-600/20",
-        outline: "border border-[#2E2E38] bg-transparent hover:bg-[#1E1E24] hover:text-white text-zinc-400",
-        secondary: "bg-[#1E1E24] text-white hover:bg-[#2E2E38]",
-        ghost: "hover:bg-[#1E1E24] hover:text-white text-zinc-400",
-        link: "text-orange-500 underline-offset-4 hover:underline hover:text-orange-400",
+        default: "bg-velocity-orange text-white hover:bg-velocity-orange-hover shadow-lg shadow-velocity-orange/20",
+        destructive: "bg-accent-red text-white hover:bg-accent-red/80 shadow-lg shadow-accent-red/20",
+        outline: "border border-border-default bg-transparent hover:bg-border-subtle hover:text-text-primary text-text-secondary",
+        secondary: "bg-border-subtle text-text-primary hover:bg-border-default",
+        ghost: "hover:bg-border-subtle hover:text-text-primary text-text-secondary",
+        link: "text-velocity-orange underline-offset-4 hover:underline hover:text-velocity-orange-hover",
       },
       size: {
         default: "h-10 px-4 py-2",

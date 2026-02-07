@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased h-screen bg-[#09090B]">
+      <body className="antialiased h-dvh bg-bg-primary">
         <div className="flex h-full w-full overflow-hidden">
           <Sidebar />
           <main className="flex-1 overflow-auto">
