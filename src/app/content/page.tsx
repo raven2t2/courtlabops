@@ -3,9 +3,12 @@
 import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import {
+  ChevronLeft,
+  ChevronRight,
   CalendarClock,
   CheckCircle2,
   Clock,
+  Eye,
   FileText,
   Image as ImageIcon,
   Play,
@@ -16,6 +19,7 @@ import {
   Sparkles,
   Twitter,
   Video,
+  X,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -113,6 +117,8 @@ export default function ContentPage() {
   const [captionDraft, setCaptionDraft] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [statusMessage, setStatusMessage] = useState<string | null>(null)
+  const [viewerOpen, setViewerOpen] = useState(false)
+  const [currentAssetIndex, setCurrentAssetIndex] = useState(0)
 
   const selectedAssets = useMemo(
     () => galleryAssets.filter((asset) => selectedAssetIds.has(asset.id)),
@@ -126,11 +132,37 @@ export default function ContentPage() {
 
   const imagesCount = useMemo(() => galleryAssets.filter((asset) => asset.type === "image").length, [galleryAssets])
   const videosCount = useMemo(() => galleryAssets.filter((asset) => asset.type === "video").length, [galleryAssets])
+  const currentAsset = galleryAssets[currentAssetIndex] ?? null
+  const hasPreviousAsset = currentAssetIndex > 0
+  const hasNextAsset = currentAssetIndex < galleryAssets.length - 1
 
   useEffect(() => {
     void loadGallery()
     void loadQueue()
   }, [])
+
+  useEffect(() => {
+    if (!viewerOpen) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setViewerOpen(false)
+      if (event.key === "ArrowLeft" && hasPreviousAsset) {
+        setCurrentAssetIndex((value) => Math.max(0, value - 1))
+      }
+      if (event.key === "ArrowRight" && hasNextAsset) {
+        setCurrentAssetIndex((value) => Math.min(galleryAssets.length - 1, value + 1))
+      }
+    }
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    window.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [viewerOpen, hasPreviousAsset, hasNextAsset, galleryAssets.length])
 
   async function loadGallery(customQuery = query, customType = typeFilter): Promise<void> {
     try {
@@ -168,6 +200,11 @@ export default function ContentPage() {
       }
       return next
     })
+  }
+
+  function openViewer(index: number): void {
+    setCurrentAssetIndex(index)
+    setViewerOpen(true)
   }
 
   function generateDraftFromSelection(): void {
@@ -327,30 +364,58 @@ export default function ContentPage() {
               </div>
 
               <div className="grid max-h-[480px] grid-cols-2 gap-3 overflow-auto md:grid-cols-3 lg:grid-cols-4">
-                {galleryAssets.map((asset) => {
+                {galleryAssets.map((asset, index) => {
                   const selected = selectedAssetIds.has(asset.id)
                   return (
-                    <button
+                    <article
                       key={asset.id}
-                      onClick={() => toggleAsset(asset.id)}
+                      onClick={() => openViewer(index)}
                       className={cn(
-                        "overflow-hidden rounded-xl border text-left transition-all",
+                        "group overflow-hidden rounded-xl border text-left transition-all cursor-pointer",
                         selected ? "border-hyper-blue bg-hyper-blue/5" : "border-border-subtle bg-bg-primary"
                       )}
                     >
-                      <div className="relative h-24 w-full bg-bg-tertiary">
+                      <div className="relative h-28 w-full bg-bg-tertiary">
                         {asset.type === "video" ? (
-                          <video src={asset.url} className="h-full w-full object-cover" muted />
+                          <>
+                            <video src={asset.url} className="h-full w-full object-cover" muted />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-black/65 backdrop-blur">
+                                <Play size={14} className="ml-0.5 text-white" />
+                              </div>
+                            </div>
+                          </>
                         ) : (
                           <img src={asset.url} alt={asset.title} className="h-full w-full object-cover" />
                         )}
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/35 opacity-0 transition-opacity group-hover:opacity-100">
+                          <span className="inline-flex items-center gap-1 rounded-full bg-black/65 px-2 py-1 text-[11px] font-semibold text-white backdrop-blur">
+                            <Eye size={11} /> Preview
+                          </span>
+                        </div>
                         <span className="absolute right-1 top-1 rounded bg-black/70 px-1 py-0.5 text-[10px] uppercase text-white">{asset.type}</span>
                       </div>
                       <div className="space-y-1 p-2">
                         <p className="line-clamp-1 text-xs font-semibold text-text-primary">{asset.title}</p>
                         <p className="text-[10px] text-text-muted">{asset.category}</p>
+                        <div className="pt-1">
+                          <button
+                            onClick={(event) => {
+                              event.stopPropagation()
+                              toggleAsset(asset.id)
+                            }}
+                            className={cn(
+                              "rounded-md px-2 py-1 text-[11px] font-semibold transition-colors",
+                              selected
+                                ? "bg-accent-green text-white"
+                                : "bg-bg-tertiary text-text-secondary hover:bg-hyper-blue hover:text-white"
+                            )}
+                          >
+                            {selected ? "Selected" : "Use in Post"}
+                          </button>
+                        </div>
                       </div>
-                    </button>
+                    </article>
                   )
                 })}
               </div>
@@ -523,6 +588,94 @@ export default function ContentPage() {
           </div>
         </div>
       </div>
+
+      {viewerOpen && currentAsset ? (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-3 backdrop-blur-sm sm:p-6">
+          <button
+            onClick={() => setViewerOpen(false)}
+            aria-label="Close preview"
+            className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/45 text-white"
+          >
+            <X size={18} />
+          </button>
+
+          {hasPreviousAsset ? (
+            <button
+              onClick={() => setCurrentAssetIndex((value) => Math.max(0, value - 1))}
+              aria-label="Previous asset"
+              className="absolute left-2 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/45 text-white sm:left-4"
+            >
+              <ChevronLeft size={20} />
+            </button>
+          ) : null}
+
+          {hasNextAsset ? (
+            <button
+              onClick={() => setCurrentAssetIndex((value) => Math.min(galleryAssets.length - 1, value + 1))}
+              aria-label="Next asset"
+              className="absolute right-2 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/45 text-white sm:right-4"
+            >
+              <ChevronRight size={20} />
+            </button>
+          ) : null}
+
+          <div className="grid h-full w-full max-w-7xl grid-rows-[minmax(0,1fr)_auto] overflow-hidden rounded-2xl border border-white/10 bg-[#090d14] lg:grid-cols-[minmax(0,1fr)_380px] lg:grid-rows-1">
+            <div className="relative flex min-h-0 items-center justify-center bg-black/65 p-3 sm:p-5">
+              {currentAsset.type === "video" ? (
+                <video
+                  src={currentAsset.url}
+                  controls
+                  autoPlay
+                  className="max-h-full w-full rounded-xl border border-white/10 bg-black object-contain"
+                />
+              ) : (
+                <img
+                  src={currentAsset.url}
+                  alt={currentAsset.title}
+                  className="max-h-full max-w-full rounded-xl border border-white/10 bg-black object-contain"
+                />
+              )}
+            </div>
+
+            <aside className="border-t border-white/10 bg-[#0d1320] p-4 lg:border-l lg:border-t-0 lg:p-5">
+              <div className="mb-3 flex items-center justify-between gap-2">
+                <span className="rounded-full border border-white/20 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-text-secondary">
+                  {currentAsset.type}
+                </span>
+                <span className="text-[11px] text-text-muted">
+                  {currentAssetIndex + 1} / {galleryAssets.length}
+                </span>
+              </div>
+              <h3 className="text-lg font-bold text-text-primary">{currentAsset.title}</h3>
+              <p className="mt-2 line-clamp-6 text-sm text-text-secondary">{currentAsset.prompt}</p>
+              <p className="mt-3 text-xs text-text-muted">
+                {currentAsset.category} · {new Date(currentAsset.createdAt).toLocaleString()}
+              </p>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                <button
+                  onClick={() => toggleAsset(currentAsset.id)}
+                  className={cn(
+                    "inline-flex items-center gap-1 rounded-lg px-3 py-2 text-xs font-semibold",
+                    selectedAssetIds.has(currentAsset.id)
+                      ? "bg-accent-green text-white"
+                      : "bg-hyper-blue text-white"
+                  )}
+                >
+                  <Plus size={13} className={selectedAssetIds.has(currentAsset.id) ? "rotate-45" : ""} />
+                  {selectedAssetIds.has(currentAsset.id) ? "Remove From Post" : "Use In Post"}
+                </button>
+                <button
+                  onClick={() => setViewerOpen(false)}
+                  className="rounded-lg border border-border-default bg-bg-primary px-3 py-2 text-xs font-semibold text-text-secondary"
+                >
+                  Back to Generator
+                </button>
+              </div>
+            </aside>
+          </div>
+        </div>
+      ) : null}
     </div>
   )
 }
