@@ -5,17 +5,17 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 import {
-  LayoutDashboard, Users, Target, Trophy, Calendar,
-  Crosshair, Settings, Flame, MoreVertical, Menu, X
+  LayoutDashboard, Users, Mail, Crosshair, Settings,
+  Flame, MoreVertical, Menu, X, CalendarDays, UserCheck
 } from "lucide-react"
 
 const NAV_ITEMS = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/" },
   { icon: Users, label: "Leads", href: "/leads", badge: "18" },
-  { icon: Target, label: "Campaigns", href: "/campaigns" },
-  { icon: Trophy, label: "Coaches", href: "/coaches" },
+  { icon: Mail, label: "Campaigns", href: "/campaigns" },
+  { icon: UserCheck, label: "Coaches", href: "/coaches" },
   { icon: Crosshair, label: "Competitors", href: "/competitors" },
-  { icon: Calendar, label: "Events", href: "/events" },
+  { icon: CalendarDays, label: "Events", href: "/events" },
   { icon: Settings, label: "Settings", href: "/settings" },
 ]
 
@@ -40,8 +40,8 @@ export function Sidebar() {
     <>
       {/* Logo */}
       <div className="px-5 pt-5 pb-4 flex items-center gap-3">
-        <div className="w-9 h-9 rounded-full overflow-hidden ring-1 ring-border-default flex-shrink-0">
-          <Image src="/courtlab-logo.jpg" alt="CourtLab" width={36} height={36} className="w-full h-full object-cover" />
+        <div className="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0" style={{ boxShadow: "0 2px 8px oklch(0 0 0 / 0.3)" }}>
+          <Image src="/courtlab-logo.jpg" alt="CourtLab" width={40} height={40} className="w-10 h-10 object-cover" />
         </div>
         <div>
           <div className="text-sm font-bold tracking-tight text-text-primary font-[--font-display]">CourtLab</div>
@@ -49,6 +49,7 @@ export function Sidebar() {
         </div>
       </div>
 
+      {/* Divider */}
       <div className="mx-5 h-px bg-border-subtle" />
 
       {/* Nav */}
