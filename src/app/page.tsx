@@ -552,43 +552,6 @@ export default function Dashboard() {
                                 <span className="text-[11px] text-text-muted">Due {card.due}</span>
                               </div>
 
-                              {(card as any).links && ((card as any).links.internal?.length > 0 || (card as any).links.external?.length > 0) && (
-                                <div className="mt-2 space-y-1">
-                                  {(card as any).links.internal?.length > 0 && (
-                                    <div className="flex flex-wrap gap-1">
-                                      {(card as any).links.internal.map((link: any) => (
-                                        <a
-                                          key={link.url}
-                                          href={link.url}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className="inline-flex items-center gap-1 rounded bg-hyper-blue/10 px-1.5 py-0.5 text-[10px] font-medium text-hyper-blue hover:bg-hyper-blue/20 transition-colors"
-                                        >
-                                          {link.label}
-                                          <ArrowUpRight size={9} />
-                                        </a>
-                                      ))}
-                                    </div>
-                                  )}
-                                  {(card as any).links.external?.length > 0 && (
-                                    <div className="flex flex-wrap gap-1">
-                                      {(card as any).links.external.map((link: any) => (
-                                        <a
-                                          key={link.url}
-                                          href={link.url}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className="inline-flex items-center gap-1 rounded bg-accent-violet/10 px-1.5 py-0.5 text-[10px] font-medium text-accent-violet hover:bg-accent-violet/20 transition-colors"
-                                        >
-                                          {link.label}
-                                          <ArrowUpRight size={9} />
-                                        </a>
-                                      ))}
-                                    </div>
-                                  )}
-                                </div>
-                              )}
-
                               <div className="mt-2 flex items-center justify-between">
                                 <span className="text-[10px] font-semibold uppercase tracking-wide text-text-muted">
                                   {card.org} · {card.owner}
