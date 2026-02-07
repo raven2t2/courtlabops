@@ -1,18 +1,10 @@
 "use client"
 
-import { useState } from "react"
-import {
-  useReactTable,
-  getCoreRowModel,
-  getSortedRowModel,
-  getFilteredRowModel,
-  SortingState,
-  ColumnDef,
-  flexRender,
-} from "@tanstack/react-table"
-import { ArrowUpDown, ArrowUp, ArrowDown, Mail, ExternalLink, Search, Plus, Download } from "lucide-react"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { Mail, ExternalLink, Search, Plus, Download, MapPin } from "lucide-react"
 
-interface Lead {
+type Lead = {
   id: string
   clubName: string
   location: string
@@ -20,661 +12,167 @@ interface Lead {
   tier: string
   contactEmail: string
   website: string
-  status: "New" | "Emailed" | "Meeting Set" | "Closed"
-  personalization: string
+  facebook?: string
+  instagram?: string
+  personalizationAnchor: string
+  draftedIntro: string
+  status: string
+  lastContact: string | null
+  nextAction: string
+  priority: string
+  notes: string
   tags: string[]
 }
 
-const leadsData: Lead[] = [
-  {
-    id: "SA-001",
-    clubName: "South Adelaide Panthers",
-    location: "Marion Stadium",
-    state: "SA",
-    tier: "Tier 1",
-    contactEmail: "secretary@southadelaidebasketball.com.au",
-    website: "https://www.southadelaidebasketball.com.au/",
-    status: "New",
-    personalization: "REDARC extended 3-year partnership for Hoops & Her program",
-    tags: ["district", "womens-basketball"],
-  },
-  {
-    id: "SA-002",
-    clubName: "Norwood Flames",
-    location: "The ARC Campbelltown",
-    state: "SA",
-    tier: "Tier 1",
-    contactEmail: "secretary@norwoodbasketball.com.au",
-    website: "https://www.norwoodbasketball.com.au/",
-    status: "New",
-    personalization: "Adelaide's biggest club (60+ teams), runs Easter Classic Tournament",
-    tags: ["district", "largest-club"],
-  },
-  {
-    id: "SA-003",
-    clubName: "Sturt Sabres",
-    location: "Springbank Sports Centre",
-    state: "SA",
-    tier: "Tier 1",
-    contactEmail: "basketball@sturtsabres.com.au",
-    website: "https://www.sturtsabres.com.au/",
-    status: "New",
-    personalization: "Most professional junior program in SA, pro player pipeline",
-    tags: ["district", "elite"],
-  },
-  {
-    id: "SA-004",
-    clubName: "Forestville Eagles",
-    location: "State Basketball Centre Wayville",
-    state: "SA",
-    tier: "Tier 1 Warm",
-    contactEmail: "finance@forestvilleeagles.asn.au",
-    website: "https://www.forestvilleeagles.asn.au/",
-    status: "New",
-    personalization: "Zane's club! Mini 3agles 3v3 program active now",
-    tags: ["district", "warm-lead", "zanes-club"],
-  },
-  {
-    id: "SA-005",
-    clubName: "West Adelaide Bearcats",
-    location: "Port Adelaide Recreation Centre",
-    state: "SA",
-    tier: "Tier 1",
-    contactEmail: "playatwestbearcats@gmail.com",
-    website: "https://www.westbearcats.net/",
-    status: "New",
-    personalization: "SA Premier League, NBL1 Central, season starts March 2026",
-    tags: ["district", "nbl1"],
-  },
-  {
-    id: "SA-006",
-    clubName: "Woodville Warriors",
-    location: "St Clair Recreation Centre",
-    state: "SA",
-    tier: "Tier 1",
-    contactEmail: "secretary@woodvillewarriors.com.au",
-    website: "https://woodvillewarriors.com.au",
-    status: "New",
-    personalization: "One of only 10 Basketball SA elite member clubs",
-    tags: ["district", "elite"],
-  },
-  {
-    id: "SA-007",
-    clubName: "Eastern Mavericks",
-    location: "St Francis De Sales College Mt Barker",
-    state: "SA",
-    tier: "Tier 2",
-    contactEmail: "secretary@easternmavericks.com.au",
-    website: "http://www.easternmavericks.com.au/",
-    status: "New",
-    personalization: "Hills region club — growing area outside metro core",
-    tags: ["district", "regional"],
-  },
-  {
-    id: "SA-008",
-    clubName: "North Adelaide Rockets",
-    location: "The Lights Sports Centre",
-    state: "SA",
-    tier: "Tier 2",
-    contactEmail: "secretary@nabc-rockets.club",
-    website: "https://nabc-rockets.club/",
-    status: "New",
-    personalization: "Northern Adelaide club at The Lights facility",
-    tags: ["district", "northern"],
-  },
-  // Melbourne / Victoria Clubs
-  {
-    id: "VIC-001",
-    clubName: "Melbourne Tigers",
-    location: "Melbourne Sports Centres - Parkville",
-    state: "VIC",
-    tier: "Tier 1",
-    contactEmail: "info@melbournetigers.basketball",
-    website: "https://melbournetigers.basketball/",
-    status: "New",
-    personalization: "NBL1 South powerhouse, 10+ NBL1 championships, pro pathway focus",
-    tags: ["nbl1", "melbourne", "elite", "championship"],
-  },
-  {
-    id: "VIC-002",
-    clubName: "Knox Raiders",
-    location: "Knox Basketball Stadium Boronia",
-    state: "VIC",
-    tier: "Tier 1",
-    contactEmail: "admin@knoxbasketball.com.au",
-    website: "https://www.knoxbasketball.com.au/",
-    status: "New",
-    personalization: "NBL1 South, historic rivalry with Kilsyth for 'The Ashes' trophy",
-    tags: ["nbl1", "melbourne-east", "rivalry", "elite"],
-  },
-  {
-    id: "VIC-003",
-    clubName: "Eltham Wildcats",
-    location: "Eltham High School Leisure Centre",
-    state: "VIC",
-    tier: "Tier 1",
-    contactEmail: "info@elthamwildcats.com.au",
-    website: "https://www.elthamwildcats.com.au/",
-    status: "New",
-    personalization: "NBL1 South, 50-year rivalry with Diamond Valley for O'Connor-Cukier Cup",
-    tags: ["nbl1", "melbourne-north", "rivalry", "heritage"],
-  },
-  {
-    id: "VIC-004",
-    clubName: "Nunawading Spectres",
-    location: "Nunawading Basketball Centre",
-    state: "VIC",
-    tier: "Tier 1",
-    contactEmail: "admin@nunawadingbasketball.com.au",
-    website: "https://www.nunawadingbasketball.com.au/",
-    status: "New",
-    personalization: "NBL1 South, Basketball Victoria heritage club, strong junior program",
-    tags: ["nbl1", "melbourne-east", "heritage", "elite"],
-  },
-  {
-    id: "VIC-005",
-    clubName: "Ringwood Hawks",
-    location: "Ringwood Basketball Stadium",
-    state: "VIC",
-    tier: "Tier 1",
-    contactEmail: "info@ringwoodbasketball.com.au",
-    website: "https://ringwoodhawks.nbl1.com.au/",
-    status: "New",
-    personalization: "NBL1 South, joined from Big V, strong community base",
-    tags: ["nbl1", "melbourne-east", "community", "growth"],
-  },
-  {
-    id: "VIC-006",
-    clubName: "Dandenong Rangers",
-    location: "Dandenong Stadium",
-    state: "VIC",
-    tier: "Tier 1",
-    contactEmail: "info@dandenongstadium.com.au",
-    website: "https://dandenongstadium.com.au/",
-    status: "New",
-    personalization: "WNBL heritage, NBL1 South, SEABL legacy club, southeastern Melbourne hub",
-    tags: ["nbl1", "melbourne-south", "wnbl", "legacy"],
-  },
-  {
-    id: "VIC-007",
-    clubName: "Kilsyth Cobras",
-    location: "Kilsyth Sports Centre",
-    state: "VIC",
-    tier: "Tier 1",
-    contactEmail: "info@kilsythbasketball.com.au",
-    website: "https://www.kilsythbasketball.com.au/",
-    status: "New",
-    personalization: "NBL1 South, historic 'Ashes' rivalry with Knox Raiders",
-    tags: ["nbl1", "melbourne-east", "rivalry", "elite"],
-  },
-  {
-    id: "VIC-008",
-    clubName: "Diamond Valley Eagles",
-    location: "Diamond Valley Sports Centre",
-    state: "VIC",
-    tier: "Tier 1",
-    contactEmail: "admin@dvbasketball.com.au",
-    website: "https://dvbasketball.com.au/",
-    status: "New",
-    personalization: "NBL1 South, 50-year rivalry with Eltham, northern Melbourne power",
-    tags: ["nbl1", "melbourne-north", "rivalry", "heritage"],
-  },
-  {
-    id: "VIC-009",
-    clubName: "Bulleen Boomers",
-    location: "Templestowe, eastern suburbs",
-    state: "VIC",
-    tier: "Tier 1",
-    contactEmail: "admin@bulleenboomers.com.au",
-    website: "https://www.bulleenboomers.com.au/",
-    status: "New",
-    personalization: "55+ year history, one of Melbourne's largest junior programs, Big V + VJBL",
-    tags: ["big-v", "melbourne-east", "heritage", "junior-heavy"],
-  },
-  {
-    id: "VIC-010",
-    clubName: "Casey Basketball",
-    location: "Casey Stadium, Cranbourne East",
-    state: "VIC",
-    tier: "Tier 2 Growth",
-    contactEmail: "comps@caseybasketball.com.au",
-    website: "https://www.caseybasketball.com.au/",
-    status: "New",
-    personalization: "Fastest-growing region in Victoria, new stadium infrastructure",
-    tags: ["growth-corridor", "melbourne-south-east", "new-families"],
-  },
-  {
-    id: "VIC-011",
-    clubName: "Westgate Basketball",
-    location: "Melbourne's inner west",
-    state: "VIC",
-    tier: "Tier 2",
-    contactEmail: "info@westgatebasketball.com.au",
-    website: "https://westgatebasketball.com.au/",
-    status: "New",
-    personalization: "Community-focused, 'Represent the west', Big V aspirations",
-    tags: ["big-v", "melbourne-west", "community"],
-  },
-  {
-    id: "VIC-012",
-    clubName: "Keilor Thunder",
-    location: "Keilor, north-west growth corridor",
-    state: "VIC",
-    tier: "Tier 1",
-    contactEmail: "info@keilorbasketball.com",
-    website: "https://www.keilorbasketball.com/",
-    status: "New",
-    personalization: "NBL1 South team, northern growth corridor powerhouse",
-    tags: ["nbl1", "melbourne-north", "growth-corridor"],
-  },
-  {
-    id: "VIC-013",
-    clubName: "Frankston Blues",
-    location: "FDBA Stadium, Seaford",
-    state: "VIC",
-    tier: "Tier 1",
-    contactEmail: "competitions@fdba.com.au",
-    website: "https://fdba.com.au/",
-    status: "New",
-    personalization: "NBL1 Men + Women, active holiday camps, import player program",
-    tags: ["nbl1", "mornington-peninsula", "holiday-camps", "imports"],
-  },
-  {
-    id: "VIC-014",
-    clubName: "Waverley Falcons",
-    location: "Mount Waverley",
-    state: "VIC",
-    tier: "Tier 1",
-    contactEmail: "info@waverleybasketball.com.au",
-    website: "https://www.waverleybasketball.com.au/",
-    status: "New",
-    personalization: "6 teams in VJBL VC (top tier), strongest junior program in east",
-    tags: ["vjbl-vc", "melbourne-east", "elite-juniors"],
-  },
-  {
-    id: "VIC-015",
-    clubName: "McKinnon Cougars",
-    location: "McKinnon, south-east",
-    state: "VIC",
-    tier: "Tier 2",
-    contactEmail: "info@mckinnonbasketball.com.au",
-    website: "https://www.mckinnonbasketball.com.au/",
-    status: "New",
-    personalization: "Family-friendly reputation, recommended for new families",
-    tags: ["family-focused", "melbourne-south-east", "retention"],
-  },
-  {
-    id: "VIC-016",
-    clubName: "Sandringham Sabres",
-    location: "Sandringham, bayside",
-    state: "VIC",
-    tier: "Tier 2",
-    contactEmail: "info@sandringhambasketball.com.au",
-    website: "https://www.sandringhamsabres.com.au/",
-    status: "New",
-    personalization: "Strong senior program, affluent bayside location",
-    tags: ["bayside", "melbourne-south", "senior-program"],
-  },
-  {
-    id: "VIC-017",
-    clubName: "Camberwell Dragons",
-    location: "Camberwell, inner east",
-    state: "VIC",
-    tier: "Tier 2",
-    contactEmail: "info@camberwelldragons.com.au",
-    website: "https://www.camberwelldragons.com.au/",
-    status: "New",
-    personalization: "Historic club, strong community ties, inner-east location",
-    tags: ["heritage", "melbourne-east", "community"],
-  },
-  {
-    id: "VIC-018",
-    clubName: "Melton Basketball",
-    location: "Melton, outer west growth corridor",
-    state: "VIC",
-    tier: "Tier 2 Growth",
-    contactEmail: "info@meltonbasketball.com.au",
-    website: "https://www.meltonbasketball.com.au/",
-    status: "New",
-    personalization: "Fastest-growing municipality, new families = new players",
-    tags: ["growth-corridor", "melbourne-west", "new-families"],
-  },
-  {
-    id: "VIC-019",
-    clubName: "Werribee Devils",
-    location: "Werribee, western corridor",
-    state: "VIC",
-    tier: "Tier 2",
-    contactEmail: "info@werribeebasketball.com.au",
-    website: "https://www.werribeebasketball.com.au/",
-    status: "New",
-    personalization: "Western corridor, growing population",
-    tags: ["growth-corridor", "melbourne-west"],
-  },
-  {
-    id: "VIC-020",
-    clubName: "Blackburn Vikings",
-    location: "Blackburn, eastern suburbs",
-    state: "VIC",
-    tier: "Tier 2",
-    contactEmail: "info@blackburnbasketball.com.au",
-    website: "https://www.blackburnbasketball.com.au/",
-    status: "New",
-    personalization: "Eastern suburbs junior program",
-    tags: ["melbourne-east", "junior-program"],
-  },
-  {
-    id: "VIC-021",
-    clubName: "Hawthorn Magic",
-    location: "Hawthorn, inner east",
-    state: "VIC",
-    tier: "Tier 2",
-    contactEmail: "info@hawthornbasketball.com.au",
-    website: "https://www.hawthornbasketball.com.au/",
-    status: "New",
-    personalization: "Inner east, community focused",
-    tags: ["melbourne-east", "community"],
-  },
-  {
-    id: "VIC-022",
-    clubName: "Doncaster Dragons",
-    location: "Doncaster, eastern suburbs",
-    state: "VIC",
-    tier: "Tier 2",
-    contactEmail: "info@doncasterbasketball.com.au",
-    website: "https://www.doncasterbasketball.com.au/",
-    status: "New",
-    personalization: "Eastern suburbs, established program",
-    tags: ["melbourne-east", "established"],
-  },
-  {
-    id: "VIC-023",
-    clubName: "Whittlesea Pacers",
-    location: "Whittlesea, outer north",
-    state: "VIC",
-    tier: "Tier 2 Growth",
-    contactEmail: "info@whittleseabasketball.com.au",
-    website: "https://www.whittleseabasketball.com.au/",
-    status: "New",
-    personalization: "Outer north growth corridor",
-    tags: ["growth-corridor", "melbourne-north"],
-  },
-  {
-    id: "VIC-024",
-    clubName: "Pakenham Warriors",
-    location: "Pakenham, outer south-east",
-    state: "VIC",
-    tier: "Tier 2 Growth",
-    contactEmail: "info@pakenhambasketball.com.au",
-    website: "https://www.pakenhambasketball.com.au/",
-    status: "New",
-    personalization: "Outer south-east growth corridor",
-    tags: ["growth-corridor", "melbourne-south-east"],
-  },
-  {
-    id: "VIC-025",
-    clubName: "Mornington Basketball",
-    location: "Mornington, Peninsula",
-    state: "VIC",
-    tier: "Tier 2",
-    contactEmail: "info@morningtonbasketball.com.au",
-    website: "https://www.morningtonbasketball.com.au/",
-    status: "New",
-    personalization: "Mornington Peninsula, coastal community",
-    tags: ["mornington-peninsula", "coastal"],
-  },
-  {
-    id: "VIC-026",
-    clubName: "Chelsea Gulls",
-    location: "Chelsea, bayside",
-    state: "VIC",
-    tier: "Tier 2",
-    contactEmail: "info@chelseabasketball.com.au",
-    website: "https://www.chelseabasketball.com.au/",
-    status: "New",
-    personalization: "Bayside location, junior program",
-    tags: ["bayside", "melbourne-south"],
-  },
-]
-
 export default function LeadsPage() {
-  const [sorting, setSorting] = useState<SortingState>([])
-  const [globalFilter, setGlobalFilter] = useState("")
+  const router = useRouter()
+  const [leads, setLeads] = useState<Lead[]>([])
+  const [filter, setFilter] = useState("")
+  const [stateFilter, setStateFilter] = useState<"ALL" | "SA" | "VIC">("ALL")
+  const [isLoading, setIsLoading] = useState(true)
 
-  const columns: ColumnDef<Lead>[] = [
-    {
-      accessorKey: "clubName",
-      header: "Club",
-      cell: ({ row }) => (
-        <div className="min-w-[200px]">
-          <div className="font-semibold text-white">{row.original.clubName}</div>
-          <div className="text-sm text-[#71717A]">{row.original.location}</div>
-        </div>
-      ),
-    },
-    {
-      accessorKey: "tier",
-      header: ({ column }) => (
-        <button
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="flex items-center gap-1.5 text-xs font-bold text-[#71717A] uppercase tracking-wider hover:text-white transition-colors cursor-pointer"
-        >
-          Tier
-          <SortIcon sorted={column.getIsSorted()} />
-        </button>
-      ),
-      cell: ({ row }) => {
-        const tier = row.original.tier
-        const isWarm = tier.includes("Warm")
-        const isTier1 = tier.includes("Tier 1") && !isWarm
-        
-        return (
-          <span className={`
-            inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold border
-            ${isWarm ? "text-amber-950 bg-amber-400 border-amber-400" : ""}
-            ${isTier1 ? "text-[#F97316] bg-[#F97316]/10 border-[#F97316]/20" : ""}
-            ${!isWarm && !isTier1 ? "text-[#71717A] bg-[#18181B] border-[#27272A]" : ""}
-          `}>
-            {tier}
-          </span>
-        )
-      },
-    },
-    {
-      accessorKey: "state",
-      header: ({ column }) => (
-        <button
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="flex items-center gap-1.5 text-xs font-bold text-[#71717A] uppercase tracking-wider hover:text-white transition-colors cursor-pointer"
-        >
-          State
-          <SortIcon sorted={column.getIsSorted()} />
-        </button>
-      ),
-      cell: ({ row }) => (
-        <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-[#18181B] text-[#A1A1AA]">
-          {row.original.state}
-        </span>
-      ),
-    },
-    {
-      accessorKey: "personalization",
-      header: "Context",
-      cell: ({ row }) => (
-        <div className="max-w-[320px] text-sm text-[#A1A1AA] line-clamp-2">
-          {row.original.personalization}
-        </div>
-      ),
-    },
-    {
-      accessorKey: "status",
-      header: "Status",
-      cell: ({ row }) => <StatusBadge status={row.original.status} />,
-    },
-    {
-      id: "actions",
-      header: "",
-      cell: ({ row }) => (
-        <div className="flex items-center gap-1">
-          <a
-            href={`mailto:${row.original.contactEmail}?subject=Quick question about ${row.original.clubName}`}
-            className="p-2.5 text-[#71717A] hover:text-white hover:bg-[#18181B] rounded-xl transition-all duration-200"
-            title={`Email ${row.original.contactEmail}`}
-          >
-            <Mail size={18} />
-          </a>
-          <a 
-            href={row.original.website} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="p-2.5 text-[#71717A] hover:text-white hover:bg-[#18181B] rounded-xl transition-all duration-200"
-            title={`Visit ${row.original.website}`}
-          >
-            <ExternalLink size={18} />
-          </a>
-        </div>
-      ),
-    },
-  ]
+  useEffect(() => {
+    fetch('/api/leads')
+      .then(res => res.json())
+      .then(data => {
+        setLeads(data.leads || [])
+        setIsLoading(false)
+      })
+      .catch(err => {
+        console.error('Failed to load leads:', err)
+        setIsLoading(false)
+      })
+  }, [])
 
-  const table = useReactTable({
-    data: leadsData,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onSortingChange: setSorting,
-    onGlobalFilterChange: setGlobalFilter,
-    state: { sorting, globalFilter },
+  const filteredLeads = leads.filter(lead => {
+    const matchesSearch = filter === "" || 
+      lead.clubName.toLowerCase().includes(filter.toLowerCase()) ||
+      lead.location.toLowerCase().includes(filter.toLowerCase()) ||
+      lead.personalizationAnchor.toLowerCase().includes(filter.toLowerCase())
+    
+    const matchesState = stateFilter === "ALL" || lead.state === stateFilter
+    
+    return matchesSearch && matchesState
   })
 
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
-        <div>
-          <h1 className="text-2xl font-bold text-white">Basketball Clubs</h1>
-          <p className="text-sm text-[#71717A] mt-2">{leadsData.length} leads researched and ready for outreach</p>
+    <div className="min-h-screen bg-bg-primary">
+      <div className="mx-auto max-w-7xl p-6">
+        {/* Header */}
+        <div className="mb-6">
+          <h1 className="text-3xl font-bold text-text-primary mb-2">Lead Pipeline</h1>
+          <p className="text-text-secondary">SA clubs (priority) → VIC expansion. Click any lead for custom outreach.</p>
         </div>
-        <div className="flex items-center gap-3">
-          <button className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-[#A1A1AA] bg-[#0F0F11] border border-[#27272A] rounded-xl hover:bg-[#18181B] hover:text-white hover:border-[#3F3F46] transition-all duration-200">
-            <Download size={16} />
-            Export
-          </button>
-          <button className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-[#F97316] rounded-xl hover:bg-[#FB923C] hover:shadow-lg hover:shadow-[#F97316]/20 transition-all duration-200 active:scale-[0.98]">
-            <Plus size={16} />
-            Add Lead
-          </button>
+
+        {/* Filters */}
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex gap-2">
+            <button
+              onClick={() => setStateFilter("ALL")}
+              className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
+                stateFilter === "ALL" 
+                  ? "bg-hyper-blue text-white" 
+                  : "bg-bg-secondary text-text-secondary hover:bg-bg-tertiary"
+              }`}
+            >
+              All ({leads.length})
+            </button>
+            <button
+              onClick={() => setStateFilter("SA")}
+              className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
+                stateFilter === "SA" 
+                  ? "bg-accent-green text-white" 
+                  : "bg-bg-secondary text-text-secondary hover:bg-bg-tertiary"
+              }`}
+            >
+              SA ({leads.filter(l => l.state === "SA").length})
+            </button>
+            <button
+              onClick={() => setStateFilter("VIC")}
+              className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
+                stateFilter === "VIC" 
+                  ? "bg-velocity-orange text-white" 
+                  : "bg-bg-secondary text-text-secondary hover:bg-bg-tertiary"
+              }`}
+            >
+              VIC ({leads.filter(l => l.state === "VIC").length})
+            </button>
+          </div>
+
+          <label className="flex items-center gap-2 rounded-xl border border-border-default bg-bg-secondary px-3 py-2">
+            <Search size={14} className="text-text-muted" />
+            <input
+              type="text"
+              placeholder="Search clubs..."
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              className="w-full bg-transparent text-sm text-text-primary outline-none placeholder:text-text-muted sm:w-64"
+            />
+          </label>
         </div>
-      </div>
 
-      {/* Search */}
-      <div className="relative max-w-lg">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#71717A]" size={18} />
-        <input
-          type="text"
-          placeholder="Search clubs, locations, tags..."
-          value={globalFilter}
-          onChange={(e) => setGlobalFilter(e.target.value)}
-          className="w-full pl-11 pr-4 py-3 bg-[#0F0F11] border border-[#27272A] rounded-xl text-sm text-white placeholder-[#71717A] focus:outline-none focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316]/20 transition-all duration-200"
-        />
-      </div>
+        {/* Leads Grid */}
+        {isLoading ? (
+          <div className="flex items-center justify-center py-16">
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-hyper-blue border-t-transparent" />
+          </div>
+        ) : (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {filteredLeads.map((lead) => (
+              <div
+                key={lead.id}
+                onClick={() => router.push(`/leads/${lead.id}`)}
+                className="rounded-xl border border-border-default bg-bg-secondary p-4 hover:border-hyper-blue/50 transition-all cursor-pointer"
+              >
+                <div className="flex items-start justify-between gap-2 mb-3">
+                  <h3 className="text-base font-bold text-text-primary">{lead.clubName}</h3>
+                  <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
+                    lead.priority === 'High' ? 'bg-accent-red/10 text-accent-red' :
+                    lead.priority === 'Medium' ? 'bg-accent-amber/10 text-accent-amber' :
+                    'bg-hyper-blue/10 text-hyper-blue'
+                  }`}>
+                    {lead.priority}
+                  </span>
+                </div>
 
-      {/* Table */}
-      <div className="bg-[#0F0F11] rounded-2xl border border-[#27272A] overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <tr key={headerGroup.id} className="border-b border-[#27272A] bg-[#09090B]">
-                  {headerGroup.headers.map((header) => (
-                    <th key={header.id} className="px-5 py-4 text-left font-normal">
-                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                    </th>
+                <div className="flex items-center gap-2 text-xs text-text-muted mb-3">
+                  <MapPin size={12} />
+                  {lead.location}, {lead.state}
+                </div>
+
+                <p className="text-xs text-text-secondary line-clamp-2 mb-3">
+                  {lead.personalizationAnchor}
+                </p>
+
+                <div className="flex flex-wrap gap-1 mb-3">
+                  {lead.tags.slice(0, 3).map(tag => (
+                    <span key={tag} className="px-2 py-0.5 rounded bg-bg-tertiary text-text-muted text-[10px]">
+                      {tag}
+                    </span>
                   ))}
-                </tr>
-              ))}
-            </thead>
-            <tbody className="divide-y divide-[#27272A]">
-              {table.getRowModel().rows.length ? (
-                table.getRowModel().rows.map((row) => (
-                  <tr 
-                    key={row.id} 
-                    onClick={() => window.location.href = `/leads/${row.original.id}`}
-                    className="hover:bg-[#18181B]/50 transition-colors duration-200 cursor-pointer"
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <td key={cell.id} className="px-5 py-4 whitespace-nowrap">
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </td>
-                    ))}
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={columns.length} className="px-5 py-16 text-center">
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#18181B] flex items-center justify-center">
-                      <Search className="text-[#3F3F46]" size={24} />
-                    </div>
-                    <h3 className="text-white font-semibold mb-1">No clubs found</h3>
-                    <p className="text-sm text-[#71717A] mb-4">Try adjusting your search terms</p>
-                    <button 
-                      onClick={() => setGlobalFilter("")}
-                      className="px-4 py-2 text-sm font-semibold text-[#A1A1AA] bg-[#18181B] border border-[#27272A] rounded-xl hover:bg-[#27272A] hover:text-white transition-all"
-                    >
-                      Clear search
-                    </button>
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </div>
+                </div>
 
-      {/* Pagination */}
-      <div className="flex items-center justify-between">
-        <p className="text-sm text-[#71717A]">
-          Showing <span className="font-semibold text-white">{table.getRowModel().rows.length}</span> of {leadsData.length} leads
-        </p>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-            className="px-4 py-2 text-sm font-semibold text-[#A1A1AA] bg-[#0F0F11] border border-[#27272A] rounded-xl hover:bg-[#18181B] hover:text-white hover:border-[#3F3F46] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#0F0F11] disabled:hover:text-[#A1A1AA] disabled:hover:border-[#27272A] transition-all duration-200"
-          >
-            Previous
-          </button>
-          <button
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-            className="px-4 py-2 text-sm font-semibold text-[#A1A1AA] bg-[#0F0F11] border border-[#27272A] rounded-xl hover:bg-[#18181B] hover:text-white hover:border-[#3F3F46] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#0F0F11] disabled:hover:text-[#A1A1AA] disabled:hover:border-[#27272A] transition-all duration-200"
-          >
-            Next
-          </button>
-        </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-text-muted">{lead.tier}</span>
+                  <span className="text-hyper-blue font-semibold">Click for outreach →</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {filteredLeads.length === 0 && !isLoading && (
+          <div className="text-center py-16">
+            <p className="text-text-secondary mb-4">No leads match your filters</p>
+            <button
+              onClick={() => { setFilter(""); setStateFilter("ALL"); }}
+              className="px-4 py-2 rounded-lg bg-bg-secondary text-text-primary hover:bg-bg-tertiary transition-colors"
+            >
+              Clear Filters
+            </button>
+          </div>
+        )}
       </div>
     </div>
-  )
-}
-
-function SortIcon({ sorted }: { sorted: false | "asc" | "desc" }) {
-  if (sorted === "asc") return <ArrowUp size={14} />
-  if (sorted === "desc") return <ArrowDown size={14} />
-  return <ArrowUpDown size={14} className="opacity-40" />
-}
-
-function StatusBadge({ status }: { status: string }) {
-  const styles: Record<string, string> = {
-    "New": "text-blue-400 bg-blue-400/10 border-blue-400/20",
-    "Emailed": "text-[#F97316] bg-[#F97316]/10 border-[#F97316]/20",
-    "Meeting Set": "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
-    "Closed": "text-[#71717A] bg-[#18181B] border-[#27272A]",
-  }
-
-  return (
-    <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold border ${styles[status]}`}>
-      {status}
-    </span>
   )
 }
