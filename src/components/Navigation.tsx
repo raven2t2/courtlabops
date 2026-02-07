@@ -13,6 +13,7 @@ import {
   Image as ImageIcon,
   CheckCircle,
   Mail,
+  Settings,
   Menu,
   X,
 } from "lucide-react";
@@ -28,6 +29,7 @@ const navItems = [
   { href: "/gallery", label: "Gallery", icon: ImageIcon },
   { href: "/approvals", label: "Approvals", icon: CheckCircle },
   { href: "/campaigns", label: "Campaigns", icon: Mail },
+  { href: "/social-setup", label: "Setup", icon: Settings },
 ];
 
 export function Navigation() {
