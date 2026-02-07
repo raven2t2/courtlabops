@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Link from "next/link"
 import {
   Check,
   Clock,
@@ -12,14 +11,14 @@ import {
   MessageSquare,
   Play,
   Search,
+  Send,
   ThumbsUp,
   Trash2,
   Twitter,
   X,
   Calendar,
   Image as ImageIcon,
-  Send,
-  Loader2,
+  AlertCircle,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -39,9 +38,9 @@ interface Post {
   mentions?: string[]
   link?: string
   createdAt: string
-  approvedAt?: string
-  approvedBy?: string
-  notes?: string
+  postedAt?: string
+  postedUrl?: string
+  error?: string
 }
 
 const PLATFORM_CONFIG: Record<Platform, { label: string; icon: typeof Twitter; color: string; bg: string }> = {
@@ -86,117 +85,136 @@ export default function ApprovalsPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [editMode, setEditMode] = useState(false)
   const [editedCaption, setEditedCaption] = useState("")
-  const [loading, setLoading] = useState(true)
-  const [actionLoading, setActionLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [stats, setStats] = useState({
+    total: 0,
+    pending: 0,
+    approved: 0,
+    rejected: 0,
+    posted: 0,
+    scheduled: 0,
+  })
 
-  // Load posts on mount
+  // Load posts from API
   useEffect(() => {
     loadPosts()
-  }, [filterPlatform, filterStatus])
+    loadStats()
+  }, [])
 
   const loadPosts = async () => {
     try {
-      setLoading(true)
-      const params = new URLSearchParams()
-      if (filterPlatform !== "all") params.append("platform", filterPlatform)
-      if (filterStatus !== "all") params.append("status", filterStatus)
-      
-      const res = await fetch(`/api/posts?${params}`)
+      const res = await fetch('/api/queue')
       const data = await res.json()
-      setPosts(data.posts || [])
-    } catch (error) {
-      console.error("Failed to load posts:", error)
-    } finally {
-      setLoading(false)
+      if (data.posts) {
+        setPosts(data.posts)
+      }
+    } catch (err) {
+      console.error('Failed to load posts:', err)
+    }
+  }
+
+  const loadStats = async () => {
+    try {
+      const res = await fetch('/api/post/status')
+      const data = await res.json()
+      if (data.stats) {
+        setStats(data.stats)
+      }
+    } catch (err) {
+      console.error('Failed to load stats:', err)
     }
   }
 
   const filteredPosts = posts.filter((post) => {
+    const matchesPlatform = filterPlatform === "all" || post.platform === filterPlatform
+    const matchesStatus = filterStatus === "all" || post.status === filterStatus
     const matchesSearch = post.caption.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchesSearch
+    return matchesPlatform && matchesStatus && matchesSearch
   })
 
-  const stats = {
-    total: posts.length,
-    pending: posts.filter((p) => p.status === "pending").length,
-    approved: posts.filter((p) => p.status === "approved").length,
-    rejected: posts.filter((p) => p.status === "rejected").length,
-    posted: posts.filter((p) => p.status === "posted").length,
-  }
-
   const handleApprove = async (postId: string) => {
-    setActionLoading(true)
+    setIsLoading(true)
     try {
-      const res = await fetch('/api/posts', {
-        method: 'PATCH',
+      const res = await fetch('/api/queue', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: postId, action: 'approve' }),
+        body: JSON.stringify({ postId, action: 'approve' }),
       })
       if (res.ok) {
         await loadPosts()
+        await loadStats()
         if (selectedPost?.id === postId) {
           setSelectedPost({ ...selectedPost, status: "approved" })
         }
       }
-    } finally {
-      setActionLoading(false)
+    } catch (err) {
+      console.error('Failed to approve:', err)
     }
+    setIsLoading(false)
   }
 
   const handleReject = async (postId: string) => {
-    setActionLoading(true)
+    setIsLoading(true)
     try {
-      const res = await fetch('/api/posts', {
-        method: 'PATCH',
+      const res = await fetch('/api/queue', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: postId, action: 'reject' }),
+        body: JSON.stringify({ postId, action: 'reject' }),
       })
       if (res.ok) {
         await loadPosts()
-        setSelectedPost(null)
+        await loadStats()
+        if (selectedPost?.id === postId) {
+          setSelectedPost({ ...selectedPost, status: "rejected" })
+        }
       }
-    } finally {
-      setActionLoading(false)
+    } catch (err) {
+      console.error('Failed to reject:', err)
     }
+    setIsLoading(false)
   }
 
   const handleEditSave = async (postId: string) => {
-    setActionLoading(true)
+    setIsLoading(true)
     try {
-      const res = await fetch('/api/posts', {
-        method: 'PATCH',
+      const res = await fetch('/api/queue', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: postId, action: 'edit', caption: editedCaption }),
+        body: JSON.stringify({ postId, action: 'approve', edits: { caption: editedCaption } }),
       })
       if (res.ok) {
-        setEditMode(false)
         await loadPosts()
+        setEditMode(false)
         if (selectedPost) {
           setSelectedPost({ ...selectedPost, caption: editedCaption })
         }
       }
-    } finally {
-      setActionLoading(false)
+    } catch (err) {
+      console.error('Failed to save edit:', err)
     }
+    setIsLoading(false)
   }
 
-  const handleSchedule = async (postId: string) => {
-    setActionLoading(true)
+  const handlePublishNow = async (postId: string) => {
+    setIsLoading(true)
     try {
-      const res = await fetch('/api/posts', {
-        method: 'PATCH',
+      const res = await fetch('/api/post', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: postId, action: 'schedule' }),
+        body: JSON.stringify({ postId }),
       })
-      if (res.ok) {
+      const data = await res.json()
+      if (data.success) {
         await loadPosts()
-        if (selectedPost?.id === postId) {
-          setSelectedPost({ ...selectedPost, status: "scheduled" })
-        }
+        await loadStats()
+        alert(`Posted successfully! ${data.posted} items published.`)
+      } else {
+        alert(`Post failed: ${data.results?.[0]?.error || 'Unknown error'}`)
       }
-    } finally {
-      setActionLoading(false)
+    } catch (err) {
+      console.error('Failed to publish:', err)
     }
+    setIsLoading(false)
   }
 
   const formatTime = (dateString: string) => {
@@ -225,7 +243,7 @@ export default function ApprovalsPage() {
                 )}
               </div>
               <h1 className="text-2xl font-extrabold tracking-tight text-text-primary sm:text-3xl">Review & Approve Posts</h1>
-              <p className="mt-1 text-sm text-text-secondary">Approve, edit, or reject scheduled content across all platforms</p>
+              <p className="mt-1 text-sm text-text-secondary">Approve by 8 PM → Auto-posts next day at scheduled times</p>
             </div>
 
             <div className="flex flex-col gap-2 sm:flex-row">
@@ -240,11 +258,10 @@ export default function ApprovalsPage() {
                 />
               </label>
               <button 
-                onClick={loadPosts}
+                onClick={() => loadPosts()}
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-hyper-blue px-3 py-2 text-sm font-semibold text-white"
               >
-                <Loader2 size={14} className={cn(loading && "animate-spin")} />
-                Refresh
+                <Send size={14} /> Refresh
               </button>
             </div>
           </div>
@@ -255,8 +272,8 @@ export default function ApprovalsPage() {
               { label: "Total", value: stats.total, icon: MessageSquare, tone: "text-text-primary" },
               { label: "Pending", value: stats.pending, icon: Clock, tone: "text-accent-amber" },
               { label: "Approved", value: stats.approved, icon: Check, tone: "text-accent-green" },
-              { label: "Rejected", value: stats.rejected, icon: X, tone: "text-accent-red" },
               { label: "Posted", value: stats.posted, icon: Send, tone: "text-hyper-blue" },
+              { label: "Rejected", value: stats.rejected, icon: X, tone: "text-accent-red" },
             ].map((item) => {
               const Icon = item.icon
               return (
@@ -316,29 +333,23 @@ export default function ApprovalsPage() {
 
             {/* Status Filter */}
             <div className="flex gap-1">
-              {Object.entries(STATUS_CONFIG).map(([key, config]) => (
+              {[
+                { key: 'pending', label: 'Pending' },
+                { key: 'approved', label: 'Approved' },
+                { key: 'posted', label: 'Posted' },
+                { key: 'rejected', label: 'Rejected' },
+              ].map(({ key, label }) => (
                 <button
                   key={key}
                   onClick={() => setFilterStatus(key as PostStatus | "all")}
                   className={cn(
                     "rounded-lg px-3 py-1.5 text-xs font-medium transition-all",
-                    filterStatus === key
-                      ? config.tone
-                      : "bg-bg-tertiary text-text-secondary hover:bg-bg-primary"
+                    filterStatus === key ? STATUS_CONFIG[key as PostStatus].tone : "bg-bg-tertiary text-text-secondary hover:bg-bg-primary"
                   )}
                 >
-                  {config.label}
+                  {label}
                 </button>
               ))}
-              <button
-                onClick={() => setFilterStatus("all")}
-                className={cn(
-                  "rounded-lg px-3 py-1.5 text-xs font-medium transition-all",
-                  filterStatus === "all" ? "border-border-default bg-bg-tertiary text-text-primary" : "bg-bg-tertiary text-text-secondary hover:bg-bg-primary"
-                )}
-              >
-                All
-              </button>
             </div>
           </div>
         </Surface>
@@ -352,63 +363,60 @@ export default function ApprovalsPage() {
               <span className="text-xs text-text-muted">{filteredPosts.length} posts</span>
             </div>
 
-            {loading ? (
-              <div className="flex items-center justify-center py-12">
-                <Loader2 size={32} className="animate-spin text-text-muted" />
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {filteredPosts.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border-subtle bg-bg-primary py-12">
-                    <Clock size={32} className="mb-2 text-text-muted" />
-                    <p className="text-sm text-text-secondary">No posts match your filters</p>
-                  </div>
-                ) : (
-                  filteredPosts.map((post) => {
-                    const platform = PLATFORM_CONFIG[post.platform]
-                    const status = STATUS_CONFIG[post.status]
-                    const StatusIcon = status.icon
-                    const PlatformIcon = platform.icon
+            <div className="space-y-3">
+              {filteredPosts.length === 0 ? (
+                <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border-subtle bg-bg-primary py-12">
+                  <Clock size={32} className="mb-2 text-text-muted" />
+                  <p className="text-sm text-text-secondary">No posts match your filters</p>
+                </div>
+              ) : (
+                filteredPosts.map((post) => {
+                  const platform = PLATFORM_CONFIG[post.platform]
+                  const status = STATUS_CONFIG[post.status]
+                  const StatusIcon = status.icon
+                  const PlatformIcon = platform.icon
 
-                    return (
-                      <div
-                        key={post.id}
-                        onClick={() => {
-                          setSelectedPost(post)
-                          setEditMode(false)
-                          setEditedCaption(post.caption)
-                        }}
-                        className={cn(
-                          "cursor-pointer rounded-xl border p-3 transition-all",
-                          selectedPost?.id === post.id
-                            ? "border-hyper-blue bg-hyper-blue/5"
-                            : "border-border-subtle bg-bg-primary hover:border-border-default"
-                        )}
-                      >
-                        <div className="flex items-start gap-3">
-                          <div className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-xl", platform.bg)}>
-                            <PlatformIcon size={18} className={platform.color} />
+                  return (
+                    <div
+                      key={post.id}
+                      onClick={() => {
+                        setSelectedPost(post)
+                        setEditMode(false)
+                        setEditedCaption(post.caption)
+                      }}
+                      className={cn(
+                        "cursor-pointer rounded-xl border p-3 transition-all",
+                        selectedPost?.id === post.id
+                          ? "border-hyper-blue bg-hyper-blue/5"
+                          : "border-border-subtle bg-bg-primary hover:border-border-default"
+                      )}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-xl", platform.bg)}>
+                          <PlatformIcon size={18} className={platform.color} />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2">
+                            <span className={cn("text-xs font-semibold", platform.color)}>{platform.label}</span>
+                            <span className="text-text-muted">·</span>
+                            <span className="text-xs text-text-muted">{TYPE_LABELS[post.type]}</span>
+                            <Badge className={status.tone}>
+                              <StatusIcon size={10} className="mr-1" />
+                              {status.label}
+                            </Badge>
                           </div>
-                          <div className="min-w-0 flex-1">
-                            <div className="flex items-center gap-2">
-                              <span className={cn("text-xs font-semibold", platform.color)}>{platform.label}</span>
-                              <span className="text-text-muted">·</span>
-                              <span className="text-xs text-text-muted">{TYPE_LABELS[post.type]}</span>
-                              <Badge className={status.tone}>
-                                <StatusIcon size={10} className="mr-1" />
-                                {status.label}
-                              </Badge>
-                            </div>
-                            <p className="mt-1 line-clamp-2 text-sm text-text-primary">{post.caption}</p>
-                            <p className="mt-1 text-xs text-text-muted">{formatTime(post.scheduledTime)}</p>
-                          </div>
+                          <p className="mt-1 line-clamp-2 text-sm text-text-primary">{post.caption}</p>
+                          <p className="mt-1 text-xs text-text-muted">{formatTime(post.scheduledTime)}</p>
+                          {post.error && (
+                            <p className="mt-1 text-xs text-accent-red">Error: {post.error}</p>
+                          )}
                         </div>
                       </div>
-                    )
-                  })
-                )}
-              </div>
-            )}
+                    </div>
+                  )
+                })
+              )}
+            </div>
           </Surface>
 
           {/* Right: Post Detail / Editor */}
@@ -488,17 +496,16 @@ export default function ApprovalsPage() {
                             setEditMode(false)
                             setEditedCaption(selectedPost.caption)
                           }}
-                          disabled={actionLoading}
                           className="rounded-lg px-3 py-1.5 text-xs font-medium text-text-secondary hover:bg-bg-tertiary"
                         >
                           Cancel
                         </button>
                         <button
                           onClick={() => handleEditSave(selectedPost.id)}
-                          disabled={actionLoading}
-                          className="rounded-lg bg-hyper-blue px-3 py-1.5 text-xs font-semibold text-white hover:bg-hyper-blue/90"
+                          disabled={isLoading}
+                          className="rounded-lg bg-hyper-blue px-3 py-1.5 text-xs font-semibold text-white hover:bg-hyper-blue/90 disabled:opacity-50"
                         >
-                          {actionLoading ? <Loader2 size={12} className="animate-spin" /> : "Save Changes"}
+                          {isLoading ? 'Saving...' : 'Save Changes'}
                         </button>
                       </div>
                     </div>
@@ -521,28 +528,27 @@ export default function ApprovalsPage() {
                   </div>
                 )}
 
+                {/* Posted URL */}
+                {selectedPost.postedUrl && (
+                  <div className="mb-4 rounded-lg border border-accent-green/40 bg-accent-green-muted p-3">
+                    <p className="text-xs text-accent-green">Posted: <a href={selectedPost.postedUrl} target="_blank" className="underline">{selectedPost.postedUrl}</a></p>
+                  </div>
+                )}
+
                 {/* Actions */}
                 {selectedPost.status === "pending" && (
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleApprove(selectedPost.id)}
-                      disabled={actionLoading}
+                      disabled={isLoading}
                       className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-accent-green py-3 text-sm font-semibold text-white hover:bg-accent-green/90 disabled:opacity-50"
                     >
-                      {actionLoading ? <Loader2 size={16} className="animate-spin" /> : <Check size={16} />}
-                      Approve
-                    </button>
-                    <button
-                      onClick={() => setEditMode(true)}
-                      disabled={actionLoading}
-                      className="flex items-center justify-center gap-2 rounded-xl border border-border-default bg-bg-primary px-4 py-3 text-sm font-semibold text-text-primary hover:bg-bg-tertiary disabled:opacity-50"
-                    >
-                      <Edit3 size={16} />
-                      Edit
+                      <Check size={16} />
+                      {isLoading ? 'Approving...' : 'Approve for Auto-Post'}
                     </button>
                     <button
                       onClick={() => handleReject(selectedPost.id)}
-                      disabled={actionLoading}
+                      disabled={isLoading}
                       className="flex items-center justify-center gap-2 rounded-xl border border-accent-red/40 bg-accent-red-muted px-4 py-3 text-sm font-semibold text-accent-red hover:bg-accent-red/20 disabled:opacity-50"
                     >
                       <Trash2 size={16} />
@@ -554,27 +560,21 @@ export default function ApprovalsPage() {
                 {selectedPost.status === "approved" && (
                   <div className="flex gap-2">
                     <button
-                      onClick={() => handleSchedule(selectedPost.id)}
-                      disabled={actionLoading}
-                      className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-accent-violet py-3 text-sm font-semibold text-white hover:bg-accent-violet/90 disabled:opacity-50"
+                      onClick={() => handlePublishNow(selectedPost.id)}
+                      disabled={isLoading}
+                      className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-hyper-blue py-3 text-sm font-semibold text-white hover:bg-hyper-blue/90 disabled:opacity-50"
                     >
-                      {actionLoading ? <Loader2 size={16} className="animate-spin" /> : <Calendar size={16} />}
-                      Schedule for {formatTime(selectedPost.scheduledTime).split(",")[1]?.trim()}
+                      <Send size={16} />
+                      {isLoading ? 'Posting...' : 'Post Now (Skip Queue)'}
                     </button>
                     <button
                       onClick={() => handleReject(selectedPost.id)}
-                      disabled={actionLoading}
+                      disabled={isLoading}
                       className="flex items-center justify-center gap-2 rounded-xl border border-border-default bg-bg-primary px-4 py-3 text-sm font-semibold text-text-secondary hover:bg-bg-tertiary disabled:opacity-50"
                     >
                       <X size={16} />
                       Unapprove
                     </button>
-                  </div>
-                )}
-
-                {selectedPost.notes && (
-                  <div className="mt-4 rounded-lg border border-border-subtle bg-bg-tertiary p-3">
-                    <p className="text-xs text-text-muted">Notes: {selectedPost.notes}</p>
                   </div>
                 )}
               </div>
@@ -588,12 +588,36 @@ export default function ApprovalsPage() {
           </Surface>
         </div>
 
-        {/* Help Text */}
-        <div className="mt-4 rounded-xl border border-border-subtle bg-bg-secondary/50 p-4">
-          <p className="text-sm text-text-secondary">
-            <span className="font-semibold text-velocity-orange">How it works:</span> Posts queue here for your review. Click any post to see details, edit the caption, or approve/reject. 
-            Approved posts get scheduled automatically. Rejected posts are removed from the queue. You can edit any pending post before approving.
-          </p>
+        {/* Automation Info */}
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-xl border border-border-subtle bg-bg-secondary/50 p-4">
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-green/10">
+                <Calendar size={20} className="text-accent-green" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-text-primary">Daily Auto-Generation</p>
+                <p className="text-xs text-text-secondary mt-1">
+                  Every night at 8 PM, new posts are generated from your gallery. 
+                  Review and approve by 8 PM for next-day posting.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="rounded-xl border border-border-subtle bg-bg-secondary/50 p-4">
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-hyper-blue/10">
+                <Send size={20} className="text-hyper-blue" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-text-primary">Auto-Posting Schedule</p>
+                <p className="text-xs text-text-secondary mt-1">
+                  Approved posts auto-post at scheduled times: 9 AM Twitter, 11 AM IG Reel, 
+                  2 PM Facebook, 4 PM Twitter, 6 PM IG Story, 8 PM Twitter.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
