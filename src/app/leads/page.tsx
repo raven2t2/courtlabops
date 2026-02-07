@@ -598,7 +598,11 @@ export default function LeadsPage() {
             <tbody className="divide-y divide-[#27272A]">
               {table.getRowModel().rows.length ? (
                 table.getRowModel().rows.map((row) => (
-                  <tr key={row.id} className="hover:bg-[#18181B]/50 transition-colors duration-200">
+                  <tr 
+                    key={row.id} 
+                    onClick={() => window.location.href = `/leads/${row.original.id}`}
+                    className="hover:bg-[#18181B]/50 transition-colors duration-200 cursor-pointer"
+                  >
                     {row.getVisibleCells().map((cell) => (
                       <td key={cell.id} className="px-5 py-4 whitespace-nowrap">
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
