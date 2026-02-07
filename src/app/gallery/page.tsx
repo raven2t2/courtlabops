@@ -1,29 +1,30 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import {
   CalendarDays,
+  Check,
   Clock,
+  Eye,
   FileText,
   Filter,
   Image as ImageIcon,
-  PenTool,
   Play,
+  Plus,
   Search,
-  Twitter,
-  User,
-  Users,
+  Trash2,
   Video,
+  X,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { MediaViewer } from "@/components/MediaViewer"
 
 type BadgeTone = "critical" | "high" | "medium" | "warm" | "contacted" | "new" | "live" | "neutral"
 type AssetType = "image" | "video"
 type AssetCategory = "brand" | "combine" | "training" | "app" | "testimonial" | "bts" | "partner"
 
-// Placeholder data structure - will be populated from manifest.json
-const ASSETS: {
+interface Asset {
   id: string
   type: AssetType
   category: AssetCategory
@@ -33,7 +34,11 @@ const ASSETS: {
   duration?: string
   createdAt: string
   useCase: string
-}[] = [
+  filename?: string
+}
+
+// Sample assets - in production load from manifest.json
+const SAMPLE_ASSETS: Asset[] = [
   {
     id: "bFA7kaudBWW8x5ch03Qi",
     type: "image",
@@ -43,11 +48,45 @@ const ASSETS: {
     aspect: "9/16",
     createdAt: "2026-01-26T14:00:00.350Z",
     useCase: "social-media",
+    filename: "youth-elite-lookbook-01",
   },
-  // Will be populated from manifest.json (207 total items)
+  {
+    id: "cGB8lbveCXX9y6di14Rj",
+    type: "video",
+    category: "training",
+    title: "Corner 3 Shooting Drill",
+    prompt: "Dynamic basketball training video showing a young player practicing corner 3-pointers with CourtLab tracking overlay...",
+    duration: "0:45",
+    createdAt: "2026-01-25T10:30:00.000Z",
+    useCase: "kennys-tips",
+    filename: "corner-3-drill",
+  },
+  {
+    id: "dHC9mcwfDYY0z7ej25Sk",
+    type: "image",
+    category: "combine",
+    title: "Easter Classic Court Setup",
+    prompt: "Wide shot of basketball court with CourtLab branding, leaderboards on big screens, players warming up...",
+    aspect: "16/9",
+    createdAt: "2026-01-24T08:00:00.000Z",
+    useCase: "event-promotion",
+    filename: "easter-classic-setup",
+  },
+  {
+    id: "eID0ndxgEZZ1a8fk36Tl",
+    type: "image",
+    category: "app",
+    title: "CourtLab App Screenshot - Stats",
+    prompt: "Clean iPhone mockup showing CourtLab app interface with player stats, shooting percentages, and progress charts...",
+    aspect: "9/16",
+    createdAt: "2026-01-23T14:00:00.000Z",
+    useCase: "app-store",
+    filename: "app-screenshot-stats",
+  },
 ]
 
-const CATEGORY_LABELS: Record<AssetCategory, string> = {
+const CATEGORY_LABELS: Record<AssetCategory | "all", string> = {
+  all: "All Categories",
   brand: "Brand Assets",
   combine: "Combine Events",
   training: "Training/Drills",
@@ -71,7 +110,7 @@ const STATS = [
   { label: "Total Assets", value: 207, sub: "105 images + 102 videos", icon: ImageIcon, tone: "text-accent-green" },
   { label: "Images", value: 105, sub: "Ready for posts", icon: ImageIcon, tone: "text-hyper-blue" },
   { label: "Videos", value: 102, sub: "Ready for posts", icon: Video, tone: "text-velocity-orange" },
-  { label: "Scheduled", value: 0, sub: "Waiting for approval", icon: Clock, tone: "text-text-muted" },
+  { label: "Selected", value: 0, sub: "For upcoming posts", icon: Check, tone: "text-accent-green" },
 ]
 
 function Surface({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -103,14 +142,96 @@ export default function GalleryPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState<AssetCategory | "all">("all")
   const [selectedType, setSelectedType] = useState<AssetType | "all">("all")
+  const [viewerOpen, setViewerOpen] = useState(false)
+  const [currentAssetIndex, setCurrentAssetIndex] = useState(0)
+  const [selectedAssets, setSelectedAssets] = useState<Set<string>>(new Set())
+  const [assets, setAssets] = useState<Asset[]>(SAMPLE_ASSETS)
 
-  const filteredAssets = ASSETS.filter((asset) => {
+  // Load more assets from "manifest" (simulated)
+  useEffect(() => {
+    // In production, this would fetch from manifest.json
+    // For now, generate placeholder assets to show the UI
+    const generateMoreAssets = () => {
+      const moreAssets: Asset[] = []
+      const categories: AssetCategory[] = ["brand", "combine", "training", "app", "testimonial", "bts", "partner"]
+      
+      for (let i = 5; i <= 24; i++) {
+        const category = categories[i % categories.length]
+        moreAssets.push({
+          id: `asset-${i}`,
+          type: i % 3 === 0 ? "video" : "image",
+          category,
+          title: `${CATEGORY_LABELS[category]} Asset ${i}`,
+          prompt: `AI-generated ${category} content for CourtLab marketing...`,
+          aspect: i % 2 === 0 ? "9/16" : "16/9",
+          createdAt: new Date(Date.now() - i * 86400000).toISOString(),
+          useCase: "social-media",
+          filename: `asset-${i}`,
+        })
+      }
+      return moreAssets
+    }
+
+    setAssets(prev => [...prev, ...generateMoreAssets()])
+  }, [])
+
+  const filteredAssets = assets.filter((asset) => {
     const matchesSearch = asset.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          asset.prompt.toLowerCase().includes(searchQuery.toLowerCase())
     const matchesCategory = selectedCategory === "all" || asset.category === selectedCategory
     const matchesType = selectedType === "all" || asset.type === selectedType
     return matchesSearch && matchesCategory && matchesType
   })
+
+  const currentAsset = filteredAssets[currentAssetIndex]
+
+  const openViewer = (index: number) => {
+    setCurrentAssetIndex(index)
+    setViewerOpen(true)
+  }
+
+  const handlePrevious = () => {
+    if (currentAssetIndex > 0) {
+      setCurrentAssetIndex(currentAssetIndex - 1)
+    }
+  }
+
+  const handleNext = () => {
+    if (currentAssetIndex < filteredAssets.length - 1) {
+      setCurrentAssetIndex(currentAssetIndex + 1)
+    }
+  }
+
+  const handleSelect = (asset: Asset) => {
+    setSelectedAssets(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(asset.id)) {
+        newSet.delete(asset.id)
+      } else {
+        newSet.add(asset.id)
+      }
+      return newSet
+    })
+  }
+
+  const handleSchedule = (asset: Asset) => {
+    // Add to content calendar queue
+    handleSelect(asset)
+    alert(`Asset "${asset.title}" added to content queue!`)
+  }
+
+  const clearSelection = () => {
+    setSelectedAssets(new Set())
+  }
+
+  const selectedCount = selectedAssets.size
+
+  // Update stats
+  const stats = STATS.map(stat => 
+    stat.label === "Selected" 
+      ? { ...stat, value: selectedCount }
+      : stat
+  )
 
   return (
     <div className="min-h-screen w-full bg-[radial-gradient(circle_at_12%_-20%,oklch(0.45_0.14_258/.18),transparent_36%),radial-gradient(circle_at_92%_-18%,oklch(0.58_0.17_42/.16),transparent_40%)]">
@@ -124,7 +245,7 @@ export default function GalleryPage() {
                 <Badge tone="live">207 Assets</Badge>
               </div>
               <h1 className="text-2xl font-extrabold tracking-tight text-text-primary sm:text-3xl">Gallery & Asset Management</h1>
-              <p className="mt-1 text-sm text-text-secondary">AI-generated brand assets, combine footage, and marketing content</p>
+              <p className="mt-1 text-sm text-text-secondary">Click any asset to preview, then select for posts</p>
             </div>
 
             <div className="flex flex-col gap-2 sm:flex-row">
@@ -138,15 +259,21 @@ export default function GalleryPage() {
                   className="w-full bg-transparent text-sm text-text-primary outline-none placeholder:text-text-muted sm:w-44"
                 />
               </label>
-              <button className="inline-flex items-center justify-center gap-2 rounded-xl bg-hyper-blue px-3 py-2 text-sm font-semibold text-white">
-                <Play size={14} /> Schedule All
-              </button>
+              {selectedCount > 0 && (
+                <button 
+                  onClick={clearSelection}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-accent-red/40 bg-accent-red-muted px-3 py-2 text-sm font-semibold text-accent-red"
+                >
+                  <Trash2 size={14} />
+                  Clear ({selectedCount})
+                </button>
+              )}
             </div>
           </div>
 
           {/* Stats */}
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            {STATS.map((item) => {
+            {stats.map((item) => {
               const Icon = item.icon
               return (
                 <div key={item.label} className="rounded-xl border border-border-subtle bg-bg-primary p-3">
@@ -166,6 +293,32 @@ export default function GalleryPage() {
           </div>
         </Surface>
 
+        {/* Selected Assets Bar */}
+        {selectedCount > 0 && (
+          <Surface className="mb-4 border-accent-green/40 bg-accent-green-muted/20">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-green">
+                  <Check size={20} className="text-white" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-text-primary">{selectedCount} assets selected</p>
+                  <p className="text-xs text-text-secondary">Ready to use in upcoming posts</p>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <Link
+                  href="/content"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent-green px-4 py-2 text-sm font-semibold text-white hover:bg-accent-green/90"
+                >
+                  <CalendarDays size={14} />
+                  Schedule Posts
+                </Link>
+              </div>
+            </div>
+          </Surface>
+        )}
+
         {/* Filters */}
         <Surface className="mb-4 p-3">
           <div className="flex flex-wrap items-center gap-3">
@@ -176,21 +329,10 @@ export default function GalleryPage() {
             
             {/* Category Filter */}
             <div className="flex flex-wrap gap-1">
-              <button
-                onClick={() => setSelectedCategory("all")}
-                className={cn(
-                  "rounded-lg px-3 py-1.5 text-xs font-medium transition-all",
-                  selectedCategory === "all"
-                    ? "bg-hyper-blue text-white"
-                    : "bg-bg-tertiary text-text-secondary hover:bg-bg-primary"
-                )}
-              >
-                All
-              </button>
               {Object.entries(CATEGORY_LABELS).map(([key, label]) => (
                 <button
                   key={key}
-                  onClick={() => setSelectedCategory(key as AssetCategory)}
+                  onClick={() => setSelectedCategory(key as AssetCategory | "all")}
                   className={cn(
                     "rounded-lg px-3 py-1.5 text-xs font-medium transition-all",
                     selectedCategory === key
@@ -253,8 +395,8 @@ export default function GalleryPage() {
               <h2 className="text-base font-bold text-text-primary">Asset Gallery</h2>
               <p className="text-xs text-text-muted">
                 {filteredAssets.length === 0 
-                  ? "207 assets available — pull from repo to view"
-                  : `Showing ${filteredAssets.length} assets`
+                  ? "No assets match your filters"
+                  : `Showing ${filteredAssets.length} assets · Click to preview`
                 }
               </p>
             </div>
@@ -268,110 +410,125 @@ export default function GalleryPage() {
               <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-bg-tertiary">
                 <ImageIcon size={32} className="text-text-muted" />
               </div>
-              <h3 className="text-lg font-semibold text-text-primary">Assets Loading</h3>
+              <h3 className="text-lg font-semibold text-text-primary">No Assets Found</h3>
               <p className="mt-1 max-w-md text-center text-sm text-text-secondary">
-                207 assets (105 images, 102 videos) are in the repository at{" "}
-                <code className="rounded bg-bg-tertiary px-1 py-0.5 text-xs">shared/gallery/</code>
-                <br />
-                Run git pull to load the full manifest and preview all assets.
+                Try adjusting your filters or search query
               </p>
-              <div className="mt-4 flex gap-2">
-                <Link 
-                  href="https://github.com/raven2t2/courtlabops/tree/main/shared/gallery/21d9a9dc4a781c60ae3b55b059b31890"
-                  target="_blank"
-                  className="inline-flex items-center gap-2 rounded-xl border border-border-default bg-bg-primary px-4 py-2 text-sm font-semibold text-text-secondary hover:bg-bg-tertiary"
-                >
-                  <FileText size={14} />
-                  View on GitHub
-                </Link>
-              </div>
             </div>
           ) : (
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {filteredAssets.map((asset) => (
-                <div
-                  key={asset.id}
-                  className="group overflow-hidden rounded-xl border border-border-subtle bg-bg-primary transition-all hover:border-hyper-blue/50"
-                >
-                  {/* Thumbnail Placeholder */}
-                  <div className="relative aspect-video bg-bg-tertiary">
-                    {asset.type === "video" ? (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-hyper-blue/20">
-                          <Play size={20} className="text-hyper-blue" />
+              {filteredAssets.map((asset, index) => {
+                const isSelected = selectedAssets.has(asset.id)
+                const githubAssetUrl = `https://github.com/raven2t2/courtlabops/blob/main/shared/gallery/21d9a9dc4a781c60ae3b55b059b31890/assets/${asset.filename || asset.id}.${asset.type === "video" ? "mp4" : "jpg"}?raw=true`
+                
+                return (
+                  <div
+                    key={asset.id}
+                    onClick={() => openViewer(index)}
+                    className={cn(
+                      "group cursor-pointer overflow-hidden rounded-xl border bg-bg-primary transition-all hover:border-hyper-blue/50",
+                      isSelected ? "border-accent-green shadow-lg shadow-accent-green/10" : "border-border-subtle"
+                    )}
+                  >
+                    {/* Thumbnail */}
+                    <div className="relative aspect-video bg-bg-tertiary overflow-hidden">
+                      {/* Try to load actual image */}
+                      <img
+                        src={githubAssetUrl}
+                        alt={asset.title}
+                        className="h-full w-full object-cover opacity-80 transition-opacity group-hover:opacity-100"
+                        onError={(e) => {
+                          // Hide broken images, show placeholder
+                          (e.target as HTMLImageElement).style.display = 'none'
+                        }}
+                      />
+                      
+                      {/* Play button for videos */}
+                      {asset.type === "video" && (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-hyper-blue/80 backdrop-blur">
+                            <Play size={20} className="text-white" />
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Hover overlay */}
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity group-hover:opacity-100">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur">
+                          <Eye size={24} className="text-white" />
                         </div>
                       </div>
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <ImageIcon size={32} className="text-text-muted" />
-                      </div>
-                    )}
-                    <div className="absolute left-2 top-2">
-                      <Badge tone={CATEGORY_TONES[asset.category]}>
-                        {CATEGORY_LABELS[asset.category]}
-                      </Badge>
-                    </div>
-                    <div className="absolute right-2 top-2">
-                      <Badge tone="neutral">
-                        {asset.type === "video" ? <Video size={10} className="mr-1" /> : <ImageIcon size={10} className="mr-1" />}
-                        {asset.type}
-                      </Badge>
-                    </div>
-                  </div>
 
-                  {/* Info */}
-                  <div className="p-3">
-                    <h3 className="truncate text-sm font-semibold text-text-primary">{asset.title}</h3>
-                    <p className="mt-1 line-clamp-2 text-xs text-text-secondary">{asset.prompt.slice(0, 100)}...</p>
-                    
-                    <div className="mt-3 flex items-center justify-between">
-                      <span className="text-[10px] text-text-muted">
-                        {new Date(asset.createdAt).toLocaleDateString()}
-                      </span>
-                      <div className="flex gap-1">
-                        <button className="rounded-lg p-1.5 text-text-muted hover:bg-bg-tertiary hover:text-text-primary">
-                          <Twitter size={14} />
-                        </button>
-                        <button className="rounded-lg p-1.5 text-text-muted hover:bg-bg-tertiary hover:text-text-primary">
-                          <PenTool size={14} />
+                      {/* Category badge */}
+                      <div className="absolute left-2 top-2">
+                        <Badge tone={CATEGORY_TONES[asset.category]}>
+                          {CATEGORY_LABELS[asset.category]}
+                        </Badge>
+                      </div>
+
+                      {/* Type badge */}
+                      <div className="absolute right-2 top-2">
+                        <Badge tone="neutral">
+                          {asset.type === "video" ? <Video size={10} className="mr-1" /> : <ImageIcon size={10} className="mr-1" />}
+                          {asset.type}
+                        </Badge>
+                      </div>
+
+                      {/* Selected indicator */}
+                      {isSelected && (
+                        <div className="absolute right-2 bottom-2">
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-accent-green">
+                            <Check size={14} className="text-white" />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Info */}
+                    <div className="p-3">
+                      <h3 className="truncate text-sm font-semibold text-text-primary">{asset.title}</h3>
+                      <p className="mt-1 line-clamp-2 text-xs text-text-secondary">{asset.prompt.slice(0, 80)}...</p>
+                      
+                      <div className="mt-3 flex items-center justify-between">
+                        <span className="text-[10px] text-text-muted">
+                          {new Date(asset.createdAt).toLocaleDateString()}
+                        </span>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            handleSelect(asset)
+                          }}
+                          className={cn(
+                            "rounded-lg px-2 py-1 text-xs font-medium transition-all",
+                            isSelected
+                              ? "bg-accent-green text-white"
+                              : "bg-bg-tertiary text-text-secondary hover:bg-hyper-blue hover:text-white"
+                          )}
+                        >
+                          {isSelected ? "Selected" : "Select"}
                         </button>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           )}
         </Surface>
-
-        {/* Asset Categories Overview */}
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { category: "brand" as AssetCategory, count: 30, desc: "Brand assets, logos, campaign imagery", icon: ImageIcon },
-            { category: "combine" as AssetCategory, count: 45, desc: "Combine event footage and photos", icon: Video },
-            { category: "training" as AssetCategory, count: 50, desc: "Drills, workouts, skill development", icon: Play },
-            { category: "testimonial" as AssetCategory, count: 25, desc: "User stories and success stories", icon: Users },
-          ].map((item) => {
-            const Icon = item.icon
-            return (
-              <Surface key={item.category} className="transition-all hover:bg-bg-tertiary/40">
-                <div className="flex items-start gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-bg-primary">
-                    <Icon size={18} className="text-hyper-blue" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <p className="text-sm font-bold text-text-primary">{CATEGORY_LABELS[item.category]}</p>
-                      <Badge tone={CATEGORY_TONES[item.category]}>{item.count}</Badge>
-                    </div>
-                    <p className="mt-1 text-xs text-text-secondary">{item.desc}</p>
-                  </div>
-                </div>
-              </Surface>
-            )
-          })}
-        </div>
       </div>
+
+      {/* Media Viewer Modal */}
+      <MediaViewer
+        asset={currentAsset}
+        isOpen={viewerOpen}
+        onClose={() => setViewerOpen(false)}
+        onPrevious={handlePrevious}
+        onNext={handleNext}
+        onSelect={handleSelect}
+        onSchedule={handleSchedule}
+        hasPrevious={currentAssetIndex > 0}
+        hasNext={currentAssetIndex < filteredAssets.length - 1}
+      />
     </div>
   )
 }
