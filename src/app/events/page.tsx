@@ -1,8 +1,9 @@
-import { readJsonFile, EventsData } from "@/lib/data"
+import eventCalendarData from "../../../assets/event-calendar-sa.json"
+import type { EventsData } from "@/lib/data"
 import { Calendar, MapPin, Users, Target, ExternalLink } from "lucide-react"
 
 export default function EventsPage() {
-  const data = readJsonFile<EventsData>("./assets/event-calendar-sa.json")
+  const data = eventCalendarData as EventsData
 
   const sortedEvents = [...data.events].sort((a, b) => {
     const priorityOrder = { "Critical": 0, "High": 1, "Medium": 2, "Low": 3 }

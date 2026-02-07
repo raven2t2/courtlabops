@@ -1,8 +1,9 @@
-import { readJsonFile, CompetitorsData } from "@/lib/data"
+import competitorAnalysisData from "../../../assets/competitor-analysis.json"
+import type { CompetitorsData } from "@/lib/data"
 import { XCircle, CheckCircle, DollarSign } from "lucide-react"
 
 export default function CompetitorsPage() {
-  const data = readJsonFile<CompetitorsData>("./assets/competitor-analysis.json")
+  const data = competitorAnalysisData as CompetitorsData
 
   return (
     <div className="space-y-10">
