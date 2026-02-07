@@ -64,7 +64,18 @@ type KanbanData = {
       done: number
     }
   }>
-  archive: Record<string, any[]>
+  archive: Record<string, unknown[]>
+}
+
+type DragState = {
+  cardId: string
+  fromColumnId: string
+  fromIndex: number
+}
+
+type DropTarget = {
+  columnId: string
+  index: number
 }
 
 const STATS = [
@@ -181,11 +192,10 @@ export default function Dashboard() {
   const [columns, setColumns] = useState<BoardColumn[]>([])
   const [selectedOwner, setSelectedOwner] = useState<string | "all">("all")
   const [isLoading, setIsLoading] = useState(true)
-
-  // Fetch kanban data
-  useEffect(() => {
-    loadKanban()
-  }, [])
+  const [isSavingBoard, setIsSavingBoard] = useState(false)
+  const [boardMessage, setBoardMessage] = useState<string>("")
+  const [dragState, setDragState] = useState<DragState | null>(null)
+  const [dropTarget, setDropTarget] = useState<DropTarget | null>(null)
 
   const loadKanban = async () => {
     try {
@@ -197,6 +207,95 @@ export default function Dashboard() {
       console.error('Failed to load kanban:', err)
     }
     setIsLoading(false)
+  }
+
+  // Fetch kanban data
+  useEffect(() => {
+    loadKanban()
+  }, [])
+
+  const moveCard = (
+    sourceColumns: BoardColumn[],
+    activeDrag: DragState,
+    targetColumnId: string,
+    targetIndex: number
+  ): BoardColumn[] => {
+    const nextColumns = sourceColumns.map((column) => ({
+      ...column,
+      cards: [...column.cards],
+    }))
+
+    const fromColumn = nextColumns.find((column) => column.id === activeDrag.fromColumnId)
+    const toColumn = nextColumns.find((column) => column.id === targetColumnId)
+
+    if (!fromColumn || !toColumn) return sourceColumns
+
+    const cardAtIndex = fromColumn.cards[activeDrag.fromIndex]
+    const movingCard = cardAtIndex?.id === activeDrag.cardId
+      ? cardAtIndex
+      : fromColumn.cards.find((card) => card.id === activeDrag.cardId)
+
+    if (!movingCard) return sourceColumns
+
+    const removalIndex = fromColumn.cards.findIndex((card) => card.id === movingCard.id)
+    if (removalIndex === -1) return sourceColumns
+
+    fromColumn.cards.splice(removalIndex, 1)
+
+    let insertIndex = Math.max(0, Math.min(targetIndex, toColumn.cards.length))
+    if (fromColumn.id === toColumn.id && removalIndex < targetIndex) {
+      insertIndex -= 1
+    }
+    insertIndex = Math.max(0, insertIndex)
+
+    toColumn.cards.splice(insertIndex, 0, movingCard)
+    return nextColumns
+  }
+
+  const persistColumns = async (nextColumns: BoardColumn[]) => {
+    setIsSavingBoard(true)
+    try {
+      const res = await fetch("/api/kanban", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          columns: nextColumns,
+          updatedBy: "Michael (drag-and-drop)",
+        }),
+      })
+
+      if (!res.ok) {
+        const payload = await res.json()
+        throw new Error(payload.error || "Failed to save board")
+      }
+
+      const payload = await res.json()
+      if (payload.kanban) {
+        setKanbanData(payload.kanban)
+      }
+      setBoardMessage("Board updated")
+      setTimeout(() => setBoardMessage(""), 2200)
+    } catch (error) {
+      console.error("Failed to persist board:", error)
+      setBoardMessage("Save failed")
+      setTimeout(() => setBoardMessage(""), 3000)
+    } finally {
+      setIsSavingBoard(false)
+    }
+  }
+
+  const onDropCard = async (columnId: string, index: number) => {
+    if (!dragState || selectedOwner !== "all") return
+    const nextColumns = moveCard(columns, dragState, columnId, index)
+    setColumns(nextColumns)
+    setDragState(null)
+    setDropTarget(null)
+    await persistColumns(nextColumns)
+  }
+
+  const onDropColumnEnd = async (columnId: string) => {
+    const targetColumn = columns.find((column) => column.id === columnId)
+    await onDropCard(columnId, targetColumn?.cards.length ?? 0)
   }
 
   // Filter columns by owner
@@ -314,6 +413,8 @@ export default function Dashboard() {
               </button>
             </div>
             <div className="ml-auto flex items-center gap-2 text-xs text-text-muted">
+              {isSavingBoard && <span className="text-accent-amber">Saving...</span>}
+              {!isSavingBoard && boardMessage && <span className="text-accent-green">{boardMessage}</span>}
               <span>Last updated: {kanbanData?.lastUpdated ? new Date(kanbanData.lastUpdated).toLocaleString() : '—'}</span>
             </div>
           </div>
@@ -326,6 +427,9 @@ export default function Dashboard() {
               <div className="flex items-center gap-3">
                 <h2 className="text-base font-bold text-text-primary">Execution Board</h2>
                 <Badge tone="neutral">{totalBoardCards} active</Badge>
+                <Badge tone={selectedOwner === "all" ? "new" : "neutral"}>
+                  {selectedOwner === "all" ? "Drag & drop enabled" : "Drag disabled while filtered"}
+                </Badge>
                 {selectedOwner !== "all" && (
                   <Badge tone={selectedOwner === "Michael" ? "new" : "warm"}>
                     {selectedOwner}'s tasks
@@ -345,7 +449,24 @@ export default function Dashboard() {
               <div className="overflow-x-auto">
                 <div className="grid min-w-[1180px] grid-cols-4 gap-3 p-3">
                   {filteredColumns.map((column) => (
-                    <div key={column.id} className="rounded-xl border border-border-subtle bg-bg-primary p-2.5">
+                    <div
+                      key={column.id}
+                      className={cn(
+                        "rounded-xl border border-border-subtle bg-bg-primary p-2.5",
+                        dropTarget?.columnId === column.id && "border-hyper-blue/60"
+                      )}
+                      onDragOver={(event) => {
+                        if (selectedOwner !== "all") return
+                        event.preventDefault()
+                        setDropTarget({ columnId: column.id, index: column.cards.length })
+                      }}
+                      onDrop={(event) => {
+                        if (selectedOwner !== "all") return
+                        event.preventDefault()
+                        event.stopPropagation()
+                        void onDropColumnEnd(column.id)
+                      }}
+                    >
                       <div className="mb-2 flex items-center justify-between gap-2">
                         <div>
                           <p className="text-sm font-bold text-text-primary">{column.title}</p>
@@ -360,10 +481,43 @@ export default function Dashboard() {
                             <p className="text-xs text-text-muted">No tasks</p>
                           </div>
                         ) : (
-                          column.cards.map((card) => (
+                          column.cards.map((card, cardIndex) => (
                             <article
                               key={card.id}
-                              className="rounded-lg border border-border-default bg-bg-secondary p-3 transition-all hover:border-hyper-blue/50"
+                              draggable={selectedOwner === "all"}
+                              onDragStart={(event) => {
+                                if (selectedOwner !== "all") return
+                                setDragState({
+                                  cardId: card.id,
+                                  fromColumnId: column.id,
+                                  fromIndex: cardIndex,
+                                })
+                                event.dataTransfer.effectAllowed = "move"
+                                event.dataTransfer.setData("text/plain", card.id)
+                              }}
+                              onDragEnd={() => {
+                                setDragState(null)
+                                setDropTarget(null)
+                              }}
+                              onDragOver={(event) => {
+                                if (selectedOwner !== "all") return
+                                event.preventDefault()
+                                setDropTarget({ columnId: column.id, index: cardIndex })
+                              }}
+                              onDrop={(event) => {
+                                if (selectedOwner !== "all") return
+                                event.preventDefault()
+                                event.stopPropagation()
+                                void onDropCard(column.id, cardIndex)
+                              }}
+                              className={cn(
+                                "rounded-lg border border-border-default bg-bg-secondary p-3 transition-all hover:border-hyper-blue/50",
+                                selectedOwner === "all" && "cursor-grab active:cursor-grabbing",
+                                dragState?.cardId === card.id && "opacity-60",
+                                dropTarget?.columnId === column.id &&
+                                  dropTarget.index === cardIndex &&
+                                  "border-hyper-blue border-dashed"
+                              )}
                             >
                               <p className="text-xs font-semibold text-text-primary">{card.title}</p>
                               {card.description && (
