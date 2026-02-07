@@ -1,6 +1,6 @@
 {
-  "version": "2026-02-07",
-  "lastUpdated": "2026-02-07T14:06:00+07:00",
+  "version": "2026-02-08",
+  "lastUpdated": "2026-02-08T01:01:00+10:30",
   "updatedBy": "Esther (CourtLab PM)",
   "columns": [
     {
@@ -18,7 +18,15 @@
           "due": "Ongoing",
           "priority": "high",
           "tags": ["git", "deploy", "workflow"],
-          "status": "Active - monitoring"
+          "status": "Active - monitoring",
+          "links": {
+            "internal": [
+              {"label": "Vercel Dashboard", "url": "https://vercel.com/michael-s-projects-e98dfb76/courtlabops"}
+            ],
+            "external": [
+              {"label": "GitHub Repo", "url": "https://github.com/raven2t2/courtlabops"}
+            ]
+          }
         },
         {
           "id": "kb-001",
@@ -28,7 +36,16 @@
           "owner": "Michael",
           "due": "Feb 10",
           "priority": "high",
-          "tags": ["website", "events"]
+          "tags": ["website", "events"],
+          "links": {
+            "internal": [
+              {"label": "Events Page", "url": "https://courtlabops.vercel.app/events"},
+              {"label": "Content Calendar", "url": "https://courtlabops.vercel.app/content"}
+            ],
+            "external": [
+              {"label": "courtlab.app (live site)", "url": "https://courtlab.app"}
+            ]
+          }
         },
         {
           "id": "kb-002",
@@ -38,7 +55,14 @@
           "owner": "Esther",
           "due": "Feb 12",
           "priority": "medium",
-          "tags": ["email", "affiliates"]
+          "tags": ["email", "affiliates"],
+          "links": {
+            "internal": [
+              {"label": "Campaigns", "url": "https://courtlabops.vercel.app/campaigns"},
+              {"label": "Coaches", "url": "https://courtlabops.vercel.app/coaches"}
+            ],
+            "external": []
+          }
         },
         {
           "id": "kb-003",
@@ -48,7 +72,13 @@
           "owner": "Esther",
           "due": "Feb 13",
           "priority": "high",
-          "tags": ["ads", "analytics"]
+          "tags": ["ads", "analytics"],
+          "links": {
+            "internal": [],
+            "external": [
+              {"label": "Apple Search Ads Console", "url": "https://searchads.apple.com"}
+            ]
+          }
         },
         {
           "id": "kb-004",
@@ -58,7 +88,15 @@
           "owner": "Esther",
           "due": "Feb 14",
           "priority": "critical",
-          "tags": ["sponsors", "easter-classic"]
+          "tags": ["sponsors", "easter-classic"],
+          "links": {
+            "internal": [
+              {"label": "Events", "url": "https://courtlabops.vercel.app/events"}
+            ],
+            "external": [
+              {"label": "Easter Classic Info", "url": "https://www.basketballsa.com.au/easter-classic-2026"}
+            ]
+          }
         },
         {
           "id": "kb-005",
@@ -68,7 +106,14 @@
           "owner": "Michael",
           "due": "Feb 08",
           "priority": "critical",
-          "tags": ["api", "social-media"]
+          "tags": ["api", "social-media"],
+          "links": {
+            "internal": [],
+            "external": [
+              {"label": "Vercel Env Vars", "url": "https://vercel.com/michael-s-projects-e98dfb76/courtlabops/settings/environment-variables"},
+              {"label": "Meta Developers", "url": "https://developers.facebook.com/apps"}
+            ]
+          }
         }
       ]
     },
@@ -86,7 +131,15 @@
           "owner": "Michael",
           "due": "Feb 13",
           "priority": "critical",
-          "tags": ["easter-classic", "events"]
+          "tags": ["easter-classic", "events"],
+          "links": {
+            "internal": [
+              {"label": "Events", "url": "https://courtlabops.vercel.app/events"}
+            ],
+            "external": [
+              {"label": "Easter Classic 2026", "url": "https://www.basketballsa.com.au/easter-classic-2026"}
+            ]
+          }
         },
         {
           "id": "ip-002",
@@ -96,7 +149,17 @@
           "owner": "Esther",
           "due": "Feb 09",
           "priority": "warm",
-          "tags": ["outreach", "sa-clubs"]
+          "tags": ["outreach", "sa-clubs"],
+          "links": {
+            "internal": [
+              {"label": "Leads (SA Clubs)", "url": "https://courtlabops.vercel.app/leads"},
+              {"label": "Campaigns", "url": "https://courtlabops.vercel.app/campaigns"}
+            ],
+            "external": [
+              {"label": "Forestville Eagles", "url": "https://www.forestvilleeagles.com.au"},
+              {"label": "Facebook", "url": "https://facebook.com/forestvilleeagles"}
+            ]
+          }
         },
         {
           "id": "ip-003",
@@ -107,7 +170,16 @@
           "due": "Feb 07",
           "priority": "high",
           "tags": ["crm", "gallery", "content"],
-          "status": "95% complete - deployed"
+          "status": "95% complete - deployed",
+          "links": {
+            "internal": [
+              {"label": "Gallery", "url": "https://courtlabops.vercel.app/gallery"},
+              {"label": "Content", "url": "https://courtlabops.vercel.app/content"}
+            ],
+            "external": [
+              {"label": "GitHub Assets", "url": "https://github.com/raven2t2/courtlabops/tree/main/shared/gallery"}
+            ]
+          }
         },
         {
           "id": "ip-004",
@@ -117,7 +189,14 @@
           "owner": "Michael",
           "due": "Feb 08",
           "priority": "high",
-          "tags": ["content", "automation"]
+          "tags": ["content", "automation"],
+          "links": {
+            "internal": [
+              {"label": "Content Calendar", "url": "https://courtlabops.vercel.app/content"},
+              {"label": "Gallery", "url": "https://courtlabops.vercel.app/gallery"}
+            ],
+            "external": []
+          }
         }
       ]
     },
@@ -135,7 +214,16 @@
           "owner": "Esther",
           "due": "Feb 14",
           "priority": "contacted",
-          "tags": ["outreach", "vic-clubs"]
+          "tags": ["outreach", "vic-clubs"],
+          "links": {
+            "internal": [
+              {"label": "Leads (VIC)", "url": "https://courtlabops.vercel.app/leads"},
+              {"label": "Campaigns", "url": "https://courtlabops.vercel.app/campaigns"}
+            ],
+            "external": [
+              {"label": "Nunawading Spectres", "url": "https://www.nunawadingbasketball.com.au"}
+            ]
+          }
         },
         {
           "id": "bl-002",
@@ -145,7 +233,14 @@
           "owner": "Michael",
           "due": "Feb 08",
           "priority": "high",
-          "tags": ["twitter", "branding"]
+          "tags": ["twitter", "branding"],
+          "links": {
+            "internal": [],
+            "external": [
+              {"label": "@EstherCourtLab", "url": "https://twitter.com/EstherCourtLab"},
+              {"label": "@CourtLabApp", "url": "https://twitter.com/CourtLabApp"}
+            ]
+          }
         },
         {
           "id": "bl-003",
@@ -155,7 +250,15 @@
           "owner": "Michael",
           "due": "Feb 09",
           "priority": "high",
-          "tags": ["twitter", "outreach", "dms"]
+          "tags": ["twitter", "outreach", "dms"],
+          "links": {
+            "internal": [
+              {"label": "Leads", "url": "https://courtlabops.vercel.app/leads"}
+            ],
+            "external": [
+              {"label": "@EstherCourtLab", "url": "https://twitter.com/EstherCourtLab"}
+            ]
+          }
         }
       ]
     },
@@ -172,7 +275,15 @@
           "org": "DevOps",
           "owner": "Esther",
           "completed": "Feb 06",
-          "tags": ["deploy", "vercel"]
+          "tags": ["deploy", "vercel"],
+          "links": {
+            "internal": [
+              {"label": "Dashboard", "url": "https://courtlabops.vercel.app"}
+            ],
+            "external": [
+              {"label": "Vercel", "url": "https://vercel.com/michael-s-projects-e98dfb76/courtlabops"}
+            ]
+          }
         },
         {
           "id": "dn-002",
@@ -181,7 +292,13 @@
           "org": "Product",
           "owner": "Esther",
           "completed": "Feb 06",
-          "tags": ["crm", "content"]
+          "tags": ["crm", "content"],
+          "links": {
+            "internal": [
+              {"label": "Content Calendar", "url": "https://courtlabops.vercel.app/content"}
+            ],
+            "external": []
+          }
         },
         {
           "id": "dn-003",
@@ -190,7 +307,13 @@
           "org": "Product",
           "owner": "Esther",
           "completed": "Feb 06",
-          "tags": ["crm", "gallery"]
+          "tags": ["crm", "gallery"],
+          "links": {
+            "internal": [
+              {"label": "Gallery", "url": "https://courtlabops.vercel.app/gallery"}
+            ],
+            "external": []
+          }
         },
         {
           "id": "dn-004",
@@ -199,7 +322,11 @@
           "org": "Product",
           "owner": "Esther",
           "completed": "Feb 06",
-          "tags": ["crm", "automation"]
+          "tags": ["crm", "automation"],
+          "links": {
+            "internal": [],
+            "external": []
+          }
         },
         {
           "id": "dn-005",
@@ -208,7 +335,13 @@
           "org": "Product",
           "owner": "Esther",
           "completed": "Feb 06",
-          "tags": ["crm", "email"]
+          "tags": ["crm", "email"],
+          "links": {
+            "internal": [
+              {"label": "Campaigns", "url": "https://courtlabops.vercel.app/campaigns"}
+            ],
+            "external": []
+          }
         },
         {
           "id": "dn-006",
@@ -217,7 +350,14 @@
           "org": "Product",
           "owner": "Esther",
           "completed": "Feb 06",
-          "tags": ["api", "social-media"]
+          "tags": ["api", "social-media"],
+          "links": {
+            "internal": [],
+            "external": [
+              {"label": "Instagram @courtlabapp", "url": "https://instagram.com/courtlabapp"},
+              {"label": "Facebook Page", "url": "https://facebook.com/CourtLab"}
+            ]
+          }
         },
         {
           "id": "dn-007",
@@ -226,7 +366,13 @@
           "org": "Research",
           "owner": "Esther",
           "completed": "Feb 05",
-          "tags": ["research", "vic-clubs"]
+          "tags": ["research", "vic-clubs"],
+          "links": {
+            "internal": [
+              {"label": "Leads (VIC)", "url": "https://courtlabops.vercel.app/leads"}
+            ],
+            "external": []
+          }
         }
       ]
     }

@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy": "vercel --prod",
+    "deploy:prod": "vercel --prod",
+    "deploy:preview": "vercel",
+    "deploy:safe": "vercel --prod --confirm"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
