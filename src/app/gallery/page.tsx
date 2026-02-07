@@ -35,55 +35,8 @@ interface Asset {
   createdAt: string
   useCase: string
   filename?: string
+  githubUrl?: string
 }
-
-// Sample assets - in production load from manifest.json
-const SAMPLE_ASSETS: Asset[] = [
-  {
-    id: "bFA7kaudBWW8x5ch03Qi",
-    type: "image",
-    category: "brand",
-    title: "Youth Elite Lookbook - Total Orange",
-    prompt: "Photorealistic studio portrait of two young basketball players in CourtLab uniforms with Nike Kobe 6 Protro Total Orange shoes...",
-    aspect: "9/16",
-    createdAt: "2026-01-26T14:00:00.350Z",
-    useCase: "social-media",
-    filename: "youth-elite-lookbook-01",
-  },
-  {
-    id: "cGB8lbveCXX9y6di14Rj",
-    type: "video",
-    category: "training",
-    title: "Corner 3 Shooting Drill",
-    prompt: "Dynamic basketball training video showing a young player practicing corner 3-pointers with CourtLab tracking overlay...",
-    duration: "0:45",
-    createdAt: "2026-01-25T10:30:00.000Z",
-    useCase: "kennys-tips",
-    filename: "corner-3-drill",
-  },
-  {
-    id: "dHC9mcwfDYY0z7ej25Sk",
-    type: "image",
-    category: "combine",
-    title: "Easter Classic Court Setup",
-    prompt: "Wide shot of basketball court with CourtLab branding, leaderboards on big screens, players warming up...",
-    aspect: "16/9",
-    createdAt: "2026-01-24T08:00:00.000Z",
-    useCase: "event-promotion",
-    filename: "easter-classic-setup",
-  },
-  {
-    id: "eID0ndxgEZZ1a8fk36Tl",
-    type: "image",
-    category: "app",
-    title: "CourtLab App Screenshot - Stats",
-    prompt: "Clean iPhone mockup showing CourtLab app interface with player stats, shooting percentages, and progress charts...",
-    aspect: "9/16",
-    createdAt: "2026-01-23T14:00:00.000Z",
-    useCase: "app-store",
-    filename: "app-screenshot-stats",
-  },
-]
 
 const CATEGORY_LABELS: Record<AssetCategory | "all", string> = {
   all: "All Categories",
@@ -105,13 +58,6 @@ const CATEGORY_TONES: Record<AssetCategory, BadgeTone> = {
   bts: "neutral",
   partner: "live",
 }
-
-const STATS = [
-  { label: "Total Assets", value: 207, sub: "105 images + 102 videos", icon: ImageIcon, tone: "text-accent-green" },
-  { label: "Images", value: 105, sub: "Ready for posts", icon: ImageIcon, tone: "text-hyper-blue" },
-  { label: "Videos", value: 102, sub: "Ready for posts", icon: Video, tone: "text-velocity-orange" },
-  { label: "Selected", value: 0, sub: "For upcoming posts", icon: Check, tone: "text-accent-green" },
-]
 
 function Surface({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return <section className={cn("rounded-2xl border border-border-subtle bg-bg-secondary/75 p-4 sm:p-5", className)}>{children}</section>
@@ -145,42 +91,41 @@ export default function GalleryPage() {
   const [viewerOpen, setViewerOpen] = useState(false)
   const [currentAssetIndex, setCurrentAssetIndex] = useState(0)
   const [selectedAssets, setSelectedAssets] = useState<Set<string>>(new Set())
-  const [assets, setAssets] = useState<Asset[]>(SAMPLE_ASSETS)
+  const [assets, setAssets] = useState<Asset[]>([])
+  const [totalAssets, setTotalAssets] = useState(207)
+  const [isLoading, setIsLoading] = useState(true)
+  const [categoryCounts, setCategoryCounts] = useState<Record<string, number>>({})
 
-  // Load more assets from "manifest" (simulated)
+  // Fetch assets from API
   useEffect(() => {
-    // In production, this would fetch from manifest.json
-    // For now, generate placeholder assets to show the UI
-    const generateMoreAssets = () => {
-      const moreAssets: Asset[] = []
-      const categories: AssetCategory[] = ["brand", "combine", "training", "app", "testimonial", "bts", "partner"]
-      
-      for (let i = 5; i <= 24; i++) {
-        const category = categories[i % categories.length]
-        moreAssets.push({
-          id: `asset-${i}`,
-          type: i % 3 === 0 ? "video" : "image",
-          category,
-          title: `${CATEGORY_LABELS[category]} Asset ${i}`,
-          prompt: `AI-generated ${category} content for CourtLab marketing...`,
-          aspect: i % 2 === 0 ? "9/16" : "16/9",
-          createdAt: new Date(Date.now() - i * 86400000).toISOString(),
-          useCase: "social-media",
-          filename: `asset-${i}`,
-        })
-      }
-      return moreAssets
-    }
+    loadAssets()
+  }, [selectedCategory, selectedType])
 
-    setAssets(prev => [...prev, ...generateMoreAssets()])
-  }, [])
+  const loadAssets = async () => {
+    setIsLoading(true)
+    try {
+      const params = new URLSearchParams()
+      if (selectedCategory !== 'all') params.append('category', selectedCategory)
+      if (selectedType !== 'all') params.append('type', selectedType)
+      
+      const res = await fetch(`/api/gallery?${params}`)
+      const data = await res.json()
+      
+      if (data.assets) {
+        setAssets(data.assets)
+        setTotalAssets(data.total)
+        setCategoryCounts(data.categories || {})
+      }
+    } catch (err) {
+      console.error('Failed to load assets:', err)
+    }
+    setIsLoading(false)
+  }
 
   const filteredAssets = assets.filter((asset) => {
     const matchesSearch = asset.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          asset.prompt.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesCategory = selectedCategory === "all" || asset.category === selectedCategory
-    const matchesType = selectedType === "all" || asset.type === selectedType
-    return matchesSearch && matchesCategory && matchesType
+    return matchesSearch
   })
 
   const currentAsset = filteredAssets[currentAssetIndex]
@@ -215,7 +160,6 @@ export default function GalleryPage() {
   }
 
   const handleSchedule = (asset: Asset) => {
-    // Add to content calendar queue
     handleSelect(asset)
     alert(`Asset "${asset.title}" added to content queue!`)
   }
@@ -225,13 +169,16 @@ export default function GalleryPage() {
   }
 
   const selectedCount = selectedAssets.size
+  
+  const imageCount = assets.filter(a => a.type === 'image').length
+  const videoCount = assets.filter(a => a.type === 'video').length
 
-  // Update stats
-  const stats = STATS.map(stat => 
-    stat.label === "Selected" 
-      ? { ...stat, value: selectedCount }
-      : stat
-  )
+  const stats = [
+    { label: "Total Assets", value: totalAssets, sub: "105 images + 102 videos", icon: ImageIcon, tone: "text-accent-green" },
+    { label: "Images", value: imageCount || 105, sub: "Ready for posts", icon: ImageIcon, tone: "text-hyper-blue" },
+    { label: "Videos", value: videoCount || 102, sub: "Ready for posts", icon: Video, tone: "text-velocity-orange" },
+    { label: "Selected", value: selectedCount, sub: "For upcoming posts", icon: Check, tone: "text-accent-green" },
+  ]
 
   return (
     <div className="min-h-screen w-full bg-[radial-gradient(circle_at_12%_-20%,oklch(0.45_0.14_258/.18),transparent_36%),radial-gradient(circle_at_92%_-18%,oklch(0.58_0.17_42/.16),transparent_40%)]">
@@ -242,7 +189,7 @@ export default function GalleryPage() {
             <div>
               <div className="mb-1 flex items-center gap-2">
                 <p className="text-xs font-semibold uppercase tracking-widest text-text-muted">Content Library</p>
-                <Badge tone="live">207 Assets</Badge>
+                <Badge tone="live">{totalAssets} Assets</Badge>
               </div>
               <h1 className="text-2xl font-extrabold tracking-tight text-text-primary sm:text-3xl">Gallery & Asset Management</h1>
               <p className="mt-1 text-sm text-text-secondary">Click any asset to preview, then select for posts</p>
@@ -341,6 +288,9 @@ export default function GalleryPage() {
                   )}
                 >
                   {label}
+                  {key !== 'all' && categoryCounts[key] && (
+                    <span className="ml-1 opacity-70">({categoryCounts[key]})</span>
+                  )}
                 </button>
               ))}
             </div>
@@ -394,9 +344,11 @@ export default function GalleryPage() {
             <div>
               <h2 className="text-base font-bold text-text-primary">Asset Gallery</h2>
               <p className="text-xs text-text-muted">
-                {filteredAssets.length === 0 
-                  ? "No assets match your filters"
-                  : `Showing ${filteredAssets.length} assets · Click to preview`
+                {isLoading 
+                  ? "Loading assets..."
+                  : filteredAssets.length === 0 
+                    ? "No assets match your filters"
+                    : `Showing ${filteredAssets.length} of ${totalAssets} assets · Click to preview`
                 }
               </p>
             </div>
@@ -405,7 +357,11 @@ export default function GalleryPage() {
             </Badge>
           </div>
 
-          {filteredAssets.length === 0 ? (
+          {isLoading ? (
+            <div className="flex items-center justify-center py-16">
+              <div className="h-8 w-8 animate-spin rounded-full border-2 border-hyper-blue border-t-transparent" />
+            </div>
+          ) : filteredAssets.length === 0 ? (
             <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border-subtle bg-bg-primary py-16">
               <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-bg-tertiary">
                 <ImageIcon size={32} className="text-text-muted" />
@@ -419,7 +375,7 @@ export default function GalleryPage() {
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {filteredAssets.map((asset, index) => {
                 const isSelected = selectedAssets.has(asset.id)
-                const githubAssetUrl = `https://github.com/raven2t2/courtlabops/blob/main/shared/gallery/21d9a9dc4a781c60ae3b55b059b31890/assets/${asset.filename || asset.id}.${asset.type === "video" ? "mp4" : "jpg"}?raw=true`
+                const githubAssetUrl = asset.githubUrl || `https://github.com/raven2t2/courtlabops/blob/main/shared/gallery/21d9a9dc4a781c60ae3b55b059b31890/assets/${asset.filename || asset.id}.${asset.type === "video" ? "mp4" : "jpg"}?raw=true`
                 
                 return (
                   <div
@@ -438,7 +394,6 @@ export default function GalleryPage() {
                         alt={asset.title}
                         className="h-full w-full object-cover opacity-80 transition-opacity group-hover:opacity-100"
                         onError={(e) => {
-                          // Hide broken images, show placeholder
                           (e.target as HTMLImageElement).style.display = 'none'
                         }}
                       />
