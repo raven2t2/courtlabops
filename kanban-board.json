@@ -1,0 +1,92 @@
+{
+  "version": "1.0",
+  "columns": [
+    {
+      "id": "drafted",
+      "name": "📋 Drafted",
+      "color": "#e2e8f0",
+      "leads": ["SA-001", "SA-002", "SA-003", "SA-004", "SA-005", "SA-006", "SA-007", "SA-008", "SA-009", "SA-010"],
+      "tasks": ["TW-001", "TW-002", "TW-003", "TW-004", "TW-005", "TW-006"]
+    },
+    {
+      "id": "sent",
+      "name": "📤 Sent",
+      "color": "#bfdbfe",
+      "leads": [],
+      "tasks": []
+    },
+    {
+      "id": "replied",
+      "name": "💬 Replied",
+      "color": "#fef08a",
+      "leads": [],
+      "tasks": []
+    },
+    {
+      "id": "meeting",
+      "name": "📅 Meeting Scheduled",
+      "color": "#c4b5fd",
+      "leads": [],
+      "tasks": []
+    },
+    {
+      "id": "closed-won",
+      "name": "✅ Closed - Won",
+      "color": "#86efac",
+      "leads": [],
+      "tasks": []
+    },
+    {
+      "id": "closed-lost",
+      "name": "❌ Closed - Lost",
+      "color": "#fca5a5",
+      "leads": [],
+      "tasks": []
+    }
+  ],
+  "tasks": {
+    "TW-001": {
+      "title": "📌 Pin @CourtLabApp welcome tweet",
+      "description": "Pin the brand introduction tweet to @CourtLabApp profile",
+      "priority": "high",
+      "platform": "twitter",
+      "account": "@CourtLabApp"
+    },
+    "TW-002": {
+      "title": "🐦 Post @CourtLabApp Easter Classic countdown",
+      "description": "8 weeks to Easter Classic tweet - ready to copy/paste",
+      "priority": "high",
+      "platform": "twitter",
+      "account": "@CourtLabApp"
+    },
+    "TW-003": {
+      "title": "🐦 Post @CourtLabApp training tip",
+      "description": "Training tip about measuring progress - ready to copy/paste",
+      "priority": "medium",
+      "platform": "twitter",
+      "account": "@CourtLabApp"
+    },
+    "TW-004": {
+      "title": "📌 Pin @EstherCourtLab intro tweet",
+      "description": "Pin the CMO persona introduction tweet",
+      "priority": "high",
+      "platform": "twitter",
+      "account": "@EstherCourtLab"
+    },
+    "TW-005": {
+      "title": "🐦 Post @EstherCourtLab hot take #1",
+      "description": "Phone stopwatch rant - ready to copy/paste",
+      "priority": "medium",
+      "platform": "twitter",
+      "account": "@EstherCourtLab"
+    },
+    "TW-006": {
+      "title": "🐦 Post @EstherCourtLab hot take #2",
+      "description": "Organized chaos take - ready to copy/paste",
+      "priority": "medium",
+      "platform": "twitter",
+      "account": "@EstherCourtLab"
+    }
+  },
+  "lastUpdated": "2026-02-07"
+}
