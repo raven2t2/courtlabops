@@ -1,6 +1,6 @@
 {
   "version": "2026-02-07",
-  "lastUpdated": "2026-02-07T13:55:00+07:00",
+  "lastUpdated": "2026-02-07T14:06:00+07:00",
   "updatedBy": "Esther (CourtLab PM)",
   "columns": [
     {
@@ -9,6 +9,17 @@
       "hint": "Needs owner or not started",
       "tone": "blue",
       "cards": [
+        {
+          "id": "kb-000",
+          "title": "PM: Enforce git commit/push workflow",
+          "description": "Ensure every change is committed and pushed immediately. Verify Vercel deployment sync. No local-only work.",
+          "org": "DevOps",
+          "owner": "Esther",
+          "due": "Ongoing",
+          "priority": "high",
+          "tags": ["git", "deploy", "workflow"],
+          "status": "Active - monitoring"
+        },
         {
           "id": "kb-001",
           "title": "Launch SA winter combine page",
