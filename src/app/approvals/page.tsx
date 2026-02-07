@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import {
   Check,
@@ -19,6 +19,7 @@ import {
   Calendar,
   Image as ImageIcon,
   Send,
+  Loader2,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -42,62 +43,6 @@ interface Post {
   approvedBy?: string
   notes?: string
 }
-
-// Sample posts in queue
-const SAMPLE_POSTS: Post[] = [
-  {
-    id: "post-001",
-    platform: "twitter",
-    type: "feed",
-    status: "pending",
-    scheduledTime: "2026-02-08T09:00:00",
-    caption: "23% faster improvement isn't a claim. It's what happens when you stop guessing and start tracking. Verified combines > AI guesswork.",
-    hashtags: ["#basketballtraining", "#verifieddata"],
-    createdAt: "2026-02-07T14:00:00",
-  },
-  {
-    id: "post-002",
-    platform: "instagram",
-    type: "reel",
-    status: "pending",
-    scheduledTime: "2026-02-08T11:00:00",
-    caption: "This is what 100 tracked shots looks like. Every make. Every miss. Data doesn't lie. Become undeniable 👆",
-    mediaUrls: ["corner-3-drill.mp4"],
-    hashtags: ["#basketballtraining", "#youthbasketball", "#courtlab", "#combinetraining"],
-    createdAt: "2026-02-07T14:30:00",
-  },
-  {
-    id: "post-003",
-    platform: "facebook",
-    type: "feed",
-    status: "pending",
-    scheduledTime: "2026-02-08T14:00:00",
-    caption: "Easter Classic 2026 is 8 weeks away. We're bringing verified combines to The ARC Campbelltown. Live leaderboards. Scout-ready PDFs. 300+ players. This is how you get noticed.",
-    mediaUrls: ["easter-classic-promo.jpg"],
-    hashtags: ["#EasterClassic", "#BasketballSA"],
-    createdAt: "2026-02-07T15:00:00",
-  },
-  {
-    id: "post-004",
-    platform: "twitter",
-    type: "thread",
-    status: "pending",
-    scheduledTime: "2026-02-08T16:00:00",
-    caption: "Thread: Why 'AI tracking' is killing player development 🧵\n\n1/ Most AI basketball apps promise instant feedback. But here's what they don't tell you...",
-    hashtags: ["#basketball", "#playerdev"],
-    createdAt: "2026-02-07T15:30:00",
-  },
-  {
-    id: "post-005",
-    platform: "instagram",
-    type: "story",
-    status: "pending",
-    scheduledTime: "2026-02-08T18:00:00",
-    caption: "Poll: How many shots do you track per week? 🏀\n\nA) 0-50\nB) 50-100\nC) 100-200\nD) 200+",
-    hashtags: ["#poll", "#basketball"],
-    createdAt: "2026-02-07T16:00:00",
-  },
-]
 
 const PLATFORM_CONFIG: Record<Platform, { label: string; icon: typeof Twitter; color: string; bg: string }> = {
   twitter: { label: "Twitter/X", icon: Twitter, color: "text-sky-400", bg: "bg-sky-500/10" },
@@ -134,19 +79,41 @@ function Badge({ children, className = "" }: { children: React.ReactNode; classN
 }
 
 export default function ApprovalsPage() {
-  const [posts, setPosts] = useState<Post[]>(SAMPLE_POSTS)
+  const [posts, setPosts] = useState<Post[]>([])
   const [selectedPost, setSelectedPost] = useState<Post | null>(null)
   const [filterPlatform, setFilterPlatform] = useState<Platform | "all">("all")
   const [filterStatus, setFilterStatus] = useState<PostStatus | "all">("pending")
   const [searchQuery, setSearchQuery] = useState("")
   const [editMode, setEditMode] = useState(false)
   const [editedCaption, setEditedCaption] = useState("")
+  const [loading, setLoading] = useState(true)
+  const [actionLoading, setActionLoading] = useState(false)
+
+  // Load posts on mount
+  useEffect(() => {
+    loadPosts()
+  }, [filterPlatform, filterStatus])
+
+  const loadPosts = async () => {
+    try {
+      setLoading(true)
+      const params = new URLSearchParams()
+      if (filterPlatform !== "all") params.append("platform", filterPlatform)
+      if (filterStatus !== "all") params.append("status", filterStatus)
+      
+      const res = await fetch(`/api/posts?${params}`)
+      const data = await res.json()
+      setPosts(data.posts || [])
+    } catch (error) {
+      console.error("Failed to load posts:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const filteredPosts = posts.filter((post) => {
-    const matchesPlatform = filterPlatform === "all" || post.platform === filterPlatform
-    const matchesStatus = filterStatus === "all" || post.status === filterStatus
     const matchesSearch = post.caption.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchesPlatform && matchesStatus && matchesSearch
+    return matchesSearch
   })
 
   const stats = {
@@ -157,32 +124,78 @@ export default function ApprovalsPage() {
     posted: posts.filter((p) => p.status === "posted").length,
   }
 
-  const handleApprove = (postId: string) => {
-    setPosts(posts.map((p) => (p.id === postId ? { ...p, status: "approved", approvedAt: new Date().toISOString(), approvedBy: "Michael" } : p)))
-    if (selectedPost?.id === postId) {
-      setSelectedPost({ ...selectedPost, status: "approved" })
+  const handleApprove = async (postId: string) => {
+    setActionLoading(true)
+    try {
+      const res = await fetch('/api/posts', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: postId, action: 'approve' }),
+      })
+      if (res.ok) {
+        await loadPosts()
+        if (selectedPost?.id === postId) {
+          setSelectedPost({ ...selectedPost, status: "approved" })
+        }
+      }
+    } finally {
+      setActionLoading(false)
     }
   }
 
-  const handleReject = (postId: string) => {
-    setPosts(posts.map((p) => (p.id === postId ? { ...p, status: "rejected" } : p)))
-    if (selectedPost?.id === postId) {
-      setSelectedPost({ ...selectedPost, status: "rejected" })
+  const handleReject = async (postId: string) => {
+    setActionLoading(true)
+    try {
+      const res = await fetch('/api/posts', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: postId, action: 'reject' }),
+      })
+      if (res.ok) {
+        await loadPosts()
+        setSelectedPost(null)
+      }
+    } finally {
+      setActionLoading(false)
     }
   }
 
-  const handleEditSave = (postId: string) => {
-    setPosts(posts.map((p) => (p.id === postId ? { ...p, caption: editedCaption, notes: p.notes ? `${p.notes}; Edited` : "Edited" } : p)))
-    setEditMode(false)
-    if (selectedPost) {
-      setSelectedPost({ ...selectedPost, caption: editedCaption })
+  const handleEditSave = async (postId: string) => {
+    setActionLoading(true)
+    try {
+      const res = await fetch('/api/posts', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: postId, action: 'edit', caption: editedCaption }),
+      })
+      if (res.ok) {
+        setEditMode(false)
+        await loadPosts()
+        if (selectedPost) {
+          setSelectedPost({ ...selectedPost, caption: editedCaption })
+        }
+      }
+    } finally {
+      setActionLoading(false)
     }
   }
 
-  const handleSchedule = (postId: string) => {
-    setPosts(posts.map((p) => (p.id === postId ? { ...p, status: "scheduled" } : p)))
-    if (selectedPost?.id === postId) {
-      setSelectedPost({ ...selectedPost, status: "scheduled" })
+  const handleSchedule = async (postId: string) => {
+    setActionLoading(true)
+    try {
+      const res = await fetch('/api/posts', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: postId, action: 'schedule' }),
+      })
+      if (res.ok) {
+        await loadPosts()
+        if (selectedPost?.id === postId) {
+          setSelectedPost({ ...selectedPost, status: "scheduled" })
+        }
+      }
+    } finally {
+      setActionLoading(false)
     }
   }
 
@@ -226,8 +239,12 @@ export default function ApprovalsPage() {
                   className="w-full bg-transparent text-sm text-text-primary outline-none placeholder:text-text-muted sm:w-44"
                 />
               </label>
-              <button className="inline-flex items-center justify-center gap-2 rounded-xl bg-hyper-blue px-3 py-2 text-sm font-semibold text-white">
-                <Send size={14} /> Post Approved Now
+              <button 
+                onClick={loadPosts}
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-hyper-blue px-3 py-2 text-sm font-semibold text-white"
+              >
+                <Loader2 size={14} className={cn(loading && "animate-spin")} />
+                Refresh
               </button>
             </div>
           </div>
@@ -335,57 +352,63 @@ export default function ApprovalsPage() {
               <span className="text-xs text-text-muted">{filteredPosts.length} posts</span>
             </div>
 
-            <div className="space-y-3">
-              {filteredPosts.length === 0 ? (
-                <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border-subtle bg-bg-primary py-12">
-                  <Clock size={32} className="mb-2 text-text-muted" />
-                  <p className="text-sm text-text-secondary">No posts match your filters</p>
-                </div>
-              ) : (
-                filteredPosts.map((post) => {
-                  const platform = PLATFORM_CONFIG[post.platform]
-                  const status = STATUS_CONFIG[post.status]
-                  const StatusIcon = status.icon
-                  const PlatformIcon = platform.icon
+            {loading ? (
+              <div className="flex items-center justify-center py-12">
+                <Loader2 size={32} className="animate-spin text-text-muted" />
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {filteredPosts.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border-subtle bg-bg-primary py-12">
+                    <Clock size={32} className="mb-2 text-text-muted" />
+                    <p className="text-sm text-text-secondary">No posts match your filters</p>
+                  </div>
+                ) : (
+                  filteredPosts.map((post) => {
+                    const platform = PLATFORM_CONFIG[post.platform]
+                    const status = STATUS_CONFIG[post.status]
+                    const StatusIcon = status.icon
+                    const PlatformIcon = platform.icon
 
-                  return (
-                    <div
-                      key={post.id}
-                      onClick={() => {
-                        setSelectedPost(post)
-                        setEditMode(false)
-                        setEditedCaption(post.caption)
-                      }}
-                      className={cn(
-                        "cursor-pointer rounded-xl border p-3 transition-all",
-                        selectedPost?.id === post.id
-                          ? "border-hyper-blue bg-hyper-blue/5"
-                          : "border-border-subtle bg-bg-primary hover:border-border-default"
-                      )}
-                    >
-                      <div className="flex items-start gap-3">
-                        <div className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-xl", platform.bg)}>
-                          <PlatformIcon size={18} className={platform.color} />
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-center gap-2">
-                            <span className={cn("text-xs font-semibold", platform.color)}>{platform.label}</span>
-                            <span className="text-text-muted">·</span>
-                            <span className="text-xs text-text-muted">{TYPE_LABELS[post.type]}</span>
-                            <Badge className={status.tone}>
-                              <StatusIcon size={10} className="mr-1" />
-                              {status.label}
-                            </Badge>
+                    return (
+                      <div
+                        key={post.id}
+                        onClick={() => {
+                          setSelectedPost(post)
+                          setEditMode(false)
+                          setEditedCaption(post.caption)
+                        }}
+                        className={cn(
+                          "cursor-pointer rounded-xl border p-3 transition-all",
+                          selectedPost?.id === post.id
+                            ? "border-hyper-blue bg-hyper-blue/5"
+                            : "border-border-subtle bg-bg-primary hover:border-border-default"
+                        )}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-xl", platform.bg)}>
+                            <PlatformIcon size={18} className={platform.color} />
                           </div>
-                          <p className="mt-1 line-clamp-2 text-sm text-text-primary">{post.caption}</p>
-                          <p className="mt-1 text-xs text-text-muted">{formatTime(post.scheduledTime)}</p>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center gap-2">
+                              <span className={cn("text-xs font-semibold", platform.color)}>{platform.label}</span>
+                              <span className="text-text-muted">·</span>
+                              <span className="text-xs text-text-muted">{TYPE_LABELS[post.type]}</span>
+                              <Badge className={status.tone}>
+                                <StatusIcon size={10} className="mr-1" />
+                                {status.label}
+                              </Badge>
+                            </div>
+                            <p className="mt-1 line-clamp-2 text-sm text-text-primary">{post.caption}</p>
+                            <p className="mt-1 text-xs text-text-muted">{formatTime(post.scheduledTime)}</p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  )
-                })
-              )}
-            </div>
+                    )
+                  })
+                )}
+              </div>
+            )}
           </Surface>
 
           {/* Right: Post Detail / Editor */}
@@ -465,15 +488,17 @@ export default function ApprovalsPage() {
                             setEditMode(false)
                             setEditedCaption(selectedPost.caption)
                           }}
+                          disabled={actionLoading}
                           className="rounded-lg px-3 py-1.5 text-xs font-medium text-text-secondary hover:bg-bg-tertiary"
                         >
                           Cancel
                         </button>
                         <button
                           onClick={() => handleEditSave(selectedPost.id)}
+                          disabled={actionLoading}
                           className="rounded-lg bg-hyper-blue px-3 py-1.5 text-xs font-semibold text-white hover:bg-hyper-blue/90"
                         >
-                          Save Changes
+                          {actionLoading ? <Loader2 size={12} className="animate-spin" /> : "Save Changes"}
                         </button>
                       </div>
                     </div>
@@ -501,21 +526,24 @@ export default function ApprovalsPage() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleApprove(selectedPost.id)}
-                      className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-accent-green py-3 text-sm font-semibold text-white hover:bg-accent-green/90"
+                      disabled={actionLoading}
+                      className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-accent-green py-3 text-sm font-semibold text-white hover:bg-accent-green/90 disabled:opacity-50"
                     >
-                      <Check size={16} />
+                      {actionLoading ? <Loader2 size={16} className="animate-spin" /> : <Check size={16} />}
                       Approve
                     </button>
                     <button
                       onClick={() => setEditMode(true)}
-                      className="flex items-center justify-center gap-2 rounded-xl border border-border-default bg-bg-primary px-4 py-3 text-sm font-semibold text-text-primary hover:bg-bg-tertiary"
+                      disabled={actionLoading}
+                      className="flex items-center justify-center gap-2 rounded-xl border border-border-default bg-bg-primary px-4 py-3 text-sm font-semibold text-text-primary hover:bg-bg-tertiary disabled:opacity-50"
                     >
                       <Edit3 size={16} />
                       Edit
                     </button>
                     <button
                       onClick={() => handleReject(selectedPost.id)}
-                      className="flex items-center justify-center gap-2 rounded-xl border border-accent-red/40 bg-accent-red-muted px-4 py-3 text-sm font-semibold text-accent-red hover:bg-accent-red/20"
+                      disabled={actionLoading}
+                      className="flex items-center justify-center gap-2 rounded-xl border border-accent-red/40 bg-accent-red-muted px-4 py-3 text-sm font-semibold text-accent-red hover:bg-accent-red/20 disabled:opacity-50"
                     >
                       <Trash2 size={16} />
                       Reject
@@ -527,14 +555,16 @@ export default function ApprovalsPage() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleSchedule(selectedPost.id)}
-                      className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-accent-violet py-3 text-sm font-semibold text-white hover:bg-accent-violet/90"
+                      disabled={actionLoading}
+                      className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-accent-violet py-3 text-sm font-semibold text-white hover:bg-accent-violet/90 disabled:opacity-50"
                     >
-                      <Calendar size={16} />
+                      {actionLoading ? <Loader2 size={16} className="animate-spin" /> : <Calendar size={16} />}
                       Schedule for {formatTime(selectedPost.scheduledTime).split(",")[1]?.trim()}
                     </button>
                     <button
                       onClick={() => handleReject(selectedPost.id)}
-                      className="flex items-center justify-center gap-2 rounded-xl border border-border-default bg-bg-primary px-4 py-3 text-sm font-semibold text-text-secondary hover:bg-bg-tertiary"
+                      disabled={actionLoading}
+                      className="flex items-center justify-center gap-2 rounded-xl border border-border-default bg-bg-primary px-4 py-3 text-sm font-semibold text-text-secondary hover:bg-bg-tertiary disabled:opacity-50"
                     >
                       <X size={16} />
                       Unapprove
