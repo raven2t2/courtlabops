@@ -3,119 +3,147 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
-import Image from "next/image"
 import {
+  Bell,
+  Calendar,
+  ChevronDown,
+  Crosshair,
   LayoutDashboard,
-  Users,
+  Menu,
+  Plus,
+  Search,
+  Settings,
   Target,
   Trophy,
-  Calendar,
-  Crosshair,
-  Menu,
+  Users,
   X,
-  Bell
 } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 const navItems = [
-  { name: "Dashboard", href: "/", icon: LayoutDashboard },
-  { name: "Leads", href: "/leads", icon: Users },
-  { name: "Campaigns", href: "/campaigns", icon: Target },
-  { name: "Coaches", href: "/coaches", icon: Trophy },
-  { name: "Events", href: "/events", icon: Calendar },
-  { name: "Competitors", href: "/competitors", icon: Crosshair },
+  { label: "Dashboard", href: "/", icon: LayoutDashboard },
+  { label: "Leads", href: "/leads", icon: Users },
+  { label: "Campaigns", href: "/campaigns", icon: Target },
+  { label: "Coaches", href: "/coaches", icon: Trophy },
+  { label: "Events", href: "/events", icon: Calendar },
+  { label: "Competitors", href: "/competitors", icon: Crosshair },
+  { label: "Settings", href: "/settings", icon: Settings },
 ]
 
 export function TopNav() {
   const pathname = usePathname()
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 bg-[#09090B]/95 backdrop-blur-xl border-b border-[#27272A]">
-      <div className="px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between gap-4">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 shrink-0">
-            <div className="w-9 h-9 rounded-full overflow-hidden ring-1 ring-[#27272A]">
-              <Image
-                src="/courtlab-logo.jpg"
-                alt="CourtLab"
-                width={36}
-                height={36}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <span className="font-bold text-lg tracking-tight text-white hidden sm:block">
-              Court<span className="text-[#F97316]">Lab</span>
-            </span>
-          </Link>
+    <header className="sticky top-0 z-50 border-b border-border-subtle/90 bg-bg-primary/90 backdrop-blur-xl">
+      <div className="mx-auto w-full max-w-[1700px] px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <Link href="/" className="group flex items-center gap-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-border-default bg-bg-secondary">
+                <span className="font-display text-sm font-extrabold tracking-tight text-velocity-orange">CL</span>
+              </div>
+              <div className="hidden sm:block">
+                <p className="font-display text-base font-bold tracking-tight text-text-primary">CourtLab</p>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-text-muted">Mission Control</p>
+              </div>
+            </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1">
+            <button className="hidden items-center gap-1 rounded-lg border border-border-default bg-bg-secondary px-2.5 py-1.5 text-xs font-semibold text-text-secondary transition-colors hover:border-border-hover hover:text-text-primary md:inline-flex">
+              Workspace
+              <ChevronDown size={13} />
+            </button>
+          </div>
+
+          <nav className="hidden items-center gap-1 lg:flex">
             {navItems.map((item) => {
-              const isActive = pathname === item.href
+              const isActive =
+                item.href === "/" ? pathname === item.href : pathname === item.href || pathname.startsWith(`${item.href}/`)
+
               return (
                 <Link
-                  key={item.name}
+                  key={item.href}
                   href={item.href}
-                  className={`
-                    px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
-                    ${isActive 
-                      ? "bg-[#18181B] text-white" 
-                      : "text-[#71717A] hover:text-white hover:bg-[#18181B]/50"
-                    }
-                  `}
+                  className={cn(
+                    "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                    isActive
+                      ? "bg-bg-tertiary text-text-primary"
+                      : "text-text-secondary hover:bg-bg-secondary hover:text-text-primary"
+                  )}
                 >
-                  {item.name}
+                  {item.label}
                 </Link>
               )
             })}
           </nav>
 
-          {/* Right side */}
-          <div className="flex items-center gap-2 shrink-0">
-            <button className="hidden sm:flex p-2.5 text-[#71717A] hover:text-white hover:bg-[#18181B] rounded-xl transition-colors">
-              <Bell size={18} />
-            </button>
-            
-            {/* Mobile menu button */}
-            <button 
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2.5 text-[#71717A] hover:text-white hover:bg-[#18181B] rounded-xl transition-colors"
+          <div className="flex items-center gap-2">
+            <label className="hidden h-9 items-center gap-2 rounded-xl border border-border-default bg-bg-secondary px-3 lg:flex">
+              <Search size={14} className="text-text-muted" />
+              <input
+                type="text"
+                placeholder="Search workspace"
+                className="w-48 bg-transparent text-sm text-text-primary outline-none placeholder:text-text-muted"
+              />
+            </label>
+
+            <button
+              className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border-default bg-bg-secondary text-text-secondary transition-colors hover:border-border-hover hover:text-text-primary"
+              aria-label="View alerts"
             >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+              <Bell size={16} />
+            </button>
+
+            <button className="hidden items-center gap-2 rounded-xl bg-hyper-blue px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-hyper-blue-hover sm:inline-flex">
+              <Plus size={14} />
+              New Task
+            </button>
+
+            <button
+              onClick={() => setMobileMenuOpen((open) => !open)}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border-default bg-bg-secondary text-text-secondary transition-colors hover:border-border-hover hover:text-text-primary lg:hidden"
+              aria-label="Toggle navigation"
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Nav with animation */}
-      <div 
-        className={`
-          md:hidden overflow-hidden transition-all duration-300 ease-in-out
-          ${mobileOpen ? 'max-h-64 opacity-100 border-t border-[#27272A]' : 'max-h-0 opacity-0'}
-        `}
+      <div
+        className={cn(
+          "overflow-hidden border-t border-border-subtle bg-bg-secondary transition-all duration-300 lg:hidden",
+          mobileMenuOpen ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"
+        )}
       >
-        <nav className="px-4 py-3 space-y-1 bg-[#0F0F11]">
+        <nav className="mx-auto flex w-full max-w-[1700px] flex-col gap-1 px-4 py-3 sm:px-6">
           {navItems.map((item) => {
-            const isActive = pathname === item.href
+            const isActive =
+              item.href === "/" ? pathname === item.href : pathname === item.href || pathname.startsWith(`${item.href}/`)
+
             return (
               <Link
-                key={item.name}
+                key={item.href}
                 href={item.href}
-                onClick={() => setMobileOpen(false)}
-                className={`
-                  flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors
-                  ${isActive 
-                    ? "bg-[#18181B] text-white" 
-                    : "text-[#71717A] hover:text-white hover:bg-[#18181B]/50"
-                  }
-                `}
+                onClick={() => setMobileMenuOpen(false)}
+                className={cn(
+                  "flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                  isActive
+                    ? "bg-bg-tertiary text-text-primary"
+                    : "text-text-secondary hover:bg-bg-tertiary hover:text-text-primary"
+                )}
               >
-                <item.icon size={18} />
-                {item.name}
+                <item.icon size={16} />
+                {item.label}
               </Link>
             )
           })}
+
+          <button className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-hyper-blue px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-hyper-blue-hover sm:hidden">
+            <Plus size={14} />
+            New Task
+          </button>
         </nav>
       </div>
     </header>
