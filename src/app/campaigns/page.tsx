@@ -21,6 +21,7 @@ import {
   CheckCircle,
   AlertCircle,
   ExternalLink,
+  X,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 

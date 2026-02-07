@@ -59,8 +59,10 @@ async function logPost(post: QueuedPost, result: any): Promise<void> {
   } catch {}
 }
 
+type PostResult = { success: boolean; url?: string; error?: string; postId: string; platform: string; status?: string; wouldPost?: boolean };
+
 // Post to Twitter using Bird CLI
-async function postToTwitter(post: QueuedPost): Promise<{ success: boolean; url?: string; error?: string }> {
+async function postToTwitter(post: QueuedPost): Promise<PostResult> {
   try {
     const tweetText = post.caption + (post.hashtags ? '\n\n' + post.hashtags.join(' ') : '');
     
@@ -82,32 +84,40 @@ async function postToTwitter(post: QueuedPost): Promise<{ success: boolean; url?
     return {
       success: true,
       url: tweetId ? `https://twitter.com/i/web/status/${tweetId}` : undefined,
+      postId: post.id,
+      platform: 'twitter',
     };
   } catch (error: any) {
     return {
       success: false,
       error: error.message,
+      postId: post.id,
+      platform: 'twitter',
     };
   }
 }
 
 // Post to Instagram (requires Graph API - placeholder)
-async function postToInstagram(post: QueuedPost): Promise<{ success: boolean; url?: string; error?: string }> {
+async function postToInstagram(post: QueuedPost): Promise<PostResult> {
   // TODO: Implement Instagram Graph API posting
   // For now, mark as needing manual posting
   return {
     success: false,
     error: 'Instagram auto-posting requires Graph API setup. Please post manually.',
+    postId: post.id,
+    platform: 'instagram',
   };
 }
 
 // Post to Facebook (requires Graph API - placeholder)
-async function postToFacebook(post: QueuedPost): Promise<{ success: boolean; url?: string; error?: string }> {
+async function postToFacebook(post: QueuedPost): Promise<PostResult> {
   // TODO: Implement Facebook Graph API posting
   // For now, mark as needing manual posting
   return {
     success: false,
     error: 'Facebook auto-posting requires Graph API setup. Please post manually.',
+    postId: post.id,
+    platform: 'facebook',
   };
 }
 
@@ -141,20 +151,21 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: 'No posts ready to publish' });
     }
     
-    const results = [];
-    
+    const results: PostResult[] = [];
+
     for (const post of postsToPost) {
       if (dryRun) {
         results.push({
           postId: post.id,
           platform: post.platform,
+          success: true,
           status: 'dry_run',
           wouldPost: true,
         });
         continue;
       }
-      
-      let result;
+
+      let result: PostResult;
       switch (post.platform) {
         case 'twitter':
           result = await postToTwitter(post);
@@ -166,7 +177,7 @@ export async function POST(request: NextRequest) {
           result = await postToFacebook(post);
           break;
         default:
-          result = { success: false, error: 'Unknown platform' };
+          result = { success: false, error: 'Unknown platform', postId: post.id, platform: post.platform };
       }
       
       // Update queue
@@ -182,12 +193,8 @@ export async function POST(request: NextRequest) {
       }
       
       await logPost(post, result);
-      
-      results.push({
-        postId: post.id,
-        platform: post.platform,
-        ...result,
-      });
+
+      results.push(result);
     }
     
     await saveQueue(queue);

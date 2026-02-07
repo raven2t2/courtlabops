@@ -17,6 +17,7 @@ import {
   Shield,
   Star,
   TrendingUp,
+  Trophy,
   UserCheck,
   Users,
   User,

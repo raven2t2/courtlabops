@@ -4,10 +4,12 @@ import { useState, useEffect, useCallback } from "react"
 import { X, ChevronLeft, ChevronRight, Play, Pause, Image as ImageIcon, Video, Check, Plus, Calendar, Twitter } from "lucide-react"
 import { cn } from "@/lib/utils"
 
+type AssetCategory = "brand" | "combine" | "training" | "app" | "testimonial" | "bts" | "partner"
+
 interface Asset {
   id: string
   type: "image" | "video"
-  category: string
+  category: AssetCategory
   title: string
   prompt: string
   aspect?: string
@@ -15,6 +17,7 @@ interface Asset {
   createdAt: string
   useCase: string
   filename?: string
+  githubUrl?: string
 }
 
 interface MediaViewerProps {
