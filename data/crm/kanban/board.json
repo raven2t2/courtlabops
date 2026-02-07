@@ -5,8 +5,42 @@
       "id": "drafted",
       "name": "📋 Drafted",
       "color": "#e2e8f0",
-      "leads": ["SA-001", "SA-002", "SA-003", "SA-004", "SA-005", "SA-006", "SA-007", "SA-008", "SA-009", "SA-010", "LEAD-001", "LEAD-002", "LEAD-003", "LEAD-004", "LEAD-005", "LEAD-006", "LEAD-007", "LEAD-008"],
-      "tasks": ["TW-001", "TW-002", "TW-003", "TW-004", "TW-005", "TW-006", "AFF-001", "AFF-002", "AFF-003", "AFF-004", "AFF-005", "AFF-006", "AFF-007", "AFF-008"]
+      "leads": [
+        "SA-001",
+        "SA-002",
+        "SA-003",
+        "SA-004",
+        "SA-005",
+        "SA-006",
+        "SA-007",
+        "SA-008",
+        "SA-009",
+        "SA-010",
+        "LEAD-001",
+        "LEAD-002",
+        "LEAD-003",
+        "LEAD-004",
+        "LEAD-005",
+        "LEAD-006",
+        "LEAD-007",
+        "LEAD-008"
+      ],
+      "tasks": [
+        "TW-001",
+        "TW-002",
+        "TW-003",
+        "TW-004",
+        "TW-005",
+        "TW-006",
+        "AFF-001",
+        "AFF-002",
+        "AFF-003",
+        "AFF-004",
+        "AFF-005",
+        "AFF-006",
+        "AFF-007",
+        "AFF-008"
+      ]
     },
     {
       "id": "sent",
@@ -52,10 +86,21 @@
       "platform": "twitter",
       "account": "@CourtLabApp",
       "links": {
-        "internal": [],
+        "internal": [
+          {
+            "label": "View Tweet",
+            "url": "https://courtlabops.vercel.app/tweets"
+          }
+        ],
         "external": [
-          {"label": "@CourtLabApp", "url": "https://twitter.com/CourtLabApp"},
-          {"label": "Tweet Draft", "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"}
+          {
+            "label": "@CourtLabApp",
+            "url": "https://twitter.com/CourtLabApp"
+          },
+          {
+            "label": "Tweet Draft",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
+          }
         ]
       }
     },
@@ -66,11 +111,25 @@
       "platform": "twitter",
       "account": "@CourtLabApp",
       "links": {
-        "internal": [],
+        "internal": [
+          {
+            "label": "View Tweet",
+            "url": "https://courtlabops.vercel.app/tweets"
+          }
+        ],
         "external": [
-          {"label": "@CourtLabApp", "url": "https://twitter.com/CourtLabApp"},
-          {"label": "Tweet Draft", "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"},
-          {"label": "Easter Classic Info", "url": "https://www.basketballsa.com.au/easter-classic-2026"}
+          {
+            "label": "@CourtLabApp",
+            "url": "https://twitter.com/CourtLabApp"
+          },
+          {
+            "label": "Tweet Draft",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
+          },
+          {
+            "label": "Easter Classic Info",
+            "url": "https://www.basketballsa.com.au/easter-classic-2026"
+          }
         ]
       }
     },
@@ -81,10 +140,21 @@
       "platform": "twitter",
       "account": "@CourtLabApp",
       "links": {
-        "internal": [],
+        "internal": [
+          {
+            "label": "View Tweet",
+            "url": "https://courtlabops.vercel.app/tweets"
+          }
+        ],
         "external": [
-          {"label": "@CourtLabApp", "url": "https://twitter.com/CourtLabApp"},
-          {"label": "Tweet Draft", "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"}
+          {
+            "label": "@CourtLabApp",
+            "url": "https://twitter.com/CourtLabApp"
+          },
+          {
+            "label": "Tweet Draft",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
+          }
         ]
       }
     },
@@ -95,10 +165,21 @@
       "platform": "twitter",
       "account": "@EstherCourtLab",
       "links": {
-        "internal": [],
+        "internal": [
+          {
+            "label": "View Tweet",
+            "url": "https://courtlabops.vercel.app/tweets"
+          }
+        ],
         "external": [
-          {"label": "@EstherCourtLab", "url": "https://twitter.com/EstherCourtLab"},
-          {"label": "Tweet Draft", "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"}
+          {
+            "label": "@EstherCourtLab",
+            "url": "https://twitter.com/EstherCourtLab"
+          },
+          {
+            "label": "Tweet Draft",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
+          }
         ]
       }
     },
@@ -109,10 +190,21 @@
       "platform": "twitter",
       "account": "@EstherCourtLab",
       "links": {
-        "internal": [],
+        "internal": [
+          {
+            "label": "View Tweet",
+            "url": "https://courtlabops.vercel.app/tweets"
+          }
+        ],
         "external": [
-          {"label": "@EstherCourtLab", "url": "https://twitter.com/EstherCourtLab"},
-          {"label": "Tweet Draft", "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"}
+          {
+            "label": "@EstherCourtLab",
+            "url": "https://twitter.com/EstherCourtLab"
+          },
+          {
+            "label": "Tweet Draft",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
+          }
         ]
       }
     },
@@ -123,10 +215,21 @@
       "platform": "twitter",
       "account": "@EstherCourtLab",
       "links": {
-        "internal": [],
+        "internal": [
+          {
+            "label": "View Tweet",
+            "url": "https://courtlabops.vercel.app/tweets"
+          }
+        ],
         "external": [
-          {"label": "@EstherCourtLab", "url": "https://twitter.com/EstherCourtLab"},
-          {"label": "Tweet Draft", "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"}
+          {
+            "label": "@EstherCourtLab",
+            "url": "https://twitter.com/EstherCourtLab"
+          },
+          {
+            "label": "Tweet Draft",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
+          }
         ]
       }
     },
@@ -139,9 +242,18 @@
       "links": {
         "internal": [],
         "external": [
-          {"label": "@BasketballAus", "url": "https://twitter.com/BasketballAus"},
-          {"label": "Lead Research", "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"},
-          {"label": "DM Draft", "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"}
+          {
+            "label": "@BasketballAus",
+            "url": "https://twitter.com/BasketballAus"
+          },
+          {
+            "label": "Lead Research",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          },
+          {
+            "label": "DM Draft",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          }
         ]
       }
     },
@@ -154,8 +266,14 @@
       "links": {
         "internal": [],
         "external": [
-          {"label": "@BBALLAU_Coaches", "url": "https://twitter.com/BBALLAU_Coaches"},
-          {"label": "Lead Research", "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"}
+          {
+            "label": "@BBALLAU_Coaches",
+            "url": "https://twitter.com/BBALLAU_Coaches"
+          },
+          {
+            "label": "Lead Research",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          }
         ]
       }
     },
@@ -168,9 +286,18 @@
       "links": {
         "internal": [],
         "external": [
-          {"label": "@bouncepassau", "url": "https://twitter.com/bouncepassau"},
-          {"label": "basketball.com.au", "url": "https://basketball.com.au"},
-          {"label": "Lead Research", "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"}
+          {
+            "label": "@bouncepassau",
+            "url": "https://twitter.com/bouncepassau"
+          },
+          {
+            "label": "basketball.com.au",
+            "url": "https://basketball.com.au"
+          },
+          {
+            "label": "Lead Research",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          }
         ]
       }
     },
@@ -183,8 +310,14 @@
       "links": {
         "internal": [],
         "external": [
-          {"label": "@codebballau", "url": "https://twitter.com/codebballau"},
-          {"label": "Lead Research", "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"}
+          {
+            "label": "@codebballau",
+            "url": "https://twitter.com/codebballau"
+          },
+          {
+            "label": "Lead Research",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          }
         ]
       }
     },
@@ -197,8 +330,14 @@
       "links": {
         "internal": [],
         "external": [
-          {"label": "@AusBballnews", "url": "https://twitter.com/AusBballnews"},
-          {"label": "Lead Research", "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"}
+          {
+            "label": "@AusBballnews",
+            "url": "https://twitter.com/AusBballnews"
+          },
+          {
+            "label": "Lead Research",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          }
         ]
       }
     },
@@ -211,8 +350,14 @@
       "links": {
         "internal": [],
         "external": [
-          {"label": "@herwaysports", "url": "https://twitter.com/herwaysports"},
-          {"label": "Lead Research", "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"}
+          {
+            "label": "@herwaysports",
+            "url": "https://twitter.com/herwaysports"
+          },
+          {
+            "label": "Lead Research",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          }
         ]
       }
     },
@@ -225,8 +370,14 @@
       "links": {
         "internal": [],
         "external": [
-          {"label": "@parkoballtraining", "url": "https://twitter.com/parkoballtraining"},
-          {"label": "Lead Research", "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"}
+          {
+            "label": "@parkoballtraining",
+            "url": "https://twitter.com/parkoballtraining"
+          },
+          {
+            "label": "Lead Research",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          }
         ]
       }
     },
@@ -239,8 +390,14 @@
       "links": {
         "internal": [],
         "external": [
-          {"label": "@FoxBasketball", "url": "https://twitter.com/FoxBasketball"},
-          {"label": "Lead Research", "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"}
+          {
+            "label": "@FoxBasketball",
+            "url": "https://twitter.com/FoxBasketball"
+          },
+          {
+            "label": "Lead Research",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          }
         ]
       }
     }
