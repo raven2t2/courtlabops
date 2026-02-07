@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import "./globals.css"
+import { AppShell } from "@/components/app-shell"
 
 export const metadata: Metadata = {
   title: "CourtLab CRM",
@@ -14,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-bg-primary text-text-primary antialiased">
-        <main className="min-h-screen w-full bg-bg-primary">{children}</main>
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   )
