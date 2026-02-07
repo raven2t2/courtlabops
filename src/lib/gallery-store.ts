@@ -4,8 +4,10 @@ import path from "path"
 const GALLERY_TOKEN = "21d9a9dc4a781c60ae3b55b059b31890"
 const MANIFEST_NAME = "manifest.json"
 const CACHE_TTL_MS = 60_000
+const REMOTE_MANIFEST_URL = process.env.GALLERY_REMOTE_MANIFEST_URL || `https://raw.githubusercontent.com/raven2t2/courtlabops/main/shared/gallery/${GALLERY_TOKEN}/${MANIFEST_NAME}`
+const REMOTE_ASSET_BASE_URL = process.env.GALLERY_REMOTE_ASSET_BASE_URL || `https://raw.githubusercontent.com/raven2t2/courtlabops/main/shared/gallery/${GALLERY_TOKEN}`
 
-type SourceType = "shared" | "context" | "none"
+type SourceType = "shared" | "context" | "remote" | "none"
 
 interface ManifestFile {
   id?: string
@@ -141,8 +143,19 @@ function guessContentType(type: "image" | "video", filename: string, provided?: 
   return "image/jpeg"
 }
 
-function makeAssetUrl(localPath: string): string {
+function makeLocalAssetUrl(localPath: string): string {
   return `/api/gallery/asset?file=${encodeURIComponent(localPath)}`
+}
+
+export function buildRemoteAssetUrl(localPath: string): string {
+  const safePath = localPath
+    .replace(/^\/+/, "")
+    .split("/")
+    .filter((part) => part.length > 0)
+    .map((part) => encodeURIComponent(part))
+    .join("/")
+
+  return `${REMOTE_ASSET_BASE_URL}/${safePath}`
 }
 
 function buildCategoryCounts(assets: GalleryAsset[]): Record<string, number> {
@@ -173,7 +186,17 @@ async function loadManifest(rootDir: string): Promise<ManifestPayload> {
   return JSON.parse(raw) as ManifestPayload
 }
 
-function mapManifestToAssets(manifest: ManifestPayload): GalleryAsset[] {
+async function fetchRemoteManifest(): Promise<ManifestPayload | null> {
+  try {
+    const response = await fetch(REMOTE_MANIFEST_URL, { cache: "no-store" })
+    if (!response.ok) return null
+    return (await response.json()) as ManifestPayload
+  } catch {
+    return null
+  }
+}
+
+function mapManifestToAssets(manifest: ManifestPayload, mode: "local" | "remote"): GalleryAsset[] {
   const files = Array.isArray(manifest.files) ? manifest.files : []
 
   return files
@@ -198,7 +221,7 @@ function mapManifestToAssets(manifest: ManifestPayload): GalleryAsset[] {
         contentType: guessContentType(type, filename, file.contentType),
         sizeBytes: typeof file.sizeBytes === "number" ? file.sizeBytes : 0,
         localPath: file.localPath,
-        url: makeAssetUrl(file.localPath),
+        url: mode === "local" ? makeLocalAssetUrl(file.localPath) : buildRemoteAssetUrl(file.localPath),
       }
     })
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
@@ -211,38 +234,60 @@ export async function getGalleryData(forceRefresh = false): Promise<GalleryData>
   }
 
   const { source, rootDir } = await resolveGalleryRoot()
-  if (source === "none") {
-    const empty: GalleryData = {
-      token: GALLERY_TOKEN,
+
+  if (source !== "none") {
+    const manifest = await loadManifest(rootDir)
+    const assets = mapManifestToAssets(manifest, "local")
+    const total = typeof manifest.totalItems === "number" ? manifest.totalItems : assets.length
+
+    const localData: GalleryData = {
+      token: manifest.token || GALLERY_TOKEN,
       source,
       rootDir,
-      exportedAt: "",
-      total: 0,
-      assets: [],
-      categories: {},
+      exportedAt: manifest.exportedAt || "",
+      total,
+      assets,
+      categories: buildCategoryCounts(assets),
     }
-    cache = empty
+
+    cache = localData
     cachedAt = now
-    return empty
+    return localData
   }
 
-  const manifest = await loadManifest(rootDir)
-  const assets = mapManifestToAssets(manifest)
-  const total = typeof manifest.totalItems === "number" ? manifest.totalItems : assets.length
+  const remoteManifest = await fetchRemoteManifest()
+  if (remoteManifest) {
+    const remoteAssets = mapManifestToAssets(remoteManifest, "remote")
+    const remoteTotal = typeof remoteManifest.totalItems === "number" ? remoteManifest.totalItems : remoteAssets.length
 
-  const data: GalleryData = {
-    token: manifest.token || GALLERY_TOKEN,
-    source,
-    rootDir,
-    exportedAt: manifest.exportedAt || "",
-    total,
-    assets,
-    categories: buildCategoryCounts(assets),
+    const remoteData: GalleryData = {
+      token: remoteManifest.token || GALLERY_TOKEN,
+      source: "remote",
+      rootDir: "",
+      exportedAt: remoteManifest.exportedAt || "",
+      total: remoteTotal,
+      assets: remoteAssets,
+      categories: buildCategoryCounts(remoteAssets),
+    }
+
+    cache = remoteData
+    cachedAt = now
+    return remoteData
   }
 
-  cache = data
+  const empty: GalleryData = {
+    token: GALLERY_TOKEN,
+    source: "none",
+    rootDir: "",
+    exportedAt: "",
+    total: 0,
+    assets: [],
+    categories: {},
+  }
+
+  cache = empty
   cachedAt = now
-  return data
+  return empty
 }
 
 export async function resolveGalleryFilePath(fileOrLocalPath: string): Promise<string | null> {
