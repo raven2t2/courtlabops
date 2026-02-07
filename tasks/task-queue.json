@@ -1,0 +1,94 @@
+{
+  "version": "1.0",
+  "tasks": [
+    {
+      "id": "TASK-001",
+      "title": "Research VIC basketball clubs (next 10)",
+      "description": "Find 10 basketball clubs in Victoria with personalization anchors and draft intros",
+      "status": "Pending",
+      "priority": "High",
+      "assignedTo": "Assistant",
+      "dueDate": "2026-02-10",
+      "tags": ["lead-gen", "vic", "basketball"],
+      "created": "2026-02-06"
+    },
+    {
+      "id": "TASK-002",
+      "title": "Send initial outreach to SA-001 to SA-005",
+      "description": "Send personalized emails to top 5 SA clubs: South Adelaide, Norwood, Sturt, Forestville, West Adelaide",
+      "status": "Pending",
+      "priority": "High",
+      "assignedTo": "Michael",
+      "dueDate": "2026-02-08",
+      "tags": ["outreach", "sa", "tier-1"],
+      "created": "2026-02-06"
+    },
+    {
+      "id": "TASK-003",
+      "title": "Identify 5 micro-influencers for affiliate program",
+      "description": "Research Instagram/TikTok basketball parents, coaches, trainers in AU with 1K-50K followers",
+      "status": "Pending",
+      "priority": "Medium",
+      "assignedTo": "Assistant",
+      "dueDate": "2026-02-12",
+      "tags": ["affiliates", "research", "marketing"],
+      "created": "2026-02-06"
+    },
+    {
+      "id": "TASK-004",
+      "title": "Monitor Apple Search Ads performance",
+      "description": "Check campaign stats after 7 days of running. Review keywords, TTR, install rates.",
+      "status": "In Progress",
+      "priority": "High",
+      "assignedTo": "Assistant",
+      "dueDate": "2026-02-13",
+      "tags": ["ads", "apple", "monitoring"],
+      "created": "2026-02-06"
+    },
+    {
+      "id": "TASK-005",
+      "title": "Research NSW basketball clubs",
+      "description": "Build lead list for New South Wales basketball clubs",
+      "status": "Pending",
+      "priority": "Medium",
+      "assignedTo": "Assistant",
+      "dueDate": "2026-02-15",
+      "tags": ["lead-gen", "nsw", "basketball"],
+      "created": "2026-02-06"
+    },
+    {
+      "id": "TASK-006",
+      "title": "Create affiliate outreach templates",
+      "description": "Draft personalized outreach for each affiliate category (coaches, parents, trainers)",
+      "status": "Pending",
+      "priority": "Medium",
+      "assignedTo": "Assistant",
+      "dueDate": "2026-02-10",
+      "tags": ["affiliates", "templates", "outreach"],
+      "created": "2026-02-06"
+    },
+    {
+      "id": "TASK-007",
+      "title": "Follow up on SA club replies",
+      "description": "Send Step 2 follow-ups to any clubs that haven't replied after 4 days",
+      "status": "Pending",
+      "priority": "High",
+      "assignedTo": "Michael",
+      "dueDate": "2026-02-12",
+      "tags": ["outreach", "follow-up", "sa"],
+      "created": "2026-02-06",
+      "dependsOn": "TASK-002"
+    },
+    {
+      "id": "TASK-008",
+      "title": "Build case study content",
+      "description": "Document early user wins, testimonials, metrics for marketing use",
+      "status": "Pending",
+      "priority": "Medium",
+      "assignedTo": "Michael",
+      "dueDate": "2026-02-20",
+      "tags": ["content", "marketing", "social-proof"],
+      "created": "2026-02-06"
+    }
+  ]
+}

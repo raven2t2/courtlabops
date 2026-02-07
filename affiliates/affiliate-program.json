@@ -1,0 +1,61 @@
+{
+  "version": "1.0",
+  "affiliates": [],
+  "categories": [
+    {
+      "id": "basketball-parent-bloggers",
+      "name": "Basketball Parent Bloggers",
+      "description": "Parents who blog/vlog about youth sports",
+      "targetFollowers": "1000-10000",
+      "commissionStructure": "30% first month, 20% recurring",
+      "notes": "High trust, engaged audience, authentic recommendations"
+    },
+    {
+      "id": "youth-coaches",
+      "name": "Youth Basketball Coaches",
+      "description": "Active coaches with social presence",
+      "targetFollowers": "500-5000",
+      "commissionStructure": "Free Pro account + 25% referrals",
+      "notes": "Authority figures, direct access to parents"
+    },
+    {
+      "id": "skills-trainers",
+      "name": "Skills Trainers & Academies",
+      "description": "Private trainers, academy owners",
+      "targetFollowers": "1000-50000",
+      "commissionStructure": "White-label option or 30% referral",
+      "notes": "Can bundle with their services, B2B potential"
+    },
+    {
+      "id": "sports-mom-influencers",
+      "name": "Sports Mom Micro-Influencers",
+      "description": "Instagram/TikTok moms in youth sports niche",
+      "targetFollowers": "5000-50000",
+      "commissionStructure": "Flat fee + performance bonus",
+      "notes": "Visual content, peer trust, high engagement"
+    },
+    {
+      "id": "basketball-podcasters",
+      "name": "Basketball Podcasters",
+      "description": "Youth basketball, coaching, parent podcasts",
+      "targetFollowers": "N/A (downloads)",
+      "commissionStructure": "$50-200 per episode + affiliate code",
+      "notes": "Long-form content, loyal listeners"
+    }
+  ],
+  "researchQueries": [
+    "youth basketball coach Instagram Australia",
+    "basketball mom blogger Australia",
+    "kids basketball training tips Instagram",
+    "basketball skills trainer Adelaide",
+    "youth sports parent podcast Australia",
+    "basketball coaching tips Instagram",
+    "#basketballmom #australia Instagram",
+    "basketball trainer Instagram Melbourne Sydney",
+    "youth basketball club Instagram Australia"
+  ],
+  "outreachTemplate": {
+    "subject": "Partnership opportunity: CourtLab x {{affiliateName}}",
+    "body": "Hi {{name}},\n\nI've been following your content on {{platform}} — your take on {{specificTopic}} really resonated with me. As a basketball dad and coach in Adelaide, I know firsthand how hard it is to find tools that actually work for local clubs.\n\nI built CourtLab (courtlab.app) to solve that — pro-grade stat tracking and video tools without the Silicon Valley bloat or price tag.\n\nI'd love to explore a partnership:\n- Free Pro account for you to try\n- {{commissionStructure}} for every coach/club you refer\n- Co-marketing opportunities (case studies, content collab)\n\nNo pressure — if it's not a fit, no worries. Just thought your audience would genuinely benefit.\n\nWorth a conversation?\n\nMichael Ragland\nFounder, CourtLab\nmichael@courtlab.app"
+  }
+}

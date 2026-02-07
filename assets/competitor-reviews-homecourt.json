@@ -1,0 +1,88 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-06",
+  "competitor": "HomeCourt",
+  "appStoreRating": "4.8/5 (14K ratings)",
+  "safetyScore": "42.7/100 (JustUseApp)",
+  "reviewVolume": "13,807 user reviews analyzed",
+  "negativeReviewCategories": {
+    "bugsCrashes": {
+      "count": "Medium",
+      "severity": "Moderate",
+      "commonComplaints": [
+        "App crashes during workout tracking",
+        "Shot detection fails in poor lighting",
+        "Camera tracking inconsistent outdoors",
+        "Battery drain from AR features",
+        "Requires specific phone positioning"
+      ],
+      "userQuotes": [
+        "Tracking is inconsistent",
+        "App freezes during drills",
+        "Camera doesn't always recognize shots"
+      ]
+    },
+    "pricing": {
+      "count": "High",
+      "severity": "Major pain point",
+      "commonComplaints": [
+        "$7.99/month too expensive for casual users",
+        "Subscription required for meaningful features",
+        "Limited free version practically useless",
+        "$69.99 yearly feels steep for parents",
+        "Family sharing limited to 4 profiles"
+      ],
+      "userQuotes": [
+        "Too expensive for what you get",
+        "Free version is basically a demo",
+        "Kids love it but parents question value"
+      ]
+    },
+    "accuracy": {
+      "count": "High",
+      "severity": "Critical for serious athletes",
+      "commonComplaints": [
+        "AI shot tracking misses makes/misses",
+        "Vertical jump measurement unreliable",
+        "Dribble speed calculations feel random",
+        "Works best indoors only",
+        "Can't distinguish between shot types"
+      ],
+      "userQuotes": [
+        "Shot counter is wrong half the time",
+        "Numbers don't match reality",
+        "More of a game than a serious tool"
+      ]
+    },
+    "userExperience": {
+      "count": "Medium",
+      "severity": "Moderate",
+      "commonComplaints": [
+        "Too gamified — focuses on points over improvement",
+        "Overwhelming number of features",
+        "Confusing navigation",
+        "Constant upsells to premium",
+        "Requires latest iOS (excludes older devices)"
+      ],
+      "userQuotes": [
+        "Too focused on badges and leaderboards",
+        "Just let me track my shots",
+        "Complicated for what should be simple"
+      ]
+    }
+  },
+  "keyTakeaways": [
+    "Users love the concept but hate the reliability",
+    "Parents pay but question ROI",
+    "Serious players frustrated by accuracy issues",
+    "Too much gamification, not enough substance",
+    "Works indoors only — major limitation"
+  ],
+  "courtLabPositioning": [
+    "'Verified combines, not AI guesswork' — counter accuracy issues",
+    "'No gimmicks, just data' — counter gamification complaints",
+    "'Works anywhere with any ball' — counter hardware/setup limits",
+    "'Built by a coach, not a tech company' — counter UX complaints",
+    "'Flat price, no upsells' — counter pricing frustration"
+  ]
+}

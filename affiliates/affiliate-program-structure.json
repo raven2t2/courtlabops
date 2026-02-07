@@ -1,0 +1,89 @@
+{
+  "programName": "CourtLab Affiliate Program",
+  "version": "1.0",
+  "lastUpdated": "2026-02-07",
+  "structure": {
+    "commission": {
+      "rate": "20%",
+      "type": "Recurring",
+      "description": "20% of all paid subscription revenue for lifetime of referred customer",
+      "example": "If referred user pays $29/month, affiliate earns $5.80/month ongoing"
+    },
+    "upfrontPayment": {
+      "available": false,
+      "reason": "No cash upfront. Performance-based only. Aligns incentives — affiliates only earn when CourtLab earns."
+    },
+    "affiliateBenefits": {
+      "freeProAccount": {
+        "value": "$29/month",
+        "description": "Lifetime free Pro account for affiliate to use and demonstrate",
+        "activation": "Immediate upon program acceptance"
+      },
+      "uniqueReferralCode": {
+        "format": "CREATORNAME20",
+        "example": "DODO20", "NAY20", "IAN20",
+        "tracking": "Automatic attribution via code entry at signup"
+      },
+      "marketingAssets": {
+        "available": [
+          "Branded graphics (Instagram stories, posts)",
+          "Demo videos (30-60 sec)",
+          "Email templates for their audience",
+          "QR codes for events/combines",
+          "Custom landing pages with their branding"
+        ],
+        "delivery": "Shared Google Drive + Dropbox for high-res assets"
+      },
+      "dashboardAccess": {
+        "features": [
+          "Real-time conversion tracking",
+          "Commission earnings display",
+          "Referred user activity",
+          "Payout history",
+          "Marketing asset downloads"
+        ]
+      }
+    },
+    "payoutSchedule": {
+      "frequency": "Monthly",
+      "minimumThreshold": "$50 AUD",
+      "method": "Bank transfer (Australian affiliates) / PayPal (International)",
+      "timing": "15th of each month for previous month's earnings"
+    },
+    "terms": {
+      "cookieDuration": "30 days",
+      "prohibitedActivities": [
+        "Paid advertising using CourtLab brand terms",
+        "Misrepresenting CourtLab features",
+        "Spam or unsolicited bulk email",
+        "Incentivizing signups with non-CourtLab rewards"
+      ],
+      "termination": "Either party may terminate with 30 days notice. Outstanding commissions paid out.",
+      "exclusivity": "Non-exclusive. Affiliates may promote competing products."
+    }
+  },
+  "activationPlaybook": {
+    "onboardingSteps": [
+      "1. Send affiliate agreement (digital signature)",
+      "2. Create unique referral code",
+      "3. Activate free Pro account",
+      "4. Share marketing asset folder",
+      "5. Schedule 15-min demo call (optional)",
+      "6. Add to affiliate dashboard",
+      "7. Send first month promotion suggestions"
+    ],
+    "contentCalendar": {
+      "week1": "Introduction post — 'I'm partnering with CourtLab'",
+      "week2": "Demo video — showing app features",
+      "week3": "Results post — player improvement story",
+      "week4": "Q&A or live session about development"
+    }
+  },
+  "successMetrics": {
+    "targetAffiliates": 20,
+    "targetConversionsPerAffiliate": 10,
+    "targetRevenuePerAffiliate": "$2,900/year",
+    "totalProgramRevenueTarget": "$58,000/year",
+    "commissionPayoutTarget": "$11,600/year"
+  }
+}

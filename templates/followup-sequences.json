@@ -1,0 +1,80 @@
+{
+  "sequences": [
+    {
+      "name": "Basketball Club Outreach",
+      "description": "5-touch sequence for SA basketball clubs",
+      "steps": [
+        {
+          "step": 1,
+          "delay": "0 days",
+          "channel": "Email",
+          "subject": "Quick question about {{clubName}}",
+          "template": "Hi there,\n\n{{personalizationAnchor}}\n\nI'm Michael from CourtLab, an Adelaide-based startup built by a local coach/dad who got tired of glitchy, expensive apps. We help clubs automate shooting stats and player film so coaches save time and players get verified data to \"Become Undeniable.\"\n\nGiven {{clubContext}}, thought CourtLab might be a fit. Worth a quick look?\n\ncourtlab.app\n\nCheers,\nMichael",
+          "goal": "Get reply or meeting"
+        },
+        {
+          "step": 2,
+          "delay": "4 days",
+          "channel": "Email",
+          "subject": "Re: Quick question about {{clubName}}",
+          "template": "Hi {{name}},\n\nQuick follow-up on my note from last week about CourtLab.\n\nI know you're busy, so here's the 30-second version:\n- Adelaide coach/dad built this (not a Silicon Valley startup)\n- Tracks shooting %, vertical, speed with verified data\n- Costs less than glitchy competitors (HomeCourt, etc.)\n- {{socialProof}}\n\nWorth 10 minutes to see if it's a fit for {{clubName}}?\n\nMichael",
+          "goal": "Re-engage non-responders"
+        },
+        {
+          "step": 3,
+          "delay": "7 days",
+          "channel": "Email",
+          "subject": "One thing {{clubName}} might find useful",
+          "template": "Hi {{name}},\n\nI wanted to share something specific that might resonate with {{clubName}}:\n\n{{valueProp}}\n\nReal example: {{caseStudy}}\n\nIf this isn't a priority right now, no worries — just wanted to put it on your radar.\n\nBest,\nMichael\n\nP.S. - If you know another club that might benefit, happy to connect. Word of mouth is how we grow.",
+          "goal": "Value-first touch before final attempt"
+        },
+        {
+          "step": 4,
+          "delay": "10 days",
+          "channel": "Email",
+          "subject": "Should I close the loop?",
+          "template": "Hi {{name}},\n\nI don't want to be the person who keeps emailing when the timing isn't right.\n\nQuick question: Should I close the loop on CourtLab for now, or is there a better time to reconnect?\n\nEither way, respect your decision.\n\nMichael\n\nP.S. - If you want to see what we're building: courtlab.app",
+          "goal": "Final attempt / permission to close"
+        },
+        {
+          "step": 5,
+          "delay": "30 days",
+          "channel": "Email",
+          "subject": "Quick update from CourtLab",
+          "template": "Hi {{name}},\n\nQuick update: CourtLab just shipped {{newFeature}} — thought you might want to know since we chatted about {{previousTopic}}.\n\nNo pitch, just wanted to share in case it's useful for {{clubName}} now or down the road.\n\nHope the season is going well.\n\nMichael",
+          "goal": "Stay on radar with value"
+        }
+      ]
+    },
+    {
+      "name": "Warm Lead (Forestville)",
+      "description": "Shorter sequence for warm connections",
+      "steps": [
+        {
+          "step": 1,
+          "delay": "0 days",
+          "channel": "Email",
+          "subject": "Mini 3agles program + CourtLab",
+          "template": "Hi {{name}},\n\nLove what you're doing with the Mini 3agles program — that 3v3 format is brilliant for building confidence.\n\nMy son Zane plays U12s at Forestville and we've seen firsthand how the club develops players.\n\nI'm Michael, founder of CourtLab — built it because I got tired of glitchy apps that didn't work for clubs like ours. We help automate shooting stats and player film.\n\nGiven Forestville's focus on development pathways, thought it might be worth a conversation. Happy to show you how it works.\n\ncourtlab.app\n\nCheers,\nMichael (Zane's dad)",
+          "goal": "Leverage warm connection"
+        },
+        {
+          "step": 2,
+          "delay": "3 days",
+          "channel": "In-person",
+          "subject": "N/A",
+          "template": "If no email reply: Catch {{name}} at next U12s practice or game. Mention CourtLab casually, offer to demo on phone.",
+          "goal": "Face-to-face connection"
+        },
+        {
+          "step": 3,
+          "delay": "5 days",
+          "channel": "Email",
+          "subject": "Quick demo of CourtLab",
+          "template": "Hi {{name}},\n\nWanted to follow up on my note about CourtLab.\n\nSince I'm at Forestville regularly with Zane, happy to show you a quick demo after practice one day — takes 2 minutes to see how it works.\n\nNo pressure, just figured it's easier to show than tell.\n\nMichael",
+          "goal": "Low-friction demo offer"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-06",
+  "criteria": {
+    "maxFollowers": 250000,
+    "focus": "Real coaching content",
+    "engagement": "Parents and players",
+    "location": "Australia preferred, global acceptable if relevant"
+  },
+  "prospects": [
+    {
+      "id": "CREATOR-001",
+      "name": "Nay Sakya",
+      "handle": "@breakdown_basketball",
+      "platform": "Instagram",
+      "followers": 157600,
+      "location": "Sydney, AUS",
+      "niche": "NBA/EuroLeague/NBL Trainer",
+      "contentType": "Skills training, player development",
+      "audience": "Aspiring players, parents seeking elite training",
+      "whyFit": "Australian-based trainer working with elite levels. His audience wants serious development — exactly CourtLab's target. Position as tool for his players to track progress between sessions.",
+      "reachoutAngle": "Offer CourtLab as player homework tool — track shots, vertical, drills between his training sessions. Affiliate commission on players who subscribe.",
+      "priority": "High",
+      "status": "Prospect",
+      "tags": ["australia", "elite-trainer", "nbl", "skills-dev"]
+    },
+    {
+      "id": "CREATOR-002",
+      "name": "Dodo Elyazar",
+      "handle": "@the.baller.movement",
+      "platform": "Instagram",
+      "followers": 120000,
+      "location": "Australia (touring)",
+      "niche": "Junior Athlete Development U12-U18",
+      "contentType": "Camps, clinics, serious junior development",
+      "audience": "Parents of competitive junior players (U12-U18)",
+      "whyFit": "Perfect alignment — targets U12-U18, exactly CourtLab's core. Running Australia tour Jan 2026. His audience is parents investing in their kids' basketball development.",
+      "reachoutAngle": "CourtLab as camp companion — every kid gets verified combine data at his camps. White-label partnership for his tour.",
+      "priority": "High",
+      "status": "Prospect",
+      "tags": ["australia", "junior-camps", "u12-u18", "tour"]
+    },
+    {
+      "id": "CREATOR-003",
+      "name": "Tyler Leclerc",
+      "handle": "@tjltraining",
+      "platform": "Instagram",
+      "followers": 47900,
+      "location": "Lowell/Woburn, MA (USA)",
+      "niche": "Skills trainer + Facility Owner + Coach Business Growth",
+      "contentType": "Drills, facility business, coach entrepreneurship",
+      "audience": "Youth coaches, parents, facility owners",
+      "whyFit": "Micro-influencer with business angle. He helps coaches grow their business — CourtLab fits that narrative (tool to professionalize coaching). Lower follower count = higher trust.",
+      "reachoutAngle": "CourtLab as business tool for coaches — adds revenue stream, professionalizes offering. Affiliate for his coach audience.",
+      "priority": "Medium",
+      "status": "Prospect",
+      "tags": ["micro", "coach-business", "facility-owner", "usa"]
+    },
+    {
+      "id": "CREATOR-004",
+      "name": "Camille LeNoir",
+      "handle": "@truepointguard",
+      "platform": "Instagram",
+      "followers": 50800,
+      "location": "USA",
+      "niche": "Player Development (Female Perspective)",
+      "contentType": "Skills, confidence building, overcoming self-doubt",
+      "audience": "Female players, parents of daughters, point guards",
+      "whyFit": "Unique angle — female trainer, focuses on confidence/mindset. Appeals to girls' basketball market (huge growth area). Different from typical 'dunk highlight' accounts.",
+      "reachoutAngle": "CourtLab for her 'DREAM' program students — track improvement, build confidence through data. Women's basketball focus aligns with Hoops & Her.",
+      "priority": "Medium",
+      "status": "Prospect",
+      "tags": ["micro", "female", "womens-basketball", "confidence"]
+    },
+    {
+      "id": "CREATOR-005",
+      "name": "Garry Linton",
+      "handle": "@takeflightcoach",
+      "platform": "Instagram",
+      "followers": 118700,
+      "location": "USA",
+      "niche": "Youth Sports Fixer + D1 Dad",
+      "contentType": "Parent education, college recruitment, fixing youth sports",
+      "audience": "Parents of serious youth players (especially boys)",
+      "whyFit": "Strong parent-focused message — 'Youth Sports is Broken.' He helps parents navigate the system. CourtLab fits perfectly (data = objective truth, no politics).",
+      "reachoutAngle": "CourtLab as the antidote to youth sports politics — 'Stop guessing, start tracking.' His D1 Dad credibility + our data = powerful combo.",
+      "priority": "High",
+      "status": "Prospect",
+      "tags": ["parent-focused", "youth-sports", "college-prep", "usa"]
+    },
+    {
+      "id": "CREATOR-006",
+      "name": "Coach Russ",
+      "handle": "@coachruss32",
+      "platform": "Instagram",
+      "followers": 37200,
+      "location": "USA",
+      "niche": "Coach Efficiency + Practice Planning",
+      "contentType": "Drills, practice structure, coach resources",
+      "audience": "Youth basketball coaches (rec/AAU)",
+      "whyFit": "Micro-influencer focused on helping coaches run better practices. CourtLab = tool they can use with their players. Very targeted audience.",
+      "reachoutAngle": "CourtLab for his coach community — player tracking without the admin headache. Affiliate for coaches who want to add value.",
+      "priority": "Medium",
+      "status": "Prospect",
+      "tags": ["micro", "coach-resources", "practice-planning", "usa"]
+    },
+    {
+      "id": "CREATOR-007",
+      "name": "Tony Miller",
+      "handle": "@coach.miller",
+      "platform": "Instagram",
+      "followers": 82400,
+      "location": "USA (BJU Bruins)",
+      "niche": "Small-Sided Games + CLA (Constraint-Led Approach)",
+      "contentType": "Basketball games, drills, coach education",
+      "audience": "Youth coaches, PE teachers, skill developers",
+      "whyFit": "Educational focus — coaches trust him for methodology. College coach credibility. CourtLab fits as 'next step' after his drills.",
+      "reachoutAngle": "CourtLab to track outcomes of his small-sided games — 'Are your players actually improving?' Data to validate his methods.",
+      "priority": "Medium",
+      "status": "Prospect",
+      "tags": ["coach-education", "small-sided-games", "college-coach", "usa"]
+    },
+    {
+      "id": "CREATOR-008",
+      "name": "Matt Hackenberg",
+      "handle": "@matt_hackenberg_basketball",
+      "platform": "Instagram",
+      "followers": 72700,
+      "location": "USA",
+      "niche": "Basketball Strategy Deep-Dives",
+      "contentType": "X's and O's, offensive concepts, strategy breakdowns",
+      "audience": "Coaches seeking tactical knowledge",
+      "whyFit": "Smart, analytical content — attracts thinking coaches. CourtLab's data approach aligns with his analytical style.",
+      "reachoutAngle": "CourtLab as the 'stats layer' to his strategy content — 'Know your plays AND your numbers.' Affiliate for his coach audience.",
+      "priority": "Low-Medium",
+      "status": "Prospect",
+      "tags": ["strategy", "Xs-and-Os", "analytical", "usa"]
+    }
+  ],
+  "summary": {
+    "totalFound": 8,
+    "byFollowerRange": {
+      "under50k": 4,
+      "50k-100k": 2,
+      "100k-250k": 2
+    },
+    "byLocation": {
+      "Australia": 2,
+      "USA": 6
+    },
+    "byAudience": {
+      "Parents": 2,
+      "Coaches": 4,
+      "Players": 2
+    }
+  },
+  "nextActions": [
+    {
+      "action": "Research more Australian micro-influencers",
+      "priority": "High",
+      "notes": "Current list is US-heavy. Need more AU-based creators under 50k."
+    },
+    {
+      "action": "Prioritize Dodo Elyazar outreach",
+      "priority": "High", 
+      "notes": "Running AU tour Jan 2026 — timing is perfect. U12-U18 focus = exact fit."
+    },
+    {
+      "action": "Check engagement rates on shortlisted creators",
+      "priority": "Medium",
+      "notes": "Use Modash or HypeAuditor to verify engagement quality."
+    },
+    {
+      "action": "Draft personalized outreach for top 3",
+      "priority": "Medium",
+      "notes": "Nay Sakya, Dodo Elyazar, Garry Linton — custom pitches for each."
+    }
+  ]
+}

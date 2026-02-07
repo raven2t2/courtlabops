@@ -1,0 +1,143 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-06",
+  "events": [
+    {
+      "id": "EVENT-001",
+      "name": "Adelaide Easter Classic 2026",
+      "dates": "April 3-6, 2026",
+      "location": "The ARC Campbelltown (Norwood Flames)",
+      "venue": "The ARC Campbelltown",
+      "host": "Norwood Basketball Club",
+      "type": "Tournament",
+      "ageGroups": ["Junior", "Youth", "Senior"],
+      "expectedAttendance": "High - Major annual event",
+      "courtLabOpportunity": "Set up booth/demo, run verified combines, capture leads from visiting teams",
+      "actionItems": [
+        "Contact Norwood about sponsorship/exhibition space",
+        "Plan CourtLab combine station",
+        "Print QR codes for quick downloads",
+        "Prepare parent handouts"
+      ],
+      "priority": "High",
+      "website": "https://www.easterclassic.com.au"
+    },
+    {
+      "id": "EVENT-002",
+      "name": "District Trials 2026/27 Season",
+      "dates": "July-August 2026 (TBC)",
+      "location": "Various (Wayville, Marion, The ARC, etc.)",
+      "venue": "Multiple venues",
+      "host": "Basketball SA + District Clubs",
+      "type": "Trials",
+      "ageGroups": ["U12", "U14", "U16", "U18"],
+      "expectedAttendance": "Very High - All district hopefuls",
+      "courtLabOpportunity": "Perfect for verified combines - every player wants to measure up",
+      "actionItems": [
+        "Partner with Basketball SA for combine integration",
+        "Offer free verified assessments",
+        "Build database of aspiring district players"
+      ],
+      "priority": "Critical",
+      "website": "Check Basketball SA website"
+    },
+    {
+      "id": "EVENT-003",
+      "name": "Under 20 SPP Trials",
+      "dates": "September 2026 (TBC)",
+      "location": "State Basketball Centre, Wayville",
+      "venue": "State Basketball Centre (Wayville Sports Centre)",
+      "host": "Basketball SA High Performance",
+      "type": "Trials",
+      "ageGroups": ["U20 Men", "U20 Women"],
+      "expectedAttendance": "Elite players only - smaller but high-value",
+      "courtLabOpportunity": "Position as elite performance tracking tool",
+      "actionItems": [
+        "Target coaches and high-performance staff",
+        "Professional combine setup"
+      ],
+      "priority": "Medium",
+      "website": "https://basketballsa.com.au/under-20-trials/"
+    },
+    {
+      "id": "EVENT-004",
+      "name": "South Adelaide School Holiday Clinics",
+      "dates": "April, July, October 2026 (TBC)",
+      "location": "Marion Stadium",
+      "venue": "Marion Stadium",
+      "host": "South Adelaide Basketball Club",
+      "type": "Camp/Clinic",
+      "ageGroups": ["Mini Panthers (4-5)", "U8-U18"],
+      "expectedAttendance": "High - Regular school holiday program",
+      "courtLabOpportunity": "Partner for combine days, build database",
+      "actionItems": [
+        "Contact South Adelaide about partnership",
+        "Offer free combine for camp attendees"
+      ],
+      "priority": "Medium",
+      "website": "https://www.southadelaidebasketball.com.au"
+    },
+    {
+      "id": "EVENT-005",
+      "name": "Australian Sports Camps - Basketball",
+      "dates": "Multiple school holidays 2026",
+      "location": "Marion Stadium",
+      "venue": "Marion Stadium",
+      "host": "Australian Sports Camps",
+      "type": "Camp",
+      "ageGroups": ["5-15"],
+      "expectedAttendance": "Medium - 3-day intensive",
+      "courtLabOpportunity": "Partner as official tracking partner",
+      "actionItems": [
+        "Contact ASC about partnership",
+        "Provide end-of-camp player reports"
+      ],
+      "priority": "Low-Medium",
+      "website": "https://australiansportscamps.com.au"
+    },
+    {
+      "id": "EVENT-006",
+      "name": "NBL1 Central Games",
+      "dates": "March-August 2026 (season)",
+      "location": "Various (Port Adelaide, Wayville, Marion, The ARC)",
+      "venue": "Multiple venues",
+      "host": "NBL1 Central Clubs",
+      "type": "League Games",
+      "ageGroups": ["Senior", "Youth League"],
+      "expectedAttendance": "Medium-High per game",
+      "courtLabOpportunity": "Brand exposure at elite games, demo with NBL1 teams",
+      "actionItems": [
+        "Target specific games for presence",
+        "Approach NBL1 clubs for team partnerships"
+      ],
+      "priority": "Low",
+      "website": "https://www.nbl1.com.au/central"
+    }
+  ],
+  "keyVenues": {
+    "wayville": {
+      "name": "State Basketball Centre (Wayville Sports Centre)",
+      "address": "Wayville Showgrounds",
+      "events": ["U20 Trials", "Forestville Eagles games", "District Finals"],
+      "courtLabStrategy": "Forestville is Zane's club - warmest entry point"
+    },
+    "theArc": {
+      "name": "The ARC Campbelltown",
+      "address": "Campbelltown, Adelaide",
+      "events": ["Easter Classic", "Norwood Flames games", "District games"],
+      "courtLabStrategy": "Biggest club venue - major tournaments"
+    },
+    "marion": {
+      "name": "Marion Stadium",
+      "address": "Norfolk Road, Marion",
+      "events": ["South Adelaide camps", "District games", "School holiday programs"],
+      "courtLabStrategy": "Major club + camps - partnership opportunity"
+    },
+    "stClair": {
+      "name": "St Clair Recreation Centre",
+      "address": "Woodville South",
+      "events": ["Woodville Warriors games"],
+      "courtLabStrategy": "Western suburbs expansion"
+    }
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-06",
+  "prospects": [
+    {
+      "id": "AFF-001",
+      "name": "Jono Hansford",
+      "platform": "Instagram",
+      "handle": "@jono.hansford",
+      "followers": 552000,
+      "location": "Melbourne, Victoria",
+      "niche": "Basketball Development Coach",
+      "website": "https://www.instagram.com/jono.hansford/",
+      "status": "Prospect",
+      "priority": "High",
+      "notes": "552K followers. Runs holiday camps and small group classes. Melbourne-based. Massive reach but may be expensive. Approach with white-label or partnership angle, not small affiliate commission.",
+      "reachoutStrategy": "Position as partnership/endorsed tool for his camps. Free Pro + revenue share on referrals from his students.",
+      "tags": ["macro-influencer", "coach", "melbourne", "camps"]
+    },
+    {
+      "id": "AFF-002",
+      "name": "NBA Basketball School Australia",
+      "platform": "Multi",
+      "handle": "N/A",
+      "followers": null,
+      "location": "Australia-wide",
+      "niche": "Youth Basketball Programs",
+      "website": "https://nbabasketballschool.com.au/",
+      "status": "Prospect",
+      "priority": "High",
+      "notes": "Official NBA brand in Australia. Runs youth programs, camps, clinics. B2B opportunity — CourtLab as their official stats partner?",
+      "reachoutStrategy": "B2B proposal: CourtLab as official player development tracking partner for NBA Basketball School Australia. White-label or co-branded solution.",
+      "tags": ["nba", "organization", "b2b", "youth-programs"]
+    },
+    {
+      "id": "AFF-003",
+      "name": "David Pereyra",
+      "platform": "NBA Basketball School",
+      "handle": "N/A",
+      "followers": null,
+      "location": "Australia",
+      "niche": "Youth Basketball Coach",
+      "website": "https://nbabasketballschool.com.au/",
+      "status": "Prospect",
+      "priority": "Medium",
+      "notes": "Lead coach at NBA Basketball School Australia. University degree in Physical Education, 10+ years youth program experience. Could be internal champion.",
+      "reachoutStrategy": "LinkedIn approach. Position CourtLab as tool for his coaches to track player development. Ask for intro to decision makers.",
+      "tags": ["coach", "nba-school", "decision-maker"]
+    }
+  ],
+  "researchQueue": [
+    "Search Instagram: #basketballmom #australia",
+    "Search Instagram: #youthbasketball #melbourne #sydney",
+    "Search TikTok: basketball drills kids australia",
+    "Search Instagram: basketball skills trainer adelaide",
+    "Search YouTube: basketball coaching australia",
+    "LinkedIn: youth basketball coaches australia",
+    "Search: basketball parent bloggers australia",
+    "Search: aussie hoops influencers"
+  ],
+  "toolsForDiscovery": [
+    {
+      "name": "Modash",
+      "url": "https://modash.io",
+      "use": "Instagram/TikTok influencer discovery by niche and location"
+    },
+    {
+      "name": "HypeAuditor",
+      "url": "https://hypeauditor.com",
+      "use": "Influencer analytics and fraud detection"
+    },
+    {
+      "name": "SparkToro",
+      "url": "https://sparktoro.com",
+      "use": "Find where basketball parents hang out online"
+    },
+    {
+      "name": "Upfluence",
+      "url": "https://upfluence.com",
+      "use": "Full affiliate platform (we're building internal version)"
+    }
+  ]
+}

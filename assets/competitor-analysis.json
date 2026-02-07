@@ -1,0 +1,284 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-06",
+  "competitors": [
+    {
+      "name": "HomeCourt",
+      "company": "NEX Team Inc.",
+      "founded": "2017",
+      "funding": "Well-funded (Series A, NBA partnership)",
+      "whatTheyClaim": {
+        "primary": "AI-powered basketball training with AR",
+        "features": [
+          "Shot tracking with camera",
+          "Dribble speed analysis",
+          "Vertical jump measurement",
+          "Interactive drills with NBA/WNBA pros",
+          "NBA Global Scout (discovery program)",
+          "Team virtual competitions",
+          "Battle mode (head-to-head challenges)"
+        ],
+        "targetAudience": "Youth players, parents, coaches",
+        "keyDifferentiator": "Official NBA partner, gamified AR experience"
+      },
+      "whatTheyCharge": {
+        "freeTier": "100+ drills, unlimited shot tracking",
+        "monthly": "$7.99 USD",
+        "yearly": "$69.99 USD",
+        "teamPlans": "Discounted bulk pricing (10-50 players)",
+        "familySharing": "Up to 4 profiles"
+      },
+      "whatTheyDontDoWell": {
+        "glitches": [
+          "Camera tracking inconsistent in poor lighting",
+          "AR features drain battery quickly",
+          "Requires specific phone positioning"
+        ],
+        "userComplaints": [
+          "Overwhelming focus on gamification vs actual skill development",
+          "Limited coach customization options",
+          "Subscription required for meaningful features",
+          "Works best indoors with perfect lighting",
+          "Shot detection misses frequently on outdoor courts"
+        ],
+        "marketPositioning": "Too focused on 'fun' vs serious development",
+        "targetAudienceMismatch": "Kids love it, parents question ROI, coaches find it distracting"
+      },
+      "courtLabAdvantage": [
+        "No gimmicks — straight data and video",
+        "Verified combines (QR scan) — objective truth, not AI guesswork",
+        "Built for clubs/teams, not just individuals",
+        "Lower price point for serious features",
+        "Hyper-local leaderboards (gym-specific)",
+        "Scout-ready PDFs — real recruitment tool"
+      ],
+      "threatLevel": "High",
+      "notes": "Biggest competitor. NBA brand is powerful. But bloated with features that don't serve serious development. CourtLab's 'no BS data' angle is the counter."
+    },
+    {
+      "name": "Pure Sweat Basketball",
+      "company": "Pure Sweat Basketball Inc.",
+      "founded": "2013",
+      "funding": "Bootstrapped/coach-owned",
+      "whatTheyClaim": {
+        "primary": "Educational videos and workouts from elite coaches",
+        "features": [
+          "Video library of drills and instruction",
+          "Custom workout builder",
+          "Activity tracking (time spent per skill)",
+          "Workouts for individual or partner/coach",
+          "Strategic workout planning"
+        ],
+        "targetAudience": "Players, coaches, trainers seeking education",
+        "keyDifferentiator": "Content from respected coach Drew Hanlen"
+      },
+      "whatTheyCharge": {
+        "model": "Appears to be free (new app 2023)",
+        "legacyApp": "$9.99-19.99 legacy pricing",
+        "newApp": "Free with possible upsells"
+      },
+      "whatTheyDontDoWell": {
+        "glitches": [
+          "New app (2023) — still working out bugs",
+          "Limited user reviews (only 15 ratings)",
+          "UI/UX issues reported in updates"
+        ],
+        "userComplaints": [
+          "'Paying for skills training other than personal trainer is waste — YouTube has same stuff free'",
+          "No verified data or stats tracking",
+          "Just videos — no performance measurement",
+          "No community or competitive features",
+          "No player development pathway"
+        ],
+        "marketPositioning": "Content library, not a tracking tool",
+        "targetAudienceMismatch": "Coaches want tools, not just content"
+      },
+      "courtLabAdvantage": [
+        "We track actual performance data, not just time spent",
+        "Verified combines vs self-reported activity",
+        "Video engine with clipping (not just consumption)",
+        "Leaderboards and competition",
+        "Coach roster management tools"
+      ],
+      "threatLevel": "Low",
+      "notes": "Different category — they're content, we're data/infrastructure. Not a direct competitor but addresses same market. Their weakness (no tracking) is our strength."
+    },
+    {
+      "name": "Ballogy",
+      "company": "Ballogy Inc.",
+      "founded": "2015",
+      "funding": "Seed/Series A",
+      "whatTheyClaim": {
+        "primary": "AI Skills Training + College Recruitment",
+        "features": [
+          "AI shot detection and analysis",
+          "100+ drills for all levels",
+          "Custom workout plans",
+          "Ballogy AI coaching assistant",
+          "Global community with leaderboards",
+          "Athletic resume for 2,000+ colleges",
+          "Ballogy Skills Assessment (BSA)",
+          "Coach tools for team management",
+          "NFHS-backed curricula"
+        ],
+        "targetAudience": "Players, coaches, teams",
+        "keyDifferentiator": "College recruitment focus, NFHS partnership"
+      },
+      "whatTheyCharge": {
+        "freeTier": "Limited content",
+        "workoutLibrary": "$4.99",
+        "bsaTest": "$1.99 per submission",
+        "groups": "$9.99-69.99 (20-75 members)",
+        "licenses": "$299-999 (bulk 20-100 licenses)"
+      },
+      "whatTheyDontDoWell": {
+        "glitches": [
+          "App is 'not user friendly at all'",
+          "Clunky interface",
+          "Won't filter to only my groups/followers",
+          "Confusing navigation",
+          "Frequent app updates fixing bugs"
+        ],
+        "userComplaints": [
+          "AI tracking inaccurate",
+          "Too complicated for casual users",
+          "Expensive for full features (groups cost $$$)",
+          "Pay-per-test model frustrates parents",
+          "Requires iOS 18 (latest only)",
+          "Large app size (786MB)",
+          "No clear development pathway"
+        ],
+        "marketPositioning": "Complex, expensive, glitchy",
+        "targetAudienceMismatch": "Promises college recruitment, delivers frustration"
+      },
+      "courtLabAdvantage": [
+        "Simple — tap for makes, hold for misses",
+        "No AI guesswork — verified human combines",
+        "Hyper-local leaderboards (not just global)",
+        "Flat pricing, not pay-per-test",
+        "Video playbooks for coaches",
+        "Built by a coach who understands clubs",
+        "Lower price for Pro tier"
+      ],
+      "threatLevel": "Medium",
+      "notes": "Closest feature competitor. But glitchy, expensive, and complicated. CourtLab's 'stability first' approach is the contrast."
+    },
+    {
+      "name": "DribbleUp",
+      "company": "DribbleUp Inc.",
+      "founded": "2018",
+      "funding": "Venture-backed",
+      "whatTheyClaim": {
+        "primary": "Smart basketball + app for home training",
+        "features": [
+          "Smart basketball with embedded tech",
+          "Computer vision tracking via phone camera",
+          "Hundreds of virtual drills",
+          "Live coaching on screen",
+          "Gamified targets and leaderboards",
+          "Family membership (up to 6 profiles)"
+        ],
+        "targetAudience": "Parents of young kids (beginners)",
+        "keyDifferentiator": "Physical smart ball + app combo"
+      },
+      "whatTheyCharge": {
+        "smartBall": "$80 one-time",
+        "membership": "$16.99/month",
+        "yearly": "$149+ (estimated)",
+        "liveSessions": "Extra cost"
+      },
+      "whatTheyDontDoWell": {
+        "glitches": [
+          "Ball tracking accuracy issues",
+          "'Took a few tries to get accuracy'",
+          "Requires specific lighting/setup",
+          "Live sessions expensive"
+        ],
+        "userComplaints": [
+          "Hardware required (smart ball)",
+          "Monthly subscription on top of hardware cost",
+          "Not suitable for serious players — too basic",
+          "Limited skill progression",
+          "Focus on dribbling only (not shooting/game skills)",
+          "Kids outgrow it quickly"
+        ],
+        "marketPositioning": "Toy for beginners, not tool for serious athletes",
+        "targetAudienceMismatch": "Parents buy for young kids, but serious players need more"
+      },
+      "courtLabAdvantage": [
+        "No hardware required — works with any ball",
+        "Tracks actual game skills (shooting, combines)",
+        "Grows with player (U12 to college)",
+        "Lower total cost (no $80 ball)",
+        "Verified data for recruitment",
+        "Coach/club tools included"
+      ],
+      "threatLevel": "Low-Medium",
+      "notes": "Different segment — they're beginner/hobby, we're serious development. But parents compare them. Our angle: 'When your kid is ready to get serious, switch to CourtLab.'"
+    },
+    {
+      "name": "BasketballConnect",
+      "company": "World Sport Action Pty Ltd",
+      "founded": "2020",
+      "funding": "Bootstrapped/Australian",
+      "whatTheyClaim": {
+        "primary": "South Australian basketball administration platform",
+        "features": [
+          "Registration and payments",
+          "Live scoring and game management",
+          "Team chat and communication",
+          "Draws, ladders, scheduling",
+          "Player availability tracking",
+          "Match statistics",
+          "Real-time notifications"
+        ],
+        "targetAudience": "SA basketball clubs, administrators, parents",
+        "keyDifferentiator": "Official SA basketball platform"
+      },
+      "whatTheyCharge": {
+        "model": "Free (club/association pays)",
+        "transactionFees": "Likely built into registration"
+      },
+      "whatTheyDontDoWell": {
+        "glitches": [
+          "App rating: 3.1/5 (598 ratings) — poor",
+          "Forced transition from Gameday confused users",
+          "Teampay payment issues"
+        ],
+        "userComplaints": [
+          "'Clunky' and unintuitive",
+          "Focus on administration, not player development",
+          "No skill tracking or drills",
+          "No video features",
+          "Parents forced to use it, don't like it",
+          "Limited to SA (not national)"
+        ],
+        "marketPositioning": "Admin tool, not development tool",
+        "targetAudienceMismatch": "Clubs need it for compliance, but doesn't help coaches train better"
+      },
+      "courtLabAdvantage": [
+        "We focus on player development, not just administration",
+        "Video tools and verified combines",
+        "Works nationally (not SA-only)",
+        "Coach playbooks and training tools",
+        "Hyper-local leaderboards (not just SA)",
+        "Scout-ready recruitment features"
+      ],
+      "threatLevel": "Low",
+      "notes": "Not a direct competitor — they're admin/compliance, we're development/training. But every SA club already has BasketballConnect. Our pitch: 'Use BasketballConnect for registration, CourtLab for development.'"
+    }
+  ],
+  "summary": {
+    "biggestThreats": ["HomeCourt", "Ballogy"],
+    "differentiation": "Stability, verified data, coach-first design, no gimmicks",
+    "pricingAdvantage": "Lower than HomeCourt/Ballogy for serious features",
+    "marketGap": "Serious development tool without AI gimmicks or hardware requirements"
+  },
+  "strategyNotes": {
+    "vsHomeCourt": "Counter their 'fun/games' with 'serious data'. CourtLab is for athletes, not gamers.",
+    "vsBallogy": "Counter their 'glitchy AI' with 'verified human combines'. Stability beats complexity.",
+    "vsDribbleUp": "Counter 'toy for beginners' with 'tool for serious players'. Natural progression.",
+    "vsPureSweat": "Counter 'content library' with 'data tracking'. We're infrastructure, not entertainment.",
+    "vsBasketballConnect": "Partner, don't compete. They're admin, we're development."
+  }
+}

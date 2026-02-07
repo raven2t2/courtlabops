@@ -1,0 +1,42 @@
+{
+  "version": "1.0",
+  "columns": [
+    {
+      "id": "drafted",
+      "name": "📋 Drafted",
+      "color": "#e2e8f0",
+      "leads": ["SA-001", "SA-002", "SA-003", "SA-004", "SA-005", "SA-006", "SA-007", "SA-008", "SA-009", "SA-010"]
+    },
+    {
+      "id": "sent",
+      "name": "📤 Sent",
+      "color": "#bfdbfe",
+      "leads": []
+    },
+    {
+      "id": "replied",
+      "name": "💬 Replied",
+      "color": "#fef08a",
+      "leads": []
+    },
+    {
+      "id": "meeting",
+      "name": "📅 Meeting Scheduled",
+      "color": "#c4b5fd",
+      "leads": []
+    },
+    {
+      "id": "closed-won",
+      "name": "✅ Closed - Won",
+      "color": "#86efac",
+      "leads": []
+    },
+    {
+      "id": "closed-lost",
+      "name": "❌ Closed - Lost",
+      "color": "#fca5a5",
+      "leads": []
+    }
+  ],
+  "lastUpdated": "2026-02-06"
+}

@@ -1,0 +1,111 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-06",
+  "criteria": {
+    "followerRange": "1,000 - 10,000",
+    "location": "Australia (Adelaide/Melbourne/Sydney)",
+    "vibe": "Real coaching content, not sponsored by major US brands",
+    "contentType": "Skills, drills, player development, parent engagement"
+  },
+  "prospects": [
+    {
+      "id": "COACH-001",
+      "name": "Joey Wright",
+      "handle": "@thewrightcoach12",
+      "platform": "Instagram",
+      "followers": 5071,
+      "location": "Adelaide",
+      "role": "Director of Coaching - Transition Sports Adelaide, Owner - Shoothq",
+      "vibe": "Professional coach with own training business. Posts skills content, coaching insights.",
+      "websiteInBio": "Yes (Shoothq)",
+      "sponsoredByMajorBrand": "No",
+      "whyGoodFit": "Local Adelaide coach with established training business. 5K followers = engaged micro-audience. Already runs coaching business (Shoothq) — CourtLab could be tool for his clients.",
+      "reachoutAngle": "CourtLab as client management tool — track his trainees' progress, provide verified reports to parents.",
+      "priority": "High",
+      "status": "Prospect",
+      "tags": ["adelaide", "micro", "business-owner", "skills-coach"]
+    },
+    {
+      "id": "COACH-002",
+      "name": "Jarrod Clarke",
+      "handle": "@jarrod.clarke.5",
+      "platform": "Instagram",
+      "followers": 194,
+      "location": "Adelaide",
+      "role": "Head Coach, SA Metro U18 Men, South Adelaide Basketball Club",
+      "vibe": "Elite-level coach, not focused on Instagram growth. Posts personal/team content.",
+      "websiteInBio": "No",
+      "sponsoredByMajorBrand": "No",
+      "whyGoodFit": "Low followers but high credibility — SA Metro coach. Different angle: not influencer partnership, but B2B club partnership through him.",
+      "reachoutAngle": "Via South Adelaide Basketball Club connection. Position as club-wide tool.",
+      "priority": "Medium",
+      "status": "Prospect",
+      "tags": ["adelaide", "elite-coach", "metro", "b2b-angle"]
+    },
+    {
+      "id": "COACH-003",
+      "name": "Ian Morris",
+      "handle": "@morrisperformancebasketball",
+      "platform": "Instagram",
+      "followers": 1624,
+      "location": "Sydney",
+      "role": "Skills & Performance Coach, 1 on 1 Training & Player Development",
+      "vibe": "Sydney-based skills trainer. Active poster (1,182 posts). Focus on individual development.",
+      "websiteInBio": "Check profile",
+      "sponsoredByMajorBrand": "No (appears independent)",
+      "whyGoodFit": "Independent skills coach in Sydney. CourtLab could differentiate his training offering. 1.6K followers = perfect micro-influencer size.",
+      "reachoutAngle": "CourtLab as competitive advantage — 'track every session, prove improvement to parents.'",
+      "priority": "High",
+      "status": "Prospect",
+      "tags": ["sydney", "micro", "skills-trainer", "independent"]
+    },
+    {
+      "id": "COACH-004",
+      "name": "Nay Sakya",
+      "handle": "@breakdown_basketball",
+      "platform": "Instagram",
+      "followers": 157600,
+      "location": "Sydney",
+      "role": "NBA/EuroLeague/NBL Trainer",
+      "vibe": "Elite trainer, large following. High production value content.",
+      "websiteInBio": "Yes",
+      "sponsoredByMajorBrand": "Possibly (check for Under Armour, Nike tags)",
+      "whyGoodFit": "Australian-based elite trainer. Massive reach. Even if partially sponsored, CourtLab could be 'tool he uses' angle.",
+      "reachoutAngle": "CourtLab for his academy students — track development between his sessions.",
+      "priority": "High (Macro but worth it)",
+      "status": "Prospect",
+      "tags": ["sydney", "macro", "elite-trainer", "nbl"]
+    },
+    {
+      "id": "COACH-005",
+      "name": "Dodo Elyazar",
+      "handle": "@the.baller.movement",
+      "platform": "Instagram",
+      "followers": 120000,
+      "location": "Australia (touring)",
+      "role": "Junior Athlete Development U12-U18",
+      "vibe": "Camps and clinics across Australia. Running tour Jan 2026.",
+      "websiteInBio": "Yes (tour registration)",
+      "sponsoredByMajorBrand": "No (appears independent)",
+      "whyGoodFit": "Perfect alignment — U12-U18 focus, camps, Australian tour. Massive opportunity for partnership.",
+      "reachoutAngle": "CourtLab as camp combine partner — every kid gets verified assessment.",
+      "priority": "Critical",
+      "status": "Prospect",
+      "tags": ["australia-wide", "camps", "u12-u18", "tour"]
+    }
+  ],
+  "researchMore": [
+    "Search: 'basketball coach Melbourne Instagram'",
+    "Search: 'basketball skills trainer Brisbane TikTok'", 
+    "Search: 'youth basketball coach Perth Instagram'",
+    "Search: '#basketballcoach #australia Instagram'",
+    "Search: 'basketball mom influencer Australia'",
+    "Check: Local PCYC basketball coordinators",
+    "Check: School basketball coaches (private schools)",
+    "Check: Aussie Hoops program coordinators"
+  ],
+  "outreachTemplate": {
+    "subject": "Quick question about your coaching setup",
+    "body": "Hi {{name}},\n\nI've been following your content on {{platform}} — your approach to {{specificTopic}} really resonates with what I'm building.\n\nI'm Michael, founder of CourtLab. I'm an Adelaide-based basketball dad/coach who built a stat tracking and video tool because I got tired of glitchy apps that didn't work for local clubs.\n\nI'd love to get your take on it. CourtLab helps:\n- Track shooting %, vertical, speed with verified data (not AI guesswork)\n- Create video playbooks for coaches\n- Build hyper-local leaderboards\n\nIf it's not a fit for your setup, no worries — just thought someone with your focus on {{audience}} would have valuable perspective.\n\nHappy to share a free Pro account either way.\n\nMichael\ncourtlab.app"
+  }
+}
