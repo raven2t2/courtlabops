@@ -4,6 +4,10 @@
 
 set -e
 
+# Twitter/X Authentication
+export AUTH_TOKEN="618eca89893e473ae3f6b52e16af9d2fcdc1ed47"
+export CT0="8558cf6ebc849c79ec6397cee5f1f46f9d95c369b3694e60426911c04d88a0ca6d54b9d6aaad7ef834ba9b5f58a265564be77cdd9eef26c3a0d8788760169cbfa254abfb7252b6797de9a0ce4d4596ce"
+
 WORKSPACE="/data/.openclaw/workspace/courtlab-crm"
 DATE=$(date +%Y-%m-%d)
 OUTPUT_DIR="$WORKSPACE/social-listening/$DATE"
@@ -13,7 +17,7 @@ echo "[$DATE] Starting CourtLab social listening..."
 
 # Check if bird is authenticated
 if ! bird whoami > /dev/null 2>&1; then
-    echo "ERROR: Bird not authenticated. Run: bird check"
+    echo "ERROR: Bird not authenticated. Check AUTH_TOKEN and CT0."
     exit 1
 fi
 

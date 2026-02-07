@@ -9,6 +9,7 @@ import {
   Calendar, 
   Target, 
   Trophy,
+  FileText,
   Menu,
   X
 } from "lucide-react";
@@ -20,6 +21,7 @@ const navItems = [
   { href: "/events", label: "Events", icon: Calendar },
   { href: "/competitors", label: "Competitors", icon: Target },
   { href: "/coaches", label: "Coaches", icon: Trophy },
+  { href: "/content", label: "Content", icon: FileText },
 ];
 
 export function Navigation() {
