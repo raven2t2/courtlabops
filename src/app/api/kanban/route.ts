@@ -1,124 +1,146 @@
 import { NextRequest, NextResponse } from "next/server"
-import { readFile, writeFile } from "fs/promises"
+import { readFile } from "fs/promises"
 import path from "path"
 
-const DATA_FILE = path.join(process.cwd(), "data", "kanban.json")
+// Point to authoritative kanban source in courtlab-crm
+const DATA_FILE = path.join(process.cwd(), "..", "courtlab-crm", "kanban", "board.json")
 
-type BoardCard = {
+type CRMTask = {
+  title: string
+  description?: string
+  priority: string
+  platform?: string
+  account?: string
+  type?: string
+  lead_id?: string
+  links?: {
+    internal: Array<{ label: string; url: string }>
+    external: Array<{ label: string; url: string }>
+  }
+}
+
+type CRMColumn = {
   id: string
+  name: string
+  color: string
+  leads: string[]
+  tasks: string[]
+}
+
+type CRMKanban = {
+  version: string
+  columns: CRMColumn[]
+  tasks: Record<string, CRMTask>
+  lastUpdated: string
+}
+
+type FrontendCard = {
+  id: string
+  title: string
+  description?: string
+  org: string
   owner: string
+  due: string
+  priority: string
+  tags?: string[]
+  links?: {
+    internal: Array<{ label: string; url: string }>
+    external: Array<{ label: string; url: string }>
+  }
 }
 
-type BoardColumn = {
+type FrontendColumn = {
   id: string
-  cards: BoardCard[]
+  title: string
+  hint: string
+  tone: string
+  cards: FrontendCard[]
 }
 
-type KanbanData = {
+type FrontendKanban = {
   version: string
   lastUpdated: string
   updatedBy: string
-  columns: BoardColumn[]
-  owners?: Record<
-    string,
-    {
-      role?: string
-      tasks: {
-        total: number
-        backlog: number
-        inProgress: number
-        waiting: number
-        done: number
-      }
+  columns: FrontendColumn[]
+  owners: Record<string, {
+    role: string
+    tasks: {
+      total: number
+      backlog: number
+      inProgress: number
+      waiting: number
+      done: number
     }
-  >
+  }>
 }
 
-const COLUMN_TO_BUCKET: Record<string, "backlog" | "inProgress" | "waiting" | "done"> = {
-  backlog: "backlog",
-  "in-progress": "inProgress",
-  waiting: "waiting",
-  "done-recent": "done",
+const COLUMN_MAPPING: Record<string, { title: string; hint: string; tone: string }> = {
+  drafted: { title: "📋 Drafted", hint: "Ready to execute", tone: "blue" },
+  sent: { title: "📤 Sent", hint: "Awaiting response", tone: "orange" },
+  replied: { title: "💬 Replied", hint: "Engagement active", tone: "violet" },
+  meeting: { title: "📅 Meeting Scheduled", hint: "Next step planned", tone: "green" },
+  "closed-won": { title: "✅ Closed - Won", hint: "Successful outcome", tone: "green" },
+  "closed-lost": { title: "❌ Closed - Lost", hint: "Archived", tone: "neutral" }
 }
 
-async function loadKanbanData(): Promise<KanbanData> {
-  const data = await readFile(DATA_FILE, "utf-8")
-  return JSON.parse(data) as KanbanData
-}
-
-function buildOwnerStats(columns: BoardColumn[], existingOwners: KanbanData["owners"] = {}) {
-  const owners: NonNullable<KanbanData["owners"]> = {}
-
-  for (const [owner, value] of Object.entries(existingOwners)) {
-    owners[owner] = {
-      role: value.role,
-      tasks: {
-        total: 0,
-        backlog: 0,
-        inProgress: 0,
-        waiting: 0,
-        done: 0,
-      },
-    }
+function transformTask(taskId: string, task: CRMTask): FrontendCard {
+  return {
+    id: taskId,
+    title: task.title,
+    description: task.description,
+    org: task.platform === "twitter" ? "Social" : task.type === "affiliate_outreach" ? "Outreach" : "General",
+    owner: "Michael", // Default for now
+    due: "Pending", // No due dates in CRM kanban yet
+    priority: task.priority,
+    tags: task.account ? [task.account.replace("@", "")] : task.lead_id ? [task.lead_id] : [],
+    links: task.links
   }
-
-  for (const column of columns) {
-    const bucket = COLUMN_TO_BUCKET[column.id]
-    if (!bucket) continue
-
-    for (const card of column.cards) {
-      const ownerName = card.owner || "Unassigned"
-      if (!owners[ownerName]) {
-        owners[ownerName] = {
-          role: ownerName === "Esther" ? "Project Manager / CMO" : ownerName === "Michael" ? "Founder" : "Team Member",
-          tasks: {
-            total: 0,
-            backlog: 0,
-            inProgress: 0,
-            waiting: 0,
-            done: 0,
-          },
-        }
-      }
-
-      owners[ownerName].tasks.total += 1
-      owners[ownerName].tasks[bucket] += 1
-    }
-  }
-
-  return owners
 }
 
 export async function GET() {
   try {
-    const kanban = await loadKanbanData()
-    return NextResponse.json(kanban)
-  } catch (error) {
-    return NextResponse.json({ error: error instanceof Error ? error.message : "Failed to load kanban" }, { status: 500 })
-  }
-}
+    const data = await readFile(DATA_FILE, "utf-8")
+    const crmKanban = JSON.parse(data) as CRMKanban
 
-export async function PUT(request: NextRequest) {
-  try {
-    const body = (await request.json()) as { columns?: BoardColumn[]; updatedBy?: string }
-    if (!Array.isArray(body.columns)) {
-      return NextResponse.json({ error: "Invalid payload: columns are required" }, { status: 400 })
+    const frontendColumns: FrontendColumn[] = crmKanban.columns.map(col => {
+      const mapping = COLUMN_MAPPING[col.id] || { title: col.name, hint: "", tone: "blue" }
+      const cards: FrontendCard[] = col.tasks.map(taskId => {
+        const task = crmKanban.tasks[taskId]
+        return task ? transformTask(taskId, task) : null
+      }).filter((c): c is FrontendCard => c !== null)
+
+      return {
+        id: col.id,
+        title: mapping.title,
+        hint: mapping.hint,
+        tone: mapping.tone,
+        cards
+      }
+    })
+
+    const frontendKanban: FrontendKanban = {
+      version: crmKanban.version,
+      lastUpdated: crmKanban.lastUpdated || new Date().toISOString(),
+      updatedBy: "CourtLab CRM",
+      columns: frontendColumns,
+      owners: {
+        Michael: {
+          role: "Founder",
+          tasks: { total: 0, backlog: 0, inProgress: 0, waiting: 0, done: 0 }
+        },
+        Esther: {
+          role: "CMO / PM",
+          tasks: { total: 0, backlog: 0, inProgress: 0, waiting: 0, done: 0 }
+        }
+      }
     }
 
-    const current = await loadKanbanData()
-    const updatedBy = typeof body.updatedBy === "string" && body.updatedBy.trim().length > 0 ? body.updatedBy.trim() : "Kanban Board"
-
-    const next: KanbanData = {
-      ...current,
-      columns: body.columns,
-      lastUpdated: new Date().toISOString(),
-      updatedBy,
-      owners: buildOwnerStats(body.columns, current.owners),
-    }
-
-    await writeFile(DATA_FILE, JSON.stringify(next, null, 2))
-    return NextResponse.json({ ok: true, kanban: next })
+    return NextResponse.json(frontendKanban)
   } catch (error) {
-    return NextResponse.json({ error: error instanceof Error ? error.message : "Failed to update kanban" }, { status: 500 })
+    console.error("Kanban load error:", error)
+    return NextResponse.json({ 
+      error: error instanceof Error ? error.message : "Failed to load kanban",
+      path: DATA_FILE 
+    }, { status: 500 })
   }
 }
