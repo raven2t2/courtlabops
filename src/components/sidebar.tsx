@@ -22,7 +22,9 @@ const NAV_ITEMS = [
 export function Sidebar() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
+  useEffect(() => { setMounted(true) }, [])
   useEffect(() => { setMobileOpen(false) }, [pathname])
 
   useEffect(() => {
@@ -42,7 +44,7 @@ export function Sidebar() {
           <Image src="/courtlab-logo.jpg" alt="CourtLab" width={36} height={36} className="w-full h-full object-cover" />
         </div>
         <div>
-          <div className="text-sm font-bold tracking-tight text-text-primary">CourtLab</div>
+          <div className="text-sm font-bold tracking-tight text-text-primary font-[--font-display]">CourtLab</div>
           <div className="text-[11px] font-medium text-text-muted">Operations Hub</div>
         </div>
       </div>
@@ -54,7 +56,7 @@ export function Sidebar() {
         <div className="px-3 mb-2">
           <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted">Menu</span>
         </div>
-        {NAV_ITEMS.map((item) => {
+        {NAV_ITEMS.map((item, i) => {
           const Icon = item.icon
           const active = pathname === item.href
           return (
@@ -63,10 +65,13 @@ export function Sidebar() {
               href={item.href}
               onClick={() => setMobileOpen(false)}
               className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] font-medium transition-all ${
+                mounted ? "slide-in" : ""
+              } ${
                 active
                   ? "bg-hyper-blue-muted text-hyper-blue"
                   : "text-text-tertiary hover:text-text-primary hover:bg-bg-tertiary"
               }`}
+              style={{ animationDelay: `${i * 40}ms` }}
             >
               <Icon size={16} strokeWidth={active ? 2.2 : 1.8} />
               <span className="flex-1 text-left">{item.label}</span>
@@ -99,7 +104,7 @@ export function Sidebar() {
             <div className="text-xs font-semibold truncate text-text-primary">Michael Ragland</div>
             <div className="text-[11px] text-text-muted">Founder</div>
           </div>
-          <MoreVertical size={14} className="text-text-muted" />
+          <MoreVertical size={14} className="text-text-muted hover:text-text-tertiary cursor-pointer transition-colors" />
         </div>
       </div>
     </>

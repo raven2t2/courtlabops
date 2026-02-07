@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 /* ─── Tailwind v4 CSS-First Theme (Oxide Engine) ────────────────────── */
 @theme inline {
   /* Fonts */
   --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Outfit', 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   /* ── CourtLab Elite Palette (OKLCH / P3-gamut) ──────────────────── */
@@ -137,6 +138,14 @@ body {
   from { opacity: 0; transform: translateX(-6px); }
   to { opacity: 1; transform: translateX(0); }
 }
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.632 0.26 30 / 0.3); }
+  50% { box-shadow: 0 0 12px 4px oklch(0.632 0.26 30 / 0.12); }
+}
 
 .fade-up {
   animation: var(--animate-fade-up);
@@ -145,6 +154,38 @@ body {
 .slide-in {
   animation: var(--animate-slide-in);
   opacity: 0;
+}
+
+/* ─── Premium Interaction Effects ───────────────────────────────────── */
+.hover-lift {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.25s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -6px oklch(0 0 0 / 0.35),
+              0 0 0 1px oklch(1 0 0 / 0.04);
+}
+
+.hover-glow {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hover-glow:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px -4px oklch(0.546 0.245 264 / 0.25);
+}
+
+.pulse-glow {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+/* Glass morphism utility */
+.glass {
+  background: oklch(0.17 0.005 285 / 0.85);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
 }
 
 /* ─── Container Query Contexts ───────────────────────────────────────── */
