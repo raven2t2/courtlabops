@@ -4,11 +4,13 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 import Image from "next/image"
-import { 
-  LayoutDashboard, 
-  Users, 
-  Target, 
+import {
+  LayoutDashboard,
+  Users,
+  Target,
   Trophy,
+  Calendar,
+  Crosshair,
   Menu,
   X,
   Bell
@@ -19,6 +21,8 @@ const navItems = [
   { name: "Leads", href: "/leads", icon: Users },
   { name: "Campaigns", href: "/campaigns", icon: Target },
   { name: "Coaches", href: "/coaches", icon: Trophy },
+  { name: "Events", href: "/events", icon: Calendar },
+  { name: "Competitors", href: "/competitors", icon: Crosshair },
 ]
 
 export function TopNav() {
@@ -31,12 +35,12 @@ export function TopNav() {
         <div className="flex h-16 items-center justify-between gap-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 shrink-0">
-            <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg shadow-[#F97316]/20">
-              <Image 
-                src="/courtlab-logo.jpg" 
-                alt="CourtLab" 
-                width={40} 
-                height={40}
+            <div className="w-9 h-9 rounded-full overflow-hidden ring-1 ring-[#27272A]">
+              <Image
+                src="/courtlab-logo.jpg"
+                alt="CourtLab"
+                width={36}
+                height={36}
                 className="w-full h-full object-cover"
               />
             </div>

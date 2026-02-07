@@ -1,107 +1,100 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
 import { Settings, User, Bell, Shield } from "lucide-react"
 
 export default function SettingsPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-10">
+      {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-        <p className="text-gray-500 mt-1">Manage your account and preferences</p>
+        <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">Settings</h1>
+        <p className="text-[#A1A1AA] mt-2 text-base">Manage your account and preferences</p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <User size={20} className="text-[#FF6B00]" />
-              <CardTitle>Profile</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
+        {/* Profile */}
+        <div className="bg-[#0F0F11] rounded-2xl border border-[#27272A] overflow-hidden">
+          <div className="px-6 py-4 border-b border-[#27272A] flex items-center gap-2">
+            <User size={18} className="text-[#F97316]" />
+            <h2 className="font-semibold text-white">Profile</h2>
+          </div>
+          <div className="p-6 space-y-4">
             <div>
-              <label className="text-sm font-medium text-gray-700">Name</label>
-              <Input defaultValue="Michael Ragland" className="mt-1" />
-            </div>
-            <div>
-              <label className="text-sm font-medium text-gray-700">Email</label>
-              <Input defaultValue="michael@courtlab.app" className="mt-1" />
+              <label className="text-sm font-medium text-[#A1A1AA]">Name</label>
+              <input defaultValue="Michael Ragland" className="w-full mt-1.5 px-4 py-2.5 bg-[#18181B] border border-[#27272A] rounded-xl text-sm text-white placeholder-[#71717A] focus:outline-none focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316]/20 transition-all" />
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700">Role</label>
-              <Input defaultValue="Founder" disabled className="mt-1 bg-gray-50" />
+              <label className="text-sm font-medium text-[#A1A1AA]">Email</label>
+              <input defaultValue="michael@courtlab.app" className="w-full mt-1.5 px-4 py-2.5 bg-[#18181B] border border-[#27272A] rounded-xl text-sm text-white placeholder-[#71717A] focus:outline-none focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316]/20 transition-all" />
             </div>
-            <Button className="bg-[#FF6B00] hover:bg-[#FF6B00]/90 text-white">
+            <div>
+              <label className="text-sm font-medium text-[#A1A1AA]">Role</label>
+              <input defaultValue="Founder" disabled className="w-full mt-1.5 px-4 py-2.5 bg-[#09090B] border border-[#27272A] rounded-xl text-sm text-[#71717A] cursor-not-allowed" />
+            </div>
+            <button className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-[#F97316] rounded-xl hover:bg-[#FB923C] hover:shadow-lg hover:shadow-[#F97316]/20 transition-all duration-200 active:scale-[0.98]">
               Save Changes
-            </Button>
-          </CardContent>
-        </Card>
+            </button>
+          </div>
+        </div>
 
-        <Card>
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <Bell size={20} className="text-[#FF6B00]" />
-              <CardTitle>Notifications</CardTitle>
+        {/* Notifications */}
+        <div className="bg-[#0F0F11] rounded-2xl border border-[#27272A] overflow-hidden">
+          <div className="px-6 py-4 border-b border-[#27272A] flex items-center gap-2">
+            <Bell size={18} className="text-[#F97316]" />
+            <h2 className="font-semibold text-white">Notifications</h2>
+          </div>
+          <div className="p-6 space-y-1 divide-y divide-[#27272A]">
+            <div className="flex items-center justify-between py-3">
+              <span className="text-[#A1A1AA]">Email notifications</span>
+              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-400/10 text-emerald-400">Enabled</span>
             </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between py-2">
-              <span className="text-gray-700">Email notifications</span>
-              <Badge variant="success">Enabled</Badge>
+            <div className="flex items-center justify-between py-3">
+              <span className="text-[#A1A1AA]">Lead alerts</span>
+              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-400/10 text-emerald-400">Enabled</span>
             </div>
-            <div className="flex items-center justify-between py-2">
-              <span className="text-gray-700">Lead alerts</span>
-              <Badge variant="success">Enabled</Badge>
+            <div className="flex items-center justify-between py-3">
+              <span className="text-[#A1A1AA]">Campaign updates</span>
+              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#18181B] text-[#71717A]">Disabled</span>
             </div>
-            <div className="flex items-center justify-between py-2">
-              <span className="text-gray-700">Campaign updates</span>
-              <Badge variant="secondary">Disabled</Badge>
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card>
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <Shield size={20} className="text-[#FF6B00]" />
-              <CardTitle>Security</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
+        {/* Security */}
+        <div className="bg-[#0F0F11] rounded-2xl border border-[#27272A] overflow-hidden">
+          <div className="px-6 py-4 border-b border-[#27272A] flex items-center gap-2">
+            <Shield size={18} className="text-[#F97316]" />
+            <h2 className="font-semibold text-white">Security</h2>
+          </div>
+          <div className="p-6 space-y-4">
             <div>
-              <label className="text-sm font-medium text-gray-700">Current Password</label>
-              <Input type="password" value="********" className="mt-1" />
+              <label className="text-sm font-medium text-[#A1A1AA]">Current Password</label>
+              <input type="password" defaultValue="********" className="w-full mt-1.5 px-4 py-2.5 bg-[#18181B] border border-[#27272A] rounded-xl text-sm text-white placeholder-[#71717A] focus:outline-none focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316]/20 transition-all" />
             </div>
-            <Button variant="outline">Change Password</Button>
-          </CardContent>
-        </Card>
+            <button className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-[#A1A1AA] bg-[#0F0F11] border border-[#27272A] rounded-xl hover:bg-[#18181B] hover:text-white hover:border-[#3F3F46] transition-all duration-200">
+              Change Password
+            </button>
+          </div>
+        </div>
 
-        <Card>
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <Settings size={20} className="text-[#FF6B00]" />
-              <CardTitle>Integrations</CardTitle>
+        {/* Integrations */}
+        <div className="bg-[#0F0F11] rounded-2xl border border-[#27272A] overflow-hidden">
+          <div className="px-6 py-4 border-b border-[#27272A] flex items-center gap-2">
+            <Settings size={18} className="text-[#F97316]" />
+            <h2 className="font-semibold text-white">Integrations</h2>
+          </div>
+          <div className="p-6 space-y-1 divide-y divide-[#27272A]">
+            <div className="flex items-center justify-between py-3">
+              <span className="text-[#A1A1AA]">Apple Search Ads</span>
+              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-400/10 text-emerald-400">Connected</span>
             </div>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between py-2">
-                <span className="text-gray-700">Apple Search Ads</span>
-                <Badge variant="success">Connected</Badge>
-              </div>
-              <div className="flex items-center justify-between py-2">
-                <span className="text-gray-700">Google Sheets</span>
-                <Badge variant="secondary">Disconnected</Badge>
-              </div>
-              <div className="flex items-center justify-between py-2">
-                <span className="text-gray-700">Brave Search API</span>
-                <Badge variant="success">Connected</Badge>
-              </div>
+            <div className="flex items-center justify-between py-3">
+              <span className="text-[#A1A1AA]">Google Sheets</span>
+              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#18181B] text-[#71717A]">Disconnected</span>
             </div>
-          </CardContent>
-        </Card>
+            <div className="flex items-center justify-between py-3">
+              <span className="text-[#A1A1AA]">Brave Search API</span>
+              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-400/10 text-emerald-400">Connected</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
