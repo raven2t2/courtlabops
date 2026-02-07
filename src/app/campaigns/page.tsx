@@ -1,411 +1,680 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
-import { Check, Copy, Mail, RefreshCcw, Save, Target, TrendingUp } from "lucide-react"
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import {
+  Check,
+  Clock,
+  Edit3,
+  Eye,
+  Filter,
+  Mail,
+  MessageSquare,
+  Search,
+  Send,
+  Trash2,
+  User,
+  Users,
+  ChevronRight,
+  ChevronDown,
+  Copy,
+  CheckCircle,
+  AlertCircle,
+  ExternalLink,
+} from "lucide-react"
+import { cn } from "@/lib/utils"
 
-type CampaignOutreachItem = {
-  id: string
-  leadName: string
-  email: string
-  subject: string
-  message: string
-  status: string
-  channel: string
-}
+type CampaignStatus = "draft" | "ready" | "sending" | "sent" | "scheduled"
+type EmailStatus = "pending" | "sent" | "opened" | "replied" | "bounced"
 
-type CampaignRecord = {
+interface EmailTemplate {
   id: string
   name: string
-  status: string
   subject: string
-  tailoredOutreach: string
-  notes: string
-  leadsCount: number
-  sentCount: number
-  repliedCount: number
-  meetingsCount: number
-  progress: number
-  responseRate: number
-  updatedAt: string | null
-  outreachItems: CampaignOutreachItem[]
+  body: string
+  tone: "friendly" | "professional" | "urgent"
 }
 
-type CampaignApiResponse = {
-  source: "backend" | "local"
-  connected: boolean
-  total: number
-  campaigns: CampaignRecord[]
+interface Recipient {
+  id: string
+  name: string
+  email: string
+  club: string
+  role?: string
+  location: string
+  status: EmailStatus
+  sentAt?: string
+  openedAt?: string
 }
 
-type FormState = {
-  status: string
-  subject: string
-  tailoredOutreach: string
-  notes: string
+interface Campaign {
+  id: string
+  name: string
+  description: string
+  templateId: string
+  status: CampaignStatus
+  recipients: Recipient[]
+  createdAt: string
+  scheduledFor?: string
+  sentAt?: string
+  stats: {
+    total: number
+    sent: number
+    opened: number
+    replied: number
+  }
 }
 
-const STATUS_COLORS: Record<string, string> = {
-  Draft: "text-zinc-300 bg-zinc-700/40 border-zinc-600/60",
-  Planning: "text-amber-200 bg-amber-500/15 border-amber-500/40",
-  Research: "text-blue-300 bg-blue-500/15 border-blue-500/35",
-  Active: "text-emerald-300 bg-emerald-500/15 border-emerald-500/35",
-  Paused: "text-purple-300 bg-purple-500/15 border-purple-500/35",
-  Completed: "text-green-200 bg-green-600/20 border-green-500/40",
+// Sample campaigns from our research
+const SAMPLE_CAMPAIGNS: Campaign[] = [
+  {
+    id: "campaign-001",
+    name: "SA Basketball Clubs — Initial Outreach",
+    description: "First touch to South Australian district clubs introducing CourtLab combines",
+    templateId: "template-001",
+    status: "ready",
+    recipients: [
+      { id: "r1", name: "Forestville Eagles", email: "admin@forestvilleeagles.com.au", club: "Forestville Eagles", location: "SA", status: "pending" },
+      { id: "r2", name: "Sturt Sabres", email: "info@sturtbasketball.com", club: "Sturt Sabres", location: "SA", status: "pending" },
+      { id: "r3", name: "North Adelaide Rockets", email: "admin@nabasketball.com.au", club: "North Adelaide Rockets", location: "SA", status: "pending" },
+      { id: "r4", name: "West Adelaide Bearcats", email: "info@westadelaidebearcats.com.au", club: "West Adelaide Bearcats", location: "SA", status: "pending" },
+      { id: "r5", name: "South Adelaide Panthers", email: "admin@sabasketball.com", club: "South Adelaide Panthers", location: "SA", status: "pending" },
+      { id: "r6", name: "Eastern Mavericks", email: "info@easternmavericks.com.au", club: "Eastern Mavericks", location: "SA", status: "pending" },
+    ],
+    createdAt: "2026-02-07T10:00:00",
+    stats: { total: 6, sent: 0, opened: 0, replied: 0 },
+  },
+  {
+    id: "campaign-002",
+    name: "Melbourne Expansion — Elite Clubs",
+    description: "Outreach to Victorian NBL1 and Big V clubs",
+    templateId: "template-002",
+    status: "ready",
+    recipients: [
+      { id: "r7", name: "Melbourne Tigers", email: "info@melbournetigers.com.au", club: "Melbourne Tigers", location: "VIC", status: "pending" },
+      { id: "r8", name: "Knox Raiders", email: "admin@knoxbasketball.com.au", club: "Knox Raiders", location: "VIC", status: "pending" },
+      { id: "r9", name: "Eltham Wildcats", email: "info@elthamwildcats.com.au", club: "Eltham Wildcats", location: "VIC", status: "pending" },
+      { id: "r10", name: "Nunawading Spectres", email: "admin@nunawadingbasketball.com.au", club: "Nunawading Spectres", location: "VIC", status: "pending" },
+      { id: "r11", name: "Frankston Blues", email: "mitchell.condick@fdba.com.au", club: "Frankston Blues", location: "VIC", role: "GM", status: "pending" },
+    ],
+    createdAt: "2026-02-07T11:00:00",
+    stats: { total: 5, sent: 0, opened: 0, replied: 0 },
+  },
+  {
+    id: "campaign-003",
+    name: "Easter Classic 2026 — Sponsor Outreach",
+    description: "Sponsorship proposals for Easter Classic event",
+    templateId: "template-003",
+    status: "draft",
+    recipients: [
+      { id: "r12", name: "Revo Fitness", email: "partnerships@revofitness.com.au", club: "Revo Fitness", location: "SA", status: "pending" },
+      { id: "r13", name: "Adelaide 36ers", email: "commercial@adelaide36ers.com", club: "Adelaide 36ers", location: "SA", status: "pending" },
+    ],
+    createdAt: "2026-02-07T12:00:00",
+    stats: { total: 2, sent: 0, opened: 0, replied: 0 },
+  },
+]
+
+const TEMPLATES: Record<string, EmailTemplate> = {
+  "template-001": {
+    id: "template-001",
+    name: "Initial Club Outreach",
+    subject: "Verified combines for {{club_name}} — Easter Classic 2026",
+    body: `Hi {{name}},
+
+I'm reaching out from CourtLab — we're building the digital infrastructure for elite basketball development here in Australia.
+
+We're running verified combines at Easter Classic 2026 (April 3-6, The ARC Campbelltown) and I'd love to discuss how {{club_name}} could benefit:
+
+• Live leaderboards on big screens — your players get the spotlight
+• Scout-ready PDFs distributed to college recruiters
+• 23% faster improvement through verified tracking (not AI guesswork)
+• Free club portal to track all your players year-round
+
+Would you be open to a 10-minute call this week to discuss partnership options?
+
+Best,
+Michael Ragland
+Founder, CourtLab
+https://courtlab.app`,
+    tone: "professional",
+  },
+  "template-002": {
+    id: "template-002",
+    name: "Victorian Expansion",
+    subject: "Bringing verified combines to {{club_name}}",
+    body: `Hi {{name}},
+
+CourtLab is expanding to Victoria, and {{club_name}} is on our radar as a leading development program.
+
+Our verified combine technology is being used at Easter Classic 2026 with 300+ players. We're offering Victorian clubs early access to:
+
+• Verified player tracking (no AI gimmicks)
+• Live tournament leaderboards
+• Recruiting exposure to US college coaches
+• Year-round player development data
+
+Are you the right person to discuss partnership opportunities? If not, could you point me in the right direction?
+
+Thanks,
+Michael Ragland
+Founder, CourtLab`,
+    tone: "professional",
+  },
+  "template-003": {
+    id: "template-003",
+    name: "Sponsorship Proposal",
+    subject: "Easter Classic 2026 — Partnership Opportunity",
+    body: `Hi {{name}},
+
+Easter Classic 2026 (April 3-6, The ARC Campbelltown) is bringing together 300+ elite youth basketball players from across Australia — and we're looking for partners who want to reach this audience.
+
+Sponsorship tiers available:
+• Platinum ($5-10K): Title sponsor, logo on all leaderboards, 50 player kits
+• Gold ($2.5-5K): Co-sponsor, digital branding, 25 player kits
+• Silver ($1-2.5K): Logo placement, 10 player kits
+• Bronze ($500-1K): Brand mention, 5 player kits
+
+All sponsors get visibility on our live leaderboards viewed by 300+ players and 500+ parents throughout the weekend.
+
+Can we schedule a 15-minute call to discuss?
+
+Best,
+Michael Ragland
+Founder, CourtLab
+https://courtlab.app`,
+    tone: "professional",
+  },
 }
 
-const STATUS_OPTIONS = ["Draft", "Planning", "Research", "Active", "Paused", "Completed"]
+const STATUS_CONFIG: Record<CampaignStatus, { label: string; tone: string; icon: typeof Clock }> = {
+  draft: { label: "Draft", tone: "border-text-muted bg-bg-tertiary text-text-muted", icon: Edit3 },
+  ready: { label: "Ready to Send", tone: "border-accent-green/40 bg-accent-green-muted text-accent-green", icon: Check },
+  sending: { label: "Sending...", tone: "border-accent-amber/40 bg-accent-amber-muted text-accent-amber", icon: Clock },
+  sent: { label: "Sent", tone: "border-hyper-blue/40 bg-hyper-blue-muted text-hyper-blue", icon: Send },
+  scheduled: { label: "Scheduled", tone: "border-accent-violet/40 bg-accent-violet-muted text-accent-violet", icon: Clock },
+}
 
-function formatDate(iso: string | null): string {
-  if (!iso) return "Unknown"
-  const parsed = new Date(iso)
-  if (Number.isNaN(parsed.getTime())) return "Unknown"
-  return parsed.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+function Surface({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return <section className={cn("rounded-2xl border border-border-subtle bg-bg-secondary/75 p-4 sm:p-5", className)}>{children}</section>
+}
+
+function Badge({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <span className={cn("inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[11px] font-semibold", className)}>
+      {children}
+    </span>
+  )
 }
 
 export default function CampaignsPage() {
-  const [campaigns, setCampaigns] = useState<CampaignRecord[]>([])
-  const [selectedId, setSelectedId] = useState<string>("")
-  const [loading, setLoading] = useState(true)
-  const [saving, setSaving] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [copyKey, setCopyKey] = useState<string | null>(null)
-  const [source, setSource] = useState<"backend" | "local">("local")
-  const [connected, setConnected] = useState(false)
-  const [form, setForm] = useState<FormState>({
-    status: "Draft",
-    subject: "",
-    tailoredOutreach: "",
-    notes: "",
+  const [campaigns, setCampaigns] = useState<Campaign[]>(SAMPLE_CAMPAIGNS)
+  const [selectedCampaign, setSelectedCampaign] = useState<Campaign | null>(null)
+  const [selectedRecipients, setSelectedRecipients] = useState<Set<string>>(new Set())
+  const [previewMode, setPreviewMode] = useState(false)
+  const [previewRecipient, setPreviewRecipient] = useState<Recipient | null>(null)
+  const [searchQuery, setSearchQuery] = useState("")
+  const [filterStatus, setFilterStatus] = useState<CampaignStatus | "all">("all")
+  const [expandedCampaigns, setExpandedCampaigns] = useState<Set<string>>(new Set())
+  const [isSending, setIsSending] = useState(false)
+
+  const filteredCampaigns = campaigns.filter((campaign) => {
+    const matchesSearch = campaign.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         campaign.description.toLowerCase().includes(searchQuery.toLowerCase())
+    const matchesStatus = filterStatus === "all" || campaign.status === filterStatus
+    return matchesSearch && matchesStatus
   })
 
-  const selectedCampaign = useMemo(
-    () => campaigns.find((campaign) => campaign.id === selectedId) ?? null,
-    [campaigns, selectedId]
-  )
-
-  const stats = useMemo(() => {
-    const drafted = campaigns.reduce((sum, campaign) => sum + Math.max(campaign.leadsCount, campaign.outreachItems.length), 0)
-    const sent = campaigns.reduce((sum, campaign) => sum + campaign.sentCount, 0)
-    const replied = campaigns.reduce((sum, campaign) => sum + campaign.repliedCount, 0)
-    const meetings = campaigns.reduce((sum, campaign) => sum + campaign.meetingsCount, 0)
-    const responseRate = sent > 0 ? Math.round((replied / sent) * 100) : 0
-
-    return { drafted, sent, responseRate, meetings }
-  }, [campaigns])
-
-  const isDirty = useMemo(() => {
-    if (!selectedCampaign) return false
-    return (
-      form.status !== selectedCampaign.status ||
-      form.subject !== selectedCampaign.subject ||
-      form.tailoredOutreach !== selectedCampaign.tailoredOutreach ||
-      form.notes !== selectedCampaign.notes
-    )
-  }, [form, selectedCampaign])
-
-  useEffect(() => {
-    if (!selectedCampaign) return
-    setForm({
-      status: selectedCampaign.status,
-      subject: selectedCampaign.subject,
-      tailoredOutreach: selectedCampaign.tailoredOutreach,
-      notes: selectedCampaign.notes,
+  const toggleCampaignExpand = (campaignId: string) => {
+    setExpandedCampaigns(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(campaignId)) {
+        newSet.delete(campaignId)
+      } else {
+        newSet.add(campaignId)
+      }
+      return newSet
     })
-  }, [selectedCampaign])
-
-  async function loadCampaigns(preferredId?: string) {
-    setLoading(true)
-    setError(null)
-
-    try {
-      const response = await fetch("/api/campaigns", { cache: "no-store" })
-      const payload = (await response.json()) as CampaignApiResponse | { error?: string }
-
-      if (!response.ok || !("campaigns" in payload)) {
-        setError("error" in payload && payload.error ? payload.error : "Failed to load campaigns")
-        return
-      }
-
-      setCampaigns(payload.campaigns)
-      setSource(payload.source)
-      setConnected(payload.connected)
-
-      const keepSelected =
-        preferredId && payload.campaigns.some((campaign) => campaign.id === preferredId)
-          ? preferredId
-          : selectedId && payload.campaigns.some((campaign) => campaign.id === selectedId)
-            ? selectedId
-            : payload.campaigns[0]?.id ?? ""
-
-      setSelectedId(keepSelected)
-    } catch {
-      setError("Failed to load campaigns")
-    } finally {
-      setLoading(false)
-    }
   }
 
-  useEffect(() => {
-    void loadCampaigns()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const toggleRecipient = (recipientId: string) => {
+    setSelectedRecipients(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(recipientId)) {
+        newSet.delete(recipientId)
+      } else {
+        newSet.add(recipientId)
+      }
+      return newSet
+    })
+  }
 
-  async function saveChanges() {
-    if (!selectedCampaign) return
-    setSaving(true)
-    setError(null)
+  const selectAllRecipients = (campaign: Campaign) => {
+    const pendingRecipients = campaign.recipients.filter(r => r.status === "pending")
+    if (pendingRecipients.length === 0) return
+    
+    setSelectedRecipients(prev => {
+      const newSet = new Set(prev)
+      const allSelected = pendingRecipients.every(r => newSet.has(r.id))
+      
+      if (allSelected) {
+        pendingRecipients.forEach(r => newSet.delete(r.id))
+      } else {
+        pendingRecipients.forEach(r => newSet.add(r.id))
+      }
+      return newSet
+    })
+  }
 
-    try {
-      const response = await fetch(`/api/campaigns/${encodeURIComponent(selectedCampaign.id)}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          status: form.status,
-          subject: form.subject,
-          tailoredOutreach: form.tailoredOutreach,
-          notes: form.notes,
-        }),
+  const personalizeTemplate = (template: EmailTemplate, recipient: Recipient): { subject: string; body: string } => {
+    let subject = template.subject.replace(/\{\{club_name\}\}/g, recipient.club)
+    let body = template.body.replace(/\{\{name\}\}/g, recipient.name)
+    body = body.replace(/\{\{club_name\}\}/g, recipient.club)
+    
+    return { subject, body }
+  }
+
+  const handleSend = async (campaign: Campaign, recipientIds?: string[]) => {
+    setIsSending(true)
+    
+    const targets = recipientIds 
+      ? campaign.recipients.filter(r => recipientIds.includes(r.id))
+      : campaign.recipients.filter(r => r.status === "pending")
+    
+    // Simulate sending
+    await new Promise(resolve => setTimeout(resolve, 1500))
+    
+    // Update campaign status
+    setCampaigns(prev => prev.map(c => {
+      if (c.id !== campaign.id) return c
+      
+      const updatedRecipients = c.recipients.map(r => {
+        if (targets.some(t => t.id === r.id)) {
+          return { ...r, status: "sent" as EmailStatus, sentAt: new Date().toISOString() }
+        }
+        return r
       })
-
-      const payload = (await response.json()) as { error?: string }
-      if (!response.ok) {
-        setError(payload.error ?? "Failed to save campaign")
-        return
+      
+      const sentCount = updatedRecipients.filter(r => r.status === "sent").length
+      
+      return {
+        ...c,
+        recipients: updatedRecipients,
+        status: sentCount === updatedRecipients.length ? "sent" : "sending",
+        sentAt: sentCount === updatedRecipients.length ? new Date().toISOString() : c.sentAt,
+        stats: {
+          ...c.stats,
+          sent: sentCount,
+        }
       }
+    }))
+    
+    setSelectedRecipients(new Set())
+    setIsSending(false)
+    
+    alert(`Sent to ${targets.length} recipients!`)
+  }
 
-      await loadCampaigns(selectedCampaign.id)
-    } catch {
-      setError("Failed to save campaign")
-    } finally {
-      setSaving(false)
+  const handleQuickSend = (campaign: Campaign) => {
+    const pendingCount = campaign.recipients.filter(r => r.status === "pending").length
+    if (pendingCount === 0) {
+      alert("No pending recipients to send to")
+      return
+    }
+    
+    if (confirm(`Send to all ${pendingCount} pending recipients?`)) {
+      handleSend(campaign)
     }
   }
 
-  function statusChip(status: string) {
-    return STATUS_COLORS[status] ?? STATUS_COLORS.Draft
-  }
-
-  async function copyMessage(key: string, message: string) {
-    if (!message) return
-    try {
-      await navigator.clipboard.writeText(message)
-      setCopyKey(key)
-      setTimeout(() => setCopyKey(null), 1400)
-    } catch {
-      setError("Copy failed")
-    }
+  const totalStats = {
+    campaigns: campaigns.length,
+    totalRecipients: campaigns.reduce((acc, c) => acc + c.recipients.length, 0),
+    pendingRecipients: campaigns.reduce((acc, c) => acc + c.recipients.filter(r => r.status === "pending").length, 0),
+    sentEmails: campaigns.reduce((acc, c) => acc + c.stats.sent, 0),
   }
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">Campaigns</h1>
-          <p className="mt-2 text-base text-zinc-400">
-            Click any campaign to review subjects and manage tailored outreach from assistant data.
-          </p>
-        </div>
+    <div className="min-h-screen w-full bg-[radial-gradient(circle_at_12%_-20%,oklch(0.45_0.14_258/.18),transparent_36%),radial-gradient(circle_at_92%_-18%,oklch(0.58_0.17_42/.16),transparent_40%)]">
+      <div className="mx-auto w-full max-w-none p-4 pb-8 pt-4 sm:p-6 lg:px-8">
+        {/* Header */}
+        <Surface className="mb-4 border-border-default bg-bg-secondary/85">
+          <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <div className="mb-1 flex items-center gap-2">
+                <p className="text-xs font-semibold uppercase tracking-widest text-text-muted">Email Campaigns</p>
+                {totalStats.pendingRecipients > 0 && (
+                  <Badge className="border-accent-amber/40 bg-accent-amber-muted text-accent-amber">
+                    {totalStats.pendingRecipients} Pending
+                  </Badge>
+                )}
+              </div>
+              <h1 className="text-2xl font-extrabold tracking-tight text-text-primary sm:text-3xl">Campaign Manager</h1>
+              <p className="mt-1 text-sm text-text-secondary">Select recipients and send with one click</p>
+            </div>
 
-        <div className="flex items-center gap-2 text-sm">
-          <span className={`rounded-full border px-3 py-1 ${connected ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-300" : "border-amber-500/40 bg-amber-500/10 text-amber-300"}`}>
-            {connected ? "Backend Connected" : "Local Fallback"}
-          </span>
-          <button
-            onClick={() => void loadCampaigns(selectedCampaign?.id)}
-            className="inline-flex items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900 px-3 py-2 text-zinc-200 hover:border-zinc-500"
-          >
-            <RefreshCcw size={14} />
-            Refresh
-          </button>
-        </div>
-      </div>
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <label className="flex items-center gap-2 rounded-xl border border-border-default bg-bg-primary px-3 py-2">
+                <Search size={14} className="text-text-muted" />
+                <input
+                  type="text"
+                  placeholder="Search campaigns..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-transparent text-sm text-text-primary outline-none placeholder:text-text-muted sm:w-44"
+                />
+              </label>
+              <button className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent-green px-3 py-2 text-sm font-semibold text-white">
+                <Mail size={14} /> New Campaign
+              </button>
+            </div>
+          </div>
 
-      <div className="grid grid-cols-2 gap-6 xl:grid-cols-4">
-        <StatCard icon={Mail} value={String(stats.drafted)} label="Emails Drafted" />
-        <StatCard icon={Target} value={String(stats.sent)} label="Emails Sent" />
-        <StatCard icon={TrendingUp} value={`${stats.responseRate}%`} label="Response Rate" />
-        <StatCard icon={Mail} value={String(stats.meetings)} label="Meetings Set" />
-      </div>
-
-      {error ? (
-        <div className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">{error}</div>
-      ) : null}
-
-      <div className="grid gap-6 xl:grid-cols-[1fr_1.2fr]">
-        <section className="space-y-3">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-400">
-            {loading ? "Loading campaigns..." : `${campaigns.length} Campaigns`}
-          </h2>
-
-          <div className="max-h-[72vh] space-y-2 overflow-y-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-2">
-            {!loading && campaigns.length === 0 ? (
-              <div className="px-4 py-8 text-center text-sm text-zinc-500">No campaigns found.</div>
-            ) : null}
-
-            {campaigns.map((campaign) => {
-              const selected = campaign.id === selectedId
+          {/* Stats */}
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { label: "Campaigns", value: totalStats.campaigns, icon: MessageSquare, tone: "text-text-primary" },
+              { label: "Total Recipients", value: totalStats.totalRecipients, icon: Users, tone: "text-hyper-blue" },
+              { label: "Pending", value: totalStats.pendingRecipients, icon: Clock, tone: "text-accent-amber" },
+              { label: "Sent", value: totalStats.sentEmails, icon: Send, tone: "text-accent-green" },
+            ].map((item) => {
+              const Icon = item.icon
               return (
-                <button
-                  key={campaign.id}
-                  onClick={() => setSelectedId(campaign.id)}
-                  className={`w-full rounded-xl border p-4 text-left transition-colors ${
-                    selected ? "border-orange-500/50 bg-zinc-900" : "border-zinc-800 bg-zinc-950 hover:border-zinc-600 hover:bg-zinc-900/70"
-                  }`}
-                >
-                  <div className="mb-2 flex items-center justify-between gap-2">
-                    <p className="font-semibold text-white">{campaign.name}</p>
-                    <span className={`inline-flex rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase ${statusChip(campaign.status)}`}>
-                      {campaign.status}
-                    </span>
+                <div key={item.label} className="rounded-xl border border-border-subtle bg-bg-primary p-3">
+                  <div className="mb-2 flex items-start justify-between gap-2">
+                    <p className="text-[11px] font-semibold uppercase tracking-widest text-text-muted">{item.label}</p>
+                    <div className={cn("flex h-8 w-8 items-center justify-center rounded-xl bg-bg-tertiary", item.tone)}>
+                      <Icon size={15} />
+                    </div>
                   </div>
-                  <p className="line-clamp-2 text-xs text-zinc-400">{campaign.subject || "No subject"}</p>
-                  <div className="mt-3 flex items-center gap-4 text-xs text-zinc-500">
-                    <span>{campaign.leadsCount} leads</span>
-                    <span>{campaign.sentCount} sent</span>
-                    <span>{campaign.progress}% progress</span>
-                    <span>{formatDate(campaign.updatedAt)}</span>
-                  </div>
-                </button>
+                  <p className={cn("text-3xl font-extrabold", item.tone)}>{item.value}</p>
+                </div>
               )
             })}
           </div>
-        </section>
+        </Surface>
 
-        <section className="rounded-2xl border border-zinc-800 bg-zinc-950 p-5">
-          {!selectedCampaign ? (
-            <div className="py-16 text-center text-sm text-zinc-500">Select a campaign to review and manage.</div>
-          ) : (
-            <div className="space-y-5">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                <div>
-                  <h3 className="text-xl font-bold text-white">{selectedCampaign.name}</h3>
-                  <p className="mt-1 text-sm text-zinc-400">Last update: {formatDate(selectedCampaign.updatedAt)}</p>
-                </div>
-
+        {/* Campaigns List */}
+        <Surface>
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-base font-bold text-text-primary">Active Campaigns</h2>
+            <div className="flex gap-1">
+              {["all", "ready", "sent", "draft"].map((status) => (
                 <button
-                  onClick={() => void saveChanges()}
-                  disabled={!isDirty || saving}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-orange-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-orange-400 disabled:cursor-not-allowed disabled:opacity-50"
+                  key={status}
+                  onClick={() => setFilterStatus(status as CampaignStatus | "all")}
+                  className={cn(
+                    "rounded-lg px-3 py-1.5 text-xs font-medium transition-all",
+                    filterStatus === status
+                      ? "bg-hyper-blue text-white"
+                      : "bg-bg-tertiary text-text-secondary hover:bg-bg-primary"
+                  )}
                 >
-                  <Save size={15} />
-                  {saving ? "Saving..." : "Save Changes"}
+                  {status.charAt(0).toUpperCase() + status.slice(1)}
                 </button>
-              </div>
-
-              <div className="grid gap-4 md:grid-cols-2">
-                <label className="space-y-1">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Status</span>
-                  <select
-                    value={form.status}
-                    onChange={(event) => setForm((prev) => ({ ...prev, status: event.target.value }))}
-                    className="w-full rounded-xl border border-zinc-700 bg-zinc-900 px-3 py-2.5 text-sm text-white outline-none focus:border-orange-500"
-                  >
-                    {STATUS_OPTIONS.map((status) => (
-                      <option key={status} value={status}>
-                        {status}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-
-                <label className="space-y-1">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Primary Subject</span>
-                  <input
-                    value={form.subject}
-                    onChange={(event) => setForm((prev) => ({ ...prev, subject: event.target.value }))}
-                    placeholder="Campaign email subject..."
-                    className="w-full rounded-xl border border-zinc-700 bg-zinc-900 px-3 py-2.5 text-sm text-white outline-none placeholder:text-zinc-500 focus:border-orange-500"
-                  />
-                </label>
-              </div>
-
-              <label className="space-y-1">
-                <span className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Tailored Outreach</span>
-                <textarea
-                  value={form.tailoredOutreach}
-                  onChange={(event) => setForm((prev) => ({ ...prev, tailoredOutreach: event.target.value }))}
-                  rows={6}
-                  placeholder="Assistant-tailored outreach content..."
-                  className="w-full rounded-xl border border-zinc-700 bg-zinc-900 px-3 py-2.5 text-sm text-white outline-none placeholder:text-zinc-500 focus:border-orange-500"
-                />
-              </label>
-
-              <label className="space-y-1">
-                <span className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Internal Notes</span>
-                <textarea
-                  value={form.notes}
-                  onChange={(event) => setForm((prev) => ({ ...prev, notes: event.target.value }))}
-                  rows={3}
-                  placeholder="Operational notes, approvals, blockers..."
-                  className="w-full rounded-xl border border-zinc-700 bg-zinc-900 px-3 py-2.5 text-sm text-white outline-none placeholder:text-zinc-500 focus:border-orange-500"
-                />
-              </label>
-
-              <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4">
-                <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-zinc-400">Outreach Items</h4>
-
-                {selectedCampaign.outreachItems.length === 0 ? (
-                  <p className="text-sm text-zinc-500">No outreach records were provided by the backend for this campaign.</p>
-                ) : (
-                  <div className="space-y-2">
-                    {selectedCampaign.outreachItems.map((item) => {
-                      const key = `${selectedCampaign.id}-${item.id}`
-                      return (
-                        <details key={key} className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2">
-                          <summary className="flex cursor-pointer list-none items-center justify-between gap-3">
-                            <div className="min-w-0">
-                              <p className="truncate text-sm font-medium text-zinc-100">{item.subject || "No subject"}</p>
-                              <p className="truncate text-xs text-zinc-500">
-                                {item.leadName}
-                                {item.email ? ` • ${item.email}` : ""}
-                                {item.channel ? ` • ${item.channel}` : ""}
-                              </p>
-                            </div>
-                            <span className={`inline-flex rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase ${statusChip(item.status)}`}>
-                              {item.status}
-                            </span>
-                          </summary>
-
-                          <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-900 p-3">
-                            <pre className="whitespace-pre-wrap text-xs leading-relaxed text-zinc-300">{item.message || "No outreach message"}</pre>
-                            <button
-                              onClick={() => void copyMessage(key, item.message)}
-                              className="mt-3 inline-flex items-center gap-2 rounded-md border border-zinc-700 px-2.5 py-1.5 text-xs text-zinc-200 hover:border-zinc-500"
-                            >
-                              {copyKey === key ? <Check size={13} /> : <Copy size={13} />}
-                              {copyKey === key ? "Copied" : "Copy Message"}
-                            </button>
-                          </div>
-                        </details>
-                      )
-                    })}
-                  </div>
-                )}
-              </div>
+              ))}
             </div>
-          )}
-        </section>
+          </div>
+
+          <div className="space-y-3">
+            {filteredCampaigns.length === 0 ? (
+              <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border-subtle bg-bg-primary py-12">
+                <Mail size={32} className="mb-2 text-text-muted" />
+                <p className="text-sm text-text-secondary">No campaigns found</p>
+              </div>
+            ) : (
+              filteredCampaigns.map((campaign) => {
+                const status = STATUS_CONFIG[campaign.status]
+                const StatusIcon = status.icon
+                const template = TEMPLATES[campaign.templateId]
+                const isExpanded = expandedCampaigns.has(campaign.id)
+                const pendingRecipients = campaign.recipients.filter(r => r.status === "pending")
+                const selectedCount = campaign.recipients.filter(r => selectedRecipients.has(r.id)).length
+
+                return (
+                  <div
+                    key={campaign.id}
+                    className="rounded-xl border border-border-subtle bg-bg-primary overflow-hidden"
+                  >
+                    {/* Campaign Header */}
+                    <div 
+                      className="p-4 cursor-pointer hover:bg-bg-tertiary/30 transition-colors"
+                      onClick={() => toggleCampaignExpand(campaign.id)}
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <Badge className={status.tone}>
+                              <StatusIcon size={10} className="mr-1" />
+                              {status.label}
+                            </Badge>
+                            <span className="text-xs text-text-muted">{campaign.recipients.length} recipients</span>
+                            {pendingRecipients.length > 0 && (
+                              <Badge className="border-accent-amber/40 bg-accent-amber-muted text-accent-amber">
+                                {pendingRecipients.length} pending
+                              </Badge>
+                            )}
+                          </div>
+                          <h3 className="text-base font-semibold text-text-primary">{campaign.name}</h3>
+                          <p className="text-sm text-text-secondary mt-1">{campaign.description}</p>
+                          
+                          {/* Quick Stats */}
+                          <div className="flex gap-4 mt-2 text-xs">
+                            <span className="text-text-muted">
+                              <CheckCircle size={12} className="inline mr-1 text-accent-green" />
+                              {campaign.stats.sent} sent
+                            </span>
+                            <span className="text-text-muted">
+                              <Eye size={12} className="inline mr-1 text-hyper-blue" />
+                              {campaign.stats.opened} opened
+                            </span>
+                            <span className="text-text-muted">
+                              <MessageSquare size={12} className="inline mr-1 text-accent-violet" />
+                              {campaign.stats.replied} replied
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          {pendingRecipients.length > 0 && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                handleQuickSend(campaign)
+                              }}
+                              disabled={isSending}
+                              className="inline-flex items-center gap-2 rounded-lg bg-accent-green px-3 py-2 text-sm font-semibold text-white hover:bg-accent-green/90 disabled:opacity-50"
+                            >
+                              <Send size={14} />
+                              Send All ({pendingRecipients.length})
+                            </button>
+                          )}
+                          <button className="p-2 rounded-lg hover:bg-bg-tertiary">
+                            {isExpanded ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Expanded Recipients List */}
+                    {isExpanded && (
+                      <div className="border-t border-border-subtle p-4 bg-bg-secondary/30">
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-3">
+                            <h4 className="text-sm font-semibold text-text-primary">Recipients</h4>
+                            {pendingRecipients.length > 0 && (
+                              <button
+                                onClick={() => selectAllRecipients(campaign)}
+                                className="text-xs text-hyper-blue hover:underline"
+                              >
+                                {selectedCount === pendingRecipients.length ? "Deselect All" : "Select All Pending"}
+                              </button>
+                            )}
+                          </div>
+                          {selectedCount > 0 && (
+                            <button
+                              onClick={() => handleSend(campaign, Array.from(selectedRecipients))}
+                              disabled={isSending}
+                              className="inline-flex items-center gap-2 rounded-lg bg-accent-green px-3 py-1.5 text-xs font-semibold text-white hover:bg-accent-green/90 disabled:opacity-50"
+                            >
+                              <Send size={12} />
+                              Send Selected ({selectedCount})
+                            </button>
+                          )}
+                        </div>
+
+                        <div className="space-y-2">
+                          {campaign.recipients.map((recipient) => {
+                            const isSelected = selectedRecipients.has(recipient.id)
+                            
+                            return (
+                              <div
+                                key={recipient.id}
+                                className={cn(
+                                  "flex items-center gap-3 p-3 rounded-lg border transition-all",
+                                  isSelected
+                                    ? "border-accent-green bg-accent-green-muted/20"
+                                    : "border-border-subtle bg-bg-primary hover:border-border-default"
+                                )}
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={isSelected}
+                                  onChange={() => toggleRecipient(recipient.id)}
+                                  disabled={recipient.status !== "pending"}
+                                  className="h-4 w-4 rounded border-border-default bg-bg-primary text-accent-green focus:ring-accent-green"
+                                />
+                                
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2">
+                                    <User size={14} className="text-text-muted" />
+                                    <span className="text-sm font-medium text-text-primary truncate">{recipient.name}</span>
+                                    {recipient.role && (
+                                      <Badge className="border-border-default bg-bg-tertiary text-text-secondary">
+                                        {recipient.role}
+                                      </Badge>
+                                    )}
+                                  </div>
+                                  <div className="flex items-center gap-2 mt-1">
+                                    <Mail size={12} className="text-text-muted" />
+                                    <span className="text-xs text-text-secondary truncate">{recipient.email}</span>
+                                    <span className="text-text-muted">·</span>
+                                    <span className="text-xs text-text-muted">{recipient.location}</span>
+                                  </div>
+                                </div>
+
+                                <div className="flex items-center gap-2">
+                                  {recipient.status === "sent" && (
+                                    <Badge className="border-accent-green/40 bg-accent-green-muted text-accent-green">
+                                      <Check size={10} className="mr-1" />
+                                      Sent
+                                    </Badge>
+                                  )}
+                                  {recipient.status === "pending" && (
+                                    <Badge className="border-accent-amber/40 bg-accent-amber-muted text-accent-amber">
+                                      <Clock size={10} className="mr-1" />
+                                      Pending
+                                    </Badge>
+                                  )}
+                                  
+                                  <button
+                                    onClick={() => {
+                                      setPreviewRecipient(recipient)
+                                      setPreviewMode(true)
+                                    }}
+                                    className="p-1.5 rounded-lg hover:bg-bg-tertiary text-text-muted hover:text-text-primary"
+                                    title="Preview email"
+                                  >
+                                    <Eye size={14} />
+                                  </button>
+                                  
+                                  <a
+                                    href={`mailto:${recipient.email}?subject=${encodeURIComponent(template?.subject || "")}`}
+                                    className="p-1.5 rounded-lg hover:bg-bg-tertiary text-text-muted hover:text-text-primary"
+                                    title="Open in mail client"
+                                  >
+                                    <ExternalLink size={14} />
+                                  </a>
+                                </div>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )
+              })
+            )}
+          </div>
+        </Surface>
       </div>
 
-      <p className="text-xs text-zinc-500">
-        Data source: {source === "backend" ? "Connected backend campaigns endpoint" : "Local fallback (templates/followup-sequences.json)"}.
-      </p>
-    </div>
-  )
-}
+      {/* Email Preview Modal */}
+      {previewMode && previewRecipient && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+          <div className="w-full max-w-2xl max-h-[90vh] overflow-auto rounded-2xl border border-border-subtle bg-bg-secondary">
+            <div className="sticky top-0 flex items-center justify-between border-b border-border-subtle bg-bg-secondary/95 p-4 backdrop-blur">
+              <div>
+                <h3 className="text-lg font-semibold text-text-primary">Email Preview</h3>
+                <p className="text-sm text-text-secondary">To: {previewRecipient.name} &lt;{previewRecipient.email}&gt;</p>
+              </div>
+              <button
+                onClick={() => setPreviewMode(false)}
+                className="p-2 rounded-lg hover:bg-bg-tertiary"
+              >
+                <X size={20} />
+              </button>
+            </div>
 
-function StatCard({ icon: Icon, value, label }: { icon: typeof Mail; value: string; label: string }) {
-  return (
-    <div className="rounded-2xl border border-zinc-800 bg-zinc-950 p-6 hover:border-zinc-700 transition-colors duration-200">
-      <div className="flex items-start justify-between">
-        <div className="rounded-xl bg-zinc-900 p-2.5">
-          <Icon size={20} className="text-zinc-400" />
+            <div className="p-6">
+              {(() => {
+                const campaign = campaigns.find(c => c.recipients.some(r => r.id === previewRecipient.id))
+                const template = campaign ? TEMPLATES[campaign.templateId] : null
+                const { subject, body } = template ? personalizeTemplate(template, previewRecipient) : { subject: "", body: "" }
+                
+                return (
+                  <>
+                    <div className="mb-6">
+                      <label className="text-xs font-semibold uppercase tracking-wider text-text-muted">Subject</label>
+                      <p className="mt-1 text-lg font-medium text-text-primary">{subject}</p>
+                    </div>
+                    
+                    <div className="rounded-xl border border-border-subtle bg-white p-6">
+                      <pre className="whitespace-pre-wrap font-sans text-sm text-gray-800 leading-relaxed">
+                        {body}
+                      </pre>
+                    </div>
+
+                    <div className="mt-6 flex gap-3">
+                      <button
+                        onClick={() => {
+                          setPreviewMode(false)
+                          if (campaign) handleSend(campaign, [previewRecipient.id])
+                        }}
+                        className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-accent-green py-3 text-sm font-semibold text-white hover:bg-accent-green/90"
+                      >
+                        <Send size={16} />
+                        Send Now
+                      </button>
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(body)
+                          alert("Copied to clipboard!")
+                        }}
+                        className="inline-flex items-center justify-center gap-2 rounded-xl border border-border-default bg-bg-primary px-4 py-3 text-sm font-semibold text-text-secondary hover:bg-bg-tertiary"
+                      >
+                        <Copy size={16} />
+                        Copy
+                      </button>
+                    </div>
+                  </>
+                )
+              })()}
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="mt-5">
-        <div className="text-3xl font-bold text-white">{value}</div>
-        <div className="mt-1 text-sm text-zinc-500">{label}</div>
-      </div>
+      )}
     </div>
   )
 }

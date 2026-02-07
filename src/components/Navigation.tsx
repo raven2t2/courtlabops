@@ -12,6 +12,7 @@ import {
   FileText,
   Image as ImageIcon,
   CheckCircle,
+  Mail,
   Menu,
   X,
 } from "lucide-react";
@@ -26,6 +27,7 @@ const navItems = [
   { href: "/content", label: "Content", icon: FileText },
   { href: "/gallery", label: "Gallery", icon: ImageIcon },
   { href: "/approvals", label: "Approvals", icon: CheckCircle },
+  { href: "/campaigns", label: "Campaigns", icon: Mail },
 ];
 
 export function Navigation() {
