@@ -1,77 +1,64 @@
 import { readJsonFile, CoachesData } from "@/lib/data"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Trophy, MapPin, Instagram, Target, Users } from "lucide-react"
+import { MapPin, Instagram, Target, Trophy } from "lucide-react"
 
 export default function CoachesPage() {
   const data = readJsonFile<CoachesData>("./assets/coach-partners-australia.json")
 
-  // Sort by priority
   const sortedProspects = [...data.prospects].sort((a, b) => {
     const priorityOrder = { "Critical": 0, "High": 1, "Medium": 2, "Low": 3 }
     return priorityOrder[a.priority as keyof typeof priorityOrder] - priorityOrder[b.priority as keyof typeof priorityOrder]
   })
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-10">
+      {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Coach Partners</h1>
-        <p className="text-gray-500 mt-1">Micro-influencers for affiliate program</p>
+        <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">Coach Partners</h1>
+        <p className="text-[#A1A1AA] mt-2 text-base">Micro-influencers for affiliate program</p>
       </div>
 
       {/* Stats */}
-      <div className="grid md:grid-cols-4 gap-4">
-        <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold">{data.prospects.length}</div>
-            <div className="text-sm text-gray-500">Total Prospects</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold">1</div>
-            <div className="text-sm text-gray-500">Critical Priority</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold">2</div>
-            <div className="text-sm text-gray-500">High Priority</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold">158K</div>
-            <div className="text-sm text-gray-500">Max Reach (Nay)</div>
-          </CardContent>
-        </Card>
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-6">
+        <div className="bg-[#0F0F11] rounded-2xl border border-[#27272A] p-6">
+          <div className="text-3xl font-bold text-white">{data.prospects.length}</div>
+          <div className="text-sm text-[#71717A] mt-1">Total Prospects</div>
+        </div>
+        <div className="bg-[#0F0F11] rounded-2xl border border-[#27272A] p-6">
+          <div className="text-3xl font-bold text-white">1</div>
+          <div className="text-sm text-[#71717A] mt-1">Critical Priority</div>
+        </div>
+        <div className="bg-[#0F0F11] rounded-2xl border border-[#27272A] p-6">
+          <div className="text-3xl font-bold text-white">2</div>
+          <div className="text-sm text-[#71717A] mt-1">High Priority</div>
+        </div>
+        <div className="bg-[#0F0F11] rounded-2xl border border-[#27272A] p-6">
+          <div className="text-3xl font-bold text-white">158K</div>
+          <div className="text-sm text-[#71717A] mt-1">Max Reach (Nay)</div>
+        </div>
       </div>
 
       {/* Criteria */}
-      <Card className="bg-gray-50">
-        <CardContent className="pt-6">
-          <h3 className="text-sm font-semibold text-gray-900 mb-4">Target Criteria</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div>
-              <div className="text-xs text-gray-500 uppercase">Followers</div>
-              <div className="font-medium">{data.criteria.followerRange}</div>
-            </div>
-            <div>
-              <div className="text-xs text-gray-500 uppercase">Location</div>
-              <div className="font-medium">{data.criteria.location}</div>
-            </div>
-            <div>
-              <div className="text-xs text-gray-500 uppercase">Vibe</div>
-              <div className="font-medium">{data.criteria.vibe}</div>
-            </div>
-            <div>
-              <div className="text-xs text-gray-500 uppercase">Content</div>
-              <div className="font-medium">{data.criteria.contentType}</div>
-            </div>
+      <div className="bg-[#0F0F11] rounded-2xl border border-[#27272A] p-6">
+        <h3 className="text-sm font-semibold text-[#A1A1AA] uppercase tracking-wider mb-5">Target Criteria</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div>
+            <div className="text-xs text-[#71717A] uppercase tracking-wide">Followers</div>
+            <div className="font-medium text-white mt-1">{data.criteria.followerRange}</div>
           </div>
-        </CardContent>
-      </Card>
+          <div>
+            <div className="text-xs text-[#71717A] uppercase tracking-wide">Location</div>
+            <div className="font-medium text-white mt-1">{data.criteria.location}</div>
+          </div>
+          <div>
+            <div className="text-xs text-[#71717A] uppercase tracking-wide">Vibe</div>
+            <div className="font-medium text-white mt-1">{data.criteria.vibe}</div>
+          </div>
+          <div>
+            <div className="text-xs text-[#71717A] uppercase tracking-wide">Content</div>
+            <div className="font-medium text-white mt-1">{data.criteria.contentType}</div>
+          </div>
+        </div>
+      </div>
 
       {/* Prospects Grid */}
       <div className="grid md:grid-cols-2 gap-6">
@@ -85,66 +72,60 @@ export default function CoachesPage() {
 
 function CoachCard({ coach }: { coach: CoachesData["prospects"][0] }) {
   const priorityColors: Record<string, string> = {
-    "Critical": "bg-red-100 text-red-700",
-    "High": "bg-[#FF6B00] text-white",
-    "Medium": "bg-gray-100 text-gray-700",
+    "Critical": "text-white bg-red-500 border-red-500 shadow-lg shadow-red-500/20",
+    "High": "text-amber-950 bg-amber-400 border-amber-400",
+    "Medium": "text-blue-400 bg-blue-400/10 border-blue-400/20",
   }
 
   return (
-    <Card className="hover:shadow-md transition-shadow">
-      <CardContent className="pt-6">
-        <div className="flex items-start justify-between mb-4">
-          <div>
-            <span className={`inline-block text-xs font-bold px-3 py-1 rounded-full mb-2 ${priorityColors[coach.priority]}`}>
-              {coach.priority}
-            </span>
-            <h3 className="text-xl font-bold text-gray-900">{coach.name}</h3>
-            <div className="flex items-center gap-2 text-[#FF6B00] font-medium mt-1">
-              <Instagram size={16} />
-              {coach.handle}
-            </div>
-          </div>
-          <div className="bg-gray-100 px-3 py-1 rounded-full">
-            <div className="text-lg font-bold">{coach.followers >= 1000 ? `${(coach.followers / 1000).toFixed(0)}K` : coach.followers}</div>
-            <div className="text-xs text-gray-500">followers</div>
+    <div className="bg-[#0F0F11] rounded-2xl border border-[#27272A] p-6 hover:border-[#3F3F46] transition-all duration-200">
+      <div className="flex items-start justify-between mb-5">
+        <div>
+          <span className={`inline-flex items-center text-[10px] font-bold px-2.5 py-1 rounded-full border mb-3 ${priorityColors[coach.priority] || "text-[#71717A] bg-[#18181B] border-[#27272A]"}`}>
+            {coach.priority.toUpperCase()}
+          </span>
+          <h3 className="text-xl font-bold text-white">{coach.name}</h3>
+          <div className="flex items-center gap-2 text-[#F97316] font-medium mt-1.5">
+            <Instagram size={16} />
+            {coach.handle}
           </div>
         </div>
-
-        <div className="space-y-2 mb-4">
-          <div className="flex items-center gap-2 text-gray-600 text-sm">
-            <MapPin size={16} className="text-gray-400" />
-            {coach.location}
-          </div>
-          <div className="flex items-center gap-2 text-gray-600 text-sm">
-            <Trophy size={16} className="text-gray-400" />
-            {coach.role}
-          </div>
+        <div className="bg-[#18181B] px-4 py-2 rounded-xl text-center">
+          <div className="text-lg font-bold text-white">{coach.followers >= 1000 ? `${(coach.followers / 1000).toFixed(0)}K` : coach.followers}</div>
+          <div className="text-xs text-[#71717A]">followers</div>
         </div>
+      </div>
 
-        <div className="bg-gray-50 rounded-lg p-3 mb-4">
-          <p className="text-sm text-gray-600 italic">"{coach.vibe}"</p>
+      <div className="space-y-2 mb-5">
+        <div className="flex items-center gap-2 text-[#A1A1AA] text-sm">
+          <MapPin size={16} className="text-[#71717A]" />
+          {coach.location}
         </div>
-
-        <div className="mb-4">
-          <h4 className="text-xs font-bold text-gray-900 uppercase mb-1 flex items-center gap-1">
-            <Target size={12} />
-            Why Good Fit
-          </h4>
-          <p className="text-sm text-gray-600">{coach.whyGoodFit}</p>
+        <div className="flex items-center gap-2 text-[#A1A1AA] text-sm">
+          <Trophy size={16} className="text-[#71717A]" />
+          {coach.role}
         </div>
+      </div>
 
-        <div className="flex flex-wrap gap-2 mb-4">
-          {coach.tags.map((tag) => (
-            <Badge key={tag} variant="secondary">
-              {tag}
-            </Badge>
-          ))}
-        </div>
+      <div className="bg-[#18181B] rounded-xl p-4 mb-5">
+        <p className="text-sm text-[#A1A1AA] italic">&ldquo;{coach.vibe}&rdquo;</p>
+      </div>
 
-        <Button className="w-full bg-[#FF6B00] hover:bg-[#FF6B00]/90 text-white">
-          View Profile
-        </Button>
-      </CardContent>
-    </Card>
+      <div className="mb-5">
+        <h4 className="text-xs font-bold text-[#A1A1AA] uppercase mb-1.5 flex items-center gap-1.5">
+          <Target size={12} />
+          Why Good Fit
+        </h4>
+        <p className="text-sm text-[#71717A]">{coach.whyGoodFit}</p>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        {coach.tags.map((tag) => (
+          <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-[#18181B] text-[#71717A] border border-[#27272A]">
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
   )
 }

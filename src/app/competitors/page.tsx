@@ -1,36 +1,33 @@
 import { readJsonFile, CompetitorsData } from "@/lib/data"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Target, XCircle, CheckCircle, DollarSign, AlertTriangle } from "lucide-react"
+import { XCircle, CheckCircle, DollarSign } from "lucide-react"
 
 export default function CompetitorsPage() {
   const data = readJsonFile<CompetitorsData>("./assets/competitor-analysis.json")
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-10">
+      {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Competitor Analysis</h1>
-        <p className="text-gray-500 mt-1">What they claim, what they charge, what they do poorly</p>
+        <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">Competitor Analysis</h1>
+        <p className="text-[#A1A1AA] mt-2 text-base">What they claim, what they charge, what they do poorly</p>
       </div>
 
       {/* Summary */}
-      <Card className="bg-gray-900 text-white">
-        <CardContent className="pt-6">
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <h3 className="text-sm font-bold text-gray-400 uppercase mb-2">Biggest Threats</h3>
-              <p className="text-lg font-semibold">{data.summary.biggestThreats.join(" & ")}</p>
-            </div>
-            <div>
-              <h3 className="text-sm font-bold text-gray-400 uppercase mb-2">Our Differentiation</h3>
-              <p className="text-lg font-semibold text-[#FF6B00]">{data.summary.differentiation}</p>
-            </div>
+      <div className="bg-[#0F0F11] rounded-2xl border border-[#27272A] p-6">
+        <div className="grid md:grid-cols-2 gap-6">
+          <div>
+            <h3 className="text-sm font-semibold text-[#71717A] uppercase tracking-wider mb-2">Biggest Threats</h3>
+            <p className="text-lg font-semibold text-white">{data.summary.biggestThreats.join(" & ")}</p>
           </div>
-        </CardContent>
-      </Card>
+          <div>
+            <h3 className="text-sm font-semibold text-[#71717A] uppercase tracking-wider mb-2">Our Differentiation</h3>
+            <p className="text-lg font-semibold text-[#F97316]">{data.summary.differentiation}</p>
+          </div>
+        </div>
+      </div>
 
       {/* Competitors */}
-      <div className="space-y-4">
+      <div className="space-y-6">
         {data.competitors.map((competitor) => (
           <CompetitorCard key={competitor.name} competitor={competitor} />
         ))}
@@ -41,54 +38,56 @@ export default function CompetitorsPage() {
 
 function CompetitorCard({ competitor }: { competitor: CompetitorsData["competitors"][0] }) {
   const threatColors: Record<string, string> = {
-    "High": "bg-red-100 text-red-700",
-    "Medium": "bg-amber-100 text-amber-700",
-    "Low-Medium": "bg-amber-50 text-amber-600",
-    "Low": "bg-green-100 text-green-700",
+    "High": "text-white bg-red-500 border-red-500 shadow-lg shadow-red-500/20",
+    "Medium": "text-amber-950 bg-amber-400 border-amber-400",
+    "Low-Medium": "text-amber-400 bg-amber-400/10 border-amber-400/20",
+    "Low": "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
   }
 
-  const price = competitor.whatTheyCharge.monthly 
-    || competitor.whatTheyCharge.yearly 
-    || competitor.whatTheyCharge.model 
+  const price = competitor.whatTheyCharge.monthly
+    || competitor.whatTheyCharge.yearly
+    || competitor.whatTheyCharge.model
     || "Freemium"
 
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
-      <div className="bg-gray-50 p-6 border-b">
+    <div className="bg-[#0F0F11] rounded-2xl border border-[#27272A] overflow-hidden hover:border-[#3F3F46] transition-all duration-200">
+      {/* Header */}
+      <div className="bg-[#18181B] p-6 border-b border-[#27272A]">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">{competitor.name}</h2>
-            <p className="text-gray-500">{competitor.company}</p>
+            <h2 className="text-2xl font-bold text-white">{competitor.name}</h2>
+            <p className="text-[#71717A]">{competitor.company}</p>
           </div>
           <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1 text-[#FF6B00] font-bold text-xl">
+            <span className="flex items-center gap-1 text-[#F97316] font-bold text-xl">
               <DollarSign size={20} />
               {price}
             </span>
-            <span className={`px-3 py-1 rounded-full text-xs font-bold ${threatColors[competitor.threatLevel]}`}>
-              {competitor.threatLevel} THREAT
+            <span className={`inline-flex items-center text-[10px] font-bold px-2.5 py-1 rounded-full border ${threatColors[competitor.threatLevel] || "text-[#71717A] bg-[#18181B] border-[#27272A]"}`}>
+              {competitor.threatLevel.toUpperCase()} THREAT
             </span>
           </div>
         </div>
       </div>
 
-      <CardContent className="pt-6">
-        <div className="grid md:grid-cols-2 gap-6">
+      {/* Body */}
+      <div className="p-6">
+        <div className="grid md:grid-cols-2 gap-8">
           <div>
-            <div className="mb-4">
-              <h3 className="text-sm font-bold text-gray-900 uppercase mb-2">What They Claim</h3>
-              <p className="text-gray-600">{competitor.whatTheyClaim.primary}</p>
+            <div className="mb-6">
+              <h3 className="text-sm font-semibold text-[#A1A1AA] uppercase tracking-wider mb-3">What They Claim</h3>
+              <p className="text-[#A1A1AA]">{competitor.whatTheyClaim.primary}</p>
             </div>
 
             <div>
-              <h3 className="text-sm font-bold text-red-600 uppercase mb-2 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-red-400 uppercase tracking-wider mb-3 flex items-center gap-2">
                 <XCircle size={16} />
                 User Complaints
               </h3>
               <ul className="space-y-2">
                 {competitor.whatTheyDontDoWell.userComplaints.slice(0, 4).map((complaint, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                    <span className="text-red-500 mt-0.5">✗</span>
+                  <li key={i} className="flex items-start gap-2 text-sm text-[#A1A1AA]">
+                    <span className="text-red-400 mt-0.5 shrink-0">&#10005;</span>
                     {complaint}
                   </li>
                 ))}
@@ -97,25 +96,25 @@ function CompetitorCard({ competitor }: { competitor: CompetitorsData["competito
           </div>
 
           <div>
-            <h3 className="text-sm font-bold text-green-600 uppercase mb-2 flex items-center gap-2">
+            <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-3 flex items-center gap-2">
               <CheckCircle size={16} />
               CourtLab Advantage
             </h3>
             <ul className="space-y-3">
               {competitor.courtLabAdvantage.slice(0, 4).map((advantage, i) => (
                 <li key={i} className="flex items-start gap-2 text-sm">
-                  <span className="text-green-500 mt-0.5">✓</span>
-                  <span className="text-gray-700">{advantage}</span>
+                  <span className="text-emerald-400 mt-0.5 shrink-0">&#10003;</span>
+                  <span className="text-[#A1A1AA]">{advantage}</span>
                 </li>
               ))}
             </ul>
 
-            <div className="mt-4 p-3 bg-gray-50 rounded-lg border-l-4 border-[#FF6B00]">
-              <p className="text-xs text-gray-600 italic">{competitor.notes}</p>
+            <div className="mt-5 p-4 bg-[#18181B] rounded-xl border-l-4 border-[#F97316]">
+              <p className="text-sm text-[#71717A] italic">{competitor.notes}</p>
             </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   )
 }

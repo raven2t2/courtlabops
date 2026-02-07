@@ -1,89 +1,82 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Target, Mail, Users, TrendingUp } from "lucide-react"
+import { Mail, Target, TrendingUp, Plus } from "lucide-react"
 
 export default function CampaignsPage() {
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-10">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Campaigns</h1>
-          <p className="text-gray-500 mt-1">Outreach and marketing campaigns</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">Campaigns</h1>
+          <p className="text-[#A1A1AA] mt-2 text-base">Outreach and marketing campaigns</p>
         </div>
-        <Button className="bg-[#FF6B00] hover:bg-[#FF6B00]/90 text-white">
+        <button className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-[#F97316] rounded-xl hover:bg-[#FB923C] hover:shadow-lg hover:shadow-[#F97316]/20 transition-all duration-200 active:scale-[0.98]">
+          <Plus size={16} />
           New Campaign
-        </Button>
+        </button>
       </div>
 
-      <div className="grid md:grid-cols-4 gap-4">
-        <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold">10</div>
-            <div className="text-sm text-gray-500">Emails Drafted</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold">0</div>
-            <div className="text-sm text-gray-500">Emails Sent</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold">0%</div>
-            <div className="text-sm text-gray-500">Response Rate</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold">0</div>
-            <div className="text-sm text-gray-500">Meetings Set</div>
-          </CardContent>
-        </Card>
+      {/* Stats */}
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-6">
+        <StatCard icon={Mail} value="10" label="Emails Drafted" />
+        <StatCard icon={Target} value="0" label="Emails Sent" />
+        <StatCard icon={TrendingUp} value="0%" label="Response Rate" />
+        <StatCard icon={Mail} value="0" label="Meetings Set" />
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Active Campaigns</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <CampaignRow 
-              name="SA Club Outreach"
-              status="Draft"
-              leads={10}
-              sent={0}
-              progress={0}
-            />
-            <CampaignRow 
-              name="Easter Classic Sponsorship"
-              status="Planning"
-              leads={1}
-              sent={0}
-              progress={10}
-            />
-            <CampaignRow 
-              name="Coach Affiliate Program"
-              status="Research"
-              leads={5}
-              sent={0}
-              progress={5}
-            />
-          </div>
-        </CardContent>
-      </Card>
+      {/* Active Campaigns */}
+      <section className="space-y-5">
+        <h2 className="text-sm font-semibold text-[#A1A1AA] uppercase tracking-wider">Active Campaigns</h2>
+        <div className="bg-[#0F0F11] rounded-2xl border border-[#27272A] divide-y divide-[#27272A]">
+          <CampaignRow
+            name="SA Club Outreach"
+            status="Draft"
+            leads={10}
+            sent={0}
+            progress={0}
+          />
+          <CampaignRow
+            name="Easter Classic Sponsorship"
+            status="Planning"
+            leads={1}
+            sent={0}
+            progress={10}
+          />
+          <CampaignRow
+            name="Coach Affiliate Program"
+            status="Research"
+            leads={5}
+            sent={0}
+            progress={5}
+          />
+        </div>
+      </section>
     </div>
   )
 }
 
-function CampaignRow({ 
-  name, 
-  status, 
-  leads, 
-  sent, 
-  progress 
-}: { 
+function StatCard({ icon: Icon, value, label }: { icon: typeof Mail; value: string; label: string }) {
+  return (
+    <div className="bg-[#0F0F11] rounded-2xl border border-[#27272A] p-6 hover:border-[#3F3F46] transition-all duration-200">
+      <div className="flex items-start justify-between">
+        <div className="p-2.5 bg-[#18181B] rounded-xl">
+          <Icon size={20} className="text-[#71717A]" />
+        </div>
+      </div>
+      <div className="mt-5">
+        <div className="text-3xl font-bold text-white">{value}</div>
+        <div className="text-sm text-[#71717A] mt-1">{label}</div>
+      </div>
+    </div>
+  )
+}
+
+function CampaignRow({
+  name,
+  status,
+  leads,
+  sent,
+  progress
+}: {
   name: string
   status: string
   leads: number
@@ -91,36 +84,36 @@ function CampaignRow({
   progress: number
 }) {
   const statusColors: Record<string, string> = {
-    "Draft": "bg-gray-100 text-gray-700",
-    "Planning": "bg-amber-100 text-amber-700",
-    "Research": "bg-blue-100 text-blue-700",
-    "Active": "bg-green-100 text-green-700",
+    "Draft": "text-[#71717A] bg-[#18181B] border-[#27272A]",
+    "Planning": "text-amber-950 bg-amber-400 border-amber-400",
+    "Research": "text-blue-400 bg-blue-400/10 border-blue-400/20",
+    "Active": "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
   }
 
   return (
-    <div className="flex items-center justify-between p-4 rounded-lg bg-gray-50">
+    <div className="flex items-center justify-between p-5 hover:bg-[#18181B]/50 transition-colors duration-200">
       <div className="flex-1">
         <div className="flex items-center gap-3">
-          <h3 className="font-semibold text-gray-900">{name}</h3>
-          <span className={`text-xs font-medium px-2 py-0.5 rounded ${statusColors[status]}`}>
-            {status}
+          <h3 className="font-semibold text-white">{name}</h3>
+          <span className={`inline-flex items-center text-[10px] font-bold px-2.5 py-1 rounded-full border ${statusColors[status] || statusColors["Draft"]}`}>
+            {status.toUpperCase()}
           </span>
         </div>
-        <div className="flex items-center gap-4 mt-2 text-sm text-gray-500">
+        <div className="flex items-center gap-4 mt-2 text-sm text-[#71717A]">
           <span>{leads} leads</span>
           <span>{sent} sent</span>
         </div>
       </div>
-      <div className="w-32">
-        <div className="flex items-center justify-between text-xs mb-1">
-          <span className="text-gray-500">Progress</span>
-          <span className="font-medium">{progress}%</span>
+      <div className="w-36">
+        <div className="flex items-center justify-between text-xs mb-2">
+          <span className="text-[#71717A]">Progress</span>
+          <span className="font-semibold text-white">{progress}%</span>
         </div>
-        <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-[#FF6B00] rounded-full transition-all"
-            style={{ width: `${progress}%` }}
-          ></div>
+        <div className="h-2 bg-[#27272A] rounded-full overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-[#F97316] to-[#FB923C] rounded-full transition-all"
+            style={{ width: `${Math.max(progress, 2)}%` }}
+          />
         </div>
       </div>
     </div>
