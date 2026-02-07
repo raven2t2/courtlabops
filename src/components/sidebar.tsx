@@ -1,161 +1,135 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
-import { cn } from "@/lib/utils"
-import { 
-  LayoutDashboard, 
-  Users, 
-  Building2, 
-  Target, 
-  Settings,
-  Trophy,
-  LogOut,
-  Menu,
-  X,
-  ChevronLeft,
-  ChevronRight
+import {
+  LayoutDashboard, Users, Target, Trophy, Calendar,
+  Crosshair, Settings, Flame, MoreVertical, Menu, X
 } from "lucide-react"
 
-const navigation = [
-  { name: "Dashboard", href: "/", icon: LayoutDashboard },
-  { name: "Leads", href: "/leads", icon: Users },
-  { name: "Clubs", href: "/clubs", icon: Building2 },
-  { name: "Campaigns", href: "/campaigns", icon: Target },
-  { name: "Coaches", href: "/coaches", icon: Trophy },
-  { name: "Settings", href: "/settings", icon: Settings },
+const NAV_ITEMS = [
+  { icon: LayoutDashboard, label: "Dashboard", href: "/" },
+  { icon: Users, label: "Leads", href: "/leads", badge: "18" },
+  { icon: Target, label: "Campaigns", href: "/campaigns" },
+  { icon: Trophy, label: "Coaches", href: "/coaches" },
+  { icon: Crosshair, label: "Competitors", href: "/competitors" },
+  { icon: Calendar, label: "Events", href: "/events" },
+  { icon: Settings, label: "Settings", href: "/settings" },
 ]
 
 export function Sidebar() {
   const pathname = usePathname()
-  const [isOpen, setIsOpen] = useState(false)
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
-  // Close mobile sidebar on route change
-  useEffect(() => {
-    setIsOpen(false)
-  }, [pathname])
+  useEffect(() => { setMobileOpen(false) }, [pathname])
 
-  // Close mobile sidebar on escape key
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsOpen(false)
-    }
-    document.addEventListener('keydown', handleEscape)
-    return () => document.removeEventListener('keydown', handleEscape)
-  }, [])
-
-  // Prevent body scroll when mobile sidebar is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden"
     } else {
-      document.body.style.overflow = ''
+      document.body.style.overflow = ""
     }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isOpen])
+    return () => { document.body.style.overflow = "" }
+  }, [mobileOpen])
+
+  const sidebarContent = (
+    <>
+      {/* Logo */}
+      <div className="px-5 pt-5 pb-4 flex items-center gap-3">
+        <div className="w-9 h-9 rounded-full overflow-hidden ring-1 ring-[#27272A] flex-shrink-0">
+          <Image src="/courtlab-logo.jpg" alt="CourtLab" width={36} height={36} className="w-full h-full object-cover" />
+        </div>
+        <div>
+          <div className="text-sm font-bold tracking-tight text-white">CourtLab</div>
+          <div className="text-[11px] font-medium text-[#52525B]">Operations Hub</div>
+        </div>
+      </div>
+
+      <div className="mx-5 h-px bg-[#1E1E24]" />
+
+      {/* Nav */}
+      <nav className="flex-1 p-3 space-y-0.5 mt-1 overflow-y-auto">
+        <div className="px-3 mb-2">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[#52525B]">Menu</span>
+        </div>
+        {NAV_ITEMS.map((item) => {
+          const Icon = item.icon
+          const active = pathname === item.href
+          return (
+            <Link
+              key={item.label}
+              href={item.href}
+              onClick={() => setMobileOpen(false)}
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] font-medium transition-all ${
+                active
+                  ? "bg-[#3B82F6]/12 text-[#3B82F6]"
+                  : "text-[#71717A] hover:text-white hover:bg-[#18181B]"
+              }`}
+            >
+              <Icon size={16} strokeWidth={active ? 2.2 : 1.8} />
+              <span className="flex-1 text-left">{item.label}</span>
+              {item.badge && (
+                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${
+                  active ? "bg-[#3B82F6] text-white" : "bg-[#18181B] text-[#52525B]"
+                }`}>
+                  {item.badge}
+                </span>
+              )}
+            </Link>
+          )
+        })}
+      </nav>
+
+      {/* Tip */}
+      <div className="mx-3 mb-3 p-3.5 rounded-xl border border-[#F59E0B]/20 bg-[#F59E0B]/5">
+        <div className="flex items-center gap-1.5 mb-1">
+          <Flame size={12} className="text-[#F59E0B]" />
+          <span className="text-[11px] font-bold text-[#F59E0B]">Action Required</span>
+        </div>
+        <p className="text-[11px] leading-relaxed text-[#A1A1AA]">Easter Classic booth reservation closes in 8 weeks.</p>
+      </div>
+
+      {/* User */}
+      <div className="px-4 py-3 border-t border-[#1E1E24]">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center text-[11px] font-bold text-white bg-[#3B82F6]">MR</div>
+          <div className="flex-1 min-w-0">
+            <div className="text-xs font-semibold truncate text-white">Michael Ragland</div>
+            <div className="text-[11px] text-[#52525B]">Founder</div>
+          </div>
+          <MoreVertical size={14} className="text-[#52525B]" />
+        </div>
+      </div>
+    </>
+  )
 
   return (
     <>
-      {/* Mobile hamburger button */}
+      {/* Mobile toggle */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={cn(
-          "fixed left-4 top-4 z-[60] flex h-10 w-10 items-center justify-center rounded-lg border border-[#2E2E38] bg-[#16161A] text-white transition-all duration-200 hover:bg-[#1E1E24] lg:hidden",
-          isOpen && "border-orange-500/50 bg-orange-500/10"
-        )}
-        aria-label="Toggle menu"
-        aria-expanded={isOpen}
+        onClick={() => setMobileOpen(!mobileOpen)}
+        className="fixed left-4 top-4 z-[60] flex h-10 w-10 items-center justify-center rounded-lg border border-[#27272A] bg-[#0A0A0D] text-white lg:hidden"
       >
-        {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        {mobileOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
 
       {/* Mobile overlay */}
-      <div 
-        className={cn(
-          "fixed inset-0 z-[55] bg-black/60 backdrop-blur-sm transition-opacity duration-300 lg:hidden",
-          isOpen ? "opacity-100" : "pointer-events-none opacity-0"
-        )}
-        onClick={() => setIsOpen(false)}
-        aria-hidden="true"
-      />
+      {mobileOpen && (
+        <div className="fixed inset-0 z-[55] bg-black/60 backdrop-blur-sm lg:hidden" onClick={() => setMobileOpen(false)} />
+      )}
 
-      {/* Sidebar */}
-      <aside 
-        className={cn(
-          "fixed inset-y-0 left-0 z-[56] flex flex-col border-r border-[#2E2E38] bg-[#0F0F11] transition-all duration-300 ease-out lg:static",
-          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
-          isCollapsed ? "w-20" : "w-64"
-        )}
-      >
-        {/* Logo section */}
-        <div className={cn(
-          "flex h-16 items-center gap-3 border-b border-[#2E2E38] px-4",
-          isCollapsed && "justify-center px-2"
-        )}>
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 text-xl shadow-lg shadow-orange-500/20">
-            🏀
-          </div>
-          {!isCollapsed && (
-            <div className="font-bold text-xl tracking-tight">
-              <span className="text-white">Court</span>
-              <span className="text-orange-500">Lab</span>
-            </div>
-          )}
-          
-          {/* Collapse button (desktop only) */}
-          <button
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            className={cn(
-              "ml-auto hidden h-6 w-6 items-center justify-center rounded-md border border-[#2E2E38] text-zinc-500 transition-colors hover:border-zinc-600 hover:text-zinc-300 lg:flex",
-              isCollapsed && "absolute -right-3 bg-[#0F0F11]"
-            )}
-            aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-          >
-            {isCollapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronLeft className="h-3 w-3" />}
-          </button>
-        </div>
+      {/* Mobile sidebar */}
+      <aside className={`fixed inset-y-0 left-0 z-[56] w-[252px] flex flex-col border-r border-[#1E1E24] bg-[#0A0A0D] transition-transform duration-300 lg:hidden ${
+        mobileOpen ? "translate-x-0" : "-translate-x-full"
+      }`}>
+        {sidebarContent}
+      </aside>
 
-        {/* Navigation */}
-        <nav className="flex-1 space-y-1 overflow-y-auto p-3">
-          {navigation.map((item) => {
-            const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`)
-            return (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                className={cn(
-                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
-                  isActive
-                    ? "bg-orange-500 text-white shadow-lg shadow-orange-500/20"
-                    : "text-zinc-400 hover:bg-[#1E1E24] hover:text-white",
-                  isCollapsed && "justify-center px-2"
-                )}
-                title={isCollapsed ? item.name : undefined}
-              >
-                <item.icon className="h-5 w-5 shrink-0" />
-                {!isCollapsed && <span>{item.name}</span>}
-              </Link>
-            )
-          })}
-        </nav>
-
-        {/* Footer */}
-        <div className="border-t border-[#2E2E38] p-3">
-          <button 
-            className={cn(
-              "flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-zinc-500 transition-colors hover:bg-[#1E1E24] hover:text-white",
-              isCollapsed && "justify-center px-2"
-            )}
-          >
-            <LogOut className="h-5 w-5 shrink-0" />
-            {!isCollapsed && <span>Sign Out</span>}
-          </button>
-        </div>
+      {/* Desktop sidebar */}
+      <aside className="w-[252px] flex-shrink-0 flex-col border-r border-[#1E1E24] bg-[#0A0A0D] hidden lg:flex">
+        {sidebarContent}
       </aside>
     </>
   )
