@@ -5,6 +5,11 @@ import { AppShell } from "@/components/app-shell"
 export const metadata: Metadata = {
   title: "CourtLab CRM",
   description: "Go-to-Market Engine for CourtLab Basketball",
+  icons: {
+    icon: "/courtlab-main-logo.png",
+    shortcut: "/courtlab-main-logo.png",
+    apple: "/courtlab-main-logo.png",
+  },
 }
 
 export default function RootLayout({

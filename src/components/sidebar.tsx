@@ -34,7 +34,7 @@ function SidebarContent({ pathname, onNavigate }: { pathname: string; onNavigate
       <div className="border-b border-border-subtle px-5 py-4">
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 overflow-hidden rounded-xl border border-border-default">
-            <Image src="/courtlab-logo.jpg" alt="CourtLab" width={40} height={40} className="h-full w-full object-cover" />
+            <Image src="/courtlab-main-logo.png" alt="CourtLab" width={40} height={40} className="h-full w-full object-contain" />
           </div>
           <div>
             <p className="text-sm font-bold tracking-tight text-text-primary">CourtLab</p>

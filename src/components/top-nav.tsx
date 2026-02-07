@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 import {
@@ -42,8 +43,15 @@ export function TopNav() {
         <div className="flex h-16 items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <Link href="/" className="group flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-border-default bg-bg-secondary">
-                <span className="font-display text-sm font-extrabold tracking-tight text-velocity-orange">CL</span>
+              <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl border border-border-default bg-bg-secondary p-0.5">
+                <Image
+                  src="/courtlab-main-logo.png"
+                  alt="CourtLab logo"
+                  width={40}
+                  height={40}
+                  className="h-full w-full object-contain"
+                  priority
+                />
               </div>
               <div className="hidden sm:block">
                 <p className="font-display text-base font-bold tracking-tight text-text-primary">CourtLab</p>
