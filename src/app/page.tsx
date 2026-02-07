@@ -132,6 +132,8 @@ const PIPELINE_LEADS = [
   { name: "Knox Raiders", loc: "VIC", status: "new" as const, contact: "Head of Programs", score: 80 },
 ]
 
+const KANBAN_STORAGE_KEY = "courtlab-kanban-columns-v1"
+
 function Surface({ children, className = "" }: { children: ReactNode; className?: string }) {
   return <section className={cn("rounded-2xl border border-border-subtle bg-bg-secondary/75 p-4 sm:p-5", className)}>{children}</section>
 }
@@ -201,8 +203,22 @@ export default function Dashboard() {
     try {
       const res = await fetch('/api/kanban')
       const data = await res.json()
+
+      let nextColumns = data.columns || []
+      try {
+        const localColumns = localStorage.getItem(KANBAN_STORAGE_KEY)
+        if (localColumns) {
+          const parsed = JSON.parse(localColumns)
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            nextColumns = parsed
+          }
+        }
+      } catch {
+        // Ignore local storage parse failures and continue with API data
+      }
+
       setKanbanData(data)
-      setColumns(data.columns || [])
+      setColumns(nextColumns)
     } catch (err) {
       console.error('Failed to load kanban:', err)
     }
@@ -253,6 +269,12 @@ export default function Dashboard() {
   }
 
   const persistColumns = async (nextColumns: BoardColumn[]) => {
+    try {
+      localStorage.setItem(KANBAN_STORAGE_KEY, JSON.stringify(nextColumns))
+    } catch {
+      // Ignore local storage write failures
+    }
+
     setIsSavingBoard(true)
     try {
       const res = await fetch("/api/kanban", {
