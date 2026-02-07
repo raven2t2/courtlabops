@@ -35,6 +35,7 @@ interface Asset {
   createdAt: string
   useCase: string
   filename?: string
+  url?: string
   githubUrl?: string
 }
 
@@ -375,7 +376,10 @@ export default function GalleryPage() {
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {filteredAssets.map((asset, index) => {
                 const isSelected = selectedAssets.has(asset.id)
-                const githubAssetUrl = asset.githubUrl || `https://github.com/raven2t2/courtlabops/blob/main/shared/gallery/21d9a9dc4a781c60ae3b55b059b31890/assets/${asset.filename || asset.id}.${asset.type === "video" ? "mp4" : "jpg"}?raw=true`
+                const githubAssetUrl =
+                  asset.url ||
+                  asset.githubUrl ||
+                  `https://github.com/raven2t2/courtlabops/blob/main/shared/gallery/21d9a9dc4a781c60ae3b55b059b31890/assets/${asset.filename || `${asset.id}.${asset.type === "video" ? "mp4" : "jpg"}`}?raw=true`
                 
                 return (
                   <div

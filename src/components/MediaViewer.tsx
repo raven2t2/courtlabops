@@ -17,6 +17,7 @@ interface Asset {
   createdAt: string
   useCase: string
   filename?: string
+  url?: string
   githubUrl?: string
 }
 
@@ -86,7 +87,10 @@ export function MediaViewer({
 
   if (!isOpen || !asset) return null
 
-  const githubAssetUrl = `https://github.com/raven2t2/courtlabops/blob/main/shared/gallery/21d9a9dc4a781c60ae3b55b059b31890/assets/${asset.filename || asset.id}.${asset.type === "video" ? "mp4" : "jpg"}?raw=true`
+  const githubAssetUrl =
+    asset.url ||
+    asset.githubUrl ||
+    `https://github.com/raven2t2/courtlabops/blob/main/shared/gallery/21d9a9dc4a781c60ae3b55b059b31890/assets/${asset.filename || `${asset.id}.${asset.type === "video" ? "mp4" : "jpg"}`}?raw=true`
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm">
