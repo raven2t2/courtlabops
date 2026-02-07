@@ -1,0 +1,20 @@
+{
+  "token": "21d9a9dc4a781c60ae3b55b059b31890",
+  "exportedAt": "2026-02-07T04:55:13.321Z",
+  "sourceBase": "http://localhost:3001",
+  "totalItems": 207,
+  "files": [
+    {
+      "index": 1,
+      "id": "bFA7kaudBWW8x5ch03Qi",
+      "type": "image",
+      "model": "gemini-3-pro-image-preview",
+      "aspect": "9/16",
+      "duration": null,
+      "createdAt": "2026-01-26T14:00:00.350Z",
+      "prompt": "Total Orange Youth Elite Lookbook (Studio, Confidence, Future Star Energy)\n\nPhotorealistic studio portrait of two young basketball players (one female, one male), standing back-to-back in a confident pose. Both wear premium black CourtLab performance uniforms with subtle orange accents, logo spelled correctly. Both are wearing Nike Kobe 6 Protro basketball shoes in the Total Orange colorway, clearly visible and in full focus. One player holds a basketball at hip level, the other stands with arms folded. Neutral dark gray seamless background, soft top light with gentle rim lighting to define muscle tone, shoe texture, and fabric detail. Sharp focus, clean commercial lighting, fashion-meets-sport aesthetic, similar to a high-end Nike youth campaign. Full body in frame, vertical 9:16, ultra-high resolution, no text, no watermarks, no other brand logos besides CourtLab and the shoes.\n\nMood:\nFuture stars. Calm confidence. Not kids — competitors.",
+      "category": "brand",
+      "useCase": "social-media"
+    }
+  ]
+}

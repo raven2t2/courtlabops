@@ -10,6 +10,7 @@ import {
   Target, 
   Trophy,
   FileText,
+  Image as ImageIcon,
   Menu,
   X
 } from "lucide-react";
@@ -22,6 +23,7 @@ const navItems = [
   { href: "/competitors", label: "Competitors", icon: Target },
   { href: "/coaches", label: "Coaches", icon: Trophy },
   { href: "/content", label: "Content", icon: FileText },
+  { href: "/gallery", label: "Gallery", icon: ImageIcon },
 ];
 
 export function Navigation() {
