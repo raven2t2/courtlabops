@@ -1,0 +1,134 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-08T21:42:00Z",
+  "templates": {
+    "sa_club_email": {
+      "type": "email",
+      "target": "SA Basketball Clubs",
+      "channel": "email",
+      "subject": "[Club Name] + CourtLab Partnership — Player Development Infrastructure",
+      "body": "Hi [Secretary Name],\n\n[PERSONALIZED OPENER - Pick one based on research:]\n- \"Saw you run the Easter Classic — biggest tournament in SA\"\n- \"60+ district teams is serious scale\"\n- \"Your Hoops & Her program is impressive\"\n- \"NBL1 Central team with pro player pipeline\"\n- \"[Club Name] has incredible community presence\"\n\n[PROBLEM STATEMENT]\nVolunteer coaches managing stats manually takes hours. No consistent coaching language across teams. Parents don't see their child's progress.\n\n[SOLUTION]\nCourtLab automates player development tracking. Three taps per coach:\n1. Check attendance\n2. Tag skills worked on (pre-set list)\n3. Done — system generates parent update\n\nResult: Coaches save 2+ hours/week. Parents get weekly clarity. Club sees trends by age group.\n\n[SOCIAL PROOF]\nBuilt in Adelaide. Already used by [mention visible clubs if applicable]. \nFounding Club rate: $2,450/year (limited to first 10 SA district clubs).\n\n[CTA]\nWorth a 15-minute demo this week?\n\ncourtlab.app\n\nCheers,\nMichael\nFounder, CourtLab",
+      "tags": ["sa-clubs", "high-priority", "email"],
+      "sendVia": "Gmail (courtlab.app account)",
+      "followUpDays": 7
+    },
+    "affiliate_dm_general": {
+      "type": "dm",
+      "target": "Micro-Influencers (50-250K)",
+      "channel": "twitter_dm",
+      "body": "Hey [name],\n\nBeen following your content on [platform] for a bit. Your post about [specific piece: 'player development' OR 'coaching tips' OR 'basketball training'] hit different — [why it resonates: 'honest take' OR 'exactly what coaches need' OR 'practical advice'].\n\nI built CourtLab because I got tired of basketball apps that don't work. No AI guesswork. Just verified combine data.\n\nYour audience [specific reason they'd benefit from CourtLab based on their niche]:\n- If coaching-focused: \"Players need reliable stats, not camera angles\"\n- If content-focused: \"Story angle of underdog 'undeniable proof'\"\n- If media-focused: \"Pathway data is hard to find for prospects\"\n- If trainer-focused: \"Clients want proof of improvement\"\n\nNot asking for anything yet. Just thought you'd dig it.\n\nCurious what you think?\n\nMichael\nCourtLab\ncourtlab.app",
+      "tags": ["affiliates", "micro-influencers", "twitter-dm"],
+      "sendVia": "Twitter DM (manual copy/paste)",
+      "followUpDays": 10
+    },
+    "coach_pain_point_dm": {
+      "type": "dm",
+      "target": "Individual Coaches",
+      "channel": "twitter_dm_or_instagram",
+      "body": "Hey [name],\n\nSaw your post about [pain point identified in research: 'admin burden' OR 'tracking stats' OR 'player development' OR 'time management'].\n\nI built CourtLab exactly for that. Takes coaches from 2 hrs/week admin to 15 minutes. Players see verified progress instead of guessing.\n\nFree tier covers [basic feature that solves their pain]. Pro is $99/year if you like it.\n\nWorth a try? No credit card needed.\n\n[App link: https://apps.apple.com/us/app/courtlab-basketball-trainer/id6757304855]\n\nMichael\nCourtLab",
+      "tags": ["coaches", "pain-first", "high-intent"],
+      "sendVia": "Twitter DM or Instagram DM (manual)",
+      "followUpDays": 7
+    },
+    "sponsor_partnership": {
+      "type": "email",
+      "target": "Easter Classic Sponsors + Corporate Partners",
+      "channel": "email",
+      "subject": "Easter Classic 2026 — Brand Sponsorship Opportunity",
+      "body": "Hi [decision maker name],\n\nEaster Classic 2026 is 8 weeks away. Perfect timing for brand visibility and youth market penetration.\n\nI'm launching CourtLab Combines — free baseline events for junior players (U10-U18). These combines generate:\n- 200+ player data points (recruit pipeline)\n- Parent engagement stories (testimonials)\n- Sponsor brand visibility (event presence, social media)\n- Media coverage (local sports news angle)\n\n[SPONSORSHIP STRUCTURE]\nOfficial: \"Player Development Presented by [Your Company]\"\nInvestment: $2,500-$5,000 (flexible, negotiable)\nValue to your brand:\n- Brand placement at event (signage, social media)\n- Athlete success stories featuring your company\n- Community goodwill + youth market credibility\n- Data insights (player demographics, performance trends)\n\n[YOUR SPECIFIC FIT]\n[Research detail: \"I saw [Company] sponsors [event] — that's exactly the audience\"]\n[Research detail: \"Your brand values align with youth development\"]\n[Research detail: \"Easter Classic reaches 200+ parents annually\"]\n\nInterested in exploring this?\n\nI'm free for a quick call [suggest 2-3 time slots this week].\n\nMichael\nFounder, CourtLab\ncourtlab.app",
+      "tags": ["sponsors", "easter-classic", "revenue"],
+      "sendVia": "Gmail (courtlab.app)",
+      "followUpDays": 5
+    },
+    "facility_partnership": {
+      "type": "email",
+      "target": "Basketball Facilities & Gyms",
+      "channel": "email_or_phone",
+      "subject": "Host CourtLab Combines — Free Event, Sponsor Revenue Opportunity",
+      "body": "Hi [facility contact name],\n\n[Facility name] would be perfect to host CourtLab Combines.\n\n[WHAT'S A COMBINE?]\n- Free baseline event for U10-U18 basketball players\n- 4 stations: zone shooting %, height/reach, movement drill, combine test\n- 90 minutes, 50-100 players per event\n- Within 72 hours: players get PDF with baselines + 2-3 next-focus tips\n\n[REVENUE MODEL FOR FACILITY]\n- Sponsors pay $2,500-$5,000 per event (we secure sponsors)\n- Facility gets 20% commission OR venue rental fee (your choice)\n- We handle all logistics: marketing, setup, execution, breakdown\n- Facility gets community goodwill + brand association\n- Multiple combines possible (quarterly or monthly)\n\n[YOUR FACILITY FIT]\n[Research detail: \"Your capacity (50-100) is perfect\"]\n[Research detail: \"You already host [events] — proven track record\"]\n[Research detail: \"Central location accessible for coaches/players\"]\n\nThis is a win-win. You get revenue, community impact, and facility visibility without extra work.\n\nInterested? Can we grab 15 minutes this week?\n\nMichael\nCourtLab\ncourtlab.app",
+      "tags": ["facilities", "partnerships", "revenue-share"],
+      "sendVia": "Email or Phone",
+      "followUpDays": 7
+    },
+    "reddit_engagement_comment": {
+      "type": "comment",
+      "target": "Reddit Parents / Coaches (r/basketball, r/youthsports, etc.)",
+      "channel": "reddit",
+      "body": "[ANSWER THEIR QUESTION FIRST - genuine help, not sales]\n\n[Example if they ask about tracking progress:]\n\"Great question! Most apps are either expensive ($100+/year) or unreliable (AutoML nonsense). The best ones focus on verified data, not AI hype.\n\nWe built CourtLab exactly for this use case — verified combine baselines, parent progress reports, zero guesswork. Free tier + Pro at $99/year.\n\nGood luck with [their specific goal]! Feel free to DM if you want more details.\"\n\n[Example if they ask about coaching tools:]\n\"This is a real pain point. Most coaches I talk to waste 2+ hours/week on admin stuff that shouldn't exist.\n\nWe automate the tracking part so you can focus on coaching. Free to try: [link]\n\nHappy to answer any questions!\"\n\n[GENERAL STRUCTURE]\n1. Answer their actual question first (value-first)\n2. Mention CourtLab naturally as a solution to their specific pain\n3. Provide link but don't be pushy\n4. Offer to help further (DM open)\n5. Sign off naturally",
+      "tags": ["organic", "reddit", "value-first", "low-friction"],
+      "sendVia": "Reddit comment (manual)",
+      "followUpDays": "N/A - organic engagement"
+    },
+    "twitter_engagement_reply": {
+      "type": "reply",
+      "target": "Coaches/Clubs/Parents (Twitter/X)",
+      "channel": "twitter",
+      "body": "[RESPOND TO THEIR POST WITH VALUE FIRST]\n\n[Example if they post about player development:]\n\"[Thoughtful take on their insight]\n\nVerified data changes everything. Most coaches realize too late that tracking is the missing piece.\n\nWe built CourtLab to solve exactly this. [App link]\"\n\n[Example if they express frustration about coaching admin:]\n\"Felt this. The admin overhead is why a lot of good coaches burn out.\n\nWe automated ours and saved 2+ hours/week. Might be worth a look.\n[App link]\"\n\n[GENERAL STRUCTURE]\n1. Quote or reference their specific post\n2. Show you understand their point\n3. Add value (insight, solution)\n4. Mention CourtLab naturally\n5. Link to free trial\n6. Keep it conversational, not salesy",
+      "tags": ["social-listening", "twitter", "engagement", "organic"],
+      "sendVia": "Twitter reply (manual web interface)",
+      "followUpDays": "N/A - organic engagement"
+    },
+    "app_review_response": {
+      "type": "comment",
+      "target": "App Store / Google Play Reviews",
+      "channel": "app_store",
+      "body": "[RESPOND TO REVIEWS WITHIN 24 HOURS]\n\n[POSITIVE REVIEWS (4-5 stars)]\n\"Thanks so much [name]! We built CourtLab to solve exactly this — proven data instead of guesswork. Love hearing that it's working for you and your players.\n\nWould love more feedback. Feel free to email us: [courtlab@email].\n\nKeep pushing!\"\n\n[NEGATIVE REVIEWS (1-3 stars)]\n\"Thanks for the feedback, [name]. We take this seriously.\n\nCan you tell us more about [specific issue]? Reach out directly: [email] so we can fix it.\n\nWe're committed to making this better.\"\n\n[FEATURE REQUEST REVIEWS]\n\"Great idea! We actually have [related feature] in the pipeline. But I want to understand your use case better.\n\nDM us or email: [email]. Let's chat.\"\n\n[GENERAL RULES]\n- Respond within 24 hours\n- Address specific feedback (show you read it)\n- Offer to help directly (email or DM)\n- Be genuine, not corporate-speak\n- Use their name if they provided it",
+      "tags": ["app-store", "reviews", "reputation", "customer-service"],
+      "sendVia": "App Store / Google Play (direct responses)",
+      "followUpDays": "N/A - responds to existing reviews"
+    }
+  },
+  "personalization_rules": {
+    "always_research_first": "Never send generic outreach. Research 2-3 specific details about the person/club.",
+    "specific_fit_reason": "Include 1-2 specific reasons why CourtLab fits THEM, not a generic pitch.",
+    "pain_point_matching": "Match outreach angle to their demonstrated pain point or interest.",
+    "tone_matching": "If they're formal (corporate), be formal. If they're casual (social media), be casual.",
+    "value_first": "Always provide value or genuine help BEFORE asking for anything.",
+    "no_pressure": "Position as 'thought you might dig this' not 'you need this'.",
+    "clear_cta": "One clear call-to-action per message (demo, free trial, quick call, etc.)"
+  },
+  "follow_up_strategy": {
+    "first_contact": "Initial outreach (email, DM, comment)",
+    "no_response_day_7": "Light follow-up: 'Just checking if you got my previous message'",
+    "no_response_day_14": "Final follow-up: 'One more time — think this might fit your needs. Open to feedback.'",
+    "response_received": "Move to kanban 'Replied' column, schedule next action (demo, call, trial)",
+    "show_interest": "Qualify next step (free trial? 15-min demo? Affiliate interest?)"
+  },
+  "platform_specific": {
+    "email": {
+      "best_time_to_send": "Tuesday-Thursday, 9-11 AM",
+      "subject_line_length": "50-60 characters",
+      "body_format": "3-4 paragraphs max, short sentences, clear CTA",
+      "signature": "Michael\nFounder, CourtLab\ncourtlab.app",
+      "tools": "Gmail (courtlab.app account)"
+    },
+    "twitter_dm": {
+      "character_limit": "10,000 (but keep under 500)",
+      "tone": "Conversational, genuine, friendly",
+      "follow_account_first": "Yes, like their recent posts before DM",
+      "tools": "Twitter web interface (manual copy/paste from template)",
+      "timing": "M-F business hours, avoid early morning"
+    },
+    "instagram_dm": {
+      "character_limit": "Character limit: 1000 per message",
+      "tone": "Casual, friendly, personal",
+      "visual_engagement": "Like 2-3 of their recent posts first",
+      "tools": "Instagram app (manual)",
+      "timing": "Evening hours (6-9 PM local time to recipient)"
+    },
+    "reddit_comment": {
+      "tone": "Helpful, knowledgeable, non-promotional",
+      "disclosure": "Mention you're from CourtLab if relevant",
+      "upvote_first": "Upvote the post/helpful comments to show engagement",
+      "tools": "Reddit app or web",
+      "timing": "During active discussion hours (comments on hot posts)"
+    },
+    "app_store_review": {
+      "response_time": "Within 24 hours",
+      "character_limit": "280 characters per response",
+      "tone": "Grateful, solutions-oriented",
+      "tools": "App Store Connect dashboard",
+      "follow_up": "If they respond, move to DM or email for deeper conversation"
+    }
+  }
+}
