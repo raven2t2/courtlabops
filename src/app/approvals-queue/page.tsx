@@ -293,7 +293,10 @@ export default function ApprovalsQueuePage() {
               <>
                 <Surface className="border-hyper-blue">
                   <div className="mb-3 flex items-center justify-between">
-                    <h2 className="font-bold text-text-primary">{selectedTask.title}</h2>
+                    <div>
+                      <h2 className="font-bold text-text-primary">{selectedTask.title}</h2>
+                      <p className="mt-1 text-xs text-text-muted">{selectedTask.id}</p>
+                    </div>
                     <button
                       onClick={() => setSelectedTaskId(null)}
                       className="rounded-lg p-1 text-text-muted hover:bg-bg-tertiary hover:text-text-primary"
@@ -302,27 +305,66 @@ export default function ApprovalsQueuePage() {
                     </button>
                   </div>
 
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-widest text-text-muted">Preview</p>
-                      <p className="mt-1 text-sm text-text-primary">{selectedTask.preview}</p>
+                      <p className="text-xs font-semibold uppercase tracking-widest text-text-muted">📌 Content to Send</p>
+                      <div className="mt-2 rounded-lg border border-border-subtle bg-bg-primary p-3">
+                        <p className="whitespace-pre-wrap text-sm text-text-primary">{selectedTask.preview || selectedTask.description || "No content available"}</p>
+                      </div>
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(selectedTask.preview || selectedTask.description || "")
+                          alert("Copied to clipboard!")
+                        }}
+                        className="mt-2 rounded-lg border border-border-default bg-bg-primary px-3 py-1.5 text-xs font-semibold text-text-secondary hover:bg-bg-tertiary"
+                      >
+                        📋 Copy to Clipboard
+                      </button>
                     </div>
 
-                    {selectedTask.description && (
+                    {selectedTask.description && selectedTask.description !== selectedTask.preview && (
                       <div>
-                        <p className="text-xs font-semibold uppercase tracking-widest text-text-muted">Description</p>
+                        <p className="text-xs font-semibold uppercase tracking-widest text-text-muted">ℹ️ Context</p>
                         <p className="mt-1 text-sm text-text-secondary">{selectedTask.description}</p>
                       </div>
                     )}
 
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-widest text-text-muted">Action</p>
-                      <p className="mt-1 text-sm text-text-primary">{selectedTask.action}</p>
+                      <p className="text-xs font-semibold uppercase tracking-widest text-text-muted">🎯 How to Send</p>
+                      <div className="mt-2 rounded-lg border border-border-subtle bg-bg-primary p-3 text-xs text-text-secondary space-y-2">
+                        {selectedTask.platform === "twitter" ? (
+                          <div>
+                            <p className="font-semibold text-text-primary">Twitter/X ({selectedTask.account})</p>
+                            <ol className="mt-1 space-y-1 ml-4 list-decimal">
+                              <li>Go to <strong>{selectedTask.account}</strong> profile</li>
+                              <li>Copy the content above</li>
+                              <li>Post manually via Twitter web interface</li>
+                              <li>Reply here when done: "Sent ✅"</li>
+                            </ol>
+                          </div>
+                        ) : selectedTask.category === "outreach" ? (
+                          <div>
+                            <p className="font-semibold text-text-primary">Direct Message / Email</p>
+                            <ol className="mt-1 space-y-1 ml-4 list-decimal">
+                              <li>Open Twitter DM or Gmail</li>
+                              <li>Copy content above</li>
+                              <li>Paste into DM/email and customize if needed</li>
+                              <li>Send manually</li>
+                              <li>Reply here when done: "Sent ✅"</li>
+                            </ol>
+                          </div>
+                        ) : (
+                          <div>
+                            <p className="font-semibold text-text-primary">Manual Send Required</p>
+                            <p className="mt-1">Copy the content above and send via your preferred channel. No API automation available yet.</p>
+                          </div>
+                        )}
+                      </div>
                     </div>
 
                     {selectedTask.links?.external && selectedTask.links.external.length > 0 && (
                       <div>
-                        <p className="text-xs font-semibold uppercase tracking-widest text-text-muted">Links</p>
+                        <p className="text-xs font-semibold uppercase tracking-widest text-text-muted">🔗 Resources</p>
                         <div className="mt-2 space-y-1">
                           {selectedTask.links.external.map((link) => (
                             <a
@@ -345,7 +387,7 @@ export default function ApprovalsQueuePage() {
                         disabled={actionInProgress}
                         className="flex-1 rounded-lg bg-accent-green px-3 py-2 text-sm font-semibold text-white transition-opacity disabled:opacity-50"
                       >
-                        <CheckCircle2 size={14} className="inline mr-1" /> {actionInProgress ? "..." : "Approve"}
+                        <CheckCircle2 size={14} className="inline mr-1" /> {actionInProgress ? "..." : "✅ Ready to Send"}
                       </button>
                       <button
                         onClick={() => void handleReject()}
@@ -361,7 +403,7 @@ export default function ApprovalsQueuePage() {
             ) : (
               <Surface className="border-dashed border-border-subtle text-center">
                 <Eye size={24} className="mx-auto text-text-muted" />
-                <p className="mt-2 text-sm text-text-secondary">Select an item to review details and approve/reject.</p>
+                <p className="mt-2 text-sm text-text-secondary">Click an item to view full message, copy to clipboard, and mark as ready to send.</p>
               </Surface>
             )}
 
