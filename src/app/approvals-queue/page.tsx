@@ -83,10 +83,11 @@ export default function ApprovalsQueuePage() {
     try {
       const res = await fetch("/api/approvals", { cache: "no-store" })
       const data = (await res.json()) as { approvals?: ApprovalTask[]; stats?: ApprovalStats }
-      setApprovals(data.approvals || [])
+      const approvalList = data.approvals ?? []
+      setApprovals(approvalList)
       setStats(data.stats || null)
-      if (data.approvals?.length > 0) {
-        setSelectedTaskId(data.approvals[0].id)
+      if (approvalList.length > 0) {
+        setSelectedTaskId(approvalList[0].id)
       }
     } catch (error) {
       console.error("Failed to load approvals", error)
