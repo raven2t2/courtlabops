@@ -66,13 +66,14 @@ export default function LeadsPage() {
   }, [])
 
   const filteredLeads = leads.filter(lead => {
-    const matchesSearch = filter === "" || 
-      lead.clubName.toLowerCase().includes(filter.toLowerCase()) ||
-      lead.location.toLowerCase().includes(filter.toLowerCase()) ||
-      lead.personalizationAnchor.toLowerCase().includes(filter.toLowerCase())
-    
+    const q = filter.toLowerCase()
+    const matchesSearch = filter === "" ||
+      (lead.clubName ?? "").toLowerCase().includes(q) ||
+      (lead.location ?? "").toLowerCase().includes(q) ||
+      (lead.personalizationAnchor ?? "").toLowerCase().includes(q)
+
     const matchesState = stateFilter === "ALL" || lead.state === stateFilter
-    
+
     return matchesSearch && matchesState
   })
 
