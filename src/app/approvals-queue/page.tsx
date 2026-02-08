@@ -307,19 +307,33 @@ export default function ApprovalsQueuePage() {
 
                   <div className="space-y-4">
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-widest text-text-muted">📌 Content to Send</p>
-                      <div className="mt-2 rounded-lg border border-border-subtle bg-bg-primary p-3">
-                        <p className="whitespace-pre-wrap text-sm text-text-primary">{selectedTask.preview || selectedTask.description || "No content available"}</p>
+                      <p className="text-xs font-semibold uppercase tracking-widest text-text-muted">💌 Full Message (Ready to Copy & Paste)</p>
+                      <div className="mt-2 rounded-lg border border-border-subtle bg-bg-primary p-4">
+                        <p className="whitespace-pre-wrap text-sm leading-relaxed text-text-primary font-mono">
+                          {selectedTask.preview || selectedTask.description || "No content available"}
+                        </p>
                       </div>
-                      <button
-                        onClick={() => {
-                          navigator.clipboard.writeText(selectedTask.preview || selectedTask.description || "")
-                          alert("Copied to clipboard!")
-                        }}
-                        className="mt-2 rounded-lg border border-border-default bg-bg-primary px-3 py-1.5 text-xs font-semibold text-text-secondary hover:bg-bg-tertiary"
-                      >
-                        📋 Copy to Clipboard
-                      </button>
+                      <div className="mt-3 flex gap-2">
+                        <button
+                          onClick={() => {
+                            navigator.clipboard.writeText(selectedTask.preview || selectedTask.description || "")
+                            alert("✅ Copied to clipboard! Paste to your DM/email.")
+                          }}
+                          className="flex-1 rounded-lg bg-hyper-blue px-3 py-2 text-xs font-semibold text-white hover:bg-hyper-blue-hover"
+                        >
+                          📋 Copy Full Message
+                        </button>
+                        {selectedTask.links?.external?.[0] && (
+                          <a
+                            href={selectedTask.links.external[0].url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 rounded-lg border border-hyper-blue bg-hyper-blue/5 px-3 py-2 text-xs font-semibold text-hyper-blue hover:bg-hyper-blue/10"
+                          >
+                            🔗 Open {selectedTask.links.external[0].label}
+                          </a>
+                        )}
+                      </div>
                     </div>
 
                     {selectedTask.description && selectedTask.description !== selectedTask.preview && (
