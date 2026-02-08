@@ -34,11 +34,10 @@ export default function LeadDetailPage() {
   useEffect(() => {
     const leadId = params.id as string
     
-    // Load SA leads
-    fetch('/data/crm/leads/sa-basketball-clubs.json')
+    fetch('/api/leads')
       .then(res => res.json())
       .then(data => {
-        const found = data.leads.find((l: Lead) => l.id === leadId)
+        const found = (data.leads || []).find((l: Lead) => l.id === leadId)
         if (found) {
           setLead(found)
         } else {
