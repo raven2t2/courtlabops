@@ -1,9 +1,35 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "columns": [
     {
+      "id": "awaiting-approval",
+      "name": "⏳ Awaiting Your Approval",
+      "color": "#fef3c7",
+      "leads": [],
+      "tasks": [
+        "APPROVAL-TW-001",
+        "APPROVAL-TW-002",
+        "APPROVAL-TW-003",
+        "APPROVAL-TW-004",
+        "APPROVAL-TW-005",
+        "APPROVAL-TW-006",
+        "APPROVAL-AFF-001",
+        "APPROVAL-AFF-002",
+        "APPROVAL-AFF-003",
+        "APPROVAL-AFF-004",
+        "APPROVAL-AFF-005",
+        "APPROVAL-AFF-006",
+        "APPROVAL-AFF-007",
+        "APPROVAL-AFF-008",
+        "APPROVAL-EMAIL-001",
+        "APPROVAL-EMAIL-002",
+        "APPROVAL-EMAIL-003",
+        "APPROVAL-EMAIL-004"
+      ]
+    },
+    {
       "id": "drafted",
-      "name": "\ud83d\udccb Drafted",
+      "name": "📋 Drafted (Research Phase)",
       "color": "#e2e8f0",
       "leads": [
         "SA-001",
@@ -15,119 +41,95 @@
         "SA-007",
         "SA-008",
         "SA-009",
-        "SA-010",
-        "SA-005",
-        "SA-006",
-        "SA-007",
-        "SA-008",
-        "SA-009",
-        "SA-010",
-        "SA-011",
-        "SA-012",
-        "SA-013",
-        "SA-014"
+        "SA-010"
       ],
-      "tasks": [
-        "TW-001",
-        "TW-002",
-        "TW-003",
-        "TW-004",
-        "TW-005",
-        "TW-006",
-        "AFF-001",
-        "AFF-002",
-        "AFF-003",
-        "AFF-004",
-        "AFF-005",
-        "AFF-006",
-        "AFF-007",
-        "AFF-008",
-        "SETUP-001"
-      ]
+      "tasks": []
     },
     {
       "id": "sent",
-      "name": "\ud83d\udce4 Sent",
+      "name": "📤 Sent",
       "color": "#bfdbfe",
       "leads": [],
       "tasks": []
     },
     {
       "id": "replied",
-      "name": "\ud83d\udcac Replied",
+      "name": "💬 Replied",
       "color": "#fef08a",
       "leads": [],
       "tasks": []
     },
     {
       "id": "meeting",
-      "name": "\ud83d\udcc5 Meeting Scheduled",
+      "name": "📅 Meeting Scheduled",
       "color": "#c4b5fd",
       "leads": [],
       "tasks": []
     },
     {
       "id": "closed-won",
-      "name": "\u2705 Closed - Won",
+      "name": "✅ Closed - Won",
       "color": "#86efac",
       "leads": [],
       "tasks": []
     },
     {
       "id": "closed-lost",
-      "name": "\u274c Closed - Lost",
+      "name": "❌ Closed - Lost",
       "color": "#fca5a5",
       "leads": [],
       "tasks": []
     }
   ],
   "tasks": {
-    "TW-001": {
-      "title": "\ud83d\udccc Pin @CourtLabApp welcome tweet",
-      "description": "Pin the brand introduction tweet to @CourtLabApp profile",
+    "APPROVAL-TW-001": {
+      "title": "📌 @CourtLabApp Welcome Tweet — PIN",
+      "description": "Review + Approve: Welcome intro tweet to pin to profile",
       "priority": "high",
       "platform": "twitter",
       "account": "@CourtLabApp",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "social",
+      "preview": "Become Undeniable. Track every shot. See real progress week by week...",
+      "action": "Review → ✅ Approve → Pin",
       "links": {
         "internal": [
           {
-            "label": "View Tweet",
-            "url": "https://courtlabops.vercel.app/tweets"
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
           }
         ],
         "external": [
           {
             "label": "@CourtLabApp",
             "url": "https://twitter.com/CourtLabApp"
-          },
-          {
-            "label": "Tweet Draft",
-            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
           }
         ]
       }
     },
-    "TW-002": {
-      "title": "\ud83d\udc26 Post @CourtLabApp Easter Classic countdown",
-      "description": "8 weeks to Easter Classic tweet - ready to copy/paste",
+    "APPROVAL-TW-002": {
+      "title": "🏀 @CourtLabApp Easter Classic Countdown",
+      "description": "Review + Approve: 8-week countdown to Easter Classic 2026",
       "priority": "high",
       "platform": "twitter",
       "account": "@CourtLabApp",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "social",
+      "preview": "8 weeks to Easter Classic 2026. Are your players ready?",
+      "action": "Review → ✅ Approve → Post",
       "links": {
         "internal": [
           {
-            "label": "View Tweet",
-            "url": "https://courtlabops.vercel.app/tweets"
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
           }
         ],
         "external": [
           {
             "label": "@CourtLabApp",
             "url": "https://twitter.com/CourtLabApp"
-          },
-          {
-            "label": "Tweet Draft",
-            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
           },
           {
             "label": "Easter Classic Info",
@@ -136,158 +138,177 @@
         ]
       }
     },
-    "TW-003": {
-      "title": "\ud83d\udc26 Post @CourtLabApp training tip",
-      "description": "Training tip about measuring progress - ready to copy/paste",
+    "APPROVAL-TW-003": {
+      "title": "💡 @CourtLabApp Training Tip — Measuring Progress",
+      "description": "Review + Approve: Training tip about measuring progress with data",
       "priority": "medium",
       "platform": "twitter",
       "account": "@CourtLabApp",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "social",
+      "preview": "Most coaches measure improvement by feel. We measure by data...",
+      "action": "Review → ✅ Approve → Post",
       "links": {
         "internal": [
           {
-            "label": "View Tweet",
-            "url": "https://courtlabops.vercel.app/tweets"
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
           }
         ],
         "external": [
           {
             "label": "@CourtLabApp",
             "url": "https://twitter.com/CourtLabApp"
-          },
-          {
-            "label": "Tweet Draft",
-            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
           }
         ]
       }
     },
-    "TW-004": {
-      "title": "\ud83d\udccc Pin @EstherCourtLab intro tweet",
-      "description": "Pin the CMO persona introduction tweet",
+    "APPROVAL-TW-004": {
+      "title": "📌 @EstherCourtLab Intro — PIN",
+      "description": "Review + Approve: CMO persona introduction tweet to pin",
       "priority": "high",
       "platform": "twitter",
       "account": "@EstherCourtLab",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "social",
+      "preview": "Hi. I'm Esther, CMO of CourtLab. Here's what I think...",
+      "action": "Review → ✅ Approve → Pin",
       "links": {
         "internal": [
           {
-            "label": "View Tweet",
-            "url": "https://courtlabops.vercel.app/tweets"
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
           }
         ],
         "external": [
           {
             "label": "@EstherCourtLab",
             "url": "https://twitter.com/EstherCourtLab"
-          },
-          {
-            "label": "Tweet Draft",
-            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
           }
         ]
       }
     },
-    "TW-005": {
-      "title": "\ud83d\udc26 Post @EstherCourtLab hot take #1",
-      "description": "Phone stopwatch rant - ready to copy/paste",
+    "APPROVAL-TW-005": {
+      "title": "🔥 @EstherCourtLab Hot Take #1 — Phone Stopwatch Rant",
+      "description": "Review + Approve: Esther's spicy take on phone stopwatches in basketball",
       "priority": "medium",
       "platform": "twitter",
       "account": "@EstherCourtLab",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "social",
+      "preview": "Phone stopwatches are ruining youth basketball...",
+      "action": "Review → ✅ Approve → Post",
       "links": {
         "internal": [
           {
-            "label": "View Tweet",
-            "url": "https://courtlabops.vercel.app/tweets"
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
           }
         ],
         "external": [
           {
             "label": "@EstherCourtLab",
             "url": "https://twitter.com/EstherCourtLab"
-          },
-          {
-            "label": "Tweet Draft",
-            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
           }
         ]
       }
     },
-    "TW-006": {
-      "title": "\ud83d\udc26 Post @EstherCourtLab hot take #2",
-      "description": "Organized chaos take - ready to copy/paste",
+    "APPROVAL-TW-006": {
+      "title": "🔥 @EstherCourtLab Hot Take #2 — Organized Chaos",
+      "description": "Review + Approve: Coaching philosophy on intentional chaos",
       "priority": "medium",
       "platform": "twitter",
       "account": "@EstherCourtLab",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "social",
+      "preview": "The best coaches aren't organized. They're intentionally chaotic...",
+      "action": "Review → ✅ Approve → Post",
       "links": {
         "internal": [
           {
-            "label": "View Tweet",
-            "url": "https://courtlabops.vercel.app/tweets"
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
           }
         ],
         "external": [
           {
             "label": "@EstherCourtLab",
             "url": "https://twitter.com/EstherCourtLab"
-          },
-          {
-            "label": "Tweet Draft",
-            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
           }
         ]
       }
     },
-    "AFF-001": {
-      "title": "\ud83d\udce8 Outreach to @BasketballAus",
-      "description": "Send personalized DM about Coach Development Framework integration - LEAD-001",
+    "APPROVAL-AFF-001": {
+      "title": "💌 DM @BasketballAus — Coach Development Framework",
+      "description": "Review + Approve: Outreach to Basketball Australia governing body",
       "priority": "highest",
-      "type": "affiliate_outreach",
-      "lead_id": "LEAD-001",
+      "platform": "twitter",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "outreach",
+      "preview": "Hi Basketball Australia, we're launching Coach Development Framework...",
+      "action": "Review → ✅ Approve → Send DM",
       "links": {
-        "internal": [],
+        "internal": [
+          {
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
+          }
+        ],
         "external": [
           {
             "label": "@BasketballAus",
             "url": "https://twitter.com/BasketballAus"
-          },
-          {
-            "label": "Lead Research",
-            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
-          },
-          {
-            "label": "DM Draft",
-            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
           }
         ]
       }
     },
-    "AFF-002": {
-      "title": "\ud83d\udce8 Outreach to @BBALLAU_Coaches",
-      "description": "Send personalized DM about Feb 16 framework launch - LEAD-002",
+    "APPROVAL-AFF-002": {
+      "title": "💌 DM @BBALLAU_Coaches — Feb 16 Launch",
+      "description": "Review + Approve: Outreach to coach community for framework launch",
       "priority": "highest",
-      "type": "affiliate_outreach",
-      "lead_id": "LEAD-002",
+      "platform": "twitter",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "outreach",
+      "preview": "Hey coaches, we're launching something Feb 16 that solves admin bloat...",
+      "action": "Review → ✅ Approve → Send DM",
       "links": {
-        "internal": [],
+        "internal": [
+          {
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
+          }
+        ],
         "external": [
           {
             "label": "@BBALLAU_Coaches",
             "url": "https://twitter.com/BBALLAU_Coaches"
-          },
-          {
-            "label": "Lead Research",
-            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
           }
         ]
       }
     },
-    "AFF-003": {
-      "title": "\ud83d\udce8 Outreach to @bouncepassau",
-      "description": "Send personalized DM about content partnership with combine data - LEAD-003",
+    "APPROVAL-AFF-003": {
+      "title": "💌 DM @bouncepassau — Content Partnership",
+      "description": "Review + Approve: Outreach to basketball.com.au for partnership",
       "priority": "high",
-      "type": "affiliate_outreach",
-      "lead_id": "LEAD-003",
+      "platform": "twitter",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "outreach",
+      "preview": "Love your content on basketball.com.au...",
+      "action": "Review → ✅ Approve → Send DM",
       "links": {
-        "internal": [],
+        "internal": [
+          {
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
+          }
+        ],
         "external": [
           {
             "label": "@bouncepassau",
@@ -296,159 +317,239 @@
           {
             "label": "basketball.com.au",
             "url": "https://basketball.com.au"
-          },
-          {
-            "label": "Lead Research",
-            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
           }
         ]
       }
     },
-    "AFF-004": {
-      "title": "\ud83d\udce8 Outreach to @codebballau",
-      "description": "Send personalized DM about underdog player stories + data - LEAD-004",
+    "APPROVAL-AFF-004": {
+      "title": "💌 DM @codebballau — Underdog Stories + Data",
+      "description": "Review + Approve: Outreach about underdog player stories",
       "priority": "high",
-      "type": "affiliate_outreach",
-      "lead_id": "LEAD-004",
-      "links": {
-        "internal": [],
-        "external": [
-          {
-            "label": "@codebballau",
-            "url": "https://twitter.com/codebballau"
-          },
-          {
-            "label": "Lead Research",
-            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
-          }
-        ]
-      }
-    },
-    "AFF-005": {
-      "title": "\ud83d\udce8 Outreach to @AusBballnews",
-      "description": "Send personalized DM about Easter Classic 2026 exclusive - LEAD-005",
-      "priority": "high",
-      "type": "affiliate_outreach",
-      "lead_id": "LEAD-005",
-      "links": {
-        "internal": [],
-        "external": [
-          {
-            "label": "@AusBballnews",
-            "url": "https://twitter.com/AusBballnews"
-          },
-          {
-            "label": "Lead Research",
-            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
-          }
-        ]
-      }
-    },
-    "AFF-006": {
-      "title": "\ud83d\udce8 Outreach to @herwaysports",
-      "description": "Send personalized DM about women's basketball data gap - LEAD-006",
-      "priority": "high",
-      "type": "affiliate_outreach",
-      "lead_id": "LEAD-006",
-      "links": {
-        "internal": [],
-        "external": [
-          {
-            "label": "@herwaysports",
-            "url": "https://twitter.com/herwaysports"
-          },
-          {
-            "label": "Lead Research",
-            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
-          }
-        ]
-      }
-    },
-    "AFF-007": {
-      "title": "\ud83d\udce8 Outreach to @parkoballtraining",
-      "description": "Send personalized DM about proving client improvement with data - LEAD-007",
-      "priority": "medium",
-      "type": "affiliate_outreach",
-      "lead_id": "LEAD-007",
-      "links": {
-        "internal": [],
-        "external": [
-          {
-            "label": "@parkoballtraining",
-            "url": "https://twitter.com/parkoballtraining"
-          },
-          {
-            "label": "Lead Research",
-            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
-          }
-        ]
-      }
-    },
-    "AFF-008": {
-      "title": "\ud83d\udce8 Outreach to @FoxBasketball",
-      "description": "Send personalized DM about pathway coverage story - LEAD-008",
-      "priority": "high",
-      "type": "affiliate_outreach",
-      "lead_id": "LEAD-008",
-      "links": {
-        "internal": [],
-        "external": [
-          {
-            "label": "@FoxBasketball",
-            "url": "https://twitter.com/FoxBasketball"
-          },
-          {
-            "label": "Lead Research",
-            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
-          }
-        ]
-      }
-    },
-    "SETUP-001": {
-      "title": "\ud83d\udd11 Set up Twitter API v2 for automated posting",
-      "description": "Get API credentials from Twitter Developer Portal to enable automated tweet scheduling",
-      "priority": "high",
+      "platform": "twitter",
       "owner": "Michael",
+      "type": "approval",
+      "category": "outreach",
+      "preview": "Your content on underdog journeys resonates...",
+      "action": "Review → ✅ Approve → Send DM",
       "links": {
         "internal": [
           {
-            "label": "Tweet Drafts",
-            "url": "https://courtlabops.vercel.app/tweets"
-          },
-          {
-            "label": "Posting Schedule",
-            "url": "https://courtlabops.vercel.app/data/twitter-posting-schedule.json"
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
           }
         ],
         "external": [
           {
-            "label": "Twitter Developer Portal",
-            "url": "https://developer.twitter.com/en/portal/dashboard"
-          },
-          {
-            "label": "Setup Guide",
-            "url": "https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api"
+            "label": "@codebballau",
+            "url": "https://twitter.com/codebballau"
           }
         ]
-      },
-      "steps": [
-        "1. Go to https://developer.twitter.com/en/portal/dashboard",
-        "2. Click Create Project + App (or use existing)",
-        "3. Enable OAuth 2.0 User Authentication",
-        "4. Set App permissions to Read and Write",
-        "5. Generate API Key & Secret",
-        "6. Generate Access Token & Secret",
-        "7. Copy Bearer Token (if shown)",
-        "8. Provide all credentials to Esther for setup"
-      ],
-      "credentials_needed": [
-        "API Key (Consumer Key)",
-        "API Secret (Consumer Secret)",
-        "Access Token",
-        "Access Token Secret",
-        "Bearer Token (optional)"
-      ]
+      }
+    },
+    "APPROVAL-AFF-005": {
+      "title": "💌 DM @AusBballnews — Easter Classic Exclusive",
+      "description": "Review + Approve: Outreach to AU basketball news for coverage",
+      "priority": "high",
+      "platform": "twitter",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "outreach",
+      "preview": "Easter Classic 2026 exclusive coverage opportunity...",
+      "action": "Review → ✅ Approve → Send DM",
+      "links": {
+        "internal": [
+          {
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
+          }
+        ],
+        "external": [
+          {
+            "label": "@AusBballnews",
+            "url": "https://twitter.com/AusBballnews"
+          }
+        ]
+      }
+    },
+    "APPROVAL-AFF-006": {
+      "title": "💌 DM @herwaysports — Women's Basketball Data Gap",
+      "description": "Review + Approve: Outreach about women's basketball opportunity",
+      "priority": "high",
+      "platform": "twitter",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "outreach",
+      "preview": "Women's basketball deserves better data solutions...",
+      "action": "Review → ✅ Approve → Send DM",
+      "links": {
+        "internal": [
+          {
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
+          }
+        ],
+        "external": [
+          {
+            "label": "@herwaysports",
+            "url": "https://twitter.com/herwaysports"
+          }
+        ]
+      }
+    },
+    "APPROVAL-AFF-007": {
+      "title": "💌 DM @parkoballtraining — Proving Client Improvement",
+      "description": "Review + Approve: Outreach about verified data for trainers",
+      "priority": "medium",
+      "platform": "twitter",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "outreach",
+      "preview": "Trainers need to prove results to retain clients...",
+      "action": "Review → ✅ Approve → Send DM",
+      "links": {
+        "internal": [
+          {
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
+          }
+        ],
+        "external": [
+          {
+            "label": "@parkoballtraining",
+            "url": "https://twitter.com/parkoballtraining"
+          }
+        ]
+      }
+    },
+    "APPROVAL-AFF-008": {
+      "title": "💌 DM @FoxBasketball — Pathway Coverage Story",
+      "description": "Review + Approve: Outreach about elite player pathway angle",
+      "priority": "high",
+      "platform": "twitter",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "outreach",
+      "preview": "Elite players need verified pathway data...",
+      "action": "Review → ✅ Approve → Send DM",
+      "links": {
+        "internal": [
+          {
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
+          }
+        ],
+        "external": [
+          {
+            "label": "@FoxBasketball",
+            "url": "https://twitter.com/FoxBasketball"
+          }
+        ]
+      }
+    },
+    "APPROVAL-EMAIL-001": {
+      "title": "📧 South Adelaide Panthers — Secretary Outreach",
+      "description": "Review + Approve: Club email about REDARC + Hoops & Her alignment",
+      "priority": "high",
+      "platform": "email",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "outreach",
+      "contact": "secretary@southadelaidebasketball.com.au",
+      "preview": "Saw that REDARC extended partnership for 3 years...",
+      "action": "Review → ✅ Approve → Send Email",
+      "links": {
+        "internal": [
+          {
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
+          }
+        ],
+        "external": [
+          {
+            "label": "Club Website",
+            "url": "https://www.southadelaidebasketball.com.au/"
+          }
+        ]
+      }
+    },
+    "APPROVAL-EMAIL-002": {
+      "title": "📧 Norwood Flames — Secretary Outreach",
+      "description": "Review + Approve: Club email about size/scale opportunity",
+      "priority": "high",
+      "platform": "email",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "outreach",
+      "contact": "secretary@norwoodbasketball.com.au",
+      "preview": "Noticed you describe yourselves as Adelaide's biggest club...",
+      "action": "Review → ✅ Approve → Send Email",
+      "links": {
+        "internal": [
+          {
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
+          }
+        ],
+        "external": [
+          {
+            "label": "Club Website",
+            "url": "https://www.norwoodbasketball.com.au/"
+          }
+        ]
+      }
+    },
+    "APPROVAL-EMAIL-003": {
+      "title": "📧 Sturt Sabres — Secretary Outreach",
+      "description": "Review + Approve: Club email about pro pathway + player development",
+      "priority": "high",
+      "platform": "email",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "outreach",
+      "contact": "basketball@sturtsabres.com.au",
+      "preview": "Saw that Sturt positions as most professional junior program...",
+      "action": "Review → ✅ Approve → Send Email",
+      "links": {
+        "internal": [
+          {
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
+          }
+        ],
+        "external": [
+          {
+            "label": "Club Website",
+            "url": "https://www.sturtsabres.com.au/"
+          }
+        ]
+      }
+    },
+    "APPROVAL-EMAIL-004": {
+      "title": "📧 Forestville Eagles — Warm Personal Outreach",
+      "description": "Review + Approve: Personal email from Michael (Zane's dad approach)",
+      "priority": "high",
+      "platform": "email",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "outreach",
+      "contact": "finance@forestvilleeagles.asn.au",
+      "preview": "Hi, I'm Michael. My son Zane plays U12s at Forestville...",
+      "action": "Review → ✅ Approve → Send Email (WARM LEAD)",
+      "links": {
+        "internal": [
+          {
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
+          }
+        ],
+        "external": [
+          {
+            "label": "Club Website",
+            "url": "https://www.forestvilleeagles.asn.au/"
+          }
+        ]
+      }
     }
   },
-  "lastUpdated": "2026-02-08"
+  "lastUpdated": "2026-02-08T21:10:00Z"
 }

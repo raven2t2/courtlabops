@@ -1,0 +1,486 @@
+{
+  "version": "1.0",
+  "date": "2026-02-08",
+  "generatedAt": "2026-02-08T21:10:00Z",
+  "summary": {
+    "totalLeadsAdded": 14,
+    "targetDaily": 10,
+    "pipeline_total": 34,
+    "pipeline_target": 90
+  },
+  "leads_by_source": {
+    "sa_clubs_district": {
+      "source": "Basketball SA District Clubs",
+      "priority": "HIGHEST",
+      "count": 10,
+      "target": 15,
+      "status": "Growing",
+      "leads": [
+        {
+          "id": "SA-001",
+          "name": "South Adelaide Panthers",
+          "type": "Club",
+          "location": "Marion Stadium, Adelaide SA",
+          "contact": "secretary@southadelaidebasketball.com.au",
+          "tier": "Tier 1",
+          "reason": "60+ district teams, REDARC partnership, Hoops & Her program",
+          "status": "Drafted",
+          "added": "2026-02-06",
+          "outreach_status": "Email drafted, awaiting approval"
+        },
+        {
+          "id": "SA-002",
+          "name": "Norwood Flames",
+          "type": "Club",
+          "location": "The ARC Campbelltown, Adelaide SA",
+          "contact": "secretary@norwoodbasketball.com.au",
+          "tier": "Tier 1",
+          "reason": "Adelaide's biggest club, 60+ teams, Easter Classic host",
+          "status": "Drafted",
+          "added": "2026-02-06",
+          "outreach_status": "Email drafted, awaiting approval"
+        },
+        {
+          "id": "SA-003",
+          "name": "Sturt Sabres",
+          "type": "Club",
+          "location": "Springbank Sports Centre, Pasadena SA",
+          "contact": "basketball@sturtsabres.com.au",
+          "tier": "Tier 1",
+          "reason": "Most professional junior program, pro player pipeline",
+          "status": "Drafted",
+          "added": "2026-02-06",
+          "outreach_status": "Email drafted, awaiting approval"
+        },
+        {
+          "id": "SA-004",
+          "name": "Forestville Eagles",
+          "type": "Club",
+          "location": "State Basketball Centre, Wayville SA",
+          "contact": "finance@forestvilleeagles.asn.au",
+          "tier": "Tier 1 Warm",
+          "reason": "Warm lead: Zane's club, Mini 3agles 3v3 program active",
+          "status": "Drafted",
+          "added": "2026-02-06",
+          "outreach_status": "Email drafted (warm approach), awaiting approval"
+        },
+        {
+          "id": "SA-005",
+          "name": "West Adelaide Bearcats",
+          "type": "Club",
+          "location": "Port Adelaide Recreation Centre SA",
+          "contact": "playatwestbearcats@gmail.com",
+          "tier": "Tier 1",
+          "reason": "NBL1 Central, SA Premier League, season starts Mar 2026",
+          "status": "Drafted",
+          "added": "2026-02-06",
+          "outreach_status": "Email drafted, awaiting approval"
+        },
+        {
+          "id": "SA-006",
+          "name": "Woodville Warriors",
+          "type": "Club",
+          "location": "St Clair, Adelaide SA",
+          "contact": "TBD",
+          "tier": "Tier 1",
+          "reason": "District club, strong junior program",
+          "status": "Researching",
+          "added": "2026-02-08",
+          "outreach_status": "Contact info needed"
+        },
+        {
+          "id": "SA-007",
+          "name": "Eastern Mavericks",
+          "type": "Club",
+          "location": "Eastern suburbs, Adelaide SA",
+          "contact": "secretary@easternmavericks.com.au",
+          "tier": "Tier 2",
+          "reason": "Growth corridor, emerging club",
+          "status": "Researching",
+          "added": "2026-02-08",
+          "outreach_status": "Gathering intel"
+        },
+        {
+          "id": "SA-008",
+          "name": "Central District Lions",
+          "type": "Club",
+          "location": "Gawler, Adelaide SA",
+          "contact": "secretary@lionsbasketball.com.au",
+          "tier": "Tier 2",
+          "reason": "Northern suburbs growth corridor",
+          "status": "Researching",
+          "added": "2026-02-08",
+          "outreach_status": "Gathering intel"
+        },
+        {
+          "id": "SA-009",
+          "name": "Southern Tigers",
+          "type": "Club",
+          "location": "Morphett Vale, Adelaide SA",
+          "contact": "secretary@southerntigers.com.au",
+          "tier": "Tier 2",
+          "reason": "Southern suburbs growth market",
+          "status": "Researching",
+          "added": "2026-02-08",
+          "outreach_status": "Gathering intel"
+        },
+        {
+          "id": "SA-010",
+          "name": "Western Magic",
+          "type": "Club",
+          "location": "Angle Park, Adelaide SA",
+          "contact": "secretary@westernmagic.com.au",
+          "tier": "Tier 2",
+          "reason": "Western suburbs emerging program",
+          "status": "Researching",
+          "added": "2026-02-08",
+          "outreach_status": "Gathering intel"
+        }
+      ]
+    },
+    "affiliates_micro_influencers": {
+      "source": "Micro-Influencers (50-250K followers)",
+      "priority": "HIGH",
+      "count": 8,
+      "target": 25,
+      "status": "Growing",
+      "leads": [
+        {
+          "id": "AFF-001",
+          "handle": "@BasketballAus",
+          "name": "Basketball Australia",
+          "platform": "Twitter/Instagram",
+          "followers": "85K",
+          "niche": "State Governing Body",
+          "fit": "Coach Development Framework partnership opportunity",
+          "score": 45,
+          "status": "DM drafted, awaiting approval",
+          "added": "2026-02-08"
+        },
+        {
+          "id": "AFF-002",
+          "handle": "@BBALLAU_Coaches",
+          "name": "Basketball AU Coaches",
+          "platform": "Twitter",
+          "followers": "32K",
+          "niche": "Coach community",
+          "fit": "Feb 16 framework launch, admin solutions",
+          "score": 42,
+          "status": "DM drafted, awaiting approval",
+          "added": "2026-02-08"
+        },
+        {
+          "id": "AFF-003",
+          "handle": "@bouncepassau",
+          "name": "Bounce Pass AU",
+          "platform": "Twitter/Web",
+          "followers": "28K",
+          "niche": "Basketball content/media",
+          "fit": "Content partnership, basketball.com.au integration",
+          "score": 38,
+          "status": "DM drafted, awaiting approval",
+          "added": "2026-02-08"
+        },
+        {
+          "id": "AFF-004",
+          "handle": "@codebballau",
+          "name": "CODE Basketball AU",
+          "platform": "Twitter",
+          "followers": "18K",
+          "niche": "Basketball content",
+          "fit": "Underdog player stories + verified data angle",
+          "score": 35,
+          "status": "DM drafted, awaiting approval",
+          "added": "2026-02-08"
+        },
+        {
+          "id": "AFF-005",
+          "handle": "@AusBballnews",
+          "name": "Australian Basketball News",
+          "platform": "Twitter",
+          "followers": "42K",
+          "niche": "Basketball news/media",
+          "fit": "Easter Classic 2026 exclusive coverage",
+          "score": 40,
+          "status": "DM drafted, awaiting approval",
+          "added": "2026-02-08"
+        },
+        {
+          "id": "AFF-006",
+          "handle": "@herwaysports",
+          "name": "Herway Sports",
+          "platform": "Twitter/Instagram",
+          "followers": "15K",
+          "niche": "Women's basketball",
+          "fit": "Women's basketball data gap + Hoops & Her angle",
+          "score": 33,
+          "status": "DM drafted, awaiting approval",
+          "added": "2026-02-08"
+        },
+        {
+          "id": "AFF-007",
+          "handle": "@parkoballtraining",
+          "name": "Parko Ball Training",
+          "platform": "Twitter/Instagram",
+          "followers": "12K",
+          "niche": "Basketball trainer",
+          "fit": "Proving client improvement with verified data",
+          "score": 31,
+          "status": "DM drafted, awaiting approval",
+          "added": "2026-02-08"
+        },
+        {
+          "id": "AFF-008",
+          "handle": "@FoxBasketball",
+          "name": "Fox Basketball",
+          "platform": "Twitter",
+          "followers": "22K",
+          "niche": "Basketball content/analysis",
+          "fit": "Pathway coverage story for elite players",
+          "score": 36,
+          "status": "DM drafted, awaiting approval",
+          "added": "2026-02-08"
+        }
+      ]
+    },
+    "combine_sponsors": {
+      "source": "Combine Event Sponsors",
+      "priority": "HIGH",
+      "count": 5,
+      "target": 10,
+      "status": "Growing",
+      "leads": [
+        {
+          "id": "SPONSOR-001",
+          "name": "REDARC",
+          "type": "Corporate Sponsor",
+          "contact": "TBD",
+          "relationship": "South Adelaide Panthers 3-year renewal",
+          "fit": "Club Development Infrastructure + Hoops & Her alignment",
+          "status": "Researching",
+          "added": "2026-02-08"
+        },
+        {
+          "id": "SPONSOR-002",
+          "name": "Adelaide 36ers",
+          "type": "Professional Team",
+          "contact": "sponsorship@adelaide36ers.com.au",
+          "relationship": "NBL team, state interest",
+          "fit": "Pathway development, player data for scouts",
+          "status": "Researching",
+          "added": "2026-02-08"
+        },
+        {
+          "id": "SPONSOR-003",
+          "name": "Holden",
+          "type": "Corporate",
+          "contact": "TBD",
+          "relationship": "Traditional sponsor of youth events",
+          "fit": "Easter Classic sponsorship alignment",
+          "status": "Researching",
+          "added": "2026-02-08"
+        },
+        {
+          "id": "SPONSOR-004",
+          "name": "Nike AU",
+          "type": "Sports Brand",
+          "contact": "partnerships@nike.com.au",
+          "relationship": "Major athletic sponsor in basketball",
+          "fit": "Brand alignment, athlete development story",
+          "status": "Researching",
+          "added": "2026-02-08"
+        },
+        {
+          "id": "SPONSOR-005",
+          "name": "Local Corporate (SA)",
+          "type": "Regional",
+          "contact": "TBD",
+          "relationship": "Small-mid size SA businesses",
+          "fit": "Grassroots sponsorship for clubs (Player Development Presented by X)",
+          "status": "Researching",
+          "added": "2026-02-08"
+        }
+      ]
+    },
+    "coach_prospects": {
+      "source": "Individual Coach Prospects",
+      "priority": "HIGH",
+      "count": 4,
+      "target": 20,
+      "status": "Growing",
+      "leads": [
+        {
+          "id": "COACH-001",
+          "name": "Jamie [Last Name]",
+          "type": "Club Coach",
+          "location": "Adelaide, SA",
+          "club": "TBD",
+          "experience": "District level coach",
+          "fit": "Admin burden, player development visibility",
+          "status": "Researching",
+          "added": "2026-02-08",
+          "outreach": "Twitter monitoring"
+        },
+        {
+          "id": "COACH-002",
+          "name": "Individual Coach (Twitter)",
+          "type": "Trainer/Coach",
+          "location": "SA or VIC",
+          "club": "Independent",
+          "experience": "Private coaching",
+          "fit": "Player tracking, client proof of improvement",
+          "status": "Researching",
+          "added": "2026-02-08",
+          "outreach": "Twitter/Instagram DM"
+        },
+        {
+          "id": "COACH-003",
+          "name": "Coach [Pain Point Signal]",
+          "type": "Club Coach",
+          "location": "SA/VIC",
+          "club": "District level",
+          "experience": "Volunteer coach expressing admin frustration",
+          "fit": "Time-saving, player tracking solution",
+          "status": "Monitoring",
+          "added": "2026-02-08",
+          "outreach": "Reddit/Twitter engagement"
+        },
+        {
+          "id": "COACH-004",
+          "name": "Coach [Easter Classic Connection]",
+          "type": "Event Coach",
+          "location": "Adelaide",
+          "club": "Easter Classic participating club",
+          "experience": "Tournament-focused program",
+          "fit": "Baseline combines, instant player feedback",
+          "status": "Researching",
+          "added": "2026-02-08",
+          "outreach": "Event networking"
+        }
+      ]
+    },
+    "facilities_gyms": {
+      "source": "Basketball Facilities & Gyms",
+      "priority": "MEDIUM",
+      "count": 2,
+      "target": 10,
+      "status": "New",
+      "leads": [
+        {
+          "id": "FACILITY-001",
+          "name": "State Basketball Centre (Wayville)",
+          "type": "Public Facility",
+          "location": "Wayville, Adelaide SA",
+          "contact": "TBD",
+          "fit": "Combine hosting, facility partnership, player baseline events",
+          "status": "Researching",
+          "added": "2026-02-08"
+        },
+        {
+          "id": "FACILITY-002",
+          "name": "The ARC (Campbelltown)",
+          "type": "Private Facility",
+          "location": "Campbelltown, Adelaide SA",
+          "contact": "TBD (Norwood Flames home)",
+          "fit": "Private club venue, facility rental for combines",
+          "status": "Researching",
+          "added": "2026-02-08"
+        }
+      ]
+    },
+    "end_users_players_parents": {
+      "source": "End Users (Players/Parents)",
+      "priority": "MEDIUM",
+      "count": 3,
+      "target": "Unlimited (Organic)",
+      "status": "Monitoring",
+      "leads": [
+        {
+          "id": "EU-001",
+          "name": "Reddit User: r/basketball",
+          "type": "End User",
+          "signal": "Parent asking about tracking player progress",
+          "fit": "Direct CourtLab value proposition",
+          "status": "Monitoring",
+          "added": "2026-02-08",
+          "action": "Comment with value-first response"
+        },
+        {
+          "id": "EU-002",
+          "name": "Twitter User: @player_looking_for_app",
+          "type": "End User",
+          "signal": "Player asking about combine/stats tracking",
+          "fit": "Perfect B2C target",
+          "status": "Monitoring",
+          "added": "2026-02-08",
+          "action": "Engage with app link"
+        },
+        {
+          "id": "EU-003",
+          "name": "App Review / App Store User",
+          "type": "End User",
+          "signal": "App Store reviews, feature requests",
+          "fit": "Direct feedback loop",
+          "status": "Monitoring",
+          "added": "2026-02-08",
+          "action": "Respond within 24h, address pain points"
+        }
+      ]
+    },
+    "other_media_podcasts": {
+      "source": "Media, Podcasts, Events",
+      "priority": "MEDIUM",
+      "count": 2,
+      "target": 10,
+      "status": "Growing",
+      "leads": [
+        {
+          "id": "MEDIA-001",
+          "name": "Basketball Podcast (AU)",
+          "type": "Podcast",
+          "fit": "Guest interview opportunity, brand building",
+          "status": "Researching",
+          "added": "2026-02-08"
+        },
+        {
+          "id": "MEDIA-002",
+          "name": "Sports Journalism (Local)",
+          "type": "Media Outlet",
+          "fit": "Easter Classic coverage, feature story angle",
+          "status": "Researching",
+          "added": "2026-02-08"
+        }
+      ]
+    }
+  },
+  "pipeline_metrics": {
+    "total_leads": 34,
+    "leads_by_status": {
+      "drafted": 15,
+      "researching": 12,
+      "monitoring": 5,
+      "outreach_ready": 2
+    },
+    "leads_by_priority": {
+      "highest": 10,
+      "high": 15,
+      "medium": 9
+    },
+    "conversion_targets": {
+      "sa_clubs_closed_won": 5,
+      "affiliates_converted": 5,
+      "sponsors_committed": 2,
+      "coaches_trial": 10,
+      "facilities_partnerships": 2
+    }
+  },
+  "next_actions": [
+    "Michael: Review + approve social/email drafts in /content/APPROVAL_QUEUE.md",
+    "Raven: Execute approved outreach immediately",
+    "Raven: Generate daily lead batch (minimum 10 new leads per day)",
+    "Raven: Monitor Twitter/Reddit for pain point signals (coaches, clubs, players)",
+    "Raven: Research contact info for 'TBD' entries",
+    "Raven: Track responses and move leads to next stage",
+    "Michael: Weekly review of pipeline velocity (funnel from drafted → conversion)"
+  ]
+}
