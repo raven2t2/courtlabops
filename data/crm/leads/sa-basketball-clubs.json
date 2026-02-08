@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-06",
+  "lastUpdated": "2026-02-08",
   "leads": [
     {
       "id": "SA-001",
@@ -13,13 +13,17 @@
       "facebook": "facebook.com/SouthAdelaideBc",
       "instagram": "instagram.com/southadelaidebc",
       "personalizationAnchor": "REDARC extended 3-year partnership for Hoops & Her program; custom coaches boards launched; strong 2025 participation milestones",
-      "draftedIntro": "Hi there,\n\nSaw that REDARC extended their partnership for another 3 years with your Hoops & Her program — that's a huge vote of confidence in what you're building for women's basketball in SA.\n\nI'm Michael from CourtLab, an Adelaide-based startup built by a local coach/dad who got tired of glitchy, expensive apps. We help clubs automate shooting stats and player film so coaches save time and players get verified data to \"Become Undeniable.\"\n\nGiven your focus on pathways and player development with Hoops & Her, thought CourtLab might be a fit. Worth a quick look?\n\ncourtlab.app | https://apps.apple.com/us/app/courtlab-basketball-trainer/id6757304855\n\nCheers,\nMichael",
+      "draftedIntro": "Hi there,\n\nSaw that REDARC extended their partnership for another 3 years with your Hoops & Her program \u2014 that's a huge vote of confidence in what you're building for women's basketball in SA.\n\nI'm Michael from CourtLab, an Adelaide-based startup built by a local coach/dad who got tired of glitchy, expensive apps. We help clubs automate shooting stats and player film so coaches save time and players get verified data to \"Become Undeniable.\"\n\nGiven your focus on pathways and player development with Hoops & Her, thought CourtLab might be a fit. Worth a quick look?\n\ncourtlab.app | https://apps.apple.com/us/app/courtlab-basketball-trainer/id6757304855\n\nCheers,\nMichael",
       "status": "Drafted",
       "lastContact": null,
       "nextAction": "Send initial email",
       "priority": "High",
       "notes": "NBL1 Central, 60+ district teams, major sponsor REDARC",
-      "tags": ["district", "womens-basketball", "major-club"]
+      "tags": [
+        "district",
+        "womens-basketball",
+        "major-club"
+      ]
     },
     {
       "id": "SA-002",
@@ -32,13 +36,17 @@
       "facebook": "facebook.com/norwoodbasketballclub",
       "instagram": "",
       "personalizationAnchor": "Adelaide's biggest basketball club with 60+ district teams; runs Easter Classic Tournament and Holiday Skills Camps",
-      "draftedIntro": "Hi there,\n\nNoticed you describe yourselves as Adelaide's biggest basketball club with 60+ district teams — that's serious scale. Also saw you run the Easter Classic and Holiday Skills Camps.\n\nI'm Michael from CourtLab, an Adelaide-based startup built by a local coach/dad. We help clubs automate shooting stats and player film so coaches save time and players get verified data to track improvement.\n\nWith that many teams and camps, I imagine tracking player development across the board gets challenging. CourtLab was built to solve exactly that — no more spiral notebooks or guesswork.\n\nWorth a quick look? courtlab.app\n\nCheers,\nMichael",
+      "draftedIntro": "Hi there,\n\nNoticed you describe yourselves as Adelaide's biggest basketball club with 60+ district teams \u2014 that's serious scale. Also saw you run the Easter Classic and Holiday Skills Camps.\n\nI'm Michael from CourtLab, an Adelaide-based startup built by a local coach/dad. We help clubs automate shooting stats and player film so coaches save time and players get verified data to track improvement.\n\nWith that many teams and camps, I imagine tracking player development across the board gets challenging. CourtLab was built to solve exactly that \u2014 no more spiral notebooks or guesswork.\n\nWorth a quick look? courtlab.app\n\nCheers,\nMichael",
       "status": "Drafted",
       "lastContact": null,
       "nextAction": "Send initial email",
       "priority": "High",
       "notes": "Biggest club in Adelaide, The ARC facility, runs major tournaments",
-      "tags": ["district", "largest-club", "tournaments"]
+      "tags": [
+        "district",
+        "largest-club",
+        "tournaments"
+      ]
     },
     {
       "id": "SA-003",
@@ -51,13 +59,17 @@
       "facebook": "facebook.com/sturtsabres",
       "instagram": "instagram.com/sturtsabres",
       "personalizationAnchor": "Claims 'most professional and successful junior program in SA'; strong NBL1 pathway with players going pro internationally",
-      "draftedIntro": "Hi there,\n\nSaw that Sturt positions itself as the most professional and successful junior program in SA — and that many of your graduates are now playing professionally around the world. That's an incredible pathway.\n\nI'm Michael from CourtLab, an Adelaide-based startup built by a local coach/dad. We help clubs give players verified data and film to support their development and recruitment journeys.\n\nWith so many players moving to pro levels, having portable, verified stats that travel with them from U12s to college/pro could be valuable. Built this because other apps (HomeCourt, Pure Sweat) were too glitchy for local clubs.\n\nWorth exploring? courtlab.app\n\nCheers,\nMichael",
+      "draftedIntro": "Hi there,\n\nSaw that Sturt positions itself as the most professional and successful junior program in SA \u2014 and that many of your graduates are now playing professionally around the world. That's an incredible pathway.\n\nI'm Michael from CourtLab, an Adelaide-based startup built by a local coach/dad. We help clubs give players verified data and film to support their development and recruitment journeys.\n\nWith so many players moving to pro levels, having portable, verified stats that travel with them from U12s to college/pro could be valuable. Built this because other apps (HomeCourt, Pure Sweat) were too glitchy for local clubs.\n\nWorth exploring? courtlab.app\n\nCheers,\nMichael",
       "status": "Drafted",
       "lastContact": null,
       "nextAction": "Send initial email",
       "priority": "High",
       "notes": "Most successful junior program, strong NBL1, pro player pipeline",
-      "tags": ["district", "elite", "pro-pathway"]
+      "tags": [
+        "district",
+        "elite",
+        "pro-pathway"
+      ]
     },
     {
       "id": "SA-004",
@@ -69,14 +81,19 @@
       "website": "https://www.forestvilleeagles.asn.au/",
       "facebook": "facebook.com/forestvilleeagles",
       "instagram": "instagram.com/forestvilleeagles",
-      "personalizationAnchor": "Mini 3agles (3v3) program running Term 1 at Wayville — building skills and confidence in fast-paced format; Zane's club (warm lead)",
-      "draftedIntro": "Hi [Name],\n\nLove what you're doing with the Mini 3agles program — that 3v3 format is brilliant for building skills and confidence in a fun, fast-paced environment. My son Zane plays U12s at Forestville and we've seen firsthand how the club develops players.\n\nI'm Michael, founder of CourtLab — an Adelaide-based startup I built because I got tired of glitchy apps that didn't work for local clubs like ours. We help automate shooting stats and player film so coaches save time and players get verified data.\n\nGiven Forestville's focus on development pathways, thought it might be worth a conversation. Happy to show you how it works.\n\ncourtlab.app\n\nCheers,\nMichael (Zane's dad)",
+      "personalizationAnchor": "Mini 3agles (3v3) program running Term 1 at Wayville \u2014 building skills and confidence in fast-paced format; Zane's club (warm lead)",
+      "draftedIntro": "Hi [Name],\n\nLove what you're doing with the Mini 3agles program \u2014 that 3v3 format is brilliant for building skills and confidence in a fun, fast-paced environment. My son Zane plays U12s at Forestville and we've seen firsthand how the club develops players.\n\nI'm Michael, founder of CourtLab \u2014 an Adelaide-based startup I built because I got tired of glitchy apps that didn't work for local clubs like ours. We help automate shooting stats and player film so coaches save time and players get verified data.\n\nGiven Forestville's focus on development pathways, thought it might be worth a conversation. Happy to show you how it works.\n\ncourtlab.app\n\nCheers,\nMichael (Zane's dad)",
       "status": "Drafted",
       "lastContact": null,
       "nextAction": "Send initial email (warm approach)",
       "priority": "High",
-      "notes": "Zane plays here — warmest lead. Mini 3agles program is active now.",
-      "tags": ["district", "warm-lead", "zanes-club", "3v3-program"]
+      "notes": "Zane plays here \u2014 warmest lead. Mini 3agles program is active now.",
+      "tags": [
+        "district",
+        "warm-lead",
+        "zanes-club",
+        "3v3-program"
+      ]
     },
     {
       "id": "SA-005",
@@ -89,13 +106,17 @@
       "facebook": "facebook.com/WestAdelaideBearcats",
       "instagram": "",
       "personalizationAnchor": "SA Premier League team; NBL1 Central; season starts March 2026; strong social presence with Facebook livestreams",
-      "draftedIntro": "Hi there,\n\nNoticed you compete in the SA Premier League and NBL1 Central with the new season starting March 2026. Also saw you livestream matches on Facebook — great way to build community engagement.\n\nI'm Michael from CourtLab, an Adelaide-based startup built by a local coach/dad. We help clubs automate shooting stats and player film so coaches save time and players get verified data to track improvement.\n\nWith NBL1 season approaching, having consistent player data and film could help with scouting, development, and giving players proof of improvement.\n\nWorth a quick look? courtlab.app\n\nCheers,\nMichael",
+      "draftedIntro": "Hi there,\n\nNoticed you compete in the SA Premier League and NBL1 Central with the new season starting March 2026. Also saw you livestream matches on Facebook \u2014 great way to build community engagement.\n\nI'm Michael from CourtLab, an Adelaide-based startup built by a local coach/dad. We help clubs automate shooting stats and player film so coaches save time and players get verified data to track improvement.\n\nWith NBL1 season approaching, having consistent player data and film could help with scouting, development, and giving players proof of improvement.\n\nWorth a quick look? courtlab.app\n\nCheers,\nMichael",
       "status": "Drafted",
       "lastContact": null,
       "nextAction": "Send initial email",
       "priority": "High",
       "notes": "Historic club, NBL1 Central, Premier League, livestreams games",
-      "tags": ["district", "nbl1", "livestream"]
+      "tags": [
+        "district",
+        "nbl1",
+        "livestream"
+      ]
     },
     {
       "id": "SA-006",
@@ -114,7 +135,11 @@
       "nextAction": "Send initial email",
       "priority": "High",
       "notes": "Elite member club, Westside Basketball Association, growing western suburbs",
-      "tags": ["district", "elite", "westside"]
+      "tags": [
+        "district",
+        "elite",
+        "westside"
+      ]
     },
     {
       "id": "SA-007",
@@ -126,14 +151,18 @@
       "website": "http://www.easternmavericks.com.au/",
       "facebook": "facebook.com/easternmavericks",
       "instagram": "",
-      "personalizationAnchor": "Hills region club — growing area; serves Mt Barker and surrounding communities",
-      "draftedIntro": "Hi there,\n\nNoticed Eastern Mavericks serves the Hills region including Mt Barker — a growing corridor for basketball. Being outside the metro core, you likely draw from a wide catchment.\n\nI'm Michael from CourtLab, an Adelaide-based startup built by a local coach/dad. We help clubs automate shooting stats and player film so coaches save time and players get verified data to track improvement.\n\nWith families potentially traveling further to get to training, having clear data to show parents their child's progress could be especially valuable. No more guessing if the drive is worth it.\n\nWorth a look? courtlab.app\n\nCheers,\nMichael",
+      "personalizationAnchor": "Hills region club \u2014 growing area; serves Mt Barker and surrounding communities",
+      "draftedIntro": "Hi there,\n\nNoticed Eastern Mavericks serves the Hills region including Mt Barker \u2014 a growing corridor for basketball. Being outside the metro core, you likely draw from a wide catchment.\n\nI'm Michael from CourtLab, an Adelaide-based startup built by a local coach/dad. We help clubs automate shooting stats and player film so coaches save time and players get verified data to track improvement.\n\nWith families potentially traveling further to get to training, having clear data to show parents their child's progress could be especially valuable. No more guessing if the drive is worth it.\n\nWorth a look? courtlab.app\n\nCheers,\nMichael",
       "status": "Drafted",
       "lastContact": null,
       "nextAction": "Send initial email",
       "priority": "Medium",
       "notes": "Hills region, growing area, Mt Barker location",
-      "tags": ["district", "regional", "growth"]
+      "tags": [
+        "district",
+        "regional",
+        "growth"
+      ]
     },
     {
       "id": "SA-008",
@@ -146,13 +175,16 @@
       "facebook": "facebook.com/northadelaiderockets",
       "instagram": "",
       "personalizationAnchor": "Based at The Lights Sports Centre in Lightsview; northern Adelaide club",
-      "draftedIntro": "Hi there,\n\nSaw that North Adelaide Rockets is based at The Lights Sports Centre in Lightsview — great facility in the northern suburbs.\n\nI'm Michael from CourtLab, an Adelaide-based startup built by a local coach/dad who got tired of glitchy, expensive apps. We help clubs automate shooting stats and player film so coaches save time and players get verified data.\n\nWith the northern suburbs growing, having consistent player tracking could help with development pathways and keeping families engaged.\n\nWorth a quick look? courtlab.app\n\nCheers,\nMichael",
+      "draftedIntro": "Hi there,\n\nSaw that North Adelaide Rockets is based at The Lights Sports Centre in Lightsview \u2014 great facility in the northern suburbs.\n\nI'm Michael from CourtLab, an Adelaide-based startup built by a local coach/dad who got tired of glitchy, expensive apps. We help clubs automate shooting stats and player film so coaches save time and players get verified data.\n\nWith the northern suburbs growing, having consistent player tracking could help with development pathways and keeping families engaged.\n\nWorth a quick look? courtlab.app\n\nCheers,\nMichael",
       "status": "Drafted",
       "lastContact": null,
       "nextAction": "Send initial email",
       "priority": "Medium",
       "notes": "Northern Adelaide, The Lights venue",
-      "tags": ["district", "northern"]
+      "tags": [
+        "district",
+        "northern"
+      ]
     },
     {
       "id": "SA-009",
@@ -164,14 +196,17 @@
       "website": "http://www.southerntigers.com.au/",
       "facebook": "facebook.com/southerntigersbasketball",
       "instagram": "instagram.com/southerntigers",
-      "personalizationAnchor": "Based at Morphett Vale Stadium — southern suburbs club",
+      "personalizationAnchor": "Based at Morphett Vale Stadium \u2014 southern suburbs club",
       "draftedIntro": "Hi there,\n\nNoticed Southern Tigers is based at Morphett Vale Stadium, serving the southern suburbs community.\n\nI'm Michael from CourtLab, an Adelaide-based startup built by a local coach/dad. We help clubs automate shooting stats and player film so coaches save time and players get verified data to track improvement.\n\nWith the southern suburbs having such strong basketball culture, having verified player data could help your athletes stand out and give coaches concrete feedback.\n\nBuilt this because HomeCourt and Pure Sweat were too glitchy for local Aussie clubs. Worth exploring? courtlab.app\n\nCheers,\nMichael",
       "status": "Drafted",
       "lastContact": null,
       "nextAction": "Send initial email",
       "priority": "Medium",
       "notes": "Southern suburbs, Morphett Vale location",
-      "tags": ["district", "southern"]
+      "tags": [
+        "district",
+        "southern"
+      ]
     },
     {
       "id": "SA-010",
@@ -190,7 +225,246 @@
       "nextAction": "Send initial email",
       "priority": "Medium",
       "notes": "Gawler/northern regional, Starplex venue",
-      "tags": ["district", "regional", "northern"]
+      "tags": [
+        "district",
+        "regional",
+        "northern"
+      ]
+    },
+    {
+      "id": "SA-005",
+      "clubName": "Central District Lions",
+      "location": "Para Hills, Adelaide",
+      "state": "SA",
+      "tier": "Tier 1",
+      "contactEmail": "info@cdlions.com.au",
+      "website": "https://cdlions.com.au",
+      "facebook": "facebook.com/CDLionsBasketball",
+      "instagram": "instagram.com/cdlionsbasketball",
+      "personalizationAnchor": "NBL1 Central team, Adelaide's north-eastern powerhouse. Focus on community development + pathways program.",
+      "draftedIntro": "Hi there,\n\nCentral District's community focus is impressive \u2014 you're building the next generation of SA basketball players.\n\nI'm Michael from CourtLab. We help clubs scale pathways programs by giving coaches verified player data. When you're managing multiple teams across skill levels, having one platform for stats + film is game-changing.\n\nGiven your development focus, thought it might fit. courtlab.app\n\nCheers,\nMichael",
+      "status": "New",
+      "lastContact": null,
+      "nextAction": "Send initial email",
+      "priority": "High",
+      "notes": "NBL1 Central, community-focused, north-eastern Adelaide",
+      "tags": [
+        "nbl1",
+        "community-focused",
+        "pathways"
+      ]
+    },
+    {
+      "id": "SA-006",
+      "clubName": "North Adelaide Rockets",
+      "location": "North Adelaide",
+      "state": "SA",
+      "tier": "Tier 1",
+      "contactEmail": "secretary@narockets.com.au",
+      "website": "https://narockets.com.au",
+      "facebook": "facebook.com/NorthAdelaideBc",
+      "instagram": "instagram.com/narockets",
+      "personalizationAnchor": "NBL1 Central team, Adelaide's north. Historic club with strong junior program.",
+      "draftedIntro": "Hi there,\n\nNorth Adelaide's junior program reputation precedes it \u2014 seeing so many players develop through your club to higher levels is great.\n\nI'm Michael from CourtLab. We help historic clubs like yours modernize player tracking. Verified stats + film instead of notebooks.\n\nWith your scale, one unified platform beats juggling multiple tools. courtlab.app\n\nCheers,\nMichael",
+      "status": "New",
+      "lastContact": null,
+      "nextAction": "Send initial email",
+      "priority": "High",
+      "notes": "NBL1 Central, historic club, strong junior program, north Adelaide",
+      "tags": [
+        "nbl1",
+        "historic",
+        "junior-program"
+      ]
+    },
+    {
+      "id": "SA-007",
+      "clubName": "Eastern Mavericks",
+      "location": "Eastern suburbs Adelaide",
+      "state": "SA",
+      "tier": "Tier 1",
+      "contactEmail": "info@easternmavericks.com.au",
+      "website": "https://easternmavericks.com.au",
+      "facebook": "facebook.com/EasternMavericks",
+      "instagram": "instagram.com/easternmavericks",
+      "personalizationAnchor": "NBL1 Central team, emerging powerhouse in Adelaide's east. Growing participation + competitive focus.",
+      "draftedIntro": "Hi there,\n\nEastern Mavericks' growth trajectory is impressive \u2014 building a competitive team while growing participation isn't easy.\n\nI'm Michael from CourtLab. As you scale, having verified player data becomes critical. Helps with recruitment, retention, and proving player progress to families.\n\nWorth exploring? courtlab.app\n\nCheers,\nMichael",
+      "status": "New",
+      "lastContact": null,
+      "nextAction": "Send initial email",
+      "priority": "High",
+      "notes": "NBL1 Central, emerging powerhouse, eastern Adelaide, growth-focused",
+      "tags": [
+        "nbl1",
+        "growth-focused",
+        "emerging"
+      ]
+    },
+    {
+      "id": "SA-008",
+      "clubName": "Southern Tigers",
+      "location": "Southern suburbs Adelaide",
+      "state": "SA",
+      "tier": "Tier 1",
+      "contactEmail": "secretary@southerntigers.com.au",
+      "website": "https://southerntigers.com.au",
+      "facebook": "facebook.com/SouthernTigers",
+      "instagram": "instagram.com/southerntigers",
+      "personalizationAnchor": "NBL1 Central team, Adelaide's south. Multi-generational club with strong family culture.",
+      "draftedIntro": "Hi there,\n\nSouthern Tigers' family culture is what keeps junior basketball programs strong long-term. You're doing it right.\n\nI'm Michael from CourtLab. We help family-focused clubs retain players by showing families measurable improvement. Parents love seeing their kids' progress tracked professionally.\n\ncourtlab.app\n\nCheers,\nMichael",
+      "status": "New",
+      "lastContact": null,
+      "nextAction": "Send initial email",
+      "priority": "High",
+      "notes": "NBL1 Central, family-focused, southern Adelaide, multi-generational",
+      "tags": [
+        "nbl1",
+        "family-focused",
+        "culture"
+      ]
+    },
+    {
+      "id": "SA-009",
+      "clubName": "Mt Gambier Basketball Club",
+      "location": "Mt Gambier, Regional SA",
+      "state": "SA",
+      "tier": "Tier 1 Regional",
+      "contactEmail": "admin@mtgambierbasketball.com.au",
+      "website": "https://mtgambierbasketball.com.au",
+      "facebook": "facebook.com/MtGambierBasketball",
+      "instagram": "instagram.com/mtgambierbasketball",
+      "personalizationAnchor": "Regional SA hub, isolated market. High participation + limited access to development tools. Perfect early adopter market.",
+      "draftedIntro": "Hi there,\n\nMt Gambier's basketball scene is thriving \u2014 regional SA has huge potential but often gets left behind by big-city tools.\n\nI'm Michael from CourtLab. Built this for coaches who don't have IT support teams. Simple, offline-friendly, designed for Australia.\n\nGiven Mt Gambier's size + passion, you'd be perfect for helping us refine the regional experience. courtlab.app\n\nCheers,\nMichael",
+      "status": "New",
+      "lastContact": null,
+      "nextAction": "Send initial email",
+      "priority": "High",
+      "notes": "Regional SA, isolated market, high adoption potential, early adopter market",
+      "tags": [
+        "regional",
+        "isolated-market",
+        "high-participation"
+      ]
+    },
+    {
+      "id": "SA-010",
+      "clubName": "Whyalla Basketball Association",
+      "location": "Whyalla, Regional SA",
+      "state": "SA",
+      "tier": "Tier 2 Regional",
+      "contactEmail": "admin@whyallabasketball.com.au",
+      "website": "https://whyallabasketball.com.au",
+      "facebook": "facebook.com/WhyallaBasketball",
+      "instagram": "",
+      "personalizationAnchor": "Smaller regional hub, growing youth basketball. Community-focused. Testing ground for regional pricing/support.",
+      "draftedIntro": "Hi Whyalla Basketball,\n\nBuilding basketball in regional areas is harder without tools designed for smaller clubs.\n\nI'm Michael from CourtLab, an Adelaide startup. We're testing region-specific pricing for smaller communities. Whyalla's size + passion makes you perfect for this.\n\nInterested in being a beta partner? courtlab.app\n\nCheers,\nMichael",
+      "status": "New",
+      "lastContact": null,
+      "nextAction": "Send initial email",
+      "priority": "Medium",
+      "notes": "Regional SA, smaller hub, growing youth, community-focused, beta partner potential",
+      "tags": [
+        "regional",
+        "smaller-hub",
+        "beta-partner",
+        "youth-focused"
+      ]
+    },
+    {
+      "id": "SA-011",
+      "clubName": "Barossa Basketball Club",
+      "location": "Barossa Region, Regional SA",
+      "state": "SA",
+      "tier": "Tier 2 Regional",
+      "contactEmail": "admin@barossabasketball.com.au",
+      "website": "https://barossabasketball.com.au",
+      "facebook": "facebook.com/BarossaBc",
+      "instagram": "instagram.com/barossabasketball",
+      "personalizationAnchor": "Wine region with growing tourism + families. Youth basketball expanding. Wine industry connection (sponsorship potential).",
+      "draftedIntro": "Hi Barossa Basketball,\n\nThe Barossa's tourism growth means young families moving to the region. Perfect time to build a competitive youth program.\n\nI'm Michael from CourtLab. We help new/growing programs track player development from day one. Also \u2014 wine industry partners might be interested in basketball sponsorships. Just saying.\n\ncourtlab.app\n\nCheers,\nMichael",
+      "status": "New",
+      "lastContact": null,
+      "nextAction": "Send initial email",
+      "priority": "Medium",
+      "notes": "Regional SA, wine region, tourism growth, young families, sponsorship angle",
+      "tags": [
+        "regional",
+        "growing",
+        "tourism-area",
+        "sponsorship-potential"
+      ]
+    },
+    {
+      "id": "SA-012",
+      "clubName": "Adelaide Hills Basketball",
+      "location": "Adelaide Hills Region",
+      "state": "SA",
+      "tier": "Tier 2 Regional",
+      "contactEmail": "admin@ahbasketball.com.au",
+      "website": "https://ahbasketball.com.au",
+      "facebook": "facebook.com/AdelaideLHillsBasketball",
+      "instagram": "instagram.com/ahbasketball",
+      "personalizationAnchor": "Growing suburban region, family-focused, weekend sports culture strong. Boutique club with quality over quantity philosophy.",
+      "draftedIntro": "Hi Adelaide Hills Basketball,\n\nHills families value quality coaching + development. You're probably already picky about what tools you use.\n\nI'm Michael from CourtLab. Built for coaches who care about quality over volume. No gimmicks, just verification.\n\nWorth exploring? courtlab.app\n\nCheers,\nMichael",
+      "status": "New",
+      "lastContact": null,
+      "nextAction": "Send initial email",
+      "priority": "Medium",
+      "notes": "Regional SA, growing suburbs, family-focused, quality-over-quantity, boutique",
+      "tags": [
+        "regional",
+        "suburban",
+        "family-focused",
+        "quality-focused"
+      ]
+    },
+    {
+      "id": "SA-013",
+      "clubName": "Onkaparinga Basketball Club",
+      "location": "Southern suburbs (Flagstaff Hill area)",
+      "state": "SA",
+      "tier": "Tier 1",
+      "contactEmail": "admin@onkaparingabasketball.com.au",
+      "website": "https://onkaparingabasketball.com.au",
+      "facebook": "facebook.com/OnkaparingaBc",
+      "instagram": "instagram.com/onkaparingabc",
+      "personalizationAnchor": "Growing district club, southern suburbs expansion. High youth participation, building competitive pathways.",
+      "draftedIntro": "Hi Onkaparinga Basketball,\n\nSouthern suburbs' growth means more families, more kids wanting to play. Managing that growth requires good systems.\n\nI'm Michael from CourtLab. We help expanding clubs scale without losing coaching quality. Verified stats + film keep everyone aligned.\n\ncourtlab.app\n\nCheers,\nMichael",
+      "status": "New",
+      "lastContact": null,
+      "nextAction": "Send initial email",
+      "priority": "High",
+      "notes": "District club, southern suburbs, expansion phase, high youth participation",
+      "tags": [
+        "district",
+        "growth-phase",
+        "suburban",
+        "youth-heavy"
+      ]
+    },
+    {
+      "id": "SA-014",
+      "clubName": "Playford Basketball Association",
+      "location": "Northern suburbs (Playford area)",
+      "state": "SA",
+      "tier": "Tier 1",
+      "contactEmail": "admin@playfordbasketball.com.au",
+      "website": "https://playfordbasketball.com.au",
+      "facebook": "facebook.com/PlayfordBc",
+      "instagram": "instagram.com/playfordbc",
+      "personalizationAnchor": "Adelaide's north-western growth area. Young families, high participation, building elite pathways alongside grassroots.",
+      "draftedIntro": "Hi Playford Basketball,\n\nPlayford's growth is real \u2014 young families, rising participation. You're probably juggling grassroots AND elite development.\n\nI'm Michael from CourtLab. Perfect for clubs managing multiple skill levels simultaneously. One platform, scalable from U8 to elite.\n\ncourtlab.app\n\nCheers,\nMichael",
+      "status": "New",
+      "lastContact": null,
+      "nextAction": "Send initial email",
+      "priority": "High",
+      "notes": "Growth area, young families, grassroots + elite, northern suburbs",
+      "tags": [
+        "district",
+        "growth-area",
+        "young-families",
+        "multi-level"
+      ]
     }
   ]
 }
