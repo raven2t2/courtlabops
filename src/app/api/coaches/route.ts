@@ -1,17 +1,6 @@
 import { NextResponse } from 'next/server'
-import { readFile } from 'fs/promises'
-import path from 'path'
-
-const COACHES_FILE = path.join(process.cwd(), 'data', 'crm', 'coaches', 'coach-prospects.json')
+import coachesData from '../../../../data/crm/coaches/coach-prospects.json'
 
 export async function GET() {
-  try {
-    const data = await readFile(COACHES_FILE, 'utf-8')
-    const coachesData = JSON.parse(data)
-    return NextResponse.json(coachesData)
-  } catch (error) {
-    return NextResponse.json({ 
-      error: error instanceof Error ? error.message : 'Failed to load coaches' 
-    }, { status: 500 })
-  }
+  return NextResponse.json(coachesData)
 }
