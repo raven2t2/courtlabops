@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-08",
+  "sponsors": [
+    {
+      "id": "SPONSOR-001",
+      "companyName": "REDARC",
+      "industry": "Automotive/Outdoor",
+      "website": "https://www.redarc.com.au",
+      "contactEmail": "marketing@redarc.com.au",
+      "contactPerson": "Marketing Manager",
+      "currentPartnerships": "South Adelaide Panthers (Hoops & Her 3-year deal)",
+      "personalizationAnchor": "Already backing women's basketball (Hoops & Her). Outdoor/performance lifestyle brand. Perfect fit for CourtLab combine sponsorship.",
+      "draftedIntro": "Hi there,\n\nREDAC already understands women's sports value — your 3-year Hoops & Her partnership with South Adelaide shows commitment.\n\nI'm Michael from CourtLab, an Adelaide-based basketball training app. We're looking for authentic partners for the Easter Classic 2026 (April 3-6) — the biggest tournament in SA with 300+ young players competing.\n\nGiven your focus on performance + lifestyle, sponsoring our 'Verified Data' booth (where coaches get player stats + film) could position REDARC as the tech-forward brand in SA basketball.\n\nWorth a conversation? courtlab.app\n\nCheers,\nMichael",
+      "status": "Research",
+      "priority": "High",
+      "tags": ["womens-sports", "performance-brand", "easter-classic-2026", "existing-partnership"],
+      "nextAction": "Research decision-maker + send intro"
+    },
+    {
+      "id": "SPONSOR-002",
+      "companyName": "Adelaide 36ers",
+      "industry": "Professional Sports",
+      "website": "https://www.adelaide36ers.com.au",
+      "contactEmail": "partnerships@adelaide36ers.com.au",
+      "contactPerson": "Partnership Manager",
+      "currentPartnerships": "NBL team (professional), youth programs",
+      "personalizationAnchor": "NBL South Australian flagship. Massive reach with metro + regional communities. 36ers pathway would benefit from verified player data.",
+      "draftedIntro": "Hi there,\n\nThe Adelaide 36ers' reach across SA is unmatched — from pro-level down to grassroots.\n\nI'm Michael from CourtLab. We're building the verification layer for SA basketball: combine times, shooting stats, player development tracking. Think of us as the data layer that supports the entire pipeline from junior clubs up to NBL.\n\nWe're sponsoring the Easter Classic 2026 (April 3-6) — 300+ young players, mostly future pathway players for teams like yours. Having 36ers association on the booth would validate the platform with young players.\n\nWorth exploring? courtlab.app\n\nCheers,\nMichael",
+      "status": "Research",
+      "priority": "High",
+      "tags": ["professional-team", "pathway-partner", "easter-classic-2026", "nbl"],
+      "nextAction": "Research contact + send partnership proposal"
+    },
+    {
+      "id": "SPONSOR-003",
+      "companyName": "Basketball SA",
+      "industry": "Sport Governance",
+      "website": "https://www.basketballsa.com.au",
+      "contactEmail": "ceo@basketballsa.com.au",
+      "contactPerson": "CEO / Partnership Lead",
+      "currentPartnerships": "State governance, official competitions",
+      "personalizationAnchor": "Controls all official SA competitions + programs. Easter Classic runs under their umbrella. Direct relationship to decision-makers.",
+      "draftedIntro": "Hi there,\n\nBasketball SA's role in growing SA basketball is critical — you set the standards.\n\nI'm Michael from CourtLab, an Adelaide startup. We've built a verified data platform for player tracking: combine times, shooting stats, progress. No AI guesswork — just truth coaches can trust.\n\nWe'd like to sponsor the Easter Classic 2026 (April 3-6) as the official 'verified player data' partner. This positions BA as supporting innovation + transparency in junior development.\n\nWould love to chat about how this benefits the Basketball SA ecosystem. courtlab.app\n\nCheers,\nMichael",
+      "status": "Research",
+      "priority": "Critical",
+      "tags": ["governance", "easter-classic-2026", "official-partner", "ecosystem"],
+      "nextAction": "Schedule call with CEO"
+    }
+  ]
+}

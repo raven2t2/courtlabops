@@ -1,0 +1,454 @@
+{
+  "version": "1.1",
+  "columns": [
+    {
+      "id": "drafted",
+      "name": "\ud83d\udccb Drafted",
+      "color": "#e2e8f0",
+      "leads": [
+        "SA-001",
+        "SA-002",
+        "SA-003",
+        "SA-004",
+        "SA-005",
+        "SA-006",
+        "SA-007",
+        "SA-008",
+        "SA-009",
+        "SA-010",
+        "SA-005",
+        "SA-006",
+        "SA-007",
+        "SA-008",
+        "SA-009",
+        "SA-010",
+        "SA-011",
+        "SA-012",
+        "SA-013",
+        "SA-014"
+      ],
+      "tasks": [
+        "TW-001",
+        "TW-002",
+        "TW-003",
+        "TW-004",
+        "TW-005",
+        "TW-006",
+        "AFF-001",
+        "AFF-002",
+        "AFF-003",
+        "AFF-004",
+        "AFF-005",
+        "AFF-006",
+        "AFF-007",
+        "AFF-008",
+        "SETUP-001"
+      ]
+    },
+    {
+      "id": "sent",
+      "name": "\ud83d\udce4 Sent",
+      "color": "#bfdbfe",
+      "leads": [],
+      "tasks": []
+    },
+    {
+      "id": "replied",
+      "name": "\ud83d\udcac Replied",
+      "color": "#fef08a",
+      "leads": [],
+      "tasks": []
+    },
+    {
+      "id": "meeting",
+      "name": "\ud83d\udcc5 Meeting Scheduled",
+      "color": "#c4b5fd",
+      "leads": [],
+      "tasks": []
+    },
+    {
+      "id": "closed-won",
+      "name": "\u2705 Closed - Won",
+      "color": "#86efac",
+      "leads": [],
+      "tasks": []
+    },
+    {
+      "id": "closed-lost",
+      "name": "\u274c Closed - Lost",
+      "color": "#fca5a5",
+      "leads": [],
+      "tasks": []
+    }
+  ],
+  "tasks": {
+    "TW-001": {
+      "title": "\ud83d\udccc Pin @CourtLabApp welcome tweet",
+      "description": "Pin the brand introduction tweet to @CourtLabApp profile",
+      "priority": "high",
+      "platform": "twitter",
+      "account": "@CourtLabApp",
+      "links": {
+        "internal": [
+          {
+            "label": "View Tweet",
+            "url": "https://courtlabops.vercel.app/tweets"
+          }
+        ],
+        "external": [
+          {
+            "label": "@CourtLabApp",
+            "url": "https://twitter.com/CourtLabApp"
+          },
+          {
+            "label": "Tweet Draft",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
+          }
+        ]
+      }
+    },
+    "TW-002": {
+      "title": "\ud83d\udc26 Post @CourtLabApp Easter Classic countdown",
+      "description": "8 weeks to Easter Classic tweet - ready to copy/paste",
+      "priority": "high",
+      "platform": "twitter",
+      "account": "@CourtLabApp",
+      "links": {
+        "internal": [
+          {
+            "label": "View Tweet",
+            "url": "https://courtlabops.vercel.app/tweets"
+          }
+        ],
+        "external": [
+          {
+            "label": "@CourtLabApp",
+            "url": "https://twitter.com/CourtLabApp"
+          },
+          {
+            "label": "Tweet Draft",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
+          },
+          {
+            "label": "Easter Classic Info",
+            "url": "https://www.basketballsa.com.au/easter-classic-2026"
+          }
+        ]
+      }
+    },
+    "TW-003": {
+      "title": "\ud83d\udc26 Post @CourtLabApp training tip",
+      "description": "Training tip about measuring progress - ready to copy/paste",
+      "priority": "medium",
+      "platform": "twitter",
+      "account": "@CourtLabApp",
+      "links": {
+        "internal": [
+          {
+            "label": "View Tweet",
+            "url": "https://courtlabops.vercel.app/tweets"
+          }
+        ],
+        "external": [
+          {
+            "label": "@CourtLabApp",
+            "url": "https://twitter.com/CourtLabApp"
+          },
+          {
+            "label": "Tweet Draft",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
+          }
+        ]
+      }
+    },
+    "TW-004": {
+      "title": "\ud83d\udccc Pin @EstherCourtLab intro tweet",
+      "description": "Pin the CMO persona introduction tweet",
+      "priority": "high",
+      "platform": "twitter",
+      "account": "@EstherCourtLab",
+      "links": {
+        "internal": [
+          {
+            "label": "View Tweet",
+            "url": "https://courtlabops.vercel.app/tweets"
+          }
+        ],
+        "external": [
+          {
+            "label": "@EstherCourtLab",
+            "url": "https://twitter.com/EstherCourtLab"
+          },
+          {
+            "label": "Tweet Draft",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
+          }
+        ]
+      }
+    },
+    "TW-005": {
+      "title": "\ud83d\udc26 Post @EstherCourtLab hot take #1",
+      "description": "Phone stopwatch rant - ready to copy/paste",
+      "priority": "medium",
+      "platform": "twitter",
+      "account": "@EstherCourtLab",
+      "links": {
+        "internal": [
+          {
+            "label": "View Tweet",
+            "url": "https://courtlabops.vercel.app/tweets"
+          }
+        ],
+        "external": [
+          {
+            "label": "@EstherCourtLab",
+            "url": "https://twitter.com/EstherCourtLab"
+          },
+          {
+            "label": "Tweet Draft",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
+          }
+        ]
+      }
+    },
+    "TW-006": {
+      "title": "\ud83d\udc26 Post @EstherCourtLab hot take #2",
+      "description": "Organized chaos take - ready to copy/paste",
+      "priority": "medium",
+      "platform": "twitter",
+      "account": "@EstherCourtLab",
+      "links": {
+        "internal": [
+          {
+            "label": "View Tweet",
+            "url": "https://courtlabops.vercel.app/tweets"
+          }
+        ],
+        "external": [
+          {
+            "label": "@EstherCourtLab",
+            "url": "https://twitter.com/EstherCourtLab"
+          },
+          {
+            "label": "Tweet Draft",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/twitter-drafts.json"
+          }
+        ]
+      }
+    },
+    "AFF-001": {
+      "title": "\ud83d\udce8 Outreach to @BasketballAus",
+      "description": "Send personalized DM about Coach Development Framework integration - LEAD-001",
+      "priority": "highest",
+      "type": "affiliate_outreach",
+      "lead_id": "LEAD-001",
+      "links": {
+        "internal": [],
+        "external": [
+          {
+            "label": "@BasketballAus",
+            "url": "https://twitter.com/BasketballAus"
+          },
+          {
+            "label": "Lead Research",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          },
+          {
+            "label": "DM Draft",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          }
+        ]
+      }
+    },
+    "AFF-002": {
+      "title": "\ud83d\udce8 Outreach to @BBALLAU_Coaches",
+      "description": "Send personalized DM about Feb 16 framework launch - LEAD-002",
+      "priority": "highest",
+      "type": "affiliate_outreach",
+      "lead_id": "LEAD-002",
+      "links": {
+        "internal": [],
+        "external": [
+          {
+            "label": "@BBALLAU_Coaches",
+            "url": "https://twitter.com/BBALLAU_Coaches"
+          },
+          {
+            "label": "Lead Research",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          }
+        ]
+      }
+    },
+    "AFF-003": {
+      "title": "\ud83d\udce8 Outreach to @bouncepassau",
+      "description": "Send personalized DM about content partnership with combine data - LEAD-003",
+      "priority": "high",
+      "type": "affiliate_outreach",
+      "lead_id": "LEAD-003",
+      "links": {
+        "internal": [],
+        "external": [
+          {
+            "label": "@bouncepassau",
+            "url": "https://twitter.com/bouncepassau"
+          },
+          {
+            "label": "basketball.com.au",
+            "url": "https://basketball.com.au"
+          },
+          {
+            "label": "Lead Research",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          }
+        ]
+      }
+    },
+    "AFF-004": {
+      "title": "\ud83d\udce8 Outreach to @codebballau",
+      "description": "Send personalized DM about underdog player stories + data - LEAD-004",
+      "priority": "high",
+      "type": "affiliate_outreach",
+      "lead_id": "LEAD-004",
+      "links": {
+        "internal": [],
+        "external": [
+          {
+            "label": "@codebballau",
+            "url": "https://twitter.com/codebballau"
+          },
+          {
+            "label": "Lead Research",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          }
+        ]
+      }
+    },
+    "AFF-005": {
+      "title": "\ud83d\udce8 Outreach to @AusBballnews",
+      "description": "Send personalized DM about Easter Classic 2026 exclusive - LEAD-005",
+      "priority": "high",
+      "type": "affiliate_outreach",
+      "lead_id": "LEAD-005",
+      "links": {
+        "internal": [],
+        "external": [
+          {
+            "label": "@AusBballnews",
+            "url": "https://twitter.com/AusBballnews"
+          },
+          {
+            "label": "Lead Research",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          }
+        ]
+      }
+    },
+    "AFF-006": {
+      "title": "\ud83d\udce8 Outreach to @herwaysports",
+      "description": "Send personalized DM about women's basketball data gap - LEAD-006",
+      "priority": "high",
+      "type": "affiliate_outreach",
+      "lead_id": "LEAD-006",
+      "links": {
+        "internal": [],
+        "external": [
+          {
+            "label": "@herwaysports",
+            "url": "https://twitter.com/herwaysports"
+          },
+          {
+            "label": "Lead Research",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          }
+        ]
+      }
+    },
+    "AFF-007": {
+      "title": "\ud83d\udce8 Outreach to @parkoballtraining",
+      "description": "Send personalized DM about proving client improvement with data - LEAD-007",
+      "priority": "medium",
+      "type": "affiliate_outreach",
+      "lead_id": "LEAD-007",
+      "links": {
+        "internal": [],
+        "external": [
+          {
+            "label": "@parkoballtraining",
+            "url": "https://twitter.com/parkoballtraining"
+          },
+          {
+            "label": "Lead Research",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          }
+        ]
+      }
+    },
+    "AFF-008": {
+      "title": "\ud83d\udce8 Outreach to @FoxBasketball",
+      "description": "Send personalized DM about pathway coverage story - LEAD-008",
+      "priority": "high",
+      "type": "affiliate_outreach",
+      "lead_id": "LEAD-008",
+      "links": {
+        "internal": [],
+        "external": [
+          {
+            "label": "@FoxBasketball",
+            "url": "https://twitter.com/FoxBasketball"
+          },
+          {
+            "label": "Lead Research",
+            "url": "file:///data/.openclaw/workspace/courtlab-crm/affiliate-leads-v1.json"
+          }
+        ]
+      }
+    },
+    "SETUP-001": {
+      "title": "\ud83d\udd11 Set up Twitter API v2 for automated posting",
+      "description": "Get API credentials from Twitter Developer Portal to enable automated tweet scheduling",
+      "priority": "high",
+      "owner": "Michael",
+      "links": {
+        "internal": [
+          {
+            "label": "Tweet Drafts",
+            "url": "https://courtlabops.vercel.app/tweets"
+          },
+          {
+            "label": "Posting Schedule",
+            "url": "https://courtlabops.vercel.app/data/twitter-posting-schedule.json"
+          }
+        ],
+        "external": [
+          {
+            "label": "Twitter Developer Portal",
+            "url": "https://developer.twitter.com/en/portal/dashboard"
+          },
+          {
+            "label": "Setup Guide",
+            "url": "https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api"
+          }
+        ]
+      },
+      "steps": [
+        "1. Go to https://developer.twitter.com/en/portal/dashboard",
+        "2. Click Create Project + App (or use existing)",
+        "3. Enable OAuth 2.0 User Authentication",
+        "4. Set App permissions to Read and Write",
+        "5. Generate API Key & Secret",
+        "6. Generate Access Token & Secret",
+        "7. Copy Bearer Token (if shown)",
+        "8. Provide all credentials to Esther for setup"
+      ],
+      "credentials_needed": [
+        "API Key (Consumer Key)",
+        "API Secret (Consumer Secret)",
+        "Access Token",
+        "Access Token Secret",
+        "Bearer Token (optional)"
+      ]
+    }
+  },
+  "lastUpdated": "2026-02-08"
+}

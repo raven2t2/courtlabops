@@ -1,0 +1,188 @@
+{
+  "lastUpdated": "2026-02-07T15:57:00+10:30",
+  "timezone": "Australia/Adelaide",
+  "uploadPostProfile": "courtlab",
+  "facebookPageId": "948912778306299",
+  "galleryAssetsPath": "/data/.openclaw/workspace/courtlabops-repo/shared/gallery/21d9a9dc4a781c60ae3b55b059b31890/assets/",
+  "apiLimits": {
+    "freeTierUploadsPerMonth": 10,
+    "usedThisMonth": 0,
+    "remainingThisMonth": 10
+  },
+  "postingSchedule": {
+    "instagram": {
+      "frequency": "1-2 feed posts/day",
+      "reelsPerWeek": 3,
+      "storiesPerDay": "3-5",
+      "bestTimes": ["07:00", "12:00", "18:00"]
+    },
+    "facebook": {
+      "frequency": "3-4x/week",
+      "focus": ["Event promos", "Club partnerships", "Parent-focused content"]
+    }
+  },
+  "hashtagSets": {
+    "set1": "#basketballtraining #youthbasketball #courtlab #becomeundeniable #australianbasketball #hoops",
+    "set2": "#combinetraining #playerdev #basketballskills #basketballaustralia #courtlab #verifieddata",
+    "set3": "#basketballcoach #youthsports #playerdevelopment #courtlabapp #becomeundeniable #trainhard",
+    "set4": "#basketballaustralia #juniorbasketball #skilldevelopment #courtlab #combinetime #nextlevel"
+  },
+  "contentThemes": [
+    "Training tips / skill breakdowns",
+    "Combine data highlights / player metrics",
+    "Easter Classic 2026 countdown",
+    "Coach testimonials / club features",
+    "Behind-the-scenes app development",
+    "Basketball culture / motivation",
+    "Parent education (why verified data matters)"
+  ],
+  "brandVoice": {
+    "tone": "Confident, not corporate. Like a coach who knows tech.",
+    "tagline": "Become Undeniable",
+    "emojiLimit": "Max 2-3 per post",
+    "audience": "Coaches and parents first, players second",
+    "geography": "Australian-first, globally relevant"
+  },
+  "approvalWorkflow": {
+    "autoPost": false,
+    "batchTime": "12:30",
+    "responseDeadline": "17:00",
+    "holdIfNoResponse": true
+  },
+  "usedAssets": [],
+  "week1": {
+    "weekOf": "2026-02-09",
+    "plannedPosts": [
+      {
+        "id": "w1-001",
+        "date": "2026-02-09",
+        "day": "Monday",
+        "scheduledTime": "07:00",
+        "platforms": ["instagram"],
+        "type": "photo",
+        "assetFile": "001_bFA7kaudBWW8x5ch03Qi.jpg",
+        "caption": "Monday motivation: The best players don't just practice — they track. \n\nEvery rep counts when you can see your progress in real data. Verified combine times. No guesswork. No AI approximations. Just the truth about where you are and where you're headed. \n\nTag a player who's ready to stop guessing and start improving. \n\nLink in bio to get early access.",
+        "hashtags": "set1",
+        "firstComment": "Follow @courtlabapp for more training insights 🏀",
+        "theme": "Motivation / Training philosophy",
+        "status": "pending",
+        "charCount": 342
+      },
+      {
+        "id": "w1-002",
+        "date": "2026-02-10",
+        "day": "Tuesday",
+        "scheduledTime": "12:00",
+        "platforms": ["instagram", "facebook"],
+        "type": "photo",
+        "assetFile": "015_vDQj23Q5wIQQueNZ9oSj.jpg",
+        "caption": "8 weeks out from Easter Classic 2026. 📍The ARC, Campbelltown. \n\nThis isn't just another tournament. It's where SA's best young players put their verified combine data on the line. \n\nCoaches: Want to see who actually improved this offseason? The numbers don't lie. \n\nPlayers: Be undeniable by April. Start tracking now.",
+        "hashtags": "set2",
+        "firstComment": "Easter Classic April 3-6. Link in bio for more info 🏆",
+        "theme": "Easter Classic countdown",
+        "status": "pending",
+        "charCount": 298
+      },
+      {
+        "id": "w1-003",
+        "date": "2026-02-12",
+        "day": "Thursday",
+        "scheduledTime": "18:00",
+        "platforms": ["instagram"],
+        "type": "photo",
+        "assetFile": "022_VmGJgfT3mHSGMVYVl2Ra.jpg",
+        "caption": "Your 10,000 hours mean nothing if you don't know what you're improving. \n\nWe've all seen it — players who train constantly but plateau. The difference? Feedback loops. \n\nCourtLab gives coaches (and parents) the data to adjust training before bad habits cement. \n\nVerified times. Measurable progress. Become undeniable.",
+        "hashtags": "set3",
+        "firstComment": "Parents: Link in bio to learn how verified data gives your kid an edge 📊",
+        "theme": "Parent education",
+        "status": "pending",
+        "charCount": 331
+      },
+      {
+        "id": "w1-004",
+        "date": "2026-02-14",
+        "day": "Saturday",
+        "scheduledTime": "08:00",
+        "platforms": ["instagram", "facebook"],
+        "type": "photo",
+        "assetFile": "008_XB4zHJn8YCeDsE63sBzf.jpg",
+        "caption": "Saturday sessions hit different when you have last week's baseline. \n\nCourtLab isn't about replacing coaches — it's about giving them the one thing they can't argue with: The Truth. \n\nData doesn't pick favorites. It just shows who's putting in the work.",
+        "hashtags": "set4",
+        "firstComment": "Coaches: DM us for club partnership options 🏀",
+        "theme": "Behind-the-scenes / Philosophy",
+        "status": "pending",
+        "charCount": 286
+      }
+    ]
+  },
+  "week2": {
+    "weekOf": "2026-02-16",
+    "plannedPosts": [
+      {
+        "id": "w2-001",
+        "date": "2026-02-16",
+        "day": "Monday",
+        "scheduledTime": "07:00",
+        "platforms": ["instagram"],
+        "type": "photo",
+        "assetFile": "TBD",
+        "caption": "New week. New baseline. Same goal: Become undeniable. \n\nWhat metric are you improving this week?",
+        "hashtags": "set1",
+        "theme": "Motivation",
+        "status": "draft"
+      },
+      {
+        "id": "w2-002",
+        "date": "2026-02-18",
+        "day": "Wednesday",
+        "scheduledTime": "12:00",
+        "platforms": ["instagram", "facebook"],
+        "type": "photo",
+        "assetFile": "TBD",
+        "caption": "6 weeks to Easter Classic. The ARC, Campbelltown. \n\nWill your players show up with verified combine data — or just hope they're ready?",
+        "hashtags": "set2",
+        "theme": "Easter Classic countdown",
+        "status": "draft"
+      },
+      {
+        "id": "w2-003",
+        "date": "2026-02-21",
+        "day": "Saturday",
+        "scheduledTime": "18:00",
+        "platforms": ["instagram"],
+        "type": "photo",
+        "assetFile": "TBD",
+        "caption": "Training tip: Track the boring stuff. \n\nEveryone posts highlights. But improvement happens in the reps nobody sees. \n\nThe 100 free throws after practice. The 50 sprints when you're already tired. The footwork drills that feel unnecessary — until they save you on defense.",
+        "hashtags": "set3",
+        "theme": "Training tips",
+        "status": "draft"
+      }
+    ]
+  },
+  "upcomingEvents": [
+    {
+      "name": "Easter Classic 2026",
+      "date": "2026-04-03 to 2026-04-06",
+      "location": "The ARC, Campbelltown",
+      "weeksAway": 8,
+      "priority": "high",
+      "action": "Create Facebook event, countdown content series"
+    },
+    {
+      "name": "District Trials 2026/27",
+      "date": "2026-07 to 2026-08",
+      "location": "SA-wide",
+      "weeksAway": 24,
+      "priority": "medium",
+      "action": "Prep 'prep for trials' content series"
+    },
+    {
+      "name": "U20 SPP Trials",
+      "date": "2026-09",
+      "location": "Wayville",
+      "weeksAway": 30,
+      "priority": "medium",
+      "action": "Elite player showcase content"
+    }
+  ]
+}
