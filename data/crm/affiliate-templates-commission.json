@@ -1,0 +1,78 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-08",
+  "purpose": "Affiliate outreach templates with 20-30% commission emphasis",
+  "templates": [
+    {
+      "id": "COACH-EMAIL-20PCT",
+      "type": "Coach",
+      "platform": "Email",
+      "subject": "[COACH_NAME], earn 20% commission + free CourtLab for your team",
+      "body": "Hi [COACH_NAME],\n\nI'm Michael from CourtLab. We help coaches track verified player stats + earn commission.\n\n**Here's what you get:**\n✓ Free premium tier for your [TEAM_SIZE] players (shooting stats, film, progress)\n✓ 20% commission on every player who converts to paid ($50/year = $10 per player)\n✓ Your own affiliate link to share with other coaches in your network\n✓ No credit card or long-term commitment\n\n**The math:**\nRefer 10 coaches → they each bring 10 players → 50 convert to paid = $500 in commissions for you.\n\n**Your role:**\nJust use CourtLab for your team, share your link with other coaches you know. They sign up, their players love it, you earn commission.\n\nWant to give it a try? I'll set you up today.\n\nAffiliate link: [YOUR_AFFILIATE_LINK]\n\ncourtlab.app\n\nCheers,\nMichael\nFounder, CourtLab",
+      "variables": ["[COACH_NAME]", "[TEAM_SIZE]", "[YOUR_AFFILIATE_LINK]"],
+      "notes": "Lead with free + commission. Make math simple and attractive."
+    },
+    {
+      "id": "INFLUENCER-INSTAGRAM-25PCT",
+      "type": "Influencer",
+      "platform": "Instagram DM",
+      "text": "Hey [INFLUENCER_NAME],\n\nLove your basketball content. Got a partnership idea that pays.\n\nCourtLab helps players prove their improvement (verified stats, no hype). Your audience = perfect fit.\n\n**What's in it for you:**\n• 25% commission on every signup through your link\n• Free premium tier for you + your squad\n• Co-branded content (skits, training tips, challenges)\n• Early access to features\n\n**Example earnings:**\n100 followers see your post → 20 click link → 10 sign up → 5 convert to paid ($50 = $250) → You earn $62.50\n\nYour affiliate link in bio. Share authentic content. Earn commission.\n\nWant to chat? DM me back.\n\ncourtlab.app #BasketballAffiliates",
+      "variables": ["[INFLUENCER_NAME]"],
+      "notes": "Emphasize commission + passive income + simple math"
+    },
+    {
+      "id": "INFLUENCER-EMAIL-25PCT",
+      "type": "Influencer",
+      "platform": "Email",
+      "subject": "Make Money: Basketball Content Partnership ($$ Commission)",
+      "body": "Hi [INFLUENCER_NAME],\n\nI'm Michael, founder of CourtLab. I've been following your basketball content — you really get what young players care about.\n\n**Partnership offer:**\nEarn 25% commission on every signup through your affiliate link.\n\n**How it works:**\n1. We give you a custom affiliate link\n2. You share CourtLab in your content (authentic, organic)\n3. Your followers sign up and convert to paid\n4. You earn 25% commission on their annual subscription ($50/year = $12.50 per paid user)\n\n**Real example:**\nYou mention CourtLab in 1 TikTok video\n→ 100 views see it\n→ 20 click the link\n→ 10 sign up for free trial\n→ 5 convert to paid ($250 total revenue)\n→ You earn $62.50 (25% commission)\n\n**What you also get:**\n✓ Free premium tier for you + your team\n✓ Co-branded content opportunities\n✓ Early access to new features\n✓ Featured in our marketing (exposure)\n\n**Your role:**\nJust share what you love. No hard sell, no exclusivity, no hoops to jump through.\n\nAffiliate link: [YOUR_AFFILIATE_LINK]\n\nInterested? Let's chat.\n\ncourtlab.app\n\nCheers,\nMichael",
+      "variables": ["[INFLUENCER_NAME]", "[YOUR_AFFILIATE_LINK]"],
+      "notes": "Emphasize passive income + real numbers + simplicity"
+    },
+    {
+      "id": "MEDIA-PODCAST-20PCT",
+      "type": "Media / Podcast",
+      "platform": "Email",
+      "subject": "Sponsor [PODCAST_NAME] + Earn 20% Commission",
+      "body": "Hi [CREATOR_NAME],\n\nI'm Michael from CourtLab. I've been listening to [PODCAST_NAME] — you're reaching exactly the audience who cares about player development.\n\n**Sponsor opportunity:**\nCourtLab sponsors your show + you earn 20% commission on listener signups.\n\n**Here's the deal:**\n✓ Sponsorship fee: $[CUSTOM]/episode or $[CUSTOM]/month\n✓ 20% commission on every listener who signs up through your link\n✓ Co-branded episodes/content\n✓ Free premium tier for your audience\n\n**Example earnings:**\n1 sponsored episode\n→ 500 listeners hear about CourtLab\n→ 50 click your affiliate link\n→ 20 sign up for free\n→ 10 convert to paid ($50 = $500)\n→ You earn $100 commission + sponsorship fee\n\n**Your role:**\nMention CourtLab authentically in your show. Share your affiliate link in show notes. That's it.\n\nAffiliate link: [YOUR_AFFILIATE_LINK]\n\nReady to talk numbers? I'm available this week.\n\ncourtlab.app\n\nCheers,\nMichael",
+      "variables": ["[CREATOR_NAME]", "[PODCAST_NAME]", "[CUSTOM]", "[YOUR_AFFILIATE_LINK]"],
+      "notes": "Combine sponsorship + commission. Make it easy to earn from both."
+    },
+    {
+      "id": "MEDIA-NEWSLETTER-20PCT",
+      "type": "Media / Newsletter",
+      "platform": "Email",
+      "subject": "Feature CourtLab in Your Newsletter + Earn 20% Commission",
+      "body": "Hi [NEWSLETTER_EDITOR],\n\nI'm Michael from CourtLab. I read [NEWSLETTER_NAME] and your audience = perfect fit for us.\n\n**Sponsorship + affiliate opportunity:**\nWe sponsor your newsletter AND pay you 20% commission on subscriber signups.\n\n**Deal structure:**\n✓ Newsletter sponsorship: $[CUSTOM]/month\n✓ 20% commission on every subscriber who signs up through your link\n✓ Exclusive CourtLab features for your audience\n✓ Co-branded content\n\n**Example earnings:**\nMonthly newsletter with 5K subscribers\n→ 200 read CourtLab feature\n→ 40 click your affiliate link\n→ 15 sign up free\n→ 8 convert to paid = $400\n→ You earn $80 commission + $[SPONSOR_FEE]\n\n**Your role:**\nWrite authentic feature about CourtLab. Share affiliate link. That's it.\n\nAffiliate link: [YOUR_AFFILIATE_LINK]\n\nLet's make this happen. What works for you?\n\ncourtlab.app\n\nCheers,\nMichael",
+      "variables": ["[NEWSLETTER_EDITOR]", "[NEWSLETTER_NAME]", "[CUSTOM]", "[SPONSOR_FEE]", "[YOUR_AFFILIATE_LINK]"],
+      "notes": "Newsletter sponsorship + commission combo = higher lifetime value"
+    },
+    {
+      "id": "FACILITY-WHITELABEL-15PCT",
+      "type": "Facility",
+      "platform": "Email",
+      "subject": "[FACILITY_NAME] + CourtLab: White-Label Player Tracking (Earn Commission)",
+      "body": "Hi [FACILITY_MANAGER],\n\nI'm Michael from CourtLab. We help basketball facilities add value for members — and earn commission.\n\n**White-label opportunity:**\nYour members get CourtLab branded under your facility name. You earn 15% commission on upgrades.\n\n**Here's what you get:**\n✓ White-label CourtLab (branded as \"[FACILITY_NAME] Player Tracker\")\n✓ Free premium tier for all members\n✓ 15% commission on members who upgrade to paid ($50/year = $7.50 per upgrade)\n✓ Member engagement analytics (see usage + adoption)\n✓ Free staff training\n✓ Zero cost to you\n\n**Example earnings:**\n100 facility members get free access\n→ 30 actively use the app\n→ 15 decide to upgrade ($150 value)\n→ You earn $22.50 commission\n\nScale this: 500 members → $112.50 commission/month just from usage.\n\n**Why it works:**\nMembers get verified stats + film. You retain members longer. You earn commission. Zero risk.\n\nAffiliate link: [YOUR_FACILITY_LINK]\n\nWant to see a demo at [FACILITY_NAME]? I'm available [DAYS].\n\ncourtlab.app\n\nCheers,\nMichael",
+      "variables": ["[FACILITY_MANAGER]", "[FACILITY_NAME]", "[YOUR_FACILITY_LINK]", "[DAYS]"],
+      "notes": "White-label + member retention + passive commission = compelling offer"
+    },
+    {
+      "id": "VENDOR-EMAIL-20PCT",
+      "type": "Vendor",
+      "platform": "Email",
+      "subject": "[VENDOR_NAME] + CourtLab: Affiliate Partnership (20% Commission)",
+      "body": "Hi [VENDOR_CONTACT],\n\nI'm Michael from CourtLab. Your [PRODUCT/SERVICE] complements what we do perfectly.\n\n**Affiliate partnership:**\nYour customers discover CourtLab through us. Our users discover your products. Everyone earns.\n\n**Here's the deal:**\n✓ 20% commission on every customer who signs up through your affiliate link\n✓ Your link featured in CourtLab app + marketing\n✓ Co-branded content\n✓ Featured sponsor booth at our Easter Classic combines (300+ athletes, 600+ families)\n✓ Free premium tier for your team\n\n**Example earnings:**\n- You share CourtLab link with 100 customers\n- 20 sign up\n- 10 convert to paid ($50 = $100)\n- You earn $20 commission (plus visibility + booth at event)\n\n**Why it works:**\nYour customers care about basketball performance. They'll love CourtLab. You earn commission. No effort from you except sharing a link.\n\nAffiliate link: [YOUR_AFFILIATE_LINK]\n\nWant to chat about the Easter Classic booth opportunity? DM me.\n\ncourtlab.app\n\nCheers,\nMichael",
+      "variables": ["[VENDOR_CONTACT]", "[VENDOR_NAME]", "[PRODUCT/SERVICE]", "[YOUR_AFFILIATE_LINK]"],
+      "notes": "Affiliate + booth opportunity at combines = higher value"
+    },
+    {
+      "id": "ORG-EMAIL-30PCT",
+      "type": "Basketball Organization",
+      "platform": "Email",
+      "subject": "Basketball SA: Official Data Partner (30% Commission + Revenue Share)",
+      "body": "Hi [ORG_CONTACT],\n\nI'm Michael from CourtLab. We help basketball organizations give their members verified player data.\n\n**Official partner opportunity:**\nCourtLab becomes Basketball SA's official player data platform. You earn 30% commission on member signups.\n\n**What you get:**\n✓ Official partner status (co-branding in all materials)\n✓ White-label CourtLab (branded as \"Basketball SA Player Data\")\n✓ 30% commission on member signups/upgrades\n✓ Revenue share on all affiliated signups\n✓ Free premium tier for BA members\n✓ Official tournament data tracking (Easter Classic, competitions)\n✓ Member engagement analytics\n✓ Long-term partnership\n\n**Revenue model:**\n- 5,000 BA members get free access\n- 1,000 actively use app\n- 500 upgrade to paid ($50 = $25,000 annual revenue)\n- Basketball SA earns $7,500 (30% commission)\n\nScale this across multiple seasons + it becomes significant revenue.\n\n**Why it works:**\n- Basketball SA looks tech-forward\n- Members get verified data (proven competitive advantage)\n- BA earns passive revenue\n- Long-term partnership = sustainable model\n\nAffiliate link: [BASKETBALL_SA_LINK]\n\nThis positions Basketball SA as THE tech-driven basketball organization in SA.\n\nWant to schedule a call? I'm available [DAYS].\n\ncourtlab.app\n\nCheers,\nMichael",
+      "variables": ["[ORG_CONTACT]", "[BASKETBALL_SA_LINK]", "[DAYS]"],
+      "notes": "CRITICAL: Emphasize official status + long-term revenue + positioning"
+    }
+  ]
+}

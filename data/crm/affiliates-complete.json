@@ -1,0 +1,322 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-08",
+  "purpose": "Complete affiliate pipeline with 20-30% commission structure",
+  "commissionModel": {
+    "tier1": {
+      "name": "Coach / Program Director",
+      "commission": "20%",
+      "description": "Individual coaches, program coordinators bringing their teams/players",
+      "example": "Coach refers 10 players → 5 convert to paid ($50/year) = $250 revenue → Coach gets $50"
+    },
+    "tier2": {
+      "name": "Influencer / Content Creator",
+      "commission": "25%",
+      "description": "Content creators, streamers with engaged audience",
+      "example": "Influencer posts affiliate link → 20 signups, 10 convert to paid ($50) = $500 → Creator gets $125"
+    },
+    "tier3": {
+      "name": "Media / Podcast / Newsletter",
+      "commission": "20%",
+      "description": "Podcasts, newsletters, blog platforms",
+      "example": "Newsletter mentions CourtLab → 50 signups, 20 convert = $1000 → Creator gets $200 + sponsorship"
+    },
+    "tier4": {
+      "name": "Facility / Court",
+      "commission": "15%",
+      "description": "Basketball courts, training facilities (white-label integration)",
+      "example": "Facility promotes to 100 members → 30 convert = $1500 → Facility gets $225"
+    },
+    "tier5": {
+      "name": "Vendor / Partner",
+      "commission": "20%",
+      "description": "Equipment brands, nutrition, sports medicine",
+      "example": "Vendor promotes to customers → 15 convert = $750 → Partner gets $150"
+    },
+    "tier6": {
+      "name": "Basketball Organization / Official Partner",
+      "commission": "25-30%",
+      "description": "Basketball SA, NBL, district associations (high-value partnerships)",
+      "example": "Basketball SA integrates CourtLab → 200 signups, 80 convert = $4000 → BA gets $1000-1200 + co-branding"
+    }
+  },
+  "affiliates": {
+    "COACHES": [
+      {
+        "id": "AFF-COACH-001",
+        "name": "Jamie Mitchell",
+        "club": "Norwood Flames",
+        "role": "Head Coach U18",
+        "email": "jamie.mitchell@norwoodbasketball.com.au",
+        "twitter": "@CoachJamieMitch",
+        "commission": "20%",
+        "affiliateLink": "courtlab.app/ref/jamie-norwood",
+        "status": "Active",
+        "priority": "High",
+        "outreachTemplate": "COACH-EMAIL-20PCT"
+      },
+      {
+        "id": "AFF-COACH-002",
+        "name": "Sarah Chen",
+        "club": "South Adelaide Panthers",
+        "role": "Women's Program Director",
+        "email": "sarah.chen@southadelaidebasketball.com.au",
+        "twitter": "@SarahCoachChen",
+        "commission": "20%",
+        "affiliateLink": "courtlab.app/ref/sarah-southadelaide",
+        "status": "Active",
+        "priority": "Critical",
+        "outreachTemplate": "COACH-EMAIL-20PCT"
+      },
+      {
+        "id": "AFF-COACH-003",
+        "name": "Marcus Williams",
+        "club": "Sturt Sabres",
+        "role": "Elite Junior Program Director",
+        "email": "marcus.williams@sturtsabres.com.au",
+        "twitter": "@SturtEliteCoach",
+        "commission": "20%",
+        "affiliateLink": "courtlab.app/ref/marcus-sturt",
+        "status": "Active",
+        "priority": "Critical",
+        "outreachTemplate": "COACH-EMAIL-20PCT"
+      },
+      {
+        "id": "AFF-COACH-004",
+        "name": "David Thompson",
+        "club": "Forestville Eagles",
+        "role": "Mini 3agles Coordinator",
+        "email": "david.thompson@forestvilleeagles.asn.au",
+        "commission": "20%",
+        "affiliateLink": "courtlab.app/ref/david-forestville",
+        "status": "Active",
+        "priority": "High",
+        "outreachTemplate": "COACH-EMAIL-20PCT",
+        "notes": "Warm lead - Michael's son plays here"
+      },
+      {
+        "id": "AFF-COACH-005",
+        "name": "Angela Rodriguez",
+        "club": "West Adelaide Bearcats",
+        "role": "Senior Competitions Manager",
+        "email": "angela.rodriguez@westbearcats.net",
+        "twitter": "@WestAdePro",
+        "commission": "20%",
+        "affiliateLink": "courtlab.app/ref/angela-westadelaide",
+        "status": "Active",
+        "priority": "High",
+        "outreachTemplate": "COACH-EMAIL-20PCT"
+      }
+    ],
+    "INFLUENCERS": [
+      {
+        "id": "AFF-INFLUENCER-001",
+        "name": "Dani Wai",
+        "handle": "@daniwai",
+        "platform": "TikTok",
+        "followers": "120K",
+        "niche": "Basketball skills + training tips",
+        "email": "[contact via TikTok DM or Instagram]",
+        "instagram": "@daniwai",
+        "commission": "25%",
+        "affiliateLink": "courtlab.app/ref/daniwai",
+        "status": "Research",
+        "priority": "High",
+        "outreachTemplate": "INFLUENCER-TIKTOK-25PCT"
+      },
+      {
+        "id": "AFF-INFLUENCER-002",
+        "name": "The Basketball Podcast AU",
+        "handle": "@basketballpodcastau",
+        "platform": "Instagram + TikTok",
+        "followers": "85K",
+        "niche": "Basketball coaching, player development",
+        "email": "[pending research]",
+        "commission": "25%",
+        "affiliateLink": "courtlab.app/ref/basketballpodcastau",
+        "status": "Research",
+        "priority": "High",
+        "outreachTemplate": "INFLUENCER-INSTAGRAM-25PCT"
+      },
+      {
+        "id": "AFF-INFLUENCER-003",
+        "name": "[Australian Basketball Coach Influencer]",
+        "handle": "@[HANDLE]",
+        "platform": "Instagram",
+        "followers": "50K+",
+        "niche": "Coaching, player development",
+        "status": "Research needed",
+        "priority": "Medium",
+        "commission": "25%"
+      }
+    ],
+    "MEDIA": [
+      {
+        "id": "AFF-MEDIA-001",
+        "name": "Hoops Talk Australia Podcast",
+        "type": "Podcast",
+        "platform": "Spotify / Apple Podcasts",
+        "audience": "Basketball coaches, players, enthusiasts",
+        "email": "[pending research]",
+        "commission": "20%",
+        "sponsorshipDeal": "$500-1000/episode or $200/month",
+        "affiliateLink": "courtlab.app/ref/hoopstalksau",
+        "status": "Research",
+        "priority": "High",
+        "outreachTemplate": "MEDIA-PODCAST-20PCT"
+      },
+      {
+        "id": "AFF-MEDIA-002",
+        "name": "Basketball SA Newsletter",
+        "type": "Email Newsletter",
+        "platform": "Email",
+        "audience": "SA basketball community, coaches, officials",
+        "email": "newsletter@basketballsa.com.au",
+        "commission": "20%",
+        "sponsorshipDeal": "$300-500/month newsletter feature",
+        "affiliateLink": "courtlab.app/ref/basketballsa-newsletter",
+        "status": "Research",
+        "priority": "High",
+        "outreachTemplate": "MEDIA-NEWSLETTER-20PCT"
+      },
+      {
+        "id": "AFF-MEDIA-003",
+        "name": "[Australian Basketball Blog / Newsletter]",
+        "type": "Blog / Newsletter",
+        "audience": "Basketball analysts, coaches",
+        "status": "Research needed",
+        "priority": "Medium",
+        "commission": "20%"
+      }
+    ],
+    "FACILITIES": [
+      {
+        "id": "AFF-FACILITY-001",
+        "name": "The ARC (The Athlete Resource Centre)",
+        "location": "Campbelltown, Adelaide",
+        "website": "[arc-campbelltown.com.au]",
+        "email": "[pending research]",
+        "manager": "[Manager name pending]",
+        "commission": "15%",
+        "whiteLabel": true,
+        "affiliateLink": "courtlab.app/ref/the-arc",
+        "status": "Research",
+        "priority": "Critical",
+        "outreachTemplate": "FACILITY-WHITLABEL-15PCT"
+      },
+      {
+        "id": "AFF-FACILITY-002",
+        "name": "[Adelaide Hills Basketball Court]",
+        "location": "Adelaide Hills",
+        "commission": "15%",
+        "whiteLabel": true,
+        "status": "Research needed",
+        "priority": "Medium"
+      },
+      {
+        "id": "AFF-FACILITY-003",
+        "name": "[Mt Gambier Basketball Court]",
+        "location": "Mt Gambier, Regional SA",
+        "commission": "15%",
+        "whiteLabel": true,
+        "status": "Research needed",
+        "priority": "Medium",
+        "notes": "Regional facility for winter combines"
+      }
+    ],
+    "VENDORS": [
+      {
+        "id": "AFF-VENDOR-001",
+        "company": "Spalding Basketball",
+        "category": "Equipment",
+        "website": "https://spalding.com.au",
+        "email": "sales@spalding.com.au",
+        "commission": "20%",
+        "affiliateLink": "courtlab.app/ref/spalding",
+        "status": "Active",
+        "priority": "High",
+        "outreachTemplate": "VENDOR-EMAIL-20PCT"
+      },
+      {
+        "id": "AFF-VENDOR-002",
+        "company": "Gatorade Australia",
+        "category": "Beverages / Sports Nutrition",
+        "website": "https://gatorade.com.au",
+        "email": "partnerships@gatorade.com.au",
+        "commission": "20%",
+        "affiliateLink": "courtlab.app/ref/gatorade",
+        "status": "Active",
+        "priority": "High",
+        "outreachTemplate": "VENDOR-EMAIL-20PCT"
+      },
+      {
+        "id": "AFF-VENDOR-003",
+        "company": "Adelaide Sports Medicine & Physio",
+        "category": "Sports Medicine",
+        "website": "https://adelaidesportsmed.com.au",
+        "email": "admin@adelaidesportsmed.com.au",
+        "commission": "20%",
+        "affiliateLink": "courtlab.app/ref/adelaidesportsmed",
+        "status": "Active",
+        "priority": "High",
+        "outreachTemplate": "VENDOR-EMAIL-20PCT"
+      },
+      {
+        "id": "AFF-VENDOR-004",
+        "company": "Rebel Sport Adelaide",
+        "category": "Sporting Goods",
+        "website": "https://rebelgroup.com.au",
+        "email": "store@rebel-marion.com.au",
+        "commission": "20%",
+        "affiliateLink": "courtlab.app/ref/rebellsport",
+        "status": "Active",
+        "priority": "Medium",
+        "outreachTemplate": "VENDOR-EMAIL-20PCT"
+      },
+      {
+        "id": "AFF-VENDOR-005",
+        "company": "Foot Locker Adelaide",
+        "category": "Athletic Footwear",
+        "website": "https://footlocker.com.au",
+        "email": "store@footlocker-adelaide.com.au",
+        "commission": "20%",
+        "affiliateLink": "courtlab.app/ref/footlocker",
+        "status": "Active",
+        "priority": "Medium",
+        "outreachTemplate": "VENDOR-EMAIL-20PCT"
+      }
+    ],
+    "BASKETBALL_ORGS": [
+      {
+        "id": "AFF-ORG-001",
+        "organization": "Basketball SA",
+        "type": "State Association",
+        "website": "https://basketballsa.com.au",
+        "email": "ceo@basketballsa.com.au",
+        "contact": "CEO / Partnership Lead",
+        "commission": "30%",
+        "whiteLabel": true,
+        "cobranding": true,
+        "affiliateLink": "courtlab.app/ref/basketballsa",
+        "status": "Critical",
+        "priority": "Critical",
+        "outreachTemplate": "ORG-EMAIL-30PCT",
+        "notes": "Highest value partnership - Easter Classic integration"
+      },
+      {
+        "id": "AFF-ORG-002",
+        "organization": "NBL (National Basketball League)",
+        "type": "Professional League",
+        "website": "https://nbl.com.au",
+        "email": "[partnerships pending research]",
+        "contact": "Partnerships / Community Manager",
+        "commission": "25%",
+        "whiteLabel": true,
+        "cobranding": true,
+        "status": "Research",
+        "priority": "High",
+        "outreachTemplate": "ORG-EMAIL-25PCT"
+      }
+    ]
+  }
+}
