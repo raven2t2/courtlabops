@@ -3,7 +3,7 @@
   "columns": [
     {
       "id": "drafted",
-      "name": "📋 Drafted",
+      "name": "\ud83d\udccb Drafted",
       "color": "#e2e8f0",
       "leads": [
         "SA-001",
@@ -16,14 +16,16 @@
         "SA-008",
         "SA-009",
         "SA-010",
-        "LEAD-001",
-        "LEAD-002",
-        "LEAD-003",
-        "LEAD-004",
-        "LEAD-005",
-        "LEAD-006",
-        "LEAD-007",
-        "LEAD-008"
+        "SA-005",
+        "SA-006",
+        "SA-007",
+        "SA-008",
+        "SA-009",
+        "SA-010",
+        "SA-011",
+        "SA-012",
+        "SA-013",
+        "SA-014"
       ],
       "tasks": [
         "TW-001",
@@ -45,35 +47,35 @@
     },
     {
       "id": "sent",
-      "name": "📤 Sent",
+      "name": "\ud83d\udce4 Sent",
       "color": "#bfdbfe",
       "leads": [],
       "tasks": []
     },
     {
       "id": "replied",
-      "name": "💬 Replied",
+      "name": "\ud83d\udcac Replied",
       "color": "#fef08a",
       "leads": [],
       "tasks": []
     },
     {
       "id": "meeting",
-      "name": "📅 Meeting Scheduled",
+      "name": "\ud83d\udcc5 Meeting Scheduled",
       "color": "#c4b5fd",
       "leads": [],
       "tasks": []
     },
     {
       "id": "closed-won",
-      "name": "✅ Closed - Won",
+      "name": "\u2705 Closed - Won",
       "color": "#86efac",
       "leads": [],
       "tasks": []
     },
     {
       "id": "closed-lost",
-      "name": "❌ Closed - Lost",
+      "name": "\u274c Closed - Lost",
       "color": "#fca5a5",
       "leads": [],
       "tasks": []
@@ -81,7 +83,7 @@
   ],
   "tasks": {
     "TW-001": {
-      "title": "📌 Pin @CourtLabApp welcome tweet",
+      "title": "\ud83d\udccc Pin @CourtLabApp welcome tweet",
       "description": "Pin the brand introduction tweet to @CourtLabApp profile",
       "priority": "high",
       "platform": "twitter",
@@ -106,7 +108,7 @@
       }
     },
     "TW-002": {
-      "title": "🐦 Post @CourtLabApp Easter Classic countdown",
+      "title": "\ud83d\udc26 Post @CourtLabApp Easter Classic countdown",
       "description": "8 weeks to Easter Classic tweet - ready to copy/paste",
       "priority": "high",
       "platform": "twitter",
@@ -135,7 +137,7 @@
       }
     },
     "TW-003": {
-      "title": "🐦 Post @CourtLabApp training tip",
+      "title": "\ud83d\udc26 Post @CourtLabApp training tip",
       "description": "Training tip about measuring progress - ready to copy/paste",
       "priority": "medium",
       "platform": "twitter",
@@ -160,7 +162,7 @@
       }
     },
     "TW-004": {
-      "title": "📌 Pin @EstherCourtLab intro tweet",
+      "title": "\ud83d\udccc Pin @EstherCourtLab intro tweet",
       "description": "Pin the CMO persona introduction tweet",
       "priority": "high",
       "platform": "twitter",
@@ -185,7 +187,7 @@
       }
     },
     "TW-005": {
-      "title": "🐦 Post @EstherCourtLab hot take #1",
+      "title": "\ud83d\udc26 Post @EstherCourtLab hot take #1",
       "description": "Phone stopwatch rant - ready to copy/paste",
       "priority": "medium",
       "platform": "twitter",
@@ -210,7 +212,7 @@
       }
     },
     "TW-006": {
-      "title": "🐦 Post @EstherCourtLab hot take #2",
+      "title": "\ud83d\udc26 Post @EstherCourtLab hot take #2",
       "description": "Organized chaos take - ready to copy/paste",
       "priority": "medium",
       "platform": "twitter",
@@ -235,7 +237,7 @@
       }
     },
     "AFF-001": {
-      "title": "📨 Outreach to @BasketballAus",
+      "title": "\ud83d\udce8 Outreach to @BasketballAus",
       "description": "Send personalized DM about Coach Development Framework integration - LEAD-001",
       "priority": "highest",
       "type": "affiliate_outreach",
@@ -259,7 +261,7 @@
       }
     },
     "AFF-002": {
-      "title": "📨 Outreach to @BBALLAU_Coaches",
+      "title": "\ud83d\udce8 Outreach to @BBALLAU_Coaches",
       "description": "Send personalized DM about Feb 16 framework launch - LEAD-002",
       "priority": "highest",
       "type": "affiliate_outreach",
@@ -279,7 +281,7 @@
       }
     },
     "AFF-003": {
-      "title": "📨 Outreach to @bouncepassau",
+      "title": "\ud83d\udce8 Outreach to @bouncepassau",
       "description": "Send personalized DM about content partnership with combine data - LEAD-003",
       "priority": "high",
       "type": "affiliate_outreach",
@@ -303,7 +305,7 @@
       }
     },
     "AFF-004": {
-      "title": "📨 Outreach to @codebballau",
+      "title": "\ud83d\udce8 Outreach to @codebballau",
       "description": "Send personalized DM about underdog player stories + data - LEAD-004",
       "priority": "high",
       "type": "affiliate_outreach",
@@ -323,7 +325,7 @@
       }
     },
     "AFF-005": {
-      "title": "📨 Outreach to @AusBballnews",
+      "title": "\ud83d\udce8 Outreach to @AusBballnews",
       "description": "Send personalized DM about Easter Classic 2026 exclusive - LEAD-005",
       "priority": "high",
       "type": "affiliate_outreach",
@@ -343,7 +345,7 @@
       }
     },
     "AFF-006": {
-      "title": "📨 Outreach to @herwaysports",
+      "title": "\ud83d\udce8 Outreach to @herwaysports",
       "description": "Send personalized DM about women's basketball data gap - LEAD-006",
       "priority": "high",
       "type": "affiliate_outreach",
@@ -363,7 +365,7 @@
       }
     },
     "AFF-007": {
-      "title": "📨 Outreach to @parkoballtraining",
+      "title": "\ud83d\udce8 Outreach to @parkoballtraining",
       "description": "Send personalized DM about proving client improvement with data - LEAD-007",
       "priority": "medium",
       "type": "affiliate_outreach",
@@ -383,7 +385,7 @@
       }
     },
     "AFF-008": {
-      "title": "📨 Outreach to @FoxBasketball",
+      "title": "\ud83d\udce8 Outreach to @FoxBasketball",
       "description": "Send personalized DM about pathway coverage story - LEAD-008",
       "priority": "high",
       "type": "affiliate_outreach",
@@ -403,7 +405,7 @@
       }
     },
     "SETUP-001": {
-      "title": "🔑 Set up Twitter API v2 for automated posting",
+      "title": "\ud83d\udd11 Set up Twitter API v2 for automated posting",
       "description": "Get API credentials from Twitter Developer Portal to enable automated tweet scheduling",
       "priority": "high",
       "owner": "Michael",
