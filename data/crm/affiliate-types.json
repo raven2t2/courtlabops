@@ -1,0 +1,121 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-08",
+  "purpose": "Affiliate pipeline by type with value propositions + outreach templates",
+  "affiliateTypes": [
+    {
+      "id": "AFFILIATE-COACH",
+      "type": "Coach",
+      "description": "Individual coaches, program directors",
+      "value": "Free premium tier for their team + player stats tracking + film library access",
+      "incentive": "Free tier for 20+ players OR commission on paid signups from their club",
+      "priority": "Critical",
+      "channels": ["email", "twitter", "instagram", "whatsapp"],
+      "template": {
+        "email": {
+          "subject": "[COACH_NAME], free CourtLab for your [TEAM/CLUB]",
+          "body": "Hi [COACH_NAME],\n\nI'm Michael from CourtLab. I help coaches track player stats without the admin headache.\n\n**What's in it for you:**\n✓ Free premium tier for your [TEAM_SIZE] players\n✓ Verified shooting stats + film clips (no AI guessing)\n✓ Player progress tracking (show parents real improvement)\n✓ [BONUS: Easter Classic integration - track your athletes there]\n\nNo credit card, no long-term commitment. Just data coaches can trust.\n\nWant to try it? I can set you up today.\n\ncourtlab.app\n\nCheers,\nMichael\nFounder, CourtLab"
+        },
+        "twitter": {
+          "text": "Hey [COACH_HANDLE], heard about [TEAM_NAME]'s development focus.\n\nBuilt CourtLab exactly for coaches like you — verified player stats + film without the BS.\n\nFree tier for your squad. No AI guesses, just truth coaches can trust.\n\nWorth a look? DM me.\n\ncourtlab.app #BasketballCoach"
+        },
+        "instagram": {
+          "text": "[COACH_NAME], your [TEAM_NAME] players deserve verified data.\n\nCourtLab: shooting stats + film + progress tracking. Free tier for coaches.\n\nDM me to set up.\n\ncourtlab.app #BasketballDevelopment"
+        }
+      }
+    },
+    {
+      "id": "AFFILIATE-INFLUENCER",
+      "type": "Influencer / Content Creator",
+      "description": "Basketball TikTok, Instagram, YouTube creators (100K+ followers or micro-influencers with engaged community)",
+      "value": "Revenue share on affiliate signups + free premium tier + co-branded content opportunities",
+      "incentive": "15-20% commission on signups + free premium access + featured in CourtLab content",
+      "priority": "High",
+      "channels": ["twitter", "instagram", "tiktok", "youtube", "email"],
+      "template": {
+        "instagram_dm": {
+          "text": "Hey [INFLUENCER_NAME],\n\nLove your basketball content. Got a partnership idea.\n\nCourtLab helps players prove their improvement (verified stats, not hype). Your audience = perfect fit.\n\n**What's in it for you:**\n• 15-20% commission on affiliate signups\n• Free premium tier\n• Co-branded content (skits, training tips, challenges)\n• Early access to new features\n\nWe provide the affiliate link + content ideas. You just share what you love.\n\nInterested? Let's chat.\n\ncourtlab.app"
+        },
+        "twitter": {
+          "text": "[INFLUENCER_HANDLE] — been watching your basketball takes.\n\nBuilt CourtLab (verified player stats, no AI BS). Your audience would love it.\n\n**Partnership offer:**\n• 15-20% commission on signups\n• Free access\n• Co-branded content\n\nLet's collab. DM me.\n\ncourtlab.app"
+        },
+        "email": {
+          "subject": "Basketball Content Partnership: CourtLab",
+          "body": "Hi [INFLUENCER_NAME],\n\nI'm Michael, founder of CourtLab. I've been following your basketball content — you really get what players care about.\n\n**Partnership idea:**\nCourtLab helps young basketball players track verified stats (shooting %, combine times, progress). Your audience = perfect fit.\n\n**What you get:**\n✓ 15-20% commission on every signup through your link\n✓ Free premium tier for you + your team\n✓ Co-branded content opportunities (skits, training tips, challenges)\n✓ Early access to new features\n✓ Featured in CourtLab socials (exposure)\n\n**Your role:**\n- Share CourtLab in content (organic, authentic)\n- Your affiliate link in bio/description\n- Optional: co-create content with our team\n\nNo pressure, no exclusivity. Just partnership.\n\nWant to chat? I'm available this week.\n\ncourtlab.app\n\nCheers,\nMichael"
+        }
+      }
+    },
+    {
+      "id": "AFFILIATE-MEDIA",
+      "type": "Media / Podcast / Newsletter",
+      "description": "Basketball podcasts, newsletters, blogs (Australian basketball community)",
+      "value": "Revenue share on affiliate signups + sponsorship / podcast integration opportunities",
+      "incentive": "10-15% commission + podcast/newsletter sponsorship package",
+      "priority": "High",
+      "channels": ["email", "twitter"],
+      "template": {
+        "email": {
+          "subject": "Sponsorship Opportunity: CourtLab x [PODCAST/NEWSLETTER_NAME]",
+          "body": "Hi [CREATOR_NAME],\n\nI'm Michael from CourtLab, a basketball training app built for Australian coaches.\n\nI've been listening to [PODCAST_NAME] / reading [NEWSLETTER_NAME] — you're reaching exactly the audience that cares about player development.\n\n**Partnership idea:**\nCourtLab sponsors your show/newsletter + revenue share on signups.\n\n**What you get:**\n✓ Sponsorship deal ($[CUSTOM] per episode/month)\n✓ 10-15% commission on affiliate signups\n✓ Product placement in your content\n✓ Co-branded episodes/articles\n✓ Free premium tier for your audience\n\n**What we get:**\n- Authentic product mentions in your show/newsletter\n- Affiliate link in show notes\n- Access to your audience (coaches, players, families)\n\nNo hard sell. Just: \"Hey, I use this, it's legit, here's the link if interested.\"\n\nWant to chat? I'd love to sponsor an episode or collaborate.\n\ncourtlab.app\n\nCheers,\nMichael"
+        },
+        "twitter": {
+          "text": "[CREATOR_HANDLE] — love [PODCAST_NAME]. Got a sponsorship idea for you.\n\nCourtLab (basketball training app). Your audience = perfect fit.\n\nRevenue share + affiliate commission. DM me to discuss.\n\ncourtlab.app"
+        }
+      }
+    },
+    {
+      "id": "AFFILIATE-FACILITY",
+      "type": "Facility / Court Owner",
+      "description": "Basketball courts, training facilities, camps",
+      "value": "Free premium tier for facility members + white-label integration + referral commission",
+      "incentive": "Free access for facility + commission on member signups + co-branded features",
+      "priority": "High",
+      "channels": ["email", "phone", "in-person"],
+      "template": {
+        "email": {
+          "subject": "[FACILITY_NAME] + CourtLab: Free Player Tracking",
+          "body": "Hi [FACILITY_MANAGER],\n\nI'm Michael from CourtLab. We help basketball facilities add value for members without extra work.\n\n**Here's the deal:**\nYour members get free CourtLab premium tier (player stats, film, progress tracking). They love it, you look good, we get users.\n\n**What you get:**\n✓ White-label option (CourtLab branded for your facility)\n✓ Free premium tier for all members\n✓ Commission on member signups (if they upgrade)\n✓ Free training for staff on how to use it\n✓ Analytics dashboard (see which members are engaged)\n\n**Why it works:**\n- Members get verified stats + film\n- You retain members longer (added value)\n- You look tech-forward\n- Zero cost to you\n\nLet's grab coffee and I can show you how it works at [FACILITY_NAME].\n\ncourtlab.app\n\nCheers,\nMichael"
+        },
+        "in_person": {
+          "text": "Hi [FACILITY_MANAGER],\n\nI'm Michael from CourtLab — I run basketball training apps. I help facilities give members verified player data.\n\n**Quick pitch:**\nYour members get free premium access (stats, film, progress). You get white-label branding option + referral commission.\n\nNo cost to you. Just added value for your community.\n\nWant to see a demo? I'm happy to come by [FACILITY_NAME].\n\ncourtlab.app"
+        }
+      }
+    },
+    {
+      "id": "AFFILIATE-VENDOR",
+      "type": "Vendor / Equipment / Services",
+      "description": "Basketball equipment brands, nutrition, apparel, sports medicine",
+      "value": "Cross-promotion + affiliate commission + sponsor integration opportunities",
+      "incentive": "Revenue share + co-branded content + Easter Classic booth opportunity",
+      "priority": "Medium",
+      "channels": ["email", "linkedin", "phone"],
+      "template": {
+        "email": {
+          "subject": "Cross-Promotion Opportunity: CourtLab x [VENDOR_NAME]",
+          "body": "Hi [VENDOR_CONTACT],\n\nI'm Michael from CourtLab. I help young basketball athletes track their development (stats, film, progress).\n\nYour [PRODUCT/SERVICE] = perfect complement to what we do.\n\n**Partnership idea:**\nCo-promote to our audiences. You reach young athletes, we reach coaches/families.\n\n**What you get:**\n✓ Affiliate link in CourtLab app (commission on signups)\n✓ Co-branded content (Instagram, email, etc.)\n✓ Featured in our Easter Classic combine (booth opportunity)\n✓ Access to our athlete audience\n✓ Cross-promotion to our community\n\n**What we get:**\n- Your affiliate link in our app\n- Mention in our marketing\n- Co-branded content\n- Featured booth at combines\n\nYour [PRODUCT] solves a problem our athletes care about. Let's make it easy for them to find you.\n\nInterested? Let's chat.\n\ncourtlab.app\n\nCheers,\nMichael"
+        },
+        "linkedin": {
+          "text": "Hi [VENDOR_CONTACT],\n\nI'm Michael, founder of CourtLab. We help young basketball athletes track verified stats + development.\n\nThought [VENDOR_NAME]'s [PRODUCT] would be valuable for our community.\n\nPartnership idea: Cross-promotion + affiliate revenue share.\n\nOpen to discussing? Let's connect.\n\ncourtlab.app"
+        }
+      }
+    },
+    {
+      "id": "AFFILIATE-BASKETBALL-ORG",
+      "type": "Basketball Organization / Association",
+      "description": "Basketball SA, NBL teams, district associations, youth programs",
+      "value": "Official data partner status + white-label integration + co-branded tournaments",
+      "incentive": "Exclusive partner status + free premium tier + revenue share on member signups",
+      "priority": "Critical",
+      "channels": ["email", "in-person", "phone"],
+      "template": {
+        "email": {
+          "subject": "[ORG_NAME]: Official Player Data Partner Opportunity",
+          "body": "Hi [ORG_CONTACT],\n\nI'm Michael from CourtLab. We help basketball organizations give their members verified player data (combine times, shooting stats, progress tracking).\n\n**Partnership idea:**\nCourtLab becomes [ORG_NAME]'s official data partner for [TOURNAMENT/PROGRAM].\n\n**What you get:**\n✓ Co-branding (we mention you in everything)\n✓ White-label option (your branding on our platform)\n✓ Free premium tier for your members\n✓ Official tournament data tracking (Easter Classic, etc.)\n✓ Revenue share on member signups\n✓ Official partnership status in our marketing\n\n**What we get:**\n- Official partner status\n- Co-branding\n- Access to your member base\n- Tournament data\n- Long-term partnership\n\nThis positions [ORG_NAME] as the tech-forward basketball organization in SA.\n\nWant to schedule a call? I'd love to discuss.\n\ncourtlab.app\n\nCheers,\nMichael"
+        },
+        "in_person": {
+          "text": "Hi [ORG_CONTACT],\n\nI'm Michael from CourtLab. We provide verified player data for basketball organizations.\n\nThought [ORG_NAME] would benefit from being our official data partner for tournaments + programs.\n\n**We provide:**\n- Free tier for members\n- Co-branding\n- Revenue share\n- Official partner status\n\nWant to chat about it? I'm free [DAYS/TIMES].\n\ncourtlab.app"
+        }
+      }
+    }
+  ]
+}
