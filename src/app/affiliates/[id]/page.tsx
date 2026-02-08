@@ -121,7 +121,7 @@ export default function AffiliateDetailPage() {
           <div className="flex items-start justify-between gap-4 mb-2">
             <div>
               <h1 className="text-3xl font-bold text-text-primary">{affiliate.name}</h1>
-              <p className="text-text-secondary mt-1 capitalize">{affiliate.type.toLowerCase()}</p>
+              <p className="text-text-secondary mt-1 capitalize">{(affiliate.type ?? "").toLowerCase()}</p>
             </div>
             <span className="px-3 py-1.5 rounded-lg text-sm font-semibold bg-green-500/10 text-green-700 border border-green-500/20">
               {affiliate.commission} Commission
