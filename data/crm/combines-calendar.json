@@ -1,0 +1,130 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-08",
+  "purpose": "School holiday combines - trojan horse for club partnerships + sponsor activation",
+  "combines": [
+    {
+      "id": "COMBINE-001",
+      "name": "Easter Classic 2026",
+      "season": "April",
+      "dates": "April 3-6, 2026",
+      "location": "The ARC, Campbelltown",
+      "host": "Norwood Flames / Basketball SA",
+      "expectedAthletes": 300,
+      "expectedFamilies": 600,
+      "type": "Tournament (Flagship)",
+      "sponsorshipTier": "HEADLINE + CATEGORY",
+      "activationBooths": 5,
+      "liveLeaderboard": true,
+      "stage": true,
+      "guestSpeakers": true,
+      "physioAssessments": true,
+      "prizes": "Equipment, apparel, gift cards, CourtLab premium subscriptions",
+      "status": "Confirmed",
+      "notes": "Biggest event. Basketball SA + Norwood already running. CourtLab adds: verified stats + leaderboard + sponsor activations."
+    },
+    {
+      "id": "COMBINE-002",
+      "name": "Winter Break Combines (Regional)",
+      "season": "June",
+      "dates": "June 22-July 3, 2026",
+      "location": "Multiple SA clubs (TBD)",
+      "expectedAthletes": 200,
+      "expectedFamilies": 400,
+      "type": "Regional Tour",
+      "sponsorshipTier": "CATEGORY + SUPPORTER",
+      "activationBooths": 3,
+      "liveLeaderboard": true,
+      "stage": false,
+      "guestSpeakers": false,
+      "physioAssessments": true,
+      "prizes": "Smaller prizes per location, focus on physio assessments",
+      "status": "Planning",
+      "notes": "Mt Gambier, Barossa, Adelaide Hills. Test regional market + build local sponsorships.",
+      "targetClubs": ["SA-009", "SA-011", "SA-012"]
+    },
+    {
+      "id": "COMBINE-003",
+      "name": "Spring Break Combines",
+      "season": "September",
+      "dates": "Sept 21-Oct 2, 2026",
+      "location": "Central SA clubs",
+      "expectedAthletes": 250,
+      "expectedFamilies": 500,
+      "type": "Regional Tour",
+      "sponsorshipTier": "CATEGORY + SUPPORTER",
+      "activationBooths": 4,
+      "liveLeaderboard": true,
+      "stage": false,
+      "guestSpeakers": true,
+      "physioAssessments": true,
+      "prizes": "Equipment + tech + physio packages",
+      "status": "Planning",
+      "notes": "Central District, Onkaparinga, Playford. Build brand awareness + data library.",
+      "targetClubs": ["SA-005", "SA-013", "SA-014"]
+    },
+    {
+      "id": "COMBINE-004",
+      "name": "Summer Break Combines",
+      "season": "December",
+      "dates": "Dec 14-31, 2026",
+      "location": "Major Adelaide clubs + guest locations",
+      "expectedAthletes": 200,
+      "expectedFamilies": 400,
+      "type": "Holiday Camps",
+      "sponsorshipTier": "HEADLINE (if major club) + CATEGORY",
+      "activationBooths": 4,
+      "liveLeaderboard": true,
+      "stage": false,
+      "guestSpeakers": false,
+      "physioAssessments": true,
+      "prizes": "Holiday-themed prizes, tech giveaways",
+      "status": "Planning",
+      "notes": "Sturt, South Adelaide, Forestville holiday camps. CourtLab as tech partner."
+    }
+  ],
+  "sponsorshipModel": {
+    "HEADLINE": {
+      "price": "$10,000+",
+      "includes": [
+        "Logo on all materials + stage",
+        "Activation booth (10x10)",
+        "Speaking slot (5-10 min)",
+        "Merchandise/giveaway integration",
+        "Live leaderboard branding",
+        "Post-event data report"
+      ],
+      "best_for": "Major brands, physio clinics, sporting goods"
+    },
+    "CATEGORY": {
+      "price": "$3,000-7,000",
+      "includes": [
+        "Category ownership (e.g., 'Best Athlete Award')",
+        "Activation booth (8x8)",
+        "Prize delivery (your branded award)",
+        "Social media mentions",
+        "T-shirt/lanyard branding"
+      ],
+      "best_for": "Sports medicine, apparel, local businesses"
+    },
+    "SUPPORTER": {
+      "price": "$500-2,000",
+      "includes": [
+        "Prize/giveaway provision (your items)",
+        "Logo on program",
+        "Social media mention",
+        "Registration table visibility"
+      ],
+      "best_for": "Local sponsors, smaller brands, emerging partnerships"
+    }
+  },
+  "sponsorActivationIdeas": [
+    "Physio assessment station (sports medicine clinic)",
+    "Equipment demo booth (Adidas, Nike, Spalding)",
+    "Nutrition station (sports drink, protein brands)",
+    "Recovery/training tech booth (foam rollers, wearables)",
+    "Local business activation (energy drinks, sports cafe)",
+    "NBL/pro player meet-and-greet (headliner partner)",
+    "CourtLab app demo + sign-up (your booth)"
+  ]
+}
