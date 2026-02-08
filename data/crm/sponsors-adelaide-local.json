@@ -1,0 +1,243 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-08",
+  "purpose": "Local Adelaide sponsors for CourtLab Live Combines - Realistic tier structure",
+  "tierStructure": {
+    "BRONZE": "Local Adelaide shops, nutrition stores, small gyms ($500-1,500)",
+    "SILVER": "Regional/growing brands, mid-size businesses, local physio chains ($1,500-4,000)",
+    "GOLD": "Major Australian retailers, sports brands, larger companies ($4,000-10,000)",
+    "PLATINUM": "Dream tier - Nike, Adidas, national chains (future)"
+  },
+  "sponsors": [
+    {
+      "id": "LOCAL-001",
+      "tier": "SILVER",
+      "companyName": "Rebel Sport Adelaide (Westfield Marion)",
+      "industry": "Sporting Goods Retail",
+      "website": "https://www.rebelgroup.com.au",
+      "contactEmail": "store@rebel-marion.com.au",
+      "contactPerson": "Store Manager / Marketing",
+      "currentPartnerships": "Various sports events",
+      "personalizationAnchor": "Major Adelaide sporting goods retailer. Foot traffic + basketball equipment expertise. Perfect for athlete audience.",
+      "activationBooth": "Latest basketball shoes + apparel demo + \"Best Athlete\" merchandise voucher",
+      "prizeCategory": "Rebel Sport gift cards ($200-500 per category)",
+      "combineRoles": [
+        "Equipment showcase booth",
+        "Category sponsor (Best Athlete, Best Shooter, etc.)",
+        "Merchandise provider"
+      ],
+      "draftedIntro": "Hi Rebel Sport,\n\nEaster Classic 2026 (April 3-6) at The ARC: 300+ young basketball athletes + 600 families.\n\nI'm Michael from CourtLab. We're running the event and need retail partners.\n\nWhat you get:\n• Activation booth for new shoe/apparel showcase\n• \"Best Athlete\" award (your gift cards)\n• Logo on all materials\n• Direct athlete + family traffic\n• Brand visibility with sports-focused market\n\nYour Marion store location is perfect for reach. Interested?\n\ncourtlab.app\n\nCheers,\nMichael",
+      "status": "Research",
+      "priority": "High",
+      "tags": ["retail", "major-adelaide", "equipment", "foot-traffic"],
+      "nextAction": "Call store manager"
+    },
+    {
+      "id": "LOCAL-002",
+      "tier": "SILVER",
+      "companyName": "Foot Locker Adelaide (Rundle Mall)",
+      "industry": "Athletic Footwear Retail",
+      "website": "https://www.footlocker.com.au",
+      "contactEmail": "store@footlocker-adelaide.com.au",
+      "contactPerson": "Store Manager",
+      "currentPartnerships": "Various youth sports events",
+      "personalizationAnchor": "Basketball shoes = core business. Young athlete market = target demographic.",
+      "activationBooth": "Latest basketball shoes + exclusive drops + \"Best Dunker\" shoe giveaway",
+      "prizeCategory": "Foot Locker basketball shoe packages ($300-500)",
+      "combineRoles": [
+        "Exclusive shoe showcase",
+        "Category sponsor",
+        "Performance shoe awards"
+      ],
+      "draftedIntro": "Hi Foot Locker,\n\nEaster Classic 2026 (April 3-6): 300+ young basketball athletes interested in performance shoes.\n\nI'm Michael from CourtLab. Perfect opportunity for Foot Locker.\n\nWhat you get:\n• Activation booth for new basketball shoe drops\n• \"Best Performer\" shoe package award\n• Logo on materials\n• Direct engagement with young athlete market\n• Brand visibility + customer acquisition\n\nYour Rundle Mall location + our event = perfect partnership.\n\ncourtlab.app\n\nCheers,\nMichael",
+      "status": "Research",
+      "priority": "High",
+      "tags": ["retail", "footwear", "rundle-mall", "young-market"],
+      "nextAction": "Call store manager"
+    },
+    {
+      "id": "LOCAL-003",
+      "tier": "BRONZE",
+      "companyName": "Goodlife Health Clubs Adelaide (Multiple locations)",
+      "industry": "Fitness / Gym",
+      "website": "https://www.goodlifehealth.com.au",
+      "contactEmail": "marketing@goodlifehealth.com.au",
+      "contactPerson": "Marketing Manager",
+      "currentPartnerships": "Local fitness events",
+      "personalizationAnchor": "Young athletes + fitness = future gym members. Lead generation play.",
+      "activationBooth": "Fitness assessment booth + gym membership giveaways",
+      "prizeCategory": "3-month gym membership packages",
+      "combineRoles": [
+        "Fitness assessment station",
+        "Membership giveaway sponsor",
+        "Youth conditioning education"
+      ],
+      "draftedIntro": "Hi Goodlife Health,\n\nYoung basketball athletes = future fitness members.\n\nI'm Michael from CourtLab. Easter Classic 2026 (April 3-6) has 300+ athletes + families interested in conditioning.\n\nWhat you get:\n• Fitness assessment booth (your expertise)\n• 3-month membership giveaways\n• Logo on materials\n• Lead generation from young athletes + parents\n• Brand visibility\n\nThis is pure customer acquisition. Interested?\n\ncourtlab.app\n\nCheers,\nMichael",
+      "status": "Research",
+      "priority": "Medium",
+      "tags": ["fitness", "bronze-tier", "lead-generation", "memberships"],
+      "nextAction": "Email marketing manager"
+    },
+    {
+      "id": "LOCAL-004",
+      "tier": "BRONZE",
+      "companyName": "Adelaide Sports Medicine & Physio Clinic",
+      "industry": "Sports Medicine / Physio",
+      "website": "https://adelaidesportsmed.com.au",
+      "contactEmail": "admin@adelaidesportsmed.com.au",
+      "contactPerson": "Clinic Manager",
+      "currentPartnerships": "Local sports teams",
+      "personalizationAnchor": "Young athletes + physio = injury prevention education + client acquisition.",
+      "activationBooth": "Free injury prevention screening + posture assessment",
+      "prizeCategory": "Free initial physio consultation packages",
+      "combineRoles": [
+        "On-site injury prevention screening",
+        "Performance assessment",
+        "Clinical partnership"
+      ],
+      "draftedIntro": "Hi Adelaide Sports Med,\n\nEaster Classic 2026 (April 3-6): 300+ young athletes needing injury prevention education.\n\nI'm Michael from CourtLab. Perfect physio partnership opportunity.\n\nWhat you get:\n• Free screening booth (your setup, our traffic)\n• Injury prevention education + demo\n• Free consultation giveaways for top performers\n• Logo on materials\n• Lead generation from young athletes + parents\n• Clinical credibility boost\n\nThis is client acquisition + community service. Interested?\n\ncourtlab.app\n\nCheers,\nMichael",
+      "status": "Research",
+      "priority": "Critical",
+      "tags": ["physio", "bronze-tier", "assessment", "clinical"],
+      "nextAction": "Call clinic manager"
+    },
+    {
+      "id": "LOCAL-005",
+      "tier": "BRONZE",
+      "companyName": "Nutrition Works Adelaide (Sports Supplements)",
+      "industry": "Sports Nutrition Retail",
+      "website": "https://nutritionworksadelaide.com.au",
+      "contactEmail": "sales@nutritionworksadelaide.com.au",
+      "contactPerson": "Store Manager",
+      "currentPartnerships": "Local gyms, athletes",
+      "personalizationAnchor": "Young athletes + nutrition education = customer acquisition for supplements.",
+      "activationBooth": "Protein shake bar + nutrition education booth",
+      "prizeCategory": "Supplement starter packs ($50-150 value)",
+      "combineRoles": [
+        "Nutrition education booth",
+        "Product sampling",
+        "Recovery product showcase"
+      ],
+      "draftedIntro": "Hi Nutrition Works,\n\nEaster Classic 2026 (April 3-6): 300+ young athletes + 600 families interested in performance nutrition.\n\nI'm Michael from CourtLab. We need a nutrition partner.\n\nWhat you get:\n• Nutrition education + product sampling booth\n• Recovery supplement giveaways\n• Logo on materials\n• Lead generation from young athletes + parents\n• Brand awareness with health-focused families\n\nYoung athlete market = your target demographic.\n\ncourtlab.app\n\nCheers,\nMichael",
+      "status": "Research",
+      "priority": "Medium",
+      "tags": ["nutrition", "bronze-tier", "supplements", "sampling"],
+      "nextAction": "Email store manager"
+    },
+    {
+      "id": "LOCAL-006",
+      "tier": "SILVER",
+      "companyName": "REDARC (Adelaide HQ)",
+      "industry": "Automotive / Outdoor Retail",
+      "website": "https://www.redarc.com.au",
+      "contactEmail": "marketing@redarc.com.au",
+      "contactPerson": "Marketing Manager",
+      "currentPartnerships": "South Adelaide Panthers (Hoops & Her 3-year)",
+      "personalizationAnchor": "Already invested in SA basketball. Performance/outdoor brand. Perfect fit for athlete awards.",
+      "activationBooth": "Performance gear demo + outdoor recreation showcase",
+      "prizeCategory": "REDARC performance packages",
+      "combineRoles": [
+        "Performance awards partner",
+        "Outdoor recreation showcase",
+        "\"Best Athlete\" award sponsor"
+      ],
+      "draftedIntro": "Hi REDARC,\n\nYou already know SA basketball (Hoops & Her partnership). Easter Classic 2026 (April 3-6) is the next big opportunity.\n\nI'm Michael from CourtLab. We're sponsoring the event and want REDARC as a category sponsor.\n\nWhat you get:\n• \"Best Athlete\" award (REDARC branded)\n• Activation booth for performance gear demo\n• Logo on all materials\n• 600+ families seeing your brand\n• Association with youth development\n\nYou've already proven commitment to SA basketball. Let's expand it.\n\ncourtlab.app\n\nCheers,\nMichael",
+      "status": "Research",
+      "priority": "High",
+      "tags": ["silver-tier", "existing-partnership", "performance-brand", "redarc"],
+      "nextAction": "Send proposal to existing contact"
+    },
+    {
+      "id": "LOCAL-007",
+      "tier": "BRONZE",
+      "companyName": "Adelaide Orthopaedic Centre",
+      "industry": "Medical / Orthopaedic",
+      "website": "https://adelaideortho.com.au",
+      "contactEmail": "admin@adelaideortho.com.au",
+      "contactPerson": "Marketing / Clinic Manager",
+      "currentPartnerships": "Sports medicine network",
+      "personalizationAnchor": "Orthopaedic specialists + young athletes = injury prevention education + future patients.",
+      "activationBooth": "Joint health assessment + injury prevention education",
+      "prizeCategory": "Free orthopaedic consultation vouchers",
+      "combineRoles": [
+        "Orthopaedic assessment booth",
+        "Injury prevention education",
+        "Clinical partnership"
+      ],
+      "draftedIntro": "Hi Adelaide Orthopaedic,\n\nYoung basketball athletes + joint health education = valuable partnership.\n\nI'm Michael from CourtLab. Easter Classic 2026 (April 3-6) has 300+ young athletes.\n\nWhat you get:\n• Assessment booth for joint health screenings\n• Injury prevention education + demo\n• Consultation vouchers for top performers\n• Logo on materials\n• Lead generation from young athletes + parents\n\nClinical credibility + customer acquisition.\n\ncourtlab.app\n\nCheers,\nMichael",
+      "status": "Research",
+      "priority": "Medium",
+      "tags": ["medical", "bronze-tier", "orthopaedic", "assessment"],
+      "nextAction": "Email clinic manager"
+    },
+    {
+      "id": "LOCAL-008",
+      "tier": "SILVER",
+      "companyName": "Gatorade Australia (Regional Distributor)",
+      "industry": "Beverages / Sports Nutrition",
+      "website": "https://gatorade.com.au",
+      "contactEmail": "partnerships@gatorade.com.au",
+      "contactPerson": "Sports Marketing",
+      "currentPartnerships": "Various sports events",
+      "personalizationAnchor": "April heat + young athletes = hydration product perfect fit. Easy activation booth.",
+      "activationBooth": "Gatorade hydration station + product sampling",
+      "prizeCategory": "Gatorade recovery packs + bottles",
+      "combineRoles": [
+        "Hydration station",
+        "Performance product showcase",
+        "Recovery sponsor"
+      ],
+      "draftedIntro": "Hi Gatorade,\n\nEaster Classic 2026 (April 3-6) in Adelaide heat: 300+ young athletes needing hydration.\n\nI'm Michael from CourtLab. Perfect opportunity for Gatorade.\n\nWhat you get:\n• Hydration station booth (high foot traffic)\n• Product sampling with athletes + families\n• \"Best Endurance\" award (Gatorade recovery packs)\n• Logo on materials\n• Brand visibility with young athlete market\n\nYoung athletes + hot weather + your products = perfect fit.\n\ncourtlab.app\n\nCheers,\nMichael",
+      "status": "Research",
+      "priority": "High",
+      "tags": ["silver-tier", "beverage", "hydration", "seasonal"],
+      "nextAction": "Send proposal"
+    },
+    {
+      "id": "LOCAL-009",
+      "tier": "BRONZE",
+      "companyName": "The Basketball Warehouse (Adelaide Online/Retail)",
+      "industry": "Basketball Equipment",
+      "website": "https://thebasketballwarehouse.com.au",
+      "contactEmail": "sales@basketballwarehouse.com.au",
+      "contactPerson": "Sales Manager",
+      "currentPartnerships": "Various basketball clubs",
+      "personalizationAnchor": "Niche basketball retailer. Sponsorship opportunity aligned with core business.",
+      "activationBooth": "Basketball equipment showcase + training aids demo",
+      "prizeCategory": "Equipment packages (basketballs, training aids, cones)",
+      "combineRoles": [
+        "Equipment showcase booth",
+        "Training aids demo",
+        "Product sponsor"
+      ],
+      "draftedIntro": "Hi Basketball Warehouse,\n\nEaster Classic 2026 (April 3-6): 300+ basketball athletes looking for quality equipment.\n\nI'm Michael from CourtLab. We need basketball equipment sponsors.\n\nWhat you get:\n• Equipment showcase booth\n• \"Best Shooter\" award (your basketballs/gear)\n• Logo on materials\n• Direct athlete + coach traffic\n• Brand visibility\n\nYour core market in one place.\n\ncourtlab.app\n\nCheers,\nMichael",
+      "status": "Research",
+      "priority": "Medium",
+      "tags": ["bronze-tier", "niche", "equipment", "direct-market"],
+      "nextAction": "Email sales manager"
+    },
+    {
+      "id": "LOCAL-010",
+      "tier": "BRONZE",
+      "companyName": "Tailored Physio + Training Adelaide",
+      "industry": "Physio / Sports Training",
+      "website": "https://tailoredphysio.com.au",
+      "contactEmail": "admin@tailoredphysio.com.au",
+      "contactPerson": "Manager",
+      "currentPartnerships": "Local athletes, sports teams",
+      "personalizationAnchor": "Sports physio + young athletes = injury prevention education + client acquisition.",
+      "activationBooth": "Movement screening + training assessment",
+      "prizeCategory": "Free physio consultation packages",
+      "combineRoles": [
+        "Movement screening booth",
+        "Training assessment",
+        "Physio consultation sponsor"
+      ],
+      "draftedIntro": "Hi Tailored Physio,\n\nYoung basketball athletes + movement screening = valuable partnership.\n\nI'm Michael from CourtLab. Easter Classic 2026 (April 3-6) has 300+ athletes.\n\nWhat you get:\n• Movement screening booth (your expertise)\n• Training assessment education\n• Free consultation vouchers\n• Logo on materials\n• Lead generation from young athletes + parents\n\nClinical expertise + customer acquisition.\n\ncourtlab.app\n\nCheers,\nMichael",
+      "status": "Research",
+      "priority": "Medium",
+      "tags": ["bronze-tier", "physio-training", "screening", "lead-gen"],
+      "nextAction": "Email manager"
+    }
+  ]
+}
