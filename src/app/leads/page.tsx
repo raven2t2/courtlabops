@@ -30,21 +30,39 @@ export default function LeadsPage() {
   const [filter, setFilter] = useState("")
   const [stateFilter, setStateFilter] = useState<"ALL" | "SA" | "VIC">("ALL")
   const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 10000)
+
     const loadLeads = async () => {
       try {
-        const res = await fetch('/api/leads')
+        const res = await fetch('/api/leads', { signal: controller.signal })
+        if (!res.ok) {
+          throw new Error(`API returned ${res.status}`)
+        }
         const data = await res.json()
         setLeads(Array.isArray(data.leads) ? data.leads : [])
-        setIsLoading(false)
       } catch (err) {
+        if ((err as Error).name === 'AbortError') {
+          setError('Request timed out loading leads')
+        } else {
+          setError((err as Error).message || 'Failed to load leads')
+        }
         console.error('Failed to load leads:', err)
         setLeads([])
+      } finally {
+        clearTimeout(timeout)
         setIsLoading(false)
       }
     }
     loadLeads()
+
+    return () => {
+      controller.abort()
+      clearTimeout(timeout)
+    }
   }, [])
 
   const filteredLeads = leads.filter(lead => {
@@ -118,6 +136,17 @@ export default function LeadsPage() {
         {isLoading ? (
           <div className="flex items-center justify-center py-16">
             <div className="h-8 w-8 animate-spin rounded-full border-2 border-hyper-blue border-t-transparent" />
+          </div>
+        ) : error ? (
+          <div className="text-center py-16">
+            <p className="text-accent-red font-semibold mb-2">Failed to load leads</p>
+            <p className="text-text-secondary text-sm mb-4">{error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-4 py-2 rounded-lg bg-hyper-blue text-white text-sm font-semibold hover:bg-hyper-blue-hover transition-colors"
+            >
+              Retry
+            </button>
           </div>
         ) : (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
