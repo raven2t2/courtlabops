@@ -32,16 +32,19 @@ export default function LeadsPage() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/leads')
-      .then(res => res.json())
-      .then(data => {
-        setLeads(data.leads || [])
+    const loadLeads = async () => {
+      try {
+        const res = await fetch('/api/leads')
+        const data = await res.json()
+        setLeads(Array.isArray(data.leads) ? data.leads : [])
         setIsLoading(false)
-      })
-      .catch(err => {
+      } catch (err) {
         console.error('Failed to load leads:', err)
+        setLeads([])
         setIsLoading(false)
-      })
+      }
+    }
+    loadLeads()
   }, [])
 
   const filteredLeads = leads.filter(lead => {

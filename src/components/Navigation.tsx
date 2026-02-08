@@ -22,14 +22,13 @@ import { useState } from "react";
 const navItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
   { href: "/leads", label: "Leads", icon: Users },
-  { href: "/events", label: "Events", icon: Calendar },
-  { href: "/competitors", label: "Competitors", icon: Target },
   { href: "/coaches", label: "Coaches", icon: Trophy },
+  { href: "/sponsors-local", label: "Sponsors", icon: Target },
+  { href: "/affiliates", label: "Affiliates", icon: Mail },
+  { href: "/campaigns", label: "Campaigns", icon: CheckCircle },
+  { href: "/events", label: "Events", icon: Calendar },
   { href: "/content", label: "Content", icon: FileText },
-  { href: "/gallery", label: "Gallery", icon: ImageIcon },
-  { href: "/approvals", label: "Approvals", icon: CheckCircle },
-  { href: "/campaigns", label: "Campaigns", icon: Mail },
-  { href: "/social-setup", label: "Setup", icon: Settings },
+  { href: "/settings", label: "Settings", icon: Settings },
 ];
 
 export function Navigation() {
