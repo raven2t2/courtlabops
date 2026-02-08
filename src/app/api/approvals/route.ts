@@ -53,12 +53,12 @@ export async function GET(request: NextRequest) {
     }
 
     // Extract all tasks in the awaiting-approval column
-    const approvalTasks: ApprovalTask[] = awaitingApprovalColumn.tasks
-      .map((taskId) => {
-        const task = kanban.tasks[taskId]
-        if (!task) return null
+    const approvalTasks: ApprovalTask[] = awaitingApprovalColumn.tasks.flatMap((taskId) => {
+      const task = kanban.tasks[taskId]
+      if (!task) return []
 
-        return {
+      return [
+        {
           id: taskId,
           title: task.title,
           description: task.description,
@@ -71,9 +71,9 @@ export async function GET(request: NextRequest) {
           preview: task.preview || task.description?.slice(0, 100) || "",
           action: task.action || "Review and approve",
           links: task.links,
-        }
-      })
-      .filter((task): task is ApprovalTask => task !== null)
+        },
+      ]
+    })
 
     // Sort by priority (highest first)
     const priorityOrder = { highest: 0, high: 1, medium: 2, low: 3 }
