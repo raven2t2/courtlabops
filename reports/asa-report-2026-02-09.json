@@ -1,0 +1,51 @@
+{
+  "timestamp": "2026-02-09T08:37:37.431Z",
+  "period": {
+    "startDate": "Start Date: 02 Feb 2026",
+    "endDate": "End Date: 08 Feb 2026"
+  },
+  "totals": {
+    "spend": 66.9,
+    "impressions": 475,
+    "taps": 14,
+    "installs": 3,
+    "newDownloads": 3
+  },
+  "aggregateMetrics": {
+    "ctr": "0.0295",
+    "cpa": "22.30",
+    "cpt": "4.7786",
+    "cpm": "140.84",
+    "conversionRate": "0.2143"
+  },
+  "campaigns": [
+    {
+      "name": "AU - CourtLab - Launch Blitz",
+      "region": "Australia",
+      "spend": 20.65,
+      "impressions": 331,
+      "taps": 3,
+      "installs": 0,
+      "metrics": {
+        "ctr": "0.0091",
+        "cpt": "6.8833",
+        "cpa": null,
+        "conversionRate": "0.0000"
+      }
+    },
+    {
+      "name": "Global - CourtLab - Launch Blitz",
+      "region": "Canada, United Kingdom, New Zealand, United States",
+      "spend": 46.25,
+      "impressions": 144,
+      "taps": 11,
+      "installs": 3,
+      "metrics": {
+        "ctr": "0.0764",
+        "cpt": "4.2045",
+        "cpa": "15.42",
+        "conversionRate": "0.2727"
+      }
+    }
+  ]
+}
