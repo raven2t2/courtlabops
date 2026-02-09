@@ -1,34 +1,26 @@
-import { NextRequest, NextResponse } from "next/server"
-import fs from "fs"
+import { NextResponse } from "next/server"
+import { promises as fs } from "fs"
 import path from "path"
 
-const BRIEFINGS_DIR = "/data/.openclaw/workspace/courtlab-briefings"
+const BRIEFINGS_DIR = path.join(process.cwd(), "..", "courtlab-briefings")
 
 export async function GET() {
   try {
-    // Ensure directory exists
-    if (!fs.existsSync(BRIEFINGS_DIR)) {
-      fs.mkdirSync(BRIEFINGS_DIR, { recursive: true })
-      return NextResponse.json({ files: [] })
+    try {
+      const files = await fs.readdir(BRIEFINGS_DIR)
+      const jsonFiles = files
+        .filter((f) => f.endsWith(".json"))
+        .map((f) => f.replace(".json", ""))
+        .sort()
+        .reverse()
+
+      return NextResponse.json({ dates: jsonFiles })
+    } catch {
+      // Directory doesn't exist yet
+      return NextResponse.json({ dates: [] })
     }
-
-    // Get all briefing files
-    const files = fs.readdirSync(BRIEFINGS_DIR)
-      .filter((f) => f.endsWith(".json"))
-      .map((f) => {
-        const filePath = path.join(BRIEFINGS_DIR, f)
-        const stat = fs.statSync(filePath)
-        const dateMatch = f.match(/(\d{4}-\d{2}-\d{2})/)
-        return {
-          date: dateMatch ? dateMatch[1] : f.replace(".json", ""),
-          timestamp: Math.floor(stat.mtimeMs / 1000),
-        }
-      })
-      .sort((a, b) => b.timestamp - a.timestamp)
-
-    return NextResponse.json({ files })
   } catch (error) {
     console.error("Error reading briefings:", error)
-    return NextResponse.json({ files: [], error: "Failed to read briefings" }, { status: 500 })
+    return NextResponse.json({ dates: [], error: "Failed to read briefings" }, { status: 500 })
   }
 }
