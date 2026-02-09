@@ -210,9 +210,36 @@ function saveSocialContent() {
   return dailyContent
 }
 
+async function syncToAPI(contentItems) {
+  try {
+    const response = await fetch("http://localhost:3000/api/content/auto-queue", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content: contentItems.map((item) => ({
+          id: item.id,
+          platform: item.platform,
+          title: item.type,
+          content: item.content,
+          priority: item.priority || "medium",
+          tags: [item.pillar, "auto-generated"],
+          source: "auto-content-generator",
+        })),
+      }),
+    })
+
+    if (response.ok) {
+      console.log("✅ Synced to /api/content/auto-queue")
+    }
+  } catch (error) {
+    console.log("⚠️  API sync skipped (dev mode or offline)")
+  }
+}
+
 if (require.main === module) {
   try {
-    saveSocialContent()
+    const result = saveSocialContent()
+    syncToAPI(result.content).catch(() => {})
     process.exit(0)
   } catch (error) {
     console.error("Error generating social content:", error)
@@ -220,4 +247,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { generateDailySocialContent, saveSocialContent }
+module.exports = { generateDailySocialContent, saveSocialContent, syncToAPI }

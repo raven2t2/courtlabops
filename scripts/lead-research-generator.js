@@ -251,9 +251,38 @@ function saveLeadResearch() {
   return { leads: leadList, templates }
 }
 
+async function syncToAPI(leads) {
+  try {
+    const response = await fetch("http://localhost:3000/api/leads/auto-generated", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        leads: leads.map((lead) => ({
+          id: lead.id,
+          name: lead.name,
+          type: lead.type,
+          location: lead.location,
+          painPoint: lead.painPoint,
+          approach: lead.approach,
+          confidence: 0.85,
+          source: "auto-research",
+          tags: ["auto-researched", "high-value"],
+        })),
+      }),
+    })
+
+    if (response.ok) {
+      console.log("✅ Synced to /api/leads/auto-generated")
+    }
+  } catch (error) {
+    console.log("⚠️  API sync skipped (dev mode or offline)")
+  }
+}
+
 if (require.main === module) {
   try {
-    saveLeadResearch()
+    const result = saveLeadResearch()
+    syncToAPI(result.leads.leads).catch(() => {})
     process.exit(0)
   } catch (error) {
     console.error("Error generating leads:", error)
@@ -261,4 +290,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { generateLeadList, generateOutreachTemplates, saveLeadResearch }
+module.exports = { generateLeadList, generateOutreachTemplates, saveLeadResearch, syncToAPI }

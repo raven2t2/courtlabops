@@ -28,13 +28,11 @@ import { cn } from "@/lib/utils"
 const navItems = [
   { label: "Dashboard", href: "/", icon: LayoutDashboard },
   { label: "Daily Briefing", href: "/briefings", icon: Newspaper },
-  { label: "Marketing Command Center", href: "/marketing-dashboard", icon: Target },
   { label: "⏳ Approvals", href: "/approvals-queue", icon: Bell },
   { label: "Leads", href: "/leads", icon: Users },
   { label: "Coaches", href: "/coaches", icon: Trophy },
   { label: "Sponsors", href: "/sponsors-local", icon: Megaphone },
   { label: "Affiliates", href: "/affiliates", icon: Handshake },
-  { label: "Affiliate Portal", href: "/affiliate-dashboard", icon: Handshake },
   { label: "Campaigns", href: "/campaigns", icon: Target },
   { label: "Events", href: "/events", icon: Calendar },
   { label: "Content", href: "/content", icon: FileText },
