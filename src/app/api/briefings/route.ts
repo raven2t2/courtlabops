@@ -1,26 +1,17 @@
-import { NextResponse } from "next/server"
 import { promises as fs } from "fs"
 import path from "path"
+import { NextResponse } from "next/server"
 
 const BRIEFINGS_DIR = path.join(process.cwd(), "..", "courtlab-briefings")
 
 export async function GET() {
   try {
-    try {
-      const files = await fs.readdir(BRIEFINGS_DIR)
-      const jsonFiles = files
-        .filter((f) => f.endsWith(".json"))
-        .map((f) => f.replace(".json", ""))
-        .sort()
-        .reverse()
+    const files = await fs.readdir(BRIEFINGS_DIR)
+    const jsonFiles = files.filter((f) => f.endsWith(".json")).sort().reverse()
+    const dates = jsonFiles.map((f) => f.replace(".json", ""))
 
-      return NextResponse.json({ dates: jsonFiles })
-    } catch {
-      // Directory doesn't exist yet
-      return NextResponse.json({ dates: [] })
-    }
+    return NextResponse.json({ dates })
   } catch (error) {
-    console.error("Error reading briefings:", error)
-    return NextResponse.json({ dates: [], error: "Failed to read briefings" }, { status: 500 })
+    return NextResponse.json({ dates: [] })
   }
 }
