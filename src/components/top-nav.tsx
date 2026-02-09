@@ -28,7 +28,7 @@ import { cn } from "@/lib/utils"
 const navItems = [
   { label: "Dashboard", href: "/", icon: LayoutDashboard },
   { label: "Daily Briefing", href: "/briefings", icon: Newspaper },
-  { label: "⏳ Approvals", href: "/approvals-queue", icon: Bell },
+  { label: "⏳ Approvals", href: "/approvals", icon: Bell },
   { label: "Leads", href: "/leads", icon: Users },
   { label: "Coaches", href: "/coaches", icon: Trophy },
   { label: "Sponsors", href: "/sponsors-local", icon: Megaphone },
