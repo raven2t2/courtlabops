@@ -6,7 +6,7 @@ import { TopNav } from "@/components/top-nav"
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const isDashboardRoute = pathname === "/"
-  const selfContainedRoutes = new Set(["/approvals", "/campaigns", "/content", "/gallery", "/social-setup"])
+  const selfContainedRoutes = new Set(["/approvals", "/campaigns", "/content", "/gallery", "/social-setup", "/briefings"])
   const isSelfContainedRoute = selfContainedRoutes.has(pathname)
 
   return (

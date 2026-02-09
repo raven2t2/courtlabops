@@ -24,7 +24,8 @@
         "APPROVAL-EMAIL-001",
         "APPROVAL-EMAIL-002",
         "APPROVAL-EMAIL-003",
-        "APPROVAL-EMAIL-004"
+        "APPROVAL-EMAIL-004",
+        "APPROVAL-COACH-001"
       ]
     },
     {
@@ -549,7 +550,33 @@
           }
         ]
       }
+    },
+    "APPROVAL-COACH-001": {
+      "title": "💌 DM @coach_sara_hoops — Women's Basketball Player Development",
+      "description": "Review + Approve: Outreach to women's basketball coach with player development focus",
+      "priority": "high",
+      "platform": "twitter",
+      "account": "@coach_sara_hoops",
+      "owner": "Michael",
+      "type": "approval",
+      "category": "outreach",
+      "preview": "Hey @coach_sara_hoops,\n\nSaw your recent post about parent feedback — that's exactly the pain point I built CourtLab to solve.\n\nParents want proof. Real data. Not \"trust me, she's improving.\"\n\nCourtLab gives you verified stats to back up your coaching. Your players get measurable proof of improvement week-to-week. Parents see it. Everyone wins.\n\nYour women's basketball program could be first in your region to offer this level of transparency.\n\nFree to try. Costs nothing to see if it works for your team.\n\ncourtlab.app\n\nMichael\nCourtLab",
+      "action": "Review → ✅ Approve → Send DM",
+      "links": {
+        "internal": [
+          {
+            "label": "View Draft",
+            "url": "https://courtlabops.vercel.app/content/APPROVAL_QUEUE.md"
+          }
+        ],
+        "external": [
+          {
+            "label": "@coach_sara_hoops",
+            "url": "https://twitter.com/coach_sara_hoops"
+          }
+        ]
+      }
     }
   },
-  "lastUpdated": "2026-02-08T21:10:00Z"
+  "lastUpdated": "2026-02-08T22:57:00Z"
 }

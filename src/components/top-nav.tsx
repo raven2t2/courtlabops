@@ -21,12 +21,14 @@ import {
   Trophy,
   Users,
   X,
+  Newspaper,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const navItems = [
   { label: "Dashboard", href: "/", icon: LayoutDashboard },
   { label: "⏳ Approvals", href: "/approvals", icon: Bell },
+  { label: "Daily Briefing", href: "/briefings", icon: Newspaper },
   { label: "Leads", href: "/leads", icon: Users },
   { label: "Coaches", href: "/coaches", icon: Trophy },
   { label: "Sponsors", href: "/sponsors-local", icon: Megaphone },
