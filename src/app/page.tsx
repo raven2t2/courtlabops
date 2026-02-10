@@ -12,6 +12,7 @@ import {
   CheckCircle,
   ChevronRight,
   Clock3,
+  FileText,
   MapPin,
   Plus,
   Search,
@@ -362,9 +363,14 @@ export default function Dashboard() {
                 />
               </label>
               <Link 
+                href="/operations"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-border-default bg-bg-primary px-3 py-2 text-sm font-semibold text-text-secondary hover:bg-bg-secondary transition-colors">
+                <Activity size={14} /> Operations
+              </Link>
+              <Link 
                 href="/briefings-hub"
                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-border-default bg-bg-primary px-3 py-2 text-sm font-semibold text-text-secondary hover:bg-bg-secondary transition-colors">
-                <Activity size={14} /> Briefings
+                <FileText size={14} /> Briefings
               </Link>
               <button 
                 onClick={() => alert('Alerts feature coming soon! Check back for real-time notifications.')}
