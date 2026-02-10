@@ -15,6 +15,9 @@ export default function BriefingsHub() {
   const [briefs, setBriefs] = useState<Brief[]>([]);
   const [selectedBrief, setSelectedBrief] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<any>(null);
+  const [searching, setSearching] = useState(false);
 
   useEffect(() => {
     fetch('/api/briefs')
@@ -39,6 +42,21 @@ export default function BriefingsHub() {
     }
   };
 
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+    
+    setSearching(true);
+    try {
+      const response = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`);
+      const data = await response.json();
+      setSearchResults(data);
+    } catch (error) {
+      console.error('Search error:', error);
+    }
+    setSearching(false);
+  };
+
   const groupedBriefs = briefs.reduce((acc, brief) => {
     if (!acc[brief.type]) {
       acc[brief.type] = [];
@@ -54,7 +72,50 @@ export default function BriefingsHub() {
         <div className="mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">📋 Briefings & Reports Hub</h1>
           <p className="text-lg text-gray-600">Strategy insights, market trends, and performance metrics</p>
+          
+          {/* Search Bar */}
+          <form onSubmit={handleSearch} className="mt-6">
+            <div className="flex gap-2">
+              <input
+                type="text"
+                placeholder="Search all briefs and reports..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
+              />
+              <button
+                type="submit"
+                disabled={searching}
+                className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition disabled:opacity-50"
+              >
+                {searching ? 'Searching...' : 'Search'}
+              </button>
+            </div>
+          </form>
         </div>
+
+        {searchResults && (
+          <div className="mb-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">🔍 Search Results</h2>
+            {searchResults.count === 0 ? (
+              <p className="text-gray-500">No results found for "{searchQuery}"</p>
+            ) : (
+              <div className="space-y-2">
+                <p className="text-sm text-gray-600 mb-3">Found {searchResults.count} files containing "{searchQuery}":</p>
+                <ul className="space-y-1">
+                  {searchResults.results.slice(0, 10).map((file: string, idx: number) => (
+                    <li key={idx} className="text-sm text-gray-700">
+                      📄 {file}
+                    </li>
+                  ))}
+                </ul>
+                {searchResults.count > 10 && (
+                  <p className="text-xs text-gray-500 mt-2">...and {searchResults.count - 10} more results</p>
+                )}
+              </div>
+            )}
+          </div>
+        )}
 
         {loading ? (
           <div className="text-center py-12">
