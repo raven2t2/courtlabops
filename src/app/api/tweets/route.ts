@@ -1,35 +1,26 @@
 import { readFile, writeFile } from "fs/promises"
 import { resolve } from "path"
 
-// Try workspace location first (dev), then fallback to project data dir (prod)
-const getTwitterFile = () => {
-  const workspacePath = "/data/.openclaw/workspace/courtlabops-repo/data/crm/twitter/twitter-drafts.json"
-  const projectPath = resolve(process.cwd(), "data", "crm", "twitter", "twitter-drafts.json")
-  return [workspacePath, projectPath]
-}
-
-const TWEETS_FILES = getTwitterFile()
-
-async function getTweetsFile() {
-  for (const filePath of TWEETS_FILES) {
-    try {
-      await readFile(filePath, "utf-8")
-      return filePath
-    } catch {}
-  }
-  // Default to first path if none exist
-  return TWEETS_FILES[0]
-}
+// Use public folder which is accessible in production
+const TWEETS_FILE = resolve(process.cwd(), "public", "data", "crm", "twitter", "twitter-drafts.json")
 
 async function readTweets() {
-  const filePath = await getTweetsFile()
-  const content = await readFile(filePath, "utf-8")
-  return JSON.parse(content)
+  try {
+    const content = await readFile(TWEETS_FILE, "utf-8")
+    return JSON.parse(content)
+  } catch (error) {
+    console.error("Error reading tweets from:", TWEETS_FILE, error)
+    throw error
+  }
 }
 
 async function writeTweets(data: any) {
-  const filePath = await getTweetsFile()
-  await writeFile(filePath, JSON.stringify(data, null, 2))
+  try {
+    await writeFile(TWEETS_FILE, JSON.stringify(data, null, 2))
+  } catch (error) {
+    console.error("Error writing tweets to:", TWEETS_FILE, error)
+    throw error
+  }
 }
 
 export async function GET() {
