@@ -15,15 +15,25 @@ export async function GET(request: Request) {
       return Response.json({ error: 'Invalid file path' }, { status: 400 });
     }
 
-    const briefsDir = join(process.cwd(), '..', 'courtlab-briefings');
-    const filePath = join(briefsDir, file);
-
-    const content = readFileSync(filePath, 'utf-8');
-    const data = JSON.parse(content);
+    const cwd = process.cwd();
+    const briefsDir = join(cwd, '..', 'courtlab-briefings');
+    
+    let fileContent = '';
+    let filePath = join(briefsDir, file);
+    
+    try {
+      fileContent = readFileSync(filePath, 'utf-8');
+    } catch (e) {
+      // Try root directory
+      filePath = join(cwd, file);
+      fileContent = readFileSync(filePath, 'utf-8');
+    }
+    
+    const data = JSON.parse(fileContent);
 
     return Response.json({
       ...data,
-      content: data.content // Plaintext content
+      content: data.content
     });
   } catch (error) {
     console.error('Error reading briefing:', error);
