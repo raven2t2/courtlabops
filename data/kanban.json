@@ -69,6 +69,18 @@
           "due": "Feb 08",
           "priority": "critical",
           "tags": ["api", "social-media"]
+        },
+        {
+          "id": "kb-006",
+          "title": "🐦 [Template] New Tweet Draft",
+          "description": "Click to open /tweets and create a new tweet. Add copy, select account (@CourtLabApp or @EstherCourtLab), set type (pinned/regular), and save. Syncs to JSON automatically.",
+          "org": "Content",
+          "owner": "Michael",
+          "due": "Ongoing",
+          "priority": "medium",
+          "tags": ["twitter", "content", "template"],
+          "status": "Template - click to use",
+          "templateLink": "/tweets"
         }
       ]
     },

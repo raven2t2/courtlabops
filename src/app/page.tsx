@@ -570,6 +570,26 @@ export default function Dashboard() {
                                 <span className="text-[11px] text-text-muted">Due {card.due}</span>
                               </div>
 
+                              {(card as any).status && (
+                                <div className="mt-2">
+                                  <span className="text-[10px] px-2 py-1 rounded bg-accent-violet/10 text-accent-violet border border-accent-violet/20">
+                                    {(card as any).status}
+                                  </span>
+                                </div>
+                              )}
+
+                              {(card as any).templateLink && (
+                                <div className="mt-2">
+                                  <Link
+                                    href={(card as any).templateLink}
+                                    className="inline-flex items-center gap-1 rounded bg-accent-green/10 px-2 py-1 text-[10px] font-medium text-accent-green hover:bg-accent-green/20 transition-colors"
+                                  >
+                                    Open Editor
+                                    <ArrowUpRight size={9} />
+                                  </Link>
+                                </div>
+                              )}
+
                               {(card as any).links && ((card as any).links.internal?.length > 0 || (card as any).links.external?.length > 0) && (
                                 <div className="mt-2 space-y-1">
                                   {(card as any).links.internal?.length > 0 && (
