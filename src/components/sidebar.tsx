@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils"
 
 const NAV_ITEMS = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/" },
+  { icon: Crosshair, label: "Operations", href: "/operations" },
   { icon: Users, label: "Leads", href: "/leads", badge: "18" },
   { icon: Mail, label: "Campaigns", href: "/campaigns" },
   { icon: UserCheck, label: "Coaches", href: "/coaches" },
