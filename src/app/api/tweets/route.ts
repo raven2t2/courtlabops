@@ -1,15 +1,35 @@
 import { readFile, writeFile } from "fs/promises"
 import { resolve } from "path"
 
-const TWEETS_FILE = resolve(process.cwd(), "data", "crm", "twitter", "twitter-drafts.json")
+// Try workspace location first (dev), then fallback to project data dir (prod)
+const getTwitterFile = () => {
+  const workspacePath = "/data/.openclaw/workspace/courtlabops-repo/data/crm/twitter/twitter-drafts.json"
+  const projectPath = resolve(process.cwd(), "data", "crm", "twitter", "twitter-drafts.json")
+  return [workspacePath, projectPath]
+}
+
+const TWEETS_FILES = getTwitterFile()
+
+async function getTweetsFile() {
+  for (const filePath of TWEETS_FILES) {
+    try {
+      await readFile(filePath, "utf-8")
+      return filePath
+    } catch {}
+  }
+  // Default to first path if none exist
+  return TWEETS_FILES[0]
+}
 
 async function readTweets() {
-  const content = await readFile(TWEETS_FILE, "utf-8")
+  const filePath = await getTweetsFile()
+  const content = await readFile(filePath, "utf-8")
   return JSON.parse(content)
 }
 
 async function writeTweets(data: any) {
-  await writeFile(TWEETS_FILE, JSON.stringify(data, null, 2))
+  const filePath = await getTweetsFile()
+  await writeFile(filePath, JSON.stringify(data, null, 2))
 }
 
 export async function GET() {
