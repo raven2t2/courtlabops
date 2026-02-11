@@ -22,6 +22,7 @@ import {
   Users,
   X,
   Newspaper,
+  Twitter,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -37,6 +38,7 @@ const navItems = [
   { label: "Campaigns", href: "/campaigns", icon: Target },
   { label: "Events", href: "/events", icon: Calendar },
   { label: "Content", href: "/content", icon: FileText },
+  { label: "Tweets", href: "/tweets", icon: Twitter },
   { label: "Competitors", href: "/competitors", icon: Crosshair },
   { label: "Settings", href: "/settings", icon: Settings },
 ]
