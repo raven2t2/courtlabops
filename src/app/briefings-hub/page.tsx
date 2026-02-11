@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { ArrowRight, Search, Calendar } from 'lucide-react';
 
 interface Brief {
   title: string;
   file: string;
   date: string;
   type: string;
+  timestamp: string;
   path: string;
 }
 
@@ -16,48 +18,54 @@ export default function BriefingsHub() {
   const [selectedBrief, setSelectedBrief] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<any>(null);
-  const [searching, setSearching] = useState(false);
+  const [filteredBriefs, setFilteredBriefs] = useState<Brief[]>([]);
 
   useEffect(() => {
-    fetch('/api/briefs')
-      .then(res => res.json())
-      .then(data => {
-        setBriefs(data.briefs || []);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Error loading briefs:', err);
-        setLoading(false);
-      });
+    fetchBriefs();
   }, []);
+
+  const fetchBriefs = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('/api/briefs');
+      const data = await response.json();
+      setBriefs(data.briefs || []);
+      setFilteredBriefs(data.briefs || []);
+    } catch (error) {
+      console.error('Error loading briefs:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleViewBrief = async (brief: Brief) => {
     try {
       const response = await fetch(brief.path);
       const data = await response.json();
-      setSelectedBrief({ ...brief, content: data.content });
+      setSelectedBrief(data);
     } catch (error) {
       console.error('Error loading brief:', error);
     }
   };
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!searchQuery.trim()) return;
-    
-    setSearching(true);
-    try {
-      const response = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`);
-      const data = await response.json();
-      setSearchResults(data);
-    } catch (error) {
-      console.error('Search error:', error);
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    if (!query.trim()) {
+      setFilteredBriefs(briefs);
+      return;
     }
-    setSearching(false);
+
+    const lowerQuery = query.toLowerCase();
+    const filtered = briefs.filter(
+      brief =>
+        brief.title.toLowerCase().includes(lowerQuery) ||
+        brief.type.toLowerCase().includes(lowerQuery) ||
+        brief.date.includes(query)
+    );
+    setFilteredBriefs(filtered);
   };
 
-  const groupedBriefs = briefs.reduce((acc, brief) => {
+  const groupedBriefs = filteredBriefs.reduce((acc, brief) => {
     if (!acc[brief.type]) {
       acc[brief.type] = [];
     }
@@ -66,139 +74,106 @@ export default function BriefingsHub() {
   }, {} as Record<string, Brief[]>);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">📋 Briefings & Reports Hub</h1>
-          <p className="text-lg text-gray-600">Strategy insights, market trends, and performance metrics</p>
-          
-          {/* Search Bar */}
-          <form onSubmit={handleSearch} className="mt-6">
-            <div className="flex gap-2">
-              <input
-                type="text"
-                placeholder="Search all briefs and reports..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
-              />
-              <button
-                type="submit"
-                disabled={searching}
-                className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition disabled:opacity-50"
-              >
-                {searching ? 'Searching...' : 'Search'}
-              </button>
-            </div>
-          </form>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">📋 Briefings & Reports</h1>
+          <p className="text-lg text-gray-600">All daily and weekly briefings, strategy documents, and performance reports</p>
         </div>
+      </div>
 
-        {searchResults && (
-          <div className="mb-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">🔍 Search Results</h2>
-            {searchResults.count === 0 ? (
-              <p className="text-gray-500">No results found for "{searchQuery}"</p>
-            ) : (
-              <div className="space-y-2">
-                <p className="text-sm text-gray-600 mb-3">Found {searchResults.count} files containing "{searchQuery}":</p>
-                <ul className="space-y-1">
-                  {searchResults.results.slice(0, 10).map((file: string, idx: number) => (
-                    <li key={idx} className="text-sm text-gray-700">
-                      📄 {file}
-                    </li>
-                  ))}
-                </ul>
-                {searchResults.count > 10 && (
-                  <p className="text-xs text-gray-500 mt-2">...and {searchResults.count - 10} more results</p>
-                )}
-              </div>
-            )}
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        {/* Search Bar */}
+        <div className="mb-8">
+          <div className="relative">
+            <Search className="absolute left-4 top-3.5 h-5 w-5 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search briefings by title, type, or date..."
+              value={searchQuery}
+              onChange={(e) => handleSearch(e.target.value)}
+              className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
           </div>
-        )}
+        </div>
 
         {loading ? (
-          <div className="text-center py-12">
-            <p className="text-gray-500">Loading briefs...</p>
+          <div className="flex justify-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
           </div>
-        ) : briefs.length === 0 ? (
-          <div className="bg-white rounded-lg shadow p-8 text-center">
-            <p className="text-gray-500 mb-4">No briefs generated yet</p>
-            <p className="text-sm text-gray-400">Briefs will appear here as cron jobs generate them</p>
+        ) : filteredBriefs.length === 0 ? (
+          <div className="bg-white rounded-lg p-12 text-center">
+            <p className="text-gray-500 text-lg">
+              {searchQuery
+                ? 'No briefings match your search'
+                : 'No briefings available yet. Check back when cron jobs run.'}
+            </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Briefs List */}
-            <div className="lg:col-span-2">
-              <div className="space-y-4">
-                {Object.entries(groupedBriefs).map(([type, typeBriefs]) => (
-                  <div key={type} className="bg-white rounded-lg shadow p-6">
-                    <h2 className="text-xl font-semibold text-gray-900 mb-4 pb-3 border-b">
-                      {typeBriefs[0].title}
-                    </h2>
-                    <div className="space-y-2">
-                      {typeBriefs.map((brief, idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => handleViewBrief(brief)}
-                          className={`w-full text-left p-3 rounded transition ${
-                            selectedBrief?.file === brief.file
-                              ? 'bg-indigo-50 border-l-4 border-indigo-600'
-                              : 'hover:bg-gray-50 border-l-4 border-transparent'
-                          }`}
-                        >
-                          <div className="font-medium text-gray-900">{brief.file}</div>
-                          <div className="text-sm text-gray-500">{brief.date}</div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Brief Content Viewer */}
-            {selectedBrief ? (
-              <div className="lg:col-span-1">
-                <div className="bg-white rounded-lg shadow p-6 sticky top-8">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">{selectedBrief.title}</h3>
-                  <div className="text-sm text-gray-600 mb-4 pb-4 border-b">
-                    <div>{selectedBrief.file}</div>
-                    <div className="text-xs text-gray-400">{selectedBrief.date}</div>
-                  </div>
-                  
-                  <div className="prose prose-sm max-w-none">
-                    {typeof selectedBrief.content === 'string' ? (
-                      <pre className="bg-gray-50 p-3 rounded text-xs overflow-auto max-h-96 whitespace-pre-wrap">
-                        {selectedBrief.content}
-                      </pre>
-                    ) : (
-                      <pre className="bg-gray-50 p-3 rounded text-xs overflow-auto max-h-96 whitespace-pre-wrap">
-                        {JSON.stringify(selectedBrief.content, null, 2)}
-                      </pre>
-                    )}
-                  </div>
+          <div className="space-y-8">
+            {Object.entries(groupedBriefs).map(([type, typeBriefs]) => (
+              <div key={type}>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500">
+                  {type}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {typeBriefs.map((brief) => (
+                    <button
+                      key={brief.file}
+                      onClick={() => handleViewBrief(brief)}
+                      className="text-left bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border-l-4 border-blue-500 hover:border-blue-600"
+                    >
+                      <div className="flex items-start justify-between mb-2">
+                        <h3 className="text-lg font-semibold text-gray-900">{brief.title}</h3>
+                        <ArrowRight className="h-5 w-5 text-gray-400" />
+                      </div>
+                      <div className="flex items-center gap-4 text-sm text-gray-500">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-4 w-4" />
+                          {brief.date}
+                        </div>
+                        <span className="px-2 py-1 bg-gray-100 rounded text-xs font-medium">
+                          {brief.type}
+                        </span>
+                      </div>
+                    </button>
+                  ))}
                 </div>
               </div>
-            ) : (
-              <div className="lg:col-span-1">
-                <div className="bg-white rounded-lg shadow p-6">
-                  <p className="text-gray-500 text-center py-12">Select a brief to view details</p>
-                </div>
-              </div>
-            )}
+            ))}
           </div>
         )}
 
-        {/* Navigation */}
-        <div className="mt-12 text-center">
-          <Link
-            href="/"
-            className="inline-block px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
-          >
-            ← Back to Dashboard
-          </Link>
-        </div>
+        {/* Detailed View Modal */}
+        {selectedBrief && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 flex items-center justify-between">
+                <div>
+                  <h2 className="text-2xl font-bold">{selectedBrief.title}</h2>
+                  <p className="text-blue-100 mt-1">{selectedBrief.date}</p>
+                </div>
+                <button
+                  onClick={() => setSelectedBrief(null)}
+                  className="text-2xl font-bold hover:text-blue-100"
+                >
+                  ×
+                </button>
+              </div>
+
+              <div className="p-8">
+                <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 whitespace-pre-wrap font-mono text-sm text-gray-800">
+                  {selectedBrief.content}
+                </div>
+
+                <div className="mt-6 text-sm text-gray-500">
+                  <p>Generated: {new Date(selectedBrief.timestamp).toLocaleString()}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,34 +1,35 @@
 import { readFileSync } from 'fs';
+import { join } from 'path';
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const filePath = searchParams.get('file');
-
-  if (!filePath) {
-    return Response.json({ error: 'No file specified' }, { status: 400 });
-  }
-
-  // Security: only allow files in courtlab-crm directory
-  if (!filePath.includes('courtlab-crm')) {
-    return Response.json({ error: 'Unauthorized' }, { status: 403 });
-  }
-
   try {
-    const content = readFileSync(filePath, 'utf-8');
-    
-    // Parse JSON if applicable
-    let data = content;
-    if (filePath.endsWith('.json')) {
-      try {
-        data = JSON.parse(content);
-      } catch {
-        // Return as text if JSON parsing fails
-      }
+    const { searchParams } = new URL(request.url);
+    const file = searchParams.get('file');
+
+    if (!file) {
+      return Response.json({ error: 'Missing file parameter' }, { status: 400 });
     }
 
-    return Response.json({ content: data, filename: filePath.split('/').pop() });
+    // Security: prevent directory traversal
+    if (file.includes('..') || file.includes('/')) {
+      return Response.json({ error: 'Invalid file path' }, { status: 400 });
+    }
+
+    const briefsDir = join(process.cwd(), '..', 'courtlab-briefings');
+    const filePath = join(briefsDir, file);
+
+    const content = readFileSync(filePath, 'utf-8');
+    const data = JSON.parse(content);
+
+    return Response.json({
+      ...data,
+      content: data.content // Plaintext content
+    });
   } catch (error) {
-    console.error('Error reading file:', error);
-    return Response.json({ error: 'File not found' }, { status: 404 });
+    console.error('Error reading briefing:', error);
+    return Response.json(
+      { error: 'Failed to read briefing' },
+      { status: 500 }
+    );
   }
 }
