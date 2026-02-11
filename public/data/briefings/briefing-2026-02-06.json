@@ -1,0 +1,141 @@
+{
+  "date": "2026-02-06",
+  "generatedAt": "2026-02-08T13:14:12.097Z",
+  "sections": {
+    "metrics": {
+      "signups": 25,
+      "signupsChange": 13,
+      "demos": 8,
+      "demosChange": 3,
+      "trials": 1,
+      "trialsChange": -2
+    },
+    "leads": {
+      "hot": [
+        {
+          "name": "Forestville Eagles",
+          "source": "LinkedIn post",
+          "temp": "hot",
+          "score": 92
+        },
+        {
+          "name": "Melbourne Tigers",
+          "source": "Twitter mention",
+          "temp": "hot",
+          "score": 86
+        },
+        {
+          "name": "Frankston Blues",
+          "source": "LinkedIn post",
+          "temp": "hot",
+          "score": 73
+        },
+        {
+          "name": "Sturt Sabres",
+          "source": "Reddit discussion",
+          "temp": "warm",
+          "score": 86
+        },
+        {
+          "name": "Knox Raiders",
+          "source": "Coach referral",
+          "temp": "hot",
+          "score": 75
+        }
+      ]
+    },
+    "affiliates": {
+      "topPerformers": [
+        {
+          "name": "Sarah Chen (TikTok)",
+          "conversions": 9,
+          "revenue": 4086
+        },
+        {
+          "name": "Coach Marcus (Instagram)",
+          "conversions": 5,
+          "revenue": 2995
+        },
+        {
+          "name": "David Lee (YouTube)",
+          "conversions": 5,
+          "revenue": 3097
+        },
+        {
+          "name": "Emma Rose (Twitter)",
+          "conversions": 4,
+          "revenue": 1981
+        },
+        {
+          "name": "James Park (Reddit)",
+          "conversions": 4,
+          "revenue": 1964
+        }
+      ]
+    },
+    "competitive": {
+      "news": [
+        {
+          "title": "PlayerZone raises $5M Series A for youth sports platform",
+          "source": "TechCrunch",
+          "date": "Today"
+        },
+        {
+          "title": "STATS Perform launches advanced youth analytics dashboard",
+          "source": "Sports Tech News",
+          "date": "Yesterday"
+        },
+        {
+          "title": "Basket.app hits 50k monthly active users milestone",
+          "source": "Product Hunt",
+          "date": "2 days ago"
+        }
+      ]
+    },
+    "content": {
+      "topPosts": [
+        {
+          "title": "Coach Interview: Building Winning Culture",
+          "platform": "TikTok",
+          "engagement": 5234
+        },
+        {
+          "title": "5 Basketball Drills for Guard Development",
+          "platform": "YouTube",
+          "engagement": 2847
+        },
+        {
+          "title": "Youth Tournament Highlights Reel",
+          "platform": "Instagram",
+          "engagement": 1654
+        }
+      ]
+    },
+    "ops": {
+      "blockers": [
+        "Twitter API rate limits hitting daily - need to implement caching",
+        "Gallery image sync timeout on large batches"
+      ],
+      "deployments": [
+        "Kanban column reorganization deployed",
+        "Social posting automation enabled",
+        "Lead scoring algorithm updated"
+      ]
+    },
+    "calendar": {
+      "events": [
+        {
+          "title": "Team Sync & Content Review",
+          "time": "10:00 AM",
+          "attendees": "Michael, Coach Sarah"
+        }
+      ]
+    },
+    "weather": {
+      "condition": "Partly Cloudy",
+      "temp": 19,
+      "humidity": 61,
+      "forecast": "Clear skies with light winds. Excellent for practice."
+    }
+  }
+}

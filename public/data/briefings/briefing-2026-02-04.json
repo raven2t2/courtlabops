@@ -1,0 +1,141 @@
+{
+  "date": "2026-02-04",
+  "generatedAt": "2026-02-08T13:14:12.095Z",
+  "sections": {
+    "metrics": {
+      "signups": 12,
+      "signupsChange": -3,
+      "demos": 8,
+      "demosChange": 1,
+      "trials": 5,
+      "trialsChange": 4
+    },
+    "leads": {
+      "hot": [
+        {
+          "name": "Forestville Eagles",
+          "source": "Reddit discussion",
+          "temp": "warm",
+          "score": 93
+        },
+        {
+          "name": "Melbourne Tigers",
+          "source": "LinkedIn post",
+          "temp": "hot",
+          "score": 85
+        },
+        {
+          "name": "Frankston Blues",
+          "source": "Influencer share",
+          "temp": "hot",
+          "score": 73
+        },
+        {
+          "name": "Sturt Sabres",
+          "source": "Influencer share",
+          "temp": "hot",
+          "score": 84
+        },
+        {
+          "name": "Knox Raiders",
+          "source": "Reddit discussion",
+          "temp": "hot",
+          "score": 77
+        }
+      ]
+    },
+    "affiliates": {
+      "topPerformers": [
+        {
+          "name": "Sarah Chen (TikTok)",
+          "conversions": 10,
+          "revenue": 4550
+        },
+        {
+          "name": "Coach Marcus (Instagram)",
+          "conversions": 5,
+          "revenue": 4160
+        },
+        {
+          "name": "David Lee (YouTube)",
+          "conversions": 5,
+          "revenue": 2060
+        },
+        {
+          "name": "Emma Rose (Twitter)",
+          "conversions": 5,
+          "revenue": 2478
+        },
+        {
+          "name": "James Park (Reddit)",
+          "conversions": 4,
+          "revenue": 2767
+        }
+      ]
+    },
+    "competitive": {
+      "news": [
+        {
+          "title": "PlayerZone raises $5M Series A for youth sports platform",
+          "source": "TechCrunch",
+          "date": "Today"
+        },
+        {
+          "title": "STATS Perform launches advanced youth analytics dashboard",
+          "source": "Sports Tech News",
+          "date": "Yesterday"
+        },
+        {
+          "title": "Hudl secures partnership with Australian Basketball Association",
+          "source": "Sports Business Daily",
+          "date": "3 days ago"
+        }
+      ]
+    },
+    "content": {
+      "topPosts": [
+        {
+          "title": "Coach Interview: Building Winning Culture",
+          "platform": "TikTok",
+          "engagement": 5234
+        },
+        {
+          "title": "5 Basketball Drills for Guard Development",
+          "platform": "YouTube",
+          "engagement": 2847
+        },
+        {
+          "title": "Youth Tournament Highlights Reel",
+          "platform": "Instagram",
+          "engagement": 1654
+        }
+      ]
+    },
+    "ops": {
+      "blockers": [
+        "Twitter API rate limits hitting daily - need to implement caching",
+        "Gallery image sync timeout on large batches"
+      ],
+      "deployments": [
+        "Kanban column reorganization deployed",
+        "Social posting automation enabled",
+        "Lead scoring algorithm updated"
+      ]
+    },
+    "calendar": {
+      "events": [
+        {
+          "title": "Team Sync & Content Review",
+          "time": "10:00 AM",
+          "attendees": "Michael, Coach Sarah"
+        }
+      ]
+    },
+    "weather": {
+      "condition": "Light Rain",
+      "temp": 21,
+      "humidity": 47,
+      "forecast": "Indoor training recommended. Good day for skill development drills."
+    }
+  }
+}

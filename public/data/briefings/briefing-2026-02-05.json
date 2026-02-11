@@ -1,0 +1,141 @@
+{
+  "date": "2026-02-05",
+  "generatedAt": "2026-02-08T13:14:12.096Z",
+  "sections": {
+    "metrics": {
+      "signups": 17,
+      "signupsChange": 0,
+      "demos": 2,
+      "demosChange": 2,
+      "trials": 1,
+      "trialsChange": 2
+    },
+    "leads": {
+      "hot": [
+        {
+          "name": "Forestville Eagles",
+          "source": "Influencer share",
+          "temp": "warm",
+          "score": 93
+        },
+        {
+          "name": "Melbourne Tigers",
+          "source": "Coach referral",
+          "temp": "hot",
+          "score": 87
+        },
+        {
+          "name": "Frankston Blues",
+          "source": "Twitter mention",
+          "temp": "warm",
+          "score": 79
+        },
+        {
+          "name": "Sturt Sabres",
+          "source": "Twitter mention",
+          "temp": "warm",
+          "score": 82
+        },
+        {
+          "name": "Knox Raiders",
+          "source": "LinkedIn post",
+          "temp": "warm",
+          "score": 75
+        }
+      ]
+    },
+    "affiliates": {
+      "topPerformers": [
+        {
+          "name": "Sarah Chen (TikTok)",
+          "conversions": 8,
+          "revenue": 5809
+        },
+        {
+          "name": "David Lee (YouTube)",
+          "conversions": 6,
+          "revenue": 2886
+        },
+        {
+          "name": "Coach Marcus (Instagram)",
+          "conversions": 5,
+          "revenue": 4358
+        },
+        {
+          "name": "Emma Rose (Twitter)",
+          "conversions": 4,
+          "revenue": 2320
+        },
+        {
+          "name": "James Park (Reddit)",
+          "conversions": 3,
+          "revenue": 2040
+        }
+      ]
+    },
+    "competitive": {
+      "news": [
+        {
+          "title": "Hudl secures partnership with Australian Basketball Association",
+          "source": "Sports Business Daily",
+          "date": "3 days ago"
+        },
+        {
+          "title": "Basket.app hits 50k monthly active users milestone",
+          "source": "Product Hunt",
+          "date": "2 days ago"
+        },
+        {
+          "title": "STATS Perform launches advanced youth analytics dashboard",
+          "source": "Sports Tech News",
+          "date": "Yesterday"
+        }
+      ]
+    },
+    "content": {
+      "topPosts": [
+        {
+          "title": "Coach Interview: Building Winning Culture",
+          "platform": "TikTok",
+          "engagement": 5234
+        },
+        {
+          "title": "5 Basketball Drills for Guard Development",
+          "platform": "YouTube",
+          "engagement": 2847
+        },
+        {
+          "title": "Youth Tournament Highlights Reel",
+          "platform": "Instagram",
+          "engagement": 1654
+        }
+      ]
+    },
+    "ops": {
+      "blockers": [
+        "Twitter API rate limits hitting daily - need to implement caching",
+        "Gallery image sync timeout on large batches"
+      ],
+      "deployments": [
+        "Kanban column reorganization deployed",
+        "Social posting automation enabled",
+        "Lead scoring algorithm updated"
+      ]
+    },
+    "calendar": {
+      "events": [
+        {
+          "title": "Team Sync & Content Review",
+          "time": "10:00 AM",
+          "attendees": "Michael, Coach Sarah"
+        }
+      ]
+    },
+    "weather": {
+      "condition": "Partly Cloudy",
+      "temp": 26,
+      "humidity": 70,
+      "forecast": "Clear skies with light winds. Excellent for practice."
+    }
+  }
+}

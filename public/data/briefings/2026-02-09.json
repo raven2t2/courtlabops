@@ -1,0 +1,80 @@
+{
+  "date": "2026-02-09",
+  "timestamp": 1770557220000,
+  "sections": {
+    "metrics": {
+      "title": "📊 CourtLab Metrics (Last 24h)",
+      "items": [
+        "26 new signups",
+        "9 demo requests",
+        "2 trial activations",
+        "847 active users"
+      ],
+      "tone": "success"
+    },
+    "leads": {
+      "title": "🔥 Lead Temperature",
+      "items": [
+        "Golden State Basketball Camp - Hot 🔥",
+        "Bay Area Elite Training - Warm ⚡",
+        "Sacramento Youth League - Engaged ✓"
+      ],
+      "tone": "info"
+    },
+    "affiliates": {
+      "title": "👥 Affiliate Activity",
+      "items": [
+        "CoachPro Network - 8 referrals yesterday",
+        "BasketballInsiders - 5 referrals yesterday",
+        "YouthSports Direct - 3 referrals yesterday"
+      ],
+      "tone": "success"
+    },
+    "competitive": {
+      "title": "⚡ Competitive Intel",
+      "items": [
+        "Hudl announced new AI coaching dashboard",
+        "NCSA raised Series C funding round",
+        "ShotTracker expanding to high school market"
+      ],
+      "tone": "warning"
+    },
+    "content": {
+      "title": "📈 Content Performance",
+      "items": [
+        "Yesterday: 'Defensive Fundamentals' video - 2.4k views",
+        "Top tweet: Coach testimonial - 847 impressions",
+        "YouTube upload rate: 2x last week"
+      ],
+      "tone": "info"
+    },
+    "ops": {
+      "title": "⚠️ Ops Status",
+      "items": [
+        "All systems operational ✓",
+        "Last deployment: 6h ago (stable)",
+        "No critical alerts"
+      ],
+      "tone": "warning"
+    },
+    "calendar": {
+      "title": "📅 Today's Calendar",
+      "items": [
+        "9:30 AM - Strategy meeting with marketing",
+        "2:00 PM - Investor call (Series B follow-up)",
+        "4:30 PM - Affiliate review & optimization"
+      ],
+      "tone": "neutral"
+    },
+    "weather": {
+      "title": "🌤️ Adelaide Weather",
+      "items": [
+        "Temperature: 18°C",
+        "Conditions: Overcast with chance of rain",
+        "Humidity: 62%",
+        "Wind: 12 km/h from the south"
+      ],
+      "tone": "neutral"
+    }
+  }
+}

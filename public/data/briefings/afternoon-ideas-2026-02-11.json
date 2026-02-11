@@ -1,0 +1,7 @@
+{
+  "title": "⚡ Afternoon Ideas - 3:00 PM",
+  "type": "afternoon-ideas",
+  "date": "2026-02-11",
+  "timestamp": "2026-02-11T17:28:00Z",
+  "content": "2 EXECUTION-READY IDEAS - 3:00 PM\n\nIDEA #1: Coach Objection Handler (PR + Product)\n• What: 3-post LinkedIn/TikTok series + new /objections landing page\n• Targets: \"I don't have time\", \"My gut is good enough\", \"We use Hudl already\"\n• Proof points: 87% of coaches miss talent without data; Hudl is $2k/year (ours is $300)\n• Execution: Write posts (Haiku), build page, deploy to courtlabops.vercel.app\n• Time: 2-3 hours\n• Series B value: Direct competitor comparison + founder credibility + social proof\n\nIDEA #2: Weekly Coach Wins Dashboard Widget (Product + Engagement)\n• What: New /dashboard component showing real coach wins (auto-populated)\n• Example wins: \"Marcus identified 2 underrated guards → starter minutes\", \"Jamie +28% defense improvement\"\n• Proof points: Real usage traction, engagement loop, case study intake\n• Execution: Design MVP, build React component, add \"Submit your win\" form\n• Time: 1.5-2 hours\n• Series B value: Traction proof (\"50+ coaches already winning\") + credibility + testimonial goldmine\n\nBoth deployable by EOD. Both feed Series B narrative: coaches are winning with CourtLab data."
+}

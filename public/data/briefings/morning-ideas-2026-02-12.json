@@ -1,0 +1,54 @@
+{
+  "title": "✅ Morning Marketing Ideas - 8:00 AM",
+  "type": "morning-ideas",
+  "date": "2026-02-12",
+  "timestamp": "2026-02-12T08:00:00Z",
+  "ideas": [
+    {
+      "id": "IDEA-001",
+      "title": "Competitive Kill Shot: Hudl's $2k Blind Spot",
+      "category": "Competitive Positioning",
+      "format": "TikTok/YouTube Shorts",
+      "duration": "30 min execution",
+      "targetAudience": "Coaches stuck with Hudl-only setup",
+      "keyAngle": "Hudl shows WHAT happened, CourtLab shows WHY and HOW TO FIX IT",
+      "timing": "Post-summer camps (coaches analyzing gaps)",
+      "expectedOutcome": "Competitive differentiation, short-form viral potential",
+      "ready": true
+    },
+    {
+      "id": "IDEA-002",
+      "title": "Affiliate Leverage: Dodo Elyazar + 2026 Camp Season",
+      "category": "Partnership Opportunity",
+      "format": "Personalized email + call prep",
+      "duration": "1 hour execution",
+      "targetAudience": "Dodo (120k followers, U12-U18 camp director, Australia)",
+      "keyAngle": "Provide combine data reports for camp materials; revenue share on parent conversions",
+      "timing": "Camp season planning NOW (March camps coming)",
+      "expectedOutcome": "$5-10k partner revenue, 50-100 new users by March",
+      "ready": true
+    },
+    {
+      "id": "IDEA-003",
+      "title": "Product Positioning: Combine Data for Coaches (Not Just Scouts)",
+      "category": "Content/Product Growth",
+      "format": "New landing page `/combine-for-coaches`",
+      "duration": "2 hours execution",
+      "targetAudience": "Coaches who understand recruiting metrics",
+      "keyAngle": "Combines = coaching tool for proving player development to parents",
+      "timing": "Deploy by EOD, test tomorrow",
+      "expectedOutcome": "New lead magnet, repositioning angle, retargeting funnel",
+      "ready": true
+    }
+  ],
+  "executionStatus": "All 3 ideas are execution-ready. No blockers.",
+  "totalExecutionTime": "3.5 hours",
+  "priority": "HIGH - Competitive move + partnership + product positioning",
+  "notes": [
+    "Idea #1: Deploy by 10 AM (morning coach scroll window)",
+    "Idea #2: Michael to send Dodo email by 9:30 AM",
+    "Idea #3: Ship landing page by EOD Thursday"
+  ],
+  "generatedAt": "2026-02-12T08:00:00Z",
+  "status": "DELIVERED"
+}
