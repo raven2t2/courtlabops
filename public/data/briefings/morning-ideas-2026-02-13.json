@@ -1,0 +1,94 @@
+{
+  "title": "⚡ Morning Marketing Ideas - 8:00 AM",
+  "type": "morning-ideas",
+  "date": "2026-02-13",
+  "timestamp": "2026-02-13T08:00:00Z",
+  "execution_window": "4 hours (8 AM - 12 PM)",
+  "narrative": "Objective truth wins markets. We prove coaching works with data, not promises.",
+  "ideas": [
+    {
+      "id": 1,
+      "title": "Combine Data Storytelling — 'Before/After Player Cards'",
+      "category": "Competitive Positioning + Content Proof",
+      "why_now": "Hudl owns game film. We own player development over time. Combines give us the baseline. Time to visualize the arc.",
+      "specific_targets": [
+        "Club directors evaluating tools (LinkedIn, email outreach via affiliates)",
+        "Coaches on basketball coaching forums + APB coaching telegram groups",
+        "Parents tired of being told 'your kid improved' (no proof)"
+      ],
+      "execution": {
+        "asset_1": "Design 3 player cards (mock data from real CourtLab early testers): 'Isaac — Week 1 Baseline → 6 Weeks Later'. Show: combine baseline (shot % / height / lateral speed) → real improvement arc. Visual before/after comparison.",
+        "asset_2": "Draft accompanying LinkedIn post (Michael): 'Coaches say 'your kid got better.' Parents ask 'how much?' We answer with data. Baseline. Weekly. No guessing. This is Isaac's 6-week arc at [Club].' (image carousel)",
+        "asset_3": "Email template for outreach: Send to 10 interested coaches who haven't signed yet. Subject: 'See how one of our coaches proved player development (with data)'. Attach sample card + link to Lite playground."
+      },
+      "why_works": "Shows CourtLab does what Hudl can't: transformation proof. Parents pay fees for development; we show it. Coaches selling spots to parents suddenly have a killer asset.",
+      "why_competitors_miss": "Hudl is about game film (what happened). We're about player development (what changed). Different conversation entirely.",
+      "blockers_and_fixes": [
+        "Issue: Don't have clean player data yet",
+        "Fix: Use mock/redacted data from CourtLab pilot. Anonymise. Show trend shape, not names."
+      ],
+      "time_estimate": "45 mins (design 3 cards) + 30 mins (draft post + email) = 1.25 hours",
+      "execution_ready": true,
+      "next_step": "Design cards in Figma → Post to LinkedIn → Deploy email to outreach list by 10 AM"
+    },
+    {
+      "id": 2,
+      "title": "ASA Proof of Concept — 'Data Discipline' Thought Leadership",
+      "category": "Founder Brand + Education",
+      "why_now": "We just proved (Feb 9) that keyword research is 80% wrong. That's a founder-level learning moment. Turn it into a Series B narrative.",
+      "specific_targets": [
+        "Series B investors (blog post + LinkedIn + email)",
+        "Tech founder communities (ProductHunt, IndieHackers, Twitter tech)",
+        "Coaches (secondary — they love founder vulnerability)"
+      ],
+      "execution": {
+        "thought_piece": "1,200-word LinkedIn article: 'We spent $500 on bad keywords. Here's what $25/day of real data taught us.' Structure: (1) Gut theory (wrong), (2) Data reality (winners), (3) Lesson for coaches (distrust your instincts, trust live data). Frame as founder learning, not sales pitch.",
+        "angle": "Investors want to see: founder humility + data discipline + speed of iteration. This delivers all 3. Subtext: 'CourtLab founders think like coaches — we test assumptions, validate with real data, iterate fast.'",
+        "tactical": "Publish to LinkedIn + Medium + Cross-post to Twitter. Include ASA v2 strategy chart (sanitized). Tag 3-4 Series B investors + product founders. Email post to 5 investor intros in your pipeline."
+      },
+      "why_works": "Flips 'startup' narrative from 'we have the answer' to 'we learn by doing.' Builds trust with investors and coaches simultaneously.",
+      "supporting_data": "ASA AU campaign: 0.91% initial CTR → refined to exact-match only → 5 proven keywords (basketball training 25%, basketball drills 50%). $25/day budget, expect <$12 CPA proof in Week 1.",
+      "time_estimate": "1 hour (write) + 30 mins (edit/publish) = 1.5 hours",
+      "execution_ready": true,
+      "next_step": "Write draft by 9:30 AM → Michael review by 10 AM → Publish by 11 AM"
+    },
+    {
+      "id": 3,
+      "title": "Combine Event Marketing Sprint — 'Free Baseline Events as Anchor Strategy'",
+      "category": "Go-to-Market + Demand Generation",
+      "why_now": "Feb is off-season for most SA clubs. Combine events are perfect now — low calendar conflict, coaches want baseline data before autumn season starts.",
+      "specific_targets": [
+        "10-15 district clubs in SA not yet signed (from CRM affiliate list)",
+        "Club directors + basketball coordinators (decision makers)",
+        "Assistant coaches + volunteer coordinators (implementers)"
+      ],
+      "execution": {
+        "campaign_1": "Email outreach (personalized): 'Free Combine Baseline + Reporting for [Club Name]'. Offer: 1x Combine event (2 hours), full baseline reporting in 72 hours, zero cost, no commitment. Only requirement: Club agrees to feedback call post-event. Target: 5 clubs, schedule for Feb 22-24.",
+        "campaign_2": "Phone/Telegram follow-up (coaches in APB coaching group): 'We're running free Combine baselines this month. Takes 2 hours. You get full player data + trends + parent-ready PDF. No strings. Interested?'",
+        "campaign_3": "Ad + social angle (secondary): Instagram carousel showing Combine energy + athlete excitement. Hook: 'Free combine baseline + data = coaches love it, parents understand their kid's progress.' Target: Parents following SA basketball clubs."
+      },
+      "why_works": "Combines are the 'demo' that makes CourtLab inevitable. Once a coach runs one and parents see the PDF, platform adoption becomes obvious. This is top-of-funnel but with proof.",
+      "expected_outcome": "Run 5 events in Feb (5 clubs × $0 platform) → 5 clubs see baseline reporting + parent value → 4-5 of them become inbound leads for Year 1 contract (convert by end of March).",
+      "blockers_and_fixes": [
+        "Issue: Combine delivery logistics (venue, personnel)",
+        "Fix: Partner with 1-2 affiliates to co-deliver first events. Club provides space; Michael + affiliate run event + reporting."
+      ],
+      "time_estimate": "30 mins (email drafts) + 1 hour (phone outreach) + 30 mins (social content) = 2 hours",
+      "execution_ready": true,
+      "next_step": "Draft outreach emails by 8:30 AM → Deploy by 9 AM → Phone calls 9:30-11 AM"
+    }
+  ],
+  "execution_checklist": [
+    "✅ Idea 1 (Player Cards) — Feasible in 1.25 hours, low-cost design",
+    "✅ Idea 2 (ASA Thought Piece) — Feasible in 1.5 hours, high founder credibility ROI",
+    "✅ Idea 3 (Combine Events) — Feasible in 2 hours, direct pipeline impact"
+  ],
+  "success_metrics": [
+    "Player Cards: 10+ views + 2+ coach inquiries by EOD",
+    "ASA Thought Piece: 50+ views + 2+ investor/founder comments on LinkedIn",
+    "Combine Events: 2+ clubs scheduled for baseline events, 1+ email intro to new club director"
+  ],
+  "sequencing": "Start with Combine outreach (highest-ROI pipeline work) + ASA thought piece (founder brand) in parallel. Player cards can deploy afternoon if time allows.",
+  "owner": "Marketing Agency",
+  "ready_for_michael": "All three ideas are execution-ready. No blocker approvals needed. Deploy and report."
+}

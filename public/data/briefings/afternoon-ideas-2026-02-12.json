@@ -1,0 +1,64 @@
+{
+  "title": "⚡ Afternoon Ideas - 3:00 PM",
+  "type": "afternoon-ideas",
+  "date": "2026-02-12",
+  "timestamp": "2026-02-12T07:00:00Z",
+  "execution_window": "3 hours (3 PM - 6 PM)",
+  "series_b_narrative": "Real user data > theory. Coaches are winning. We're the infrastructure layer.",
+  "ideas": [
+    {
+      "id": 1,
+      "title": "ASA Data Loop Proof — Content Series",
+      "category": "Tactical PR + Content",
+      "description": "Turn the ASA AU campaign refinement story into 3-part creator content: (1) Why your keyword research was wrong (theory/gut fail), (2) What the data actually showed (exact match winners), (3) How coaches fix their own assumptions.",
+      "specific_targets": [
+        "Coach Telegram channels (APB coaching group)",
+        "Youth sports AI crowd (Product Hunt, IndieHackers)",
+        "Basketball ops directors (ASC regional networks)"
+      ],
+      "draft_hooks": [
+        "Post 1: 'We tested 30 basketball keywords. 13 had zero impressions. Here's what actually works.' (carousel with keyword chart)",
+        "Post 2: 'Your instinct about what coaches search is probably wrong. (So was ours.)'",
+        "Post 3: 'The coaches winning with data always ask the same question first: What does the live campaign actually say?'"
+      ],
+      "implementation": "Write 3 carousel posts + 1 long-form (LinkedIn) via Haiku templates. Deploy to /content/blog/aaa-data-wins. Commit to repo. Publish via HubSpot calendar.",
+      "why_matters_series_b": "Demonstrates: (1) How CourtLab coaches learn to trust data over gut, (2) Real campaign iteration (not theory), (3) Founder humility + data discipline = investor confidence.",
+      "time_estimate": "1.5-2 hours",
+      "execution_ready": true,
+      "blockers": "none"
+    },
+    {
+      "id": 2,
+      "title": "courtlabops.vercel.app — Add 'Coach Wins' Feed Widget",
+      "category": "Tool/Feature Improvement",
+      "description": "New homepage section: Auto-fetching coach success stories (\"Marcus upgraded 2 underrated players,\" \"Team +12% shooting after 6-week streak,\" \"Scout feedback validated by stats.\") Creates engagement loop + testimonial goldmine + traction proof.",
+      "specific_targets": [
+        "Founding club coaches (real wins)",
+        "Prospect coaches browsing demo site",
+        "Series B investors reviewing product differentiation"
+      ],
+      "draft_implementation": [
+        "Step 1: Create /components/WinsCarousel.jsx (3 rotating wins, each 30s auto-advance)",
+        "Step 2: Add API endpoint /api/coach-wins (mock 5 wins for now, link to form for real submissions)",
+        "Step 3: Create inline 'Submit your win' button → Google Form → auto-add to DB",
+        "Step 4: Deploy to staging, test responsive (mobile first), merge to main"
+      ],
+      "why_matters_series_b": "Proof of adoption + engagement. Shows coaches are winning real outcomes (talent ID, skill improvement, scout validation). Counters 'nice product, but do coaches actually use it?' question.",
+      "time_estimate": "1.5-2 hours (quick React, mock data, form integration)",
+      "execution_ready": true,
+      "design_notes": "Card-based, 3-card carousel. Dark theme (match site). Real names + skill tags + outcome metrics.",
+      "blockers": "none"
+    }
+  ],
+  "execution_checklist": [
+    "✅ Content ready: 3 carousel drafts + 1 long-form LinkedIn post",
+    "✅ Product ready: React component + API mock + form submission",
+    "✅ Sync ready: scripts/sync-briefings-to-web.sh",
+    "✅ Git ready: Commit both PRs by 6 PM"
+  ],
+  "success_metrics": [
+    "Content: 10+ engagements per post + 2+ shares",
+    "Product: 5+ coach wins collected within 48h + verified for authenticity"
+  ],
+  "next_action": "Execute content + feature in parallel. Notify Michael when both PRs merged."
+}

@@ -1,110 +1,130 @@
 {
   "briefings": [
     {
+      "name": "ideas-midday-feb12.md",
+      "updated": "2026-02-12T21:30:57.640Z",
+      "size": 4888
+    },
+    {
       "name": "morning-ideas-2026-02-12.md",
-      "updated": "2026-02-11T21:56:25.430Z",
+      "updated": "2026-02-12T21:30:57.640Z",
       "size": 5345
     },
     {
       "name": "pain-point-research-2026-02-11.json",
-      "updated": "2026-02-11T21:56:25.428Z",
+      "updated": "2026-02-12T21:30:57.637Z",
       "size": 776
     },
     {
+      "name": "morning-ideas-2026-02-13.json",
+      "updated": "2026-02-12T21:30:57.635Z",
+      "size": 7479
+    },
+    {
       "name": "outreach-drafts-2026-02-11.json",
-      "updated": "2026-02-11T21:56:25.427Z",
+      "updated": "2026-02-12T21:30:57.635Z",
       "size": 872
     },
     {
       "name": "pain-point-outreach-2026-02-11.json",
-      "updated": "2026-02-11T21:56:25.427Z",
+      "updated": "2026-02-12T21:30:57.635Z",
       "size": 897
     },
     {
+      "name": "morning-ideas-2026-02-12.json",
+      "updated": "2026-02-12T21:30:57.634Z",
+      "size": 2294
+    },
+    {
+      "name": "lead-scoring-2026-02-11.json",
+      "updated": "2026-02-12T21:30:57.633Z",
+      "size": 736
+    },
+    {
       "name": "midday-ideas-2026-02-11.json",
-      "updated": "2026-02-11T21:56:25.426Z",
+      "updated": "2026-02-12T21:30:57.633Z",
       "size": 1096
     },
     {
       "name": "morning-ideas-2026-02-11.json",
-      "updated": "2026-02-11T21:56:25.426Z",
+      "updated": "2026-02-12T21:30:57.633Z",
       "size": 1096
     },
     {
-      "name": "morning-ideas-2026-02-12.json",
-      "updated": "2026-02-11T21:56:25.426Z",
-      "size": 2294
-    },
-    {
       "name": "evening-wrap-2026-02-11.json",
-      "updated": "2026-02-11T21:56:25.425Z",
+      "updated": "2026-02-12T21:30:57.632Z",
       "size": 1055
     },
     {
-      "name": "lead-scoring-2026-02-11.json",
-      "updated": "2026-02-11T21:56:25.425Z",
-      "size": 736
-    },
-    {
       "name": "briefing-2026-02-07.json",
-      "updated": "2026-02-11T21:56:25.424Z",
+      "updated": "2026-02-12T21:30:57.631Z",
       "size": 3422
     },
     {
       "name": "briefing-2026-02-08.json",
-      "updated": "2026-02-11T21:56:25.424Z",
+      "updated": "2026-02-12T21:30:57.631Z",
       "size": 3687
     },
     {
       "name": "briefing-2026-02-06.json",
-      "updated": "2026-02-11T21:56:25.423Z",
+      "updated": "2026-02-12T21:30:57.630Z",
       "size": 3396
     },
     {
       "name": "briefing-2026-02-04.json",
-      "updated": "2026-02-11T21:56:25.422Z",
+      "updated": "2026-02-12T21:30:57.629Z",
       "size": 3436
     },
     {
       "name": "briefing-2026-02-05.json",
-      "updated": "2026-02-11T21:56:25.422Z",
+      "updated": "2026-02-12T21:30:57.629Z",
       "size": 3421
     },
     {
       "name": "briefing-2026-02-02.json",
-      "updated": "2026-02-11T21:56:25.421Z",
+      "updated": "2026-02-12T21:30:57.628Z",
       "size": 3422
     },
     {
       "name": "briefing-2026-02-03.json",
-      "updated": "2026-02-11T21:56:25.421Z",
+      "updated": "2026-02-12T21:30:57.628Z",
       "size": 3408
     },
     {
+      "name": "afternoon-ideas-2026-02-12.json",
+      "updated": "2026-02-12T21:30:57.627Z",
+      "size": 3826
+    },
+    {
       "name": "autonomous-executor-2026-02-11.json",
-      "updated": "2026-02-11T21:56:25.420Z",
+      "updated": "2026-02-12T21:30:57.627Z",
       "size": 1118
     },
     {
       "name": "briefing-2026-02-01.json",
-      "updated": "2026-02-11T21:56:25.420Z",
+      "updated": "2026-02-12T21:30:57.627Z",
       "size": 3408
     },
     {
       "name": "afternoon-ideas-2026-02-11.json",
-      "updated": "2026-02-11T21:56:25.419Z",
+      "updated": "2026-02-12T21:30:57.626Z",
       "size": 1328
     },
     {
       "name": "2026-02-09.json",
-      "updated": "2026-02-11T21:56:25.418Z",
+      "updated": "2026-02-12T21:30:57.625Z",
       "size": 2154
     },
     {
       "name": "2026-02-08.json",
-      "updated": "2026-02-11T21:56:25.417Z",
+      "updated": "2026-02-12T21:30:57.624Z",
       "size": 2031
+    },
+    {
+      "name": "index.json",
+      "updated": "2026-02-11T21:56:25.515Z",
+      "size": 2614
     }
   ],
-  "lastSync": "2026-02-11T21:56:25.515Z"
+  "lastSync": "2026-02-12T21:30:57.711Z"
 }
