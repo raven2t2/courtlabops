@@ -81,6 +81,28 @@
           "tags": ["twitter", "content", "template"],
           "status": "Template - click to use",
           "templateLink": "/tweets"
+        },
+        {
+          "id": "kb-007",
+          "title": "West Adelaide Bearcats outreach (SA-011)",
+          "description": "Personalized outreach to NBL1 Central + Premier League powerhouse. Dual-gender competitive program, strong pathways. Email + Founding Club offer.",
+          "org": "Sales",
+          "owner": "Assistant",
+          "due": "Feb 14",
+          "priority": "High",
+          "tags": ["outreach", "sa-clubs", "nbl1-central", "premier-league"],
+          "status": "Drafted"
+        },
+        {
+          "id": "kb-008",
+          "title": "Ballarat Miners outreach (VIC-027)",
+          "description": "Personalized outreach to NBL1 South regional powerhouse. New coach Ray Borner (2026), dual-gender program, pathways growth opportunity.",
+          "org": "Sales",
+          "owner": "Assistant",
+          "due": "Feb 14",
+          "priority": "High",
+          "tags": ["outreach", "vic-clubs", "nbl1-south", "regional"],
+          "status": "Drafted"
         }
       ]
     },

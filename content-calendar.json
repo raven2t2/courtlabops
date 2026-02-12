@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-07T15:57:00+10:30",
+  "lastUpdated": "2026-02-12T13:00:00+10:30",
   "timezone": "Australia/Adelaide",
   "uploadPostProfile": "courtlab",
   "facebookPageId": "948912778306299",
@@ -97,6 +97,21 @@
         "theme": "Parent education",
         "status": "pending",
         "charCount": 331
+      },
+      {
+        "id": "w1-003b",
+        "date": "2026-02-13",
+        "day": "Friday",
+        "scheduledTime": "15:00",
+        "platforms": ["instagram"],
+        "type": "photo",
+        "assetFile": "003_kPqR7vWxZ2Yj1nFm4Lsb.jpg",
+        "caption": "Real question for coaches: Do you know the ONE stat that separates good teams from great teams?\n\nIt's not points. It's not rebounds. \n\nIt's decision-making consistency. Turnovers per possession under pressure. Efficiency in the last 5 minutes of close games.\n\nEvery elite program tracks this. Most programs don't.\n\nThat's the gap. That's where improvement happens.\n\nWhat metric would change your season if you could see it clearly?",
+        "hashtags": "set3",
+        "firstComment": "Tag a coach who'd benefit from seeing the actual data 👇",
+        "theme": "Coaching insight / Data philosophy",
+        "status": "pending",
+        "charCount": 318
       },
       {
         "id": "w1-004",
