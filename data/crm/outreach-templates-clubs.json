@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "version": "2026-02-14",
+    "purpose": "Club-focused outreach templates (not individual coaches)",
+    "targetAudience": "Athletic directors, board presidents, head coaches",
+    "channels": ["email", "linkedin", "direct-call"]
+  },
+  "templates": {
+    "athletic_director_email": {
+      "name": "Athletic Director - Time Saving Pitch",
+      "channel": "email",
+      "subject": "[Club Name] — Coaches Save 2.5 Hours/Week With CourtLab",
+      "tone": "professional, specific, ROI-focused",
+      "template": "Hi [Director Name],\n\nI noticed your club has [X] volunteer coaches managing [Y] teams.\n\nThat's typically 2-3 hours/week per coach on:\n• Attendance tracking\n• Session notes\n• Parent updates\n• Video organization\n\nCourtLab automates this workflow. One 30-second check-in per session, and:\n✓ System auto-generates parent updates (weekly)\n✓ Video playbook organizes clips automatically\n✓ Stats tracked for development benchmarks\n✓ Coaches get their time back\n\n[Coach Name] at [Similar Club] saves 2.5 hours/week. That's $1,500+/year per coach in reclaimed time.\n\nWorth a 15-minute conversation to see if it fits your club?\n\n— Michael\nCourtLab",
+      "variables": [
+        "Club Name",
+        "Director Name",
+        "Number of coaches",
+        "Number of teams",
+        "Coach Name",
+        "Similar Club"
+      ],
+      "followUp": [
+        "If no response in 3 days: Send second email with parent testimonial",
+        "If no response in 7 days: Send article about volunteer retention"
+      ]
+    },
+    "sponsor_partnership_email": {
+      "name": "Sponsor — Development-Presented-By Opportunity",
+      "channel": "email",
+      "subject": "Development Presented By [Brand] — Real Youth Impact at [Club]",
+      "tone": "strategic, partnership-focused, impact-driven",
+      "template": "Hi [Sponsor Manager],\n\nMost youth basketball sponsorships = logo on jersey. Fine, but not much impact to show.\n\nWhat if you could actually measure development impact?\n\n[Club Name] is using CourtLab to:\n✓ Verify player improvement with data\n✓ Create weekly parent updates (proof of value)\n✓ Host combines with verified stats\n✓ Generate sponsor-ready impact reports\n\nWith a \"Development Presented By [Your Brand]\" partnership, you get:\n• Real testimonials from coaches + parents\n• Quarterly impact report (\"Our players improved 23% faster than regional average\")\n• Visibility at Easter Classic (April 3-6) and beyond\n• Association with actual youth development, not just team jerseys\n\nFirst club to do this with us is already interested. Want to be first for your market?\n\n— Michael\nCourtLab",
+      "variables": [
+        "Club Name",
+        "Sponsor Manager",
+        "Your Brand"
+      ],
+      "followUp": [
+        "If interested: Schedule call with club + sponsor together",
+        "If not now: Add to 90-day follow-up (Q2 budgets)"
+      ]
+    },
+    "head_coach_recruitment": {
+      "name": "Head Coach — Leverage Your Volunteers",
+      "channel": "linkedin_dm",
+      "subject": "Your volunteers + CourtLab = parent testimonials",
+      "tone": "peer-to-peer, practical, coach-focused",
+      "template": "Hey [Coach Name],\n\nSaw your club hosted [Tournament/Event]. Impressive.\n\nOne thing I hear from head coaches:\n\"My volunteers are amazing, but they're drowning in admin. I can't ask them to do more.\"\n\nCourtLab is built for exactly this:\n\n30-second session check-in (attendance + focus skill), and:\n✓ System generates weekly parent updates\n✓ Coaches don't have to type anything\n✓ Parents actually see progress\n✓ You get development data for your board\n\nMost head coaches save 2-3 hours/week per volunteer. They can actually focus on coaching.\n\nIf your volunteers are busy, might be worth a look.\n\nHappy to hop on a call if you're curious.\n\n— Michael",
+      "variables": [
+        "Coach Name",
+        "Tournament/Event"
+      ],
+      "followUp": [
+        "If they engage: Offer demo access (free trial for one session)",
+        "If they're interested: Connect with athletic director"
+      ]
+    },
+    "combine_director_email": {
+      "name": "Combine/Tournament Director — Verified Stats in Minutes",
+      "channel": "email",
+      "subject": "[Tournament Name] — Verified Stats. Parent-Ready. No Manual Work.",
+      "tone": "technical, efficiency-focused",
+      "template": "Hi [Director Name],\n\nManually tracking combine stats is brutal. Spreadsheets. Typos. Parents waiting.\n\nCourtLab's combine module:\n✓ Real-time stat capture (shooting %, vertical, etc)\n✓ Instant leaderboards (parents can see results while waiting)\n✓ One-page PDF reports per athlete (shooting %ile, benchmarks)\n✓ Done in 90 minutes instead of 4 hours\n\nFor [Tournament Name] (April 3-6?), imagine:\n• Athletes get instant feedback (\"You're top 15% in shooting\")\n• Parents get verified benchmark report in their email that day\n• Coaches get data for scout conversations\n• You get reputation as most professional tournament in the region\n\nWe're partnering with one tournament for Easter Classic. Interested in being that tournament?\n\n— Michael\nCourtLab",
+      "variables": [
+        "Director Name",
+        "Tournament Name"
+      ],
+      "followUp": [
+        "If interested: Schedule Easter Classic planning call immediately",
+        "If not now: Mention again in March"
+      ]
+    },
+    "board_member_outreach": {
+      "name": "Board Member — Parent Retention + Sponsorship Value",
+      "channel": "linkedin",
+      "subject": "How [Club] Can Increase Registration Retention 10-15%",
+      "tone": "business-focused, board-level",
+      "template": "Hi [Board Member],\n\nAs a board member, you probably track:\n• Registration numbers (declining? flat?)\n• Sponsor interest (hard to show ROI?)\n• Volunteer satisfaction (burnout?)\n\nCourtLab fixes all three:\n\n1. PARENT RETENTION (10-15% lift)\nWeekly parent updates: \"This week Marcus worked on shooting consistency, defensive positioning, and ball handling\" + video clips. Parents see value, keep kids registered.\n\n2. SPONSOR VALUE\n\"Development Presented By [Sponsor]\" means real impact data, not just logo. Sponsors pay more for that.\n\n3. VOLUNTEER RETENTION\nCoaches save 2.5 hours/week on admin. They stay longer, recruit friends, happier.\n\nCost: $2,450/year. ROI: 10 extra registrations × $400/family = $4,000 regained, plus sponsor premium.\n\nWorth 15 minutes to explore?\n\n— Michael",
+      "variables": [
+        "Board Member"
+      ],
+      "followUp": [
+        "If positive: Set up demo with athletic director",
+        "If hesitant: Send board-focused ROI one-pager"
+      ]
+    }
+  },
+  "personalizationRules": {
+    "beforeSending": [
+      "Verify club name, decision-maker name, correct spelling",
+      "Research: How many volunteers? Any volunteer retention issues?",
+      "Research: Current sponsor situation - what's the gap?",
+      "Mention specific recent event, tournament, or news about the club",
+      "Never use template without at least 3 custom details"
+    ],
+    "toneGuidelines": [
+      "Not salesy - peer-to-peer, helpful",
+      "Specific ROI numbers, not generic benefits",
+      "Problem-first: Lead with their pain (admin, retention, sponsor value)",
+      "Short: Email max 150 words, subject line one benefit"
+    ],
+    "timing": [
+      "Athletic directors: Tuesday-Thursday 9-11am (not Friday)",
+      "Coaches: Monday-Wednesday (prefer mid-week)",
+      "Board members: LinkedIn: Tuesday-Thursday",
+      "Sponsors: Email: Monday-Wednesday (budget conversation timing)"
+    ]
+  },
+  "successMetrics": {
+    "email": {
+      "openRate": ">30%",
+      "replyRate": ">5%",
+      "demoRequestRate": ">2%"
+    },
+    "linkedin": {
+      "engagementRate": ">10%",
+      "responseRate": ">3%",
+      "connectionToConversationRate": ">1%"
+    },
+    "overall": {
+      "conversationToDemo": ">20%",
+      "demoToPilot": ">30%",
+      "pilotToPaid": ">80%"
+    }
+  }
+}
