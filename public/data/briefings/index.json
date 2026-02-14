@@ -1,130 +1,155 @@
 {
   "briefings": [
     {
-      "name": "ideas-midday-feb12.md",
-      "updated": "2026-02-12T21:30:57.640Z",
-      "size": 4888
+      "name": "weekly-strategy-brief-2026-02-15.md",
+      "updated": "2026-02-14T20:31:06.318Z",
+      "size": 11923
     },
     {
       "name": "morning-ideas-2026-02-12.md",
-      "updated": "2026-02-12T21:30:57.640Z",
+      "updated": "2026-02-14T20:31:06.317Z",
       "size": 5345
     },
     {
+      "name": "ideas-midday-feb12.md",
+      "updated": "2026-02-14T20:31:06.316Z",
+      "size": 4888
+    },
+    {
+      "name": "2026-02-14-morning-ideas.md",
+      "updated": "2026-02-14T20:31:06.315Z",
+      "size": 6854
+    },
+    {
+      "name": "2026-02-14-midday-ideas.md",
+      "updated": "2026-02-14T20:31:06.314Z",
+      "size": 7413
+    },
+    {
+      "name": "2026-02-14-afternoon-ideas.md",
+      "updated": "2026-02-14T20:31:06.313Z",
+      "size": 7017
+    },
+    {
+      "name": "sales-briefing-2026-02-13.json",
+      "updated": "2026-02-14T20:31:06.310Z",
+      "size": 8305
+    },
+    {
       "name": "pain-point-research-2026-02-11.json",
-      "updated": "2026-02-12T21:30:57.637Z",
+      "updated": "2026-02-14T20:31:06.309Z",
       "size": 776
     },
     {
-      "name": "morning-ideas-2026-02-13.json",
-      "updated": "2026-02-12T21:30:57.635Z",
-      "size": 7479
-    },
-    {
       "name": "outreach-drafts-2026-02-11.json",
-      "updated": "2026-02-12T21:30:57.635Z",
+      "updated": "2026-02-14T20:31:06.308Z",
       "size": 872
     },
     {
       "name": "pain-point-outreach-2026-02-11.json",
-      "updated": "2026-02-12T21:30:57.635Z",
+      "updated": "2026-02-14T20:31:06.308Z",
       "size": 897
     },
     {
+      "name": "morning-ideas-2026-02-13.json",
+      "updated": "2026-02-14T20:31:06.307Z",
+      "size": 7479
+    },
+    {
       "name": "morning-ideas-2026-02-12.json",
-      "updated": "2026-02-12T21:30:57.634Z",
+      "updated": "2026-02-14T20:31:06.306Z",
       "size": 2294
     },
     {
+      "name": "morning-ideas-2026-02-11.json",
+      "updated": "2026-02-14T20:31:06.305Z",
+      "size": 1096
+    },
+    {
       "name": "lead-scoring-2026-02-11.json",
-      "updated": "2026-02-12T21:30:57.633Z",
+      "updated": "2026-02-14T20:31:06.304Z",
       "size": 736
     },
     {
       "name": "midday-ideas-2026-02-11.json",
-      "updated": "2026-02-12T21:30:57.633Z",
-      "size": 1096
-    },
-    {
-      "name": "morning-ideas-2026-02-11.json",
-      "updated": "2026-02-12T21:30:57.633Z",
+      "updated": "2026-02-14T20:31:06.304Z",
       "size": 1096
     },
     {
       "name": "evening-wrap-2026-02-11.json",
-      "updated": "2026-02-12T21:30:57.632Z",
+      "updated": "2026-02-14T20:31:06.303Z",
       "size": 1055
     },
     {
       "name": "briefing-2026-02-07.json",
-      "updated": "2026-02-12T21:30:57.631Z",
+      "updated": "2026-02-14T20:31:06.301Z",
       "size": 3422
     },
     {
       "name": "briefing-2026-02-08.json",
-      "updated": "2026-02-12T21:30:57.631Z",
+      "updated": "2026-02-14T20:31:06.301Z",
       "size": 3687
     },
     {
       "name": "briefing-2026-02-06.json",
-      "updated": "2026-02-12T21:30:57.630Z",
+      "updated": "2026-02-14T20:31:06.300Z",
       "size": 3396
     },
     {
-      "name": "briefing-2026-02-04.json",
-      "updated": "2026-02-12T21:30:57.629Z",
-      "size": 3436
-    },
-    {
       "name": "briefing-2026-02-05.json",
-      "updated": "2026-02-12T21:30:57.629Z",
+      "updated": "2026-02-14T20:31:06.299Z",
       "size": 3421
     },
     {
+      "name": "briefing-2026-02-04.json",
+      "updated": "2026-02-14T20:31:06.298Z",
+      "size": 3436
+    },
+    {
       "name": "briefing-2026-02-02.json",
-      "updated": "2026-02-12T21:30:57.628Z",
+      "updated": "2026-02-14T20:31:06.297Z",
       "size": 3422
     },
     {
       "name": "briefing-2026-02-03.json",
-      "updated": "2026-02-12T21:30:57.628Z",
+      "updated": "2026-02-14T20:31:06.297Z",
       "size": 3408
-    },
-    {
-      "name": "afternoon-ideas-2026-02-12.json",
-      "updated": "2026-02-12T21:30:57.627Z",
-      "size": 3826
-    },
-    {
-      "name": "autonomous-executor-2026-02-11.json",
-      "updated": "2026-02-12T21:30:57.627Z",
-      "size": 1118
     },
     {
       "name": "briefing-2026-02-01.json",
-      "updated": "2026-02-12T21:30:57.627Z",
+      "updated": "2026-02-14T20:31:06.296Z",
       "size": 3408
     },
     {
+      "name": "autonomous-executor-2026-02-11.json",
+      "updated": "2026-02-14T20:31:06.295Z",
+      "size": 1118
+    },
+    {
+      "name": "afternoon-ideas-2026-02-12.json",
+      "updated": "2026-02-14T20:31:06.294Z",
+      "size": 3826
+    },
+    {
       "name": "afternoon-ideas-2026-02-11.json",
-      "updated": "2026-02-12T21:30:57.626Z",
+      "updated": "2026-02-14T20:31:06.292Z",
       "size": 1328
     },
     {
       "name": "2026-02-09.json",
-      "updated": "2026-02-12T21:30:57.625Z",
+      "updated": "2026-02-14T20:31:06.291Z",
       "size": 2154
     },
     {
       "name": "2026-02-08.json",
-      "updated": "2026-02-12T21:30:57.624Z",
+      "updated": "2026-02-14T20:31:06.290Z",
       "size": 2031
     },
     {
       "name": "index.json",
-      "updated": "2026-02-11T21:56:25.515Z",
-      "size": 2614
+      "updated": "2026-02-12T21:30:57.711Z",
+      "size": 3085
     }
   ],
-  "lastSync": "2026-02-12T21:30:57.711Z"
+  "lastSync": "2026-02-14T20:31:06.391Z"
 }

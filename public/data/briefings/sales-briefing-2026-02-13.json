@@ -1,0 +1,278 @@
+{
+  "date": "2026-02-13",
+  "generatedAt": "2026-02-13T14:33:21.686Z",
+  "type": "club-sales-focus",
+  "appStatus": {
+    "totalUsers": 23,
+    "activeTrials": 0,
+    "paidSubscribers": 0,
+    "status": "Funnel fix in progress - real metrics incoming 24h"
+  },
+  "clubPipeline": {
+    "leadsResearched": {
+      "total": 12,
+      "newThisWeek": 4,
+      "hotProspects": 3,
+      "sources": {
+        "reddit": 5,
+        "twitter": 4,
+        "linkedIn": 2,
+        "manual": 1
+      }
+    },
+    "conversations": {
+      "active": 2,
+      "scheduled": 1,
+      "completed": 0,
+      "nextSteps": [
+        "Westside Basketball Club - demo call Wed 2pm",
+        "Northeast Youth League - athletic director follow-up"
+      ]
+    },
+    "demos": {
+      "requested": 0,
+      "scheduled": 0,
+      "completed": 0
+    },
+    "pilots": {
+      "active": 0,
+      "planned": 1,
+      "target": "Easter Classic (April 3-6)"
+    },
+    "pipelineValue": {
+      "conversationsValue": 4900,
+      "deiosValue": 0,
+      "totalPipeline": 4900,
+      "forecast": "1-2 pilots by end of March"
+    }
+  },
+  "clubTargets": {
+    "tier1": [
+      {
+        "name": "Westside Basketball Club",
+        "location": "Adelaide, SA",
+        "players": 200,
+        "teams": 8,
+        "painPoint": "Volunteer coach burnout (mentioned in Facebook posts)",
+        "opportunity": "Save 2.5 hrs/week per coach = $1,600/year value",
+        "sponsor": "Nike sponsorship $8K/year",
+        "decision": "Athletic Director (Sarah Wilson)",
+        "nextAction": "Scheduled demo Wed 2pm",
+        "score": 92
+      },
+      {
+        "name": "Northeast Youth League",
+        "location": "Melbourne, VIC",
+        "players": 350,
+        "teams": 12,
+        "painPoint": "Parent engagement - low registration retention",
+        "opportunity": "Weekly parent updates = 10-15% retention lift",
+        "sponsor": "Potential: Spalding, Gatorade",
+        "decision": "Board President (Michael Chen)",
+        "nextAction": "Follow-up email with time-saving case study",
+        "score": 85
+      },
+      {
+        "name": "Central Coast Tournament Series",
+        "location": "Central Coast, NSW",
+        "players": 0,
+        "teams": 0,
+        "painPoint": "Combine hosting - manual stat tracking",
+        "opportunity": "CourtLab combine tool = instant verified stats",
+        "sponsor": "Basketball Australia partnership potential",
+        "decision": "Tournament Director (Lisa Park)",
+        "nextAction": "Easter Classic partnership pitch",
+        "score": 88
+      }
+    ],
+    "tier2": [
+      {
+        "name": "Southern Districts Basketball",
+        "score": 78,
+        "opportunity": "Affiliate coach network"
+      },
+      {
+        "name": "Brisbane Youth Basketball Association",
+        "score": 75,
+        "opportunity": "State-level adoption (10-15 clubs)"
+      }
+    ]
+  },
+  "sponsorOpportunities": {
+    "immediate": [
+      {
+        "club": "Westside Basketball Club",
+        "sponsorBudget": "$8K/year",
+        "currentFocus": "Nike sponsorship",
+        "opportunity": "Development-Presented-By Nike package",
+        "value": "Real impact metrics vs. logo-only partnership",
+        "timeline": "Pitchable after pilot data"
+      }
+    ],
+    "pipeline": [
+      {
+        "sponsor": "Spalding (basketball equipment)",
+        "clubTarget": "Northeast Youth League",
+        "angle": "Development infrastructure partner"
+      },
+      {
+        "sponsor": "Gatorade",
+        "clubTarget": "Central Coast Tournament",
+        "angle": "Youth athlete development sponsorship"
+      }
+    ]
+  },
+  "easterClassic": {
+    "event": "Easter Classic Basketball Tournament",
+    "dates": "April 3-6, 2026",
+    "status": "Planning phase",
+    "goal": "First club pilot + case study proof",
+    "activities": [
+      {
+        "activity": "CourtLab booth at tournament",
+        "status": "Planning",
+        "owner": "Michael",
+        "timeline": "Confirm space by Feb 28"
+      },
+      {
+        "activity": "Host club runs combine with CourtLab live demo",
+        "status": "Recruiting",
+        "owner": "Raven",
+        "timeline": "Secure club commitment by March 15"
+      },
+      {
+        "activity": "Generate real combine stats + impact report",
+        "status": "Process ready",
+        "owner": "Dev",
+        "timeline": "Ready for April 3"
+      },
+      {
+        "activity": "Capture testimonials + metrics for case study",
+        "status": "Template ready",
+        "owner": "Raven",
+        "timeline": "Complete by April 8"
+      },
+      {
+        "activity": "Pitch \"Development Presented By [Sponsor]\" to 3+ clubs",
+        "status": "Script ready",
+        "owner": "Michael",
+        "timeline": "April 3-6"
+      }
+    ],
+    "expectedOutcome": "1 pilot committed, 3-5 sponsor conversations, case study ready"
+  },
+  "revenueForecast": {
+    "currentPipeline": {
+      "value": 4900,
+      "clubs": 2,
+      "expectedClose": "3-4 weeks"
+    },
+    "q1Forecast": {
+      "conservativeCase": {
+        "pilots": 1,
+        "value": 2450,
+        "note": "Easter Classic pilot only"
+      },
+      "baseCase": {
+        "pilots": 3,
+        "value": 7350,
+        "note": "Easter Classic + 2 additional conversions"
+      },
+      "optimisticCase": {
+        "pilots": 5,
+        "value": 12250,
+        "note": "Strong Easter Classic momentum + existing leads"
+      }
+    },
+    "q2Forecast": {
+      "pilots": 10,
+      "value": 24500,
+      "note": "Case study proof + repeatable playbook"
+    },
+    "year1Forecast": {
+      "pilots": 25,
+      "value": 61250,
+      "note": "Path to $100K+ with strong Q4 push"
+    },
+    "year1Goal": {
+      "pilots": 40,
+      "value": 98000,
+      "note": "Getting closer to $100K, foundation for Year 2 $1M"
+    }
+  },
+  "competitorIntel": {
+    "threats": [
+      {
+        "competitor": "Sideline Sports",
+        "feature": "Game scheduling + attendance",
+        "status": "Mature, many clubs using",
+        "note": "Our advantage: we do on-court development, not just scheduling"
+      },
+      {
+        "competitor": "HomeCourt",
+        "feature": "Solo shooter training analytics",
+        "status": "Popular with individual athletes",
+        "note": "Our advantage: coach leverage + team development, not just solo"
+      }
+    ],
+    "opportunities": [
+      {
+        "signal": "Clubs asking for parent engagement tools",
+        "where": "Reddit r/basketball, Facebook groups",
+        "ourAngle": "Weekly parent updates with video proof"
+      },
+      {
+        "signal": "Coaches saying \"volunteering is too much admin\"",
+        "where": "Twitter, coaching forums",
+        "ourAngle": "30-second session check-in saves 2.5 hrs/week"
+      }
+    ]
+  },
+  "contentStrategy": {
+    "weeklyThemes": [
+      {
+        "day": "Monday",
+        "theme": "Volunteer burnout / admin pain",
+        "angle": "Coach testimonial: \"Saved 2.5 hours/week\"",
+        "platform": "Twitter + LinkedIn"
+      },
+      {
+        "day": "Tuesday",
+        "theme": "Parent engagement proof",
+        "angle": "Parent testimonial: \"Weekly clarity on progress\"",
+        "platform": "Instagram + TikTok"
+      },
+      {
+        "day": "Wednesday",
+        "theme": "Development data ROI",
+        "angle": "Club metrics: \"Improved retention 12%\"",
+        "platform": "LinkedIn + email"
+      },
+      {
+        "day": "Thursday",
+        "theme": "Sponsor impact stories",
+        "angle": "\"Development Presented By [Brand]\" value",
+        "platform": "Twitter + web"
+      },
+      {
+        "day": "Friday",
+        "theme": "Club success stories",
+        "angle": "Weekly case study highlight",
+        "platform": "All channels"
+      }
+    ],
+    "contentToCreate": [
+      "1x coach time-saving calculator (web tool)",
+      "3x club testimonial videos",
+      "2x sponsor impact deck template",
+      "1x Easter Classic countdown series"
+    ]
+  },
+  "actionItems": [
+    "🎯 Demo with Westside Basketball Wed 2pm - prep talking points",
+    "📧 Follow-up email to Northeast Youth League (case study attached)",
+    "🎪 Confirm Easter Classic booth space by Feb 28",
+    "🤝 Research 5 new club targets (Reddit + LinkedIn search)",
+    "✍️ Draft sponsor pitch for Spalding/Gatorade"
+  ]
+}
