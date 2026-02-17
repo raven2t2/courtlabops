@@ -103,6 +103,28 @@
           "priority": "High",
           "tags": ["outreach", "vic-clubs", "nbl1-south", "regional"],
           "status": "Drafted"
+        },
+        {
+          "id": "kb-009",
+          "title": "Mount Lofty Mustangs outreach (SA-017)",
+          "description": "Personalized outreach to growing Adelaide Hills basketball club. Strong youth programs, family-focused culture, new facility investments.",
+          "org": "Sales",
+          "owner": "Assistant",
+          "due": "Feb 17",
+          "priority": "High",
+          "tags": ["outreach", "sa-clubs", "growth-club", "family-focused"],
+          "status": "Drafted"
+        },
+        {
+          "id": "kb-010",
+          "title": "Frankston Blues outreach (VIC-028)",
+          "description": "Personalized outreach to NBL1 South Frankston powerhouse. 40+ district teams, strong community engagement, Melbourne metro strength.",
+          "org": "Sales",
+          "owner": "Assistant",
+          "due": "Feb 17",
+          "priority": "High",
+          "tags": ["outreach", "vic-clubs", "nbl1-south", "metro"],
+          "status": "Drafted"
         }
       ]
     },
