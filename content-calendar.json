@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-12T13:00:00+10:30",
+  "lastUpdated": "2026-02-18T13:00:00+10:30",
   "timezone": "Australia/Adelaide",
   "uploadPostProfile": "courtlab",
   "facebookPageId": "948912778306299",
@@ -153,11 +153,13 @@
         "scheduledTime": "12:00",
         "platforms": ["instagram", "facebook"],
         "type": "photo",
-        "assetFile": "TBD",
+        "assetFile": "015_vDQj23Q5wIQQueNZ9oSj.jpg",
         "caption": "6 weeks to Easter Classic. The ARC, Campbelltown. \n\nWill your players show up with verified combine data — or just hope they're ready?",
         "hashtags": "set2",
+        "firstComment": "Easter Classic April 3-6. Link in bio for more info 🏆",
         "theme": "Easter Classic countdown",
-        "status": "draft"
+        "status": "pending",
+        "charCount": 120
       },
       {
         "id": "w2-003",
