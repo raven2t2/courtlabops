@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-18T13:00:00+10:30",
+  "lastUpdated": "2026-02-19T13:00:00+10:30",
   "timezone": "Australia/Adelaide",
   "uploadPostProfile": "courtlab",
   "facebookPageId": "948912778306299",
@@ -145,6 +145,21 @@
         "hashtags": "set1",
         "theme": "Motivation",
         "status": "draft"
+      },
+      {
+        "id": "w2-001b",
+        "date": "2026-02-20",
+        "day": "Friday",
+        "scheduledTime": "17:00",
+        "platforms": ["instagram"],
+        "type": "photo",
+        "assetFile": "027_xyz123.jpg",
+        "caption": "Friday feels different when you know your numbers. 📊\n\nThis week: Shot selection %. FT consistency. Defensive stops per game. \n\nCoaches see patterns. Players see improvement. Parents see progress.\n\nThat's the compounding effect of verified data.\n\nWhat's your baseline going into Week 3?",
+        "hashtags": "set3",
+        "firstComment": "Tag a player tracking their progress 👇",
+        "theme": "Data philosophy / Weekly reflection",
+        "status": "pending",
+        "charCount": 265
       },
       {
         "id": "w2-002",
