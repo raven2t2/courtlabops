@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-19T13:00:00+10:30",
+  "lastUpdated": "2026-02-20T13:00:00+10:30",
   "timezone": "Australia/Adelaide",
   "uploadPostProfile": "courtlab",
   "facebookPageId": "948912778306299",
@@ -183,11 +183,13 @@
         "scheduledTime": "18:00",
         "platforms": ["instagram"],
         "type": "photo",
-        "assetFile": "TBD",
+        "assetFile": "024_a0FKcWEKRVKTTeih5aKY.jpg",
         "caption": "Training tip: Track the boring stuff. \n\nEveryone posts highlights. But improvement happens in the reps nobody sees. \n\nThe 100 free throws after practice. The 50 sprints when you're already tired. The footwork drills that feel unnecessary — until they save you on defense.",
         "hashtags": "set3",
+        "firstComment": "Tag a player who's grinding the fundamentals 👇",
         "theme": "Training tips",
-        "status": "draft"
+        "status": "pending",
+        "charCount": 310
       }
     ]
   },
