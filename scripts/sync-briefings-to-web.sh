@@ -37,6 +37,9 @@ fs.writeFileSync(
 console.log('✅ Synced', briefings.length, 'briefings to web');
 "
 
+# Update the briefings index for Vercel API
+bash /data/.openclaw/workspace/courtlabops-repo/scripts/update-briefings-index.sh
+
 # Git commit if there are changes
 cd /data/.openclaw/workspace/courtlabops-repo
 git add public/data/briefings/ 2>/dev/null

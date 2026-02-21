@@ -2,16 +2,24 @@ import { promises as fs } from "fs"
 import path from "path"
 import { NextResponse } from "next/server"
 
-const BRIEFINGS_DIR = path.join(process.cwd(), "..", "courtlab-briefings")
-
 export async function GET() {
   try {
-    const files = await fs.readdir(BRIEFINGS_DIR)
-    const jsonFiles = files.filter((f) => f.endsWith(".json")).sort().reverse()
-    const dates = jsonFiles.map((f) => f.replace(".json", ""))
-
-    return NextResponse.json({ dates })
+    // Read the pre-generated index file (updated by cron jobs)
+    const indexPath = path.join(process.cwd(), "public", "data", "briefings-index.json")
+    const indexData = await fs.readFile(indexPath, "utf-8")
+    const index = JSON.parse(indexData)
+    
+    return NextResponse.json({ 
+      briefings: index.briefings,
+      count: index.count,
+      lastUpdated: index.lastUpdated
+    })
   } catch (error) {
-    return NextResponse.json({ dates: [] })
+    console.error("Error reading briefings index:", error)
+    return NextResponse.json({ 
+      briefings: [], 
+      count: 0,
+      error: "Could not load briefings index"
+    })
   }
 }

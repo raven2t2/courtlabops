@@ -1,7 +1,5 @@
-import { readdirSync, readFileSync } from 'fs';
+import { readFileSync } from 'fs';
 import { join } from 'path';
-
-const FILE_PATTERN = /^[a-z0-9-]+-\d{4}-\d{2}-\d{2}\.json$/i;
 
 export interface BriefMetadata {
   title: string;
@@ -21,36 +19,24 @@ export interface BriefDocument {
   content: string;
 }
 
-function getBriefingDirectories() {
-  const cwd = process.cwd();
-  return [join(cwd, '..', 'courtlab-briefings'), cwd];
+// Categorize briefing by filename
+function categorizeBrief(filename: string): string {
+  if (filename.includes('morning')) return 'Morning Ideas';
+  if (filename.includes('midday')) return 'Midday Ideas';
+  if (filename.includes('afternoon')) return 'Afternoon Ideas';
+  if (filename.includes('evening')) return 'Evening Wrap';
+  if (filename.includes('strategy') || filename.includes('weekly')) return 'Strategy';
+  if (filename.includes('pain-point') || filename.includes('research')) return 'Research';
+  if (filename.includes('outreach')) return 'Outreach';
+  if (filename.includes('lead') || filename.includes('scoring')) return 'Lead Scoring';
+  if (filename.includes('sales')) return 'Sales';
+  return 'Other';
 }
 
-function coerceBriefDocument(file: string, parsed: unknown): BriefDocument | null {
-  if (!parsed || typeof parsed !== 'object') {
-    return null;
-  }
-
-  const data = parsed as Record<string, unknown>;
-  const title = typeof data.title === 'string' ? data.title : file;
-  const date = typeof data.date === 'string' ? data.date : '';
-  const type = typeof data.type === 'string' ? data.type : 'uncategorized';
-  const timestamp =
-    typeof data.timestamp === 'string' ? data.timestamp : `${date}T00:00:00.000Z`;
-  const content = typeof data.content === 'string' ? data.content : '';
-
-  if (!date) {
-    return null;
-  }
-
-  return {
-    title,
-    file,
-    date,
-    type,
-    timestamp,
-    content,
-  };
+// Extract date from filename
+function extractDate(filename: string): string {
+  const match = filename.match(/(\d{4}-\d{2}-\d{2})/);
+  return match ? match[1] : '';
 }
 
 function safeDateValue(input: string) {
@@ -59,74 +45,92 @@ function safeDateValue(input: string) {
 }
 
 export function listBriefMetadata(): BriefMetadata[] {
-  const docs = loadBriefDocuments();
-  return docs.map((brief) => ({
-    title: brief.title,
-    file: brief.file,
-    date: brief.date,
-    type: brief.type,
-    timestamp: brief.timestamp,
-    path: `/api/briefs/view?file=${encodeURIComponent(brief.file)}`,
-  }));
+  try {
+    const indexPath = join(process.cwd(), 'public', 'data', 'briefings-index.json');
+    const indexData = readFileSync(indexPath, 'utf-8');
+    const index = JSON.parse(indexData);
+
+    return (index.briefings || [])
+      .map((filename: string): BriefMetadata | null => {
+        const date = extractDate(filename);
+        if (!date) return null; // Skip if no date found
+
+        return {
+          title: filename.replace(/\.(md|json)$/, '').replace(/-/g, ' '),
+          file: filename,
+          date,
+          type: categorizeBrief(filename),
+          timestamp: `${date}T00:00:00.000Z`,
+          path: `/api/briefs/view?file=${encodeURIComponent(filename)}`,
+        };
+      })
+      .filter((brief: BriefMetadata | null): brief is BriefMetadata => brief !== null)
+      .sort((a: BriefMetadata, b: BriefMetadata) => safeDateValue(b.timestamp) - safeDateValue(a.timestamp));
+  } catch (error) {
+    console.error('Error reading briefings index:', error);
+    return [] as BriefMetadata[];
+  }
 }
 
 export function loadBriefDocuments(): BriefDocument[] {
-  const docs: BriefDocument[] = [];
-  const seen = new Set<string>();
-
-  for (const dir of getBriefingDirectories()) {
+  const metadata = listBriefMetadata();
+  return metadata.map((m) => {
+    // Try to load actual file content
+    let content = '';
     try {
-      const files = readdirSync(dir).filter((file) => FILE_PATTERN.test(file));
-
-      for (const file of files) {
-        if (seen.has(file)) {
-          continue;
-        }
-
-        try {
-          const raw = readFileSync(join(dir, file), 'utf-8');
-          const parsed = JSON.parse(raw);
-          const doc = coerceBriefDocument(file, parsed);
-          if (!doc) {
-            continue;
-          }
-
-          seen.add(file);
-          docs.push(doc);
-        } catch (error) {
-          console.error(`Error parsing briefing file ${file}:`, error);
-        }
-      }
+      const briefPath = join(process.cwd(), 'public', 'data', 'briefings', m.file);
+      content = readFileSync(briefPath, 'utf-8');
     } catch (error) {
-      // Directory can be absent in some environments; continue to fallback dirs.
-      const nodeError = error as NodeJS.ErrnoException;
-      if (nodeError.code !== 'ENOENT') {
-        console.error(`Error reading briefings from ${dir}:`, error);
-      }
+      // Content is optional, just leave empty if file can't be read
     }
-  }
 
-  return docs.sort((a, b) => safeDateValue(b.timestamp || b.date) - safeDateValue(a.timestamp || a.date));
+    return {
+      title: m.title,
+      file: m.file,
+      date: m.date,
+      type: m.type,
+      timestamp: m.timestamp,
+      content,
+    };
+  });
 }
 
 export function getBriefDocumentByFile(file: string): BriefDocument | null {
-  if (!FILE_PATTERN.test(file) || file.includes('..') || file.includes('/')) {
+  // Prevent path traversal
+  if (file.includes('..') || file.includes('/')) {
     return null;
   }
 
-  for (const dir of getBriefingDirectories()) {
-    try {
-      const fullPath = join(dir, file);
-      const raw = readFileSync(fullPath, 'utf-8');
-      const parsed = JSON.parse(raw);
-      const doc = coerceBriefDocument(file, parsed);
-      if (doc) {
-        return doc;
-      }
-    } catch {
-      // Try the next directory location.
-    }
-  }
+  try {
+    const indexPath = join(process.cwd(), 'public', 'data', 'briefings-index.json');
+    const indexData = readFileSync(indexPath, 'utf-8');
+    const index = JSON.parse(indexData);
 
-  return null;
+    const exists = (index.briefings || []).includes(file);
+    if (!exists) return null;
+
+    const date = extractDate(file);
+    if (!date) return null;
+
+    // Try to read the actual file content
+    let content = '';
+    try {
+      const briefPath = join(process.cwd(), 'public', 'data', 'briefings', file);
+      content = readFileSync(briefPath, 'utf-8');
+    } catch {
+      // Content is optional
+    }
+
+    return {
+      title: file.replace(/\.(md|json)$/, '').replace(/-/g, ' '),
+      file,
+      date,
+      type: categorizeBrief(file),
+      timestamp: `${date}T00:00:00.000Z`,
+      content,
+    };
+  } catch (error) {
+    console.error('Error reading brief:', error);
+    return null;
+  }
 }
