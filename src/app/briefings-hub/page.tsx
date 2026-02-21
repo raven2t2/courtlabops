@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react';
 import {
   BarChart3,
   CalendarDays,
@@ -127,6 +127,47 @@ function metricBadges(brief: BriefRecord) {
   return items.slice(0, 3);
 }
 
+const URL_TOKEN_PATTERN = /(https?:\/\/[^\s<>"']+|www\.[^\s<>"']+)/gi;
+
+function normalizeUrl(url: string) {
+  return /^https?:\/\//i.test(url) ? url : `https://${url}`;
+}
+
+function renderContentWithLinks(content: string) {
+  const lines = content.split('\n');
+
+  return lines.map((line, lineIndex) => {
+    const parts = line.split(URL_TOKEN_PATTERN);
+    return (
+      <Fragment key={`line-${lineIndex}`}>
+        {parts.map((part, partIndex) => {
+          if (!part) {
+            return null;
+          }
+          if (!/^(https?:\/\/|www\.)/i.test(part)) {
+            return <Fragment key={`text-${lineIndex}-${partIndex}`}>{part}</Fragment>;
+          }
+
+          const href = normalizeUrl(part);
+          return (
+            <a
+              key={`url-${lineIndex}-${partIndex}`}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="break-all text-hyper-blue underline decoration-hyper-blue/60 underline-offset-2 hover:text-blue-300"
+              onClick={(event) => event.stopPropagation()}
+            >
+              {part}
+            </a>
+          );
+        })}
+        {lineIndex < lines.length - 1 ? '\n' : null}
+      </Fragment>
+    );
+  });
+}
+
 export default function BriefingsHubDashboard() {
   const [data, setData] = useState<BriefingsAnalyticsPayload | null>(null);
   const [loading, setLoading] = useState(true);
@@ -139,6 +180,7 @@ export default function BriefingsHubDashboard() {
   const [selectedTerm, setSelectedTerm] = useState<string | null>(null);
   const [selectedBucket, setSelectedBucket] = useState<string | null>(null);
   const [selectedBrief, setSelectedBrief] = useState<BriefRecord | null>(null);
+  const [isPending, startTransition] = useTransition();
 
   const fetchAnalytics = useCallback(async (background = false) => {
     const requestId = requestIdRef.current + 1;
@@ -198,6 +240,15 @@ export default function BriefingsHubDashboard() {
     }
 
     const search = searchQuery.trim().toLowerCase();
+    const searchableById = new Map(
+      data.briefs.map((brief) => [
+        brief.id,
+        `${brief.title} ${brief.type} ${brief.date} ${brief.snippet} ${brief.content}`.toLowerCase(),
+      ])
+    );
+    const selectedTermBriefIds = selectedTerm
+      ? new Set(data.terms.find((term) => term.term === selectedTerm)?.briefIds || [])
+      : null;
 
     return data.briefs.filter((brief) => {
       if (selectedBucket && !brief.date.startsWith(selectedBucket)) {
@@ -208,24 +259,15 @@ export default function BriefingsHubDashboard() {
         return false;
       }
 
-      if (selectedTerm) {
-        const content = brief.content.toLowerCase();
-        if (!brief.termHits.includes(selectedTerm) && !content.includes(selectedTerm.toLowerCase())) {
-          return false;
-        }
+      if (selectedTermBriefIds && !selectedTermBriefIds.has(brief.id)) {
+        return false;
       }
 
       if (!search) {
         return true;
       }
 
-      return (
-        brief.title.toLowerCase().includes(search) ||
-        brief.type.toLowerCase().includes(search) ||
-        brief.date.includes(search) ||
-        brief.snippet.toLowerCase().includes(search) ||
-        brief.content.toLowerCase().includes(search)
-      );
+      return (searchableById.get(brief.id) || '').includes(search);
     });
   }, [data, searchQuery, selectedBucket, selectedTags, selectedTerm]);
 
@@ -331,7 +373,7 @@ export default function BriefingsHubDashboard() {
               onClick={() => fetchAnalytics(true)}
               className="inline-flex items-center gap-2 rounded-xl border border-border-default bg-bg-primary px-4 py-2 text-sm font-semibold text-text-primary transition-colors hover:border-border-hover"
             >
-              <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
+              <RefreshCw className={`h-4 w-4 ${refreshing || isPending ? 'animate-spin' : ''}`} />
               Refresh
             </button>
           </div>
@@ -454,7 +496,11 @@ export default function BriefingsHubDashboard() {
                 </div>
                 {selectedTerm && (
                   <button
-                    onClick={() => setSelectedTerm(null)}
+                    onClick={() =>
+                      startTransition(() => {
+                        setSelectedTerm(null);
+                      })
+                    }
                     className="inline-flex items-center gap-1 rounded-lg border border-border-default bg-bg-primary px-3 py-1.5 text-xs font-semibold hover:border-border-hover"
                   >
                     <X className="h-3.5 w-3.5" />
@@ -470,7 +516,11 @@ export default function BriefingsHubDashboard() {
                   return (
                     <button
                       key={term.term}
-                      onClick={() => setSelectedTerm(isActive ? null : term.term)}
+                      onClick={() =>
+                        startTransition(() => {
+                          setSelectedTerm(isActive ? null : term.term);
+                        })
+                      }
                       className={`rounded-xl border px-2.5 py-1 text-left font-semibold transition-colors ${
                         isActive
                           ? 'border-hyper-blue bg-hyper-blue text-white'
@@ -648,7 +698,9 @@ export default function BriefingsHubDashboard() {
 
               <div className="rounded-2xl border border-border-default bg-bg-secondary p-5">
                 <p className="mb-3 text-xs uppercase tracking-[0.16em] text-text-muted">Raw Briefing</p>
-                <pre className="whitespace-pre-wrap break-words text-sm text-text-primary">{selectedBrief.content}</pre>
+                <div className="whitespace-pre-wrap break-words font-mono text-sm text-text-primary">
+                  {renderContentWithLinks(selectedBrief.content)}
+                </div>
               </div>
             </div>
           </div>
