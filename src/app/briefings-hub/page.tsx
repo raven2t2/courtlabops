@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   BarChart3,
   CalendarDays,
@@ -132,6 +132,7 @@ export default function BriefingsHubDashboard() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const requestIdRef = useRef(0);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -140,6 +141,9 @@ export default function BriefingsHubDashboard() {
   const [selectedBrief, setSelectedBrief] = useState<BriefRecord | null>(null);
 
   const fetchAnalytics = useCallback(async (background = false) => {
+    const requestId = requestIdRef.current + 1;
+    requestIdRef.current = requestId;
+
     try {
       if (background) {
         setRefreshing(true);
@@ -153,14 +157,24 @@ export default function BriefingsHubDashboard() {
       }
 
       const payload = (await response.json()) as BriefingsAnalyticsPayload;
+      if (requestId !== requestIdRef.current) {
+        return;
+      }
+
       setData(payload);
       setError(null);
     } catch (fetchError) {
+      if (requestId !== requestIdRef.current) {
+        return;
+      }
+
       const message = fetchError instanceof Error ? fetchError.message : 'Unable to load briefings';
       setError(message);
     } finally {
-      setLoading(false);
-      setRefreshing(false);
+      if (requestId === requestIdRef.current) {
+        setLoading(false);
+        setRefreshing(false);
+      }
     }
   }, []);
 
@@ -237,7 +251,7 @@ export default function BriefingsHubDashboard() {
       .filter((term) => term.count > 0)
       .sort((a, b) => b.count - a.count)
       .slice(0, 45)
-      .map((term, index, arr) => {
+      .map((term, _index, arr) => {
         const max = arr[0]?.count || 1;
         return {
           ...term,
@@ -282,7 +296,7 @@ export default function BriefingsHubDashboard() {
     );
   }
 
-  if (!data || error) {
+  if (!data) {
     return (
       <div className="mx-auto mt-8 w-full max-w-3xl rounded-2xl border border-accent-red/40 bg-accent-red-muted p-6 text-text-primary">
         <h1 className="font-display text-2xl font-bold">Briefings Dashboard Unavailable</h1>
@@ -321,6 +335,12 @@ export default function BriefingsHubDashboard() {
               Refresh
             </button>
           </div>
+
+          {error && (
+            <div className="mt-4 rounded-xl border border-accent-amber/40 bg-accent-amber-muted px-4 py-2 text-sm text-text-primary">
+              Refresh failed: {error}. Showing last successful snapshot.
+            </div>
+          )}
 
           <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-5">
             <div className="rounded-2xl border border-border-default bg-bg-primary p-4">
