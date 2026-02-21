@@ -64,7 +64,7 @@ export function listBriefMetadata(): BriefMetadata[] {
           path: `/api/briefs/view?file=${encodeURIComponent(filename)}`,
         };
       })
-      .filter((brief): brief is BriefMetadata => brief !== null)
+      .filter((brief: BriefMetadata | null): brief is BriefMetadata => brief !== null)
       .sort((a, b) => safeDateValue(b.timestamp) - safeDateValue(a.timestamp));
   } catch (error) {
     console.error('Error reading briefings index:', error);
