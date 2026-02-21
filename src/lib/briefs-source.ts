@@ -65,7 +65,7 @@ export function listBriefMetadata(): BriefMetadata[] {
         };
       })
       .filter((brief: BriefMetadata | null): brief is BriefMetadata => brief !== null)
-      .sort((a, b) => safeDateValue(b.timestamp) - safeDateValue(a.timestamp));
+      .sort((a: BriefMetadata, b: BriefMetadata) => safeDateValue(b.timestamp) - safeDateValue(a.timestamp));
   } catch (error) {
     console.error('Error reading briefings index:', error);
     return [];
