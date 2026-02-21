@@ -51,7 +51,7 @@ export function listBriefMetadata(): BriefMetadata[] {
     const index = JSON.parse(indexData);
 
     return (index.briefings || [])
-      .map((filename: string) => {
+      .map((filename: string): BriefMetadata | null => {
         const date = extractDate(filename);
         if (!date) return null; // Skip if no date found
 
