@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "briefing:daily": "node scripts/daily-briefing.js",
-    "briefing:samples": "node scripts/generate-sample-briefings.js"
+    "briefing:samples": "node scripts/generate-sample-briefings.js",
+    "briefs:extract": "node scripts/extract-briefings.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
@@ -20,6 +21,7 @@
     "axios": "^1.13.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "compromise": "^14.14.5",
     "form-data": "^4.0.5",
     "jsonwebtoken": "^9.0.3",
     "lucide-react": "^0.563.0",
