@@ -68,7 +68,7 @@ export function listBriefMetadata(): BriefMetadata[] {
       .sort((a: BriefMetadata, b: BriefMetadata) => safeDateValue(b.timestamp) - safeDateValue(a.timestamp));
   } catch (error) {
     console.error('Error reading briefings index:', error);
-    return [];
+    return [] as BriefMetadata[];
   }
 }
 
