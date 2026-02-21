@@ -74,14 +74,25 @@ export function listBriefMetadata(): BriefMetadata[] {
 
 export function loadBriefDocuments(): BriefDocument[] {
   const metadata = listBriefMetadata();
-  return metadata.map((m) => ({
-    title: m.title,
-    file: m.file,
-    date: m.date,
-    type: m.type,
-    timestamp: m.timestamp,
-    content: '',
-  }));
+  return metadata.map((m) => {
+    // Try to load actual file content
+    let content = '';
+    try {
+      const briefPath = join(process.cwd(), 'public', 'data', 'briefings', m.file);
+      content = readFileSync(briefPath, 'utf-8');
+    } catch (error) {
+      // Content is optional, just leave empty if file can't be read
+    }
+
+    return {
+      title: m.title,
+      file: m.file,
+      date: m.date,
+      type: m.type,
+      timestamp: m.timestamp,
+      content,
+    };
+  });
 }
 
 export function getBriefDocumentByFile(file: string): BriefDocument | null {
