@@ -1,10 +1,14 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react';
 import {
+  AlertTriangle,
   BarChart3,
   CalendarDays,
+  CheckCircle2,
+  Circle,
   DollarSign,
+  Download,
   Filter,
   RefreshCw,
   Search,
@@ -12,7 +16,12 @@ import {
   TrendingUp,
   X,
 } from 'lucide-react';
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import type { BriefRecord, BriefingsAnalyticsPayload, TimelinePoint, WordCloudTerm } from '@/lib/briefs-analytics';
+import { deriveStructuredBriefing } from '@/lib/briefing-structured';
 
 const REFRESH_INTERVAL_MS = 180000;
 
@@ -30,6 +39,21 @@ const TAG_COLORS: Record<string, string> = {
 
 function getTagClass(tag: string) {
   return TAG_COLORS[tag] || TAG_COLORS.General;
+}
+
+function getPriorityClass(priorityColor: string) {
+  switch (priorityColor) {
+    case 'red':
+      return 'border-accent-red/50 bg-accent-red-muted text-red-200';
+    case 'orange':
+      return 'border-velocity-orange/50 bg-velocity-orange-muted text-orange-200';
+    case 'yellow':
+      return 'border-accent-amber/50 bg-accent-amber-muted text-amber-200';
+    case 'green':
+      return 'border-accent-green/50 bg-accent-green-muted text-green-200';
+    default:
+      return 'border-accent-blue/50 bg-accent-blue-muted text-blue-200';
+  }
 }
 
 function formatCurrency(value: number) {
@@ -127,19 +151,47 @@ function metricBadges(brief: BriefRecord) {
   return items.slice(0, 3);
 }
 
+function toReadableSnippet(content: string) {
+  const plain = content
+    .replace(/^#+\s*/gm, '')
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/\*(.*?)\*/g, '$1')
+    .replace(/`{1,3}/g, '')
+    .replace(/\[(.*?)\]\((.*?)\)/g, '$1')
+    .replace(/^\s*[-*+]\s+/gm, '')
+    .replace(/\n{2,}/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (plain.length <= 280) {
+    return plain;
+  }
+
+  return `${plain.slice(0, 277)}...`;
+}
+
 export default function BriefingsHubDashboard() {
   const [data, setData] = useState<BriefingsAnalyticsPayload | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const requestIdRef = useRef(0);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedTerm, setSelectedTerm] = useState<string | null>(null);
   const [selectedBucket, setSelectedBucket] = useState<string | null>(null);
   const [selectedBrief, setSelectedBrief] = useState<BriefRecord | null>(null);
+  const [isPending, startTransition] = useTransition();
+  const [checkedNeedsInput, setCheckedNeedsInput] = useState<boolean[]>([]);
+  const [checkedMetricTasks, setCheckedMetricTasks] = useState<boolean[][]>([]);
+  const [exportingPdf, setExportingPdf] = useState(false);
+  const structuredExportRef = useRef<HTMLDivElement | null>(null);
 
   const fetchAnalytics = useCallback(async (background = false) => {
+    const requestId = requestIdRef.current + 1;
+    requestIdRef.current = requestId;
+
     try {
       if (background) {
         setRefreshing(true);
@@ -153,14 +205,24 @@ export default function BriefingsHubDashboard() {
       }
 
       const payload = (await response.json()) as BriefingsAnalyticsPayload;
+      if (requestId !== requestIdRef.current) {
+        return;
+      }
+
       setData(payload);
       setError(null);
     } catch (fetchError) {
+      if (requestId !== requestIdRef.current) {
+        return;
+      }
+
       const message = fetchError instanceof Error ? fetchError.message : 'Unable to load briefings';
       setError(message);
     } finally {
-      setLoading(false);
-      setRefreshing(false);
+      if (requestId === requestIdRef.current) {
+        setLoading(false);
+        setRefreshing(false);
+      }
     }
   }, []);
 
@@ -184,6 +246,15 @@ export default function BriefingsHubDashboard() {
     }
 
     const search = searchQuery.trim().toLowerCase();
+    const searchableById = new Map(
+      data.briefs.map((brief) => [
+        brief.id,
+        `${brief.title} ${brief.type} ${brief.date} ${brief.snippet} ${brief.content}`.toLowerCase(),
+      ])
+    );
+    const selectedTermBriefIds = selectedTerm
+      ? new Set(data.terms.find((term) => term.term === selectedTerm)?.briefIds || [])
+      : null;
 
     return data.briefs.filter((brief) => {
       if (selectedBucket && !brief.date.startsWith(selectedBucket)) {
@@ -194,24 +265,15 @@ export default function BriefingsHubDashboard() {
         return false;
       }
 
-      if (selectedTerm) {
-        const content = brief.content.toLowerCase();
-        if (!brief.termHits.includes(selectedTerm) && !content.includes(selectedTerm.toLowerCase())) {
-          return false;
-        }
+      if (selectedTermBriefIds && !selectedTermBriefIds.has(brief.id)) {
+        return false;
       }
 
       if (!search) {
         return true;
       }
 
-      return (
-        brief.title.toLowerCase().includes(search) ||
-        brief.type.toLowerCase().includes(search) ||
-        brief.date.includes(search) ||
-        brief.snippet.toLowerCase().includes(search) ||
-        brief.content.toLowerCase().includes(search)
-      );
+      return (searchableById.get(brief.id) || '').includes(search);
     });
   }, [data, searchQuery, selectedBucket, selectedTags, selectedTerm]);
 
@@ -237,7 +299,7 @@ export default function BriefingsHubDashboard() {
       .filter((term) => term.count > 0)
       .sort((a, b) => b.count - a.count)
       .slice(0, 45)
-      .map((term, index, arr) => {
+      .map((term, _index, arr) => {
         const max = arr[0]?.count || 1;
         return {
           ...term,
@@ -274,6 +336,65 @@ export default function BriefingsHubDashboard() {
     return Array.from(counts.entries()).sort((a, b) => b[1] - a[1])[0]?.[0] || 'General';
   }, [filteredBriefs]);
 
+  const structuredBriefing = useMemo(() => {
+    if (!selectedBrief) {
+      return null;
+    }
+    return deriveStructuredBriefing(selectedBrief.content, selectedBrief.title, selectedBrief.timestamp);
+  }, [selectedBrief]);
+
+  useEffect(() => {
+    if (!structuredBriefing) {
+      setCheckedNeedsInput([]);
+      setCheckedMetricTasks([]);
+      return;
+    }
+
+    setCheckedNeedsInput(new Array(structuredBriefing.needs_input.length).fill(false));
+    setCheckedMetricTasks(
+      structuredBriefing.success_metrics.initiatives.map((initiative) =>
+        initiative.tasks.map((task) => task.completed)
+      )
+    );
+  }, [structuredBriefing]);
+
+  const exportStructuredBriefToPdf = useCallback(async () => {
+    if (!structuredExportRef.current || !selectedBrief) {
+      return;
+    }
+
+    setExportingPdf(true);
+    try {
+      const canvas = await html2canvas(structuredExportRef.current, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#0b1120',
+      });
+      const imageData = canvas.toDataURL('image/png');
+
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'pt',
+        format: 'a4',
+      });
+
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const widthRatio = pageWidth / canvas.width;
+      const heightRatio = pageHeight / canvas.height;
+      const ratio = Math.min(widthRatio, heightRatio);
+      const imageWidth = canvas.width * ratio;
+      const imageHeight = canvas.height * ratio;
+
+      pdf.addImage(imageData, 'PNG', (pageWidth - imageWidth) / 2, 20, imageWidth, imageHeight);
+      pdf.save(`${selectedBrief.file.replace(/\.json$/i, '')}.pdf`);
+    } catch (error) {
+      console.error('Error exporting PDF:', error);
+    } finally {
+      setExportingPdf(false);
+    }
+  }, [selectedBrief]);
+
   if (loading && !data) {
     return (
       <div className="mx-auto flex min-h-[70vh] w-full max-w-7xl items-center justify-center px-6 py-10">
@@ -282,7 +403,7 @@ export default function BriefingsHubDashboard() {
     );
   }
 
-  if (!data || error) {
+  if (!data) {
     return (
       <div className="mx-auto mt-8 w-full max-w-3xl rounded-2xl border border-accent-red/40 bg-accent-red-muted p-6 text-text-primary">
         <h1 className="font-display text-2xl font-bold">Briefings Dashboard Unavailable</h1>
@@ -317,10 +438,16 @@ export default function BriefingsHubDashboard() {
               onClick={() => fetchAnalytics(true)}
               className="inline-flex items-center gap-2 rounded-xl border border-border-default bg-bg-primary px-4 py-2 text-sm font-semibold text-text-primary transition-colors hover:border-border-hover"
             >
-              <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
+              <RefreshCw className={`h-4 w-4 ${refreshing || isPending ? 'animate-spin' : ''}`} />
               Refresh
             </button>
           </div>
+
+          {error && (
+            <div className="mt-4 rounded-xl border border-accent-amber/40 bg-accent-amber-muted px-4 py-2 text-sm text-text-primary">
+              Refresh failed: {error}. Showing last successful snapshot.
+            </div>
+          )}
 
           <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-5">
             <div className="rounded-2xl border border-border-default bg-bg-primary p-4">
@@ -434,7 +561,11 @@ export default function BriefingsHubDashboard() {
                 </div>
                 {selectedTerm && (
                   <button
-                    onClick={() => setSelectedTerm(null)}
+                    onClick={() =>
+                      startTransition(() => {
+                        setSelectedTerm(null);
+                      })
+                    }
                     className="inline-flex items-center gap-1 rounded-lg border border-border-default bg-bg-primary px-3 py-1.5 text-xs font-semibold hover:border-border-hover"
                   >
                     <X className="h-3.5 w-3.5" />
@@ -450,7 +581,11 @@ export default function BriefingsHubDashboard() {
                   return (
                     <button
                       key={term.term}
-                      onClick={() => setSelectedTerm(isActive ? null : term.term)}
+                      onClick={() =>
+                        startTransition(() => {
+                          setSelectedTerm(isActive ? null : term.term);
+                        })
+                      }
                       className={`rounded-xl border px-2.5 py-1 text-left font-semibold transition-colors ${
                         isActive
                           ? 'border-hyper-blue bg-hyper-blue text-white'
@@ -545,7 +680,7 @@ export default function BriefingsHubDashboard() {
                         <span className="inline-flex items-center gap-1"><BarChart3 className="h-3 w-3" />{new Date(brief.timestamp).toLocaleTimeString('en-US')}</span>
                       </div>
 
-                      <p className="mt-3 text-sm text-text-secondary">{brief.snippet}</p>
+                      <p className="mt-3 text-sm leading-6 text-text-secondary">{toReadableSnippet(brief.content)}</p>
 
                       <div className="mt-3 flex flex-wrap gap-2">
                         {brief.tags.map((tag) => (
@@ -593,43 +728,270 @@ export default function BriefingsHubDashboard() {
             </div>
 
             <div className="space-y-4 p-6">
-              <div className="flex flex-wrap gap-2">
-                {selectedBrief.tags.map((tag) => (
-                  <span key={tag} className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold ${getTagClass(tag)}`}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
+              {structuredBriefing ? (
+                <>
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex flex-wrap gap-2">
+                      {selectedBrief.tags.map((tag) => (
+                        <span key={tag} className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold ${getTagClass(tag)}`}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <button
+                      onClick={() => void exportStructuredBriefToPdf()}
+                      disabled={exportingPdf}
+                      className="inline-flex items-center gap-2 rounded-xl border border-border-default bg-bg-secondary px-3 py-2 text-xs font-semibold text-text-primary hover:border-border-hover disabled:opacity-60"
+                    >
+                      <Download className="h-3.5 w-3.5" />
+                      {exportingPdf ? 'Exporting PDF...' : 'Export Brief to PDF'}
+                    </button>
+                  </div>
 
-              <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-                <div className="rounded-xl border border-border-default bg-bg-secondary p-3">
-                  <p className="text-xs uppercase tracking-[0.12em] text-text-muted">Ad Spend</p>
-                  <p className="mt-1 text-lg font-bold text-text-primary">
-                    {selectedBrief.kpis.adSpend.length
-                      ? formatCurrency(selectedBrief.kpis.adSpend.reduce((sum, value) => sum + value, 0))
-                      : 'N/A'}
-                  </p>
-                </div>
-                <div className="rounded-xl border border-border-default bg-bg-secondary p-3">
-                  <p className="text-xs uppercase tracking-[0.12em] text-text-muted">CTR</p>
-                  <p className="mt-1 text-lg font-bold text-text-primary">{selectedBrief.kpis.ctr[0] ? `${selectedBrief.kpis.ctr[0]}%` : 'N/A'}</p>
-                </div>
-                <div className="rounded-xl border border-border-default bg-bg-secondary p-3">
-                  <p className="text-xs uppercase tracking-[0.12em] text-text-muted">ROI</p>
-                  <p className="mt-1 text-lg font-bold text-text-primary">{selectedBrief.kpis.roi[0] || 'N/A'}</p>
-                </div>
-                <div className="rounded-xl border border-border-default bg-bg-secondary p-3">
-                  <p className="text-xs uppercase tracking-[0.12em] text-text-muted">CAC</p>
-                  <p className="mt-1 text-lg font-bold text-text-primary">
-                    {selectedBrief.kpis.cac[0] ? formatCurrency(selectedBrief.kpis.cac[0]) : 'N/A'}
-                  </p>
-                </div>
-              </div>
+                  <div ref={structuredExportRef} className="space-y-6 rounded-2xl border border-border-default bg-bg-primary p-4">
+                    <div className="rounded-2xl border border-accent-amber/40 bg-accent-amber-muted p-4">
+                      <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-text-primary">
+                        <AlertTriangle className="h-4 w-4 text-accent-amber" />
+                        Bottlenecks Requiring Input
+                      </div>
+                      <div className="space-y-2">
+                        {structuredBriefing.needs_input.map((item, itemIndex) => (
+                          <label key={item} className="flex cursor-pointer items-start gap-2 rounded-lg px-2 py-1 hover:bg-bg-secondary/60">
+                            <input
+                              type="checkbox"
+                              checked={checkedNeedsInput[itemIndex] || false}
+                              onChange={() =>
+                                setCheckedNeedsInput((current) =>
+                                  current.map((value, idx) => (idx === itemIndex ? !value : value))
+                                )
+                              }
+                              className="mt-1 h-4 w-4 accent-hyper-blue"
+                            />
+                            <span className="text-sm text-text-primary">{item}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
 
-              <div className="rounded-2xl border border-border-default bg-bg-secondary p-5">
-                <p className="mb-3 text-xs uppercase tracking-[0.16em] text-text-muted">Raw Briefing</p>
-                <pre className="whitespace-pre-wrap break-words text-sm text-text-primary">{selectedBrief.content}</pre>
-              </div>
+                    <section>
+                      <div className="mb-3 flex items-center justify-between gap-3">
+                        <h4 className="font-display text-lg font-bold text-text-primary">At A Glance Actions</h4>
+                        <p className="text-xs uppercase tracking-[0.14em] text-text-muted">
+                          {structuredBriefing.briefing_meta.generated_at || 'Generated now'}
+                        </p>
+                      </div>
+                      <div className="grid gap-3 md:grid-cols-3">
+                        {structuredBriefing.action_cards.map((card) => (
+                          <article key={card.id} className={`rounded-xl border p-3 ${getPriorityClass(card.priority_color)}`}>
+                            <div className="flex items-start justify-between gap-2">
+                              <h5 className="font-display text-base font-bold">{card.title}</h5>
+                              <span className="rounded-full border border-current/40 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em]">
+                                {card.priority}
+                              </span>
+                            </div>
+                            <p className="mt-2 text-xs text-text-secondary">Owner: {card.owner}</p>
+                            <p className="text-xs text-text-secondary">Start: {card.start} · Duration: {card.duration}</p>
+                            <p className="mt-2 text-sm font-medium text-text-primary">{card.action}</p>
+                          </article>
+                        ))}
+                      </div>
+                    </section>
+
+                    <section>
+                      <h4 className="mb-3 font-display text-lg font-bold text-text-primary">Strategic Context</h4>
+                      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                        {structuredBriefing.strategic_context.map((item) => (
+                          <article key={item.theme} className="rounded-xl border border-border-default bg-bg-secondary p-3">
+                            <h5 className="text-sm font-semibold text-text-primary">{item.theme}</h5>
+                            <p className="mt-2 text-sm leading-6 text-text-secondary">{item.detail}</p>
+                          </article>
+                        ))}
+                      </div>
+                    </section>
+
+                    <section>
+                      <div className="mb-3 flex items-center justify-between gap-3">
+                        <h4 className="font-display text-lg font-bold text-text-primary">Success Metrics</h4>
+                        <p className="text-xs uppercase tracking-[0.14em] text-text-muted">
+                          Deadline: {structuredBriefing.success_metrics.deadline || 'N/A'}
+                        </p>
+                      </div>
+                      <div className="space-y-3">
+                        {structuredBriefing.success_metrics.initiatives.map((initiative, initiativeIndex) => {
+                          const currentChecks = checkedMetricTasks[initiativeIndex] || [];
+                          const completedCount = currentChecks.filter(Boolean).length;
+                          const totalTasks = initiative.tasks.length || 1;
+                          const progress = Math.round((completedCount / totalTasks) * 100);
+
+                          return (
+                            <article key={initiative.parent_idea} className="rounded-xl border border-border-default bg-bg-secondary p-3">
+                              <div className="mb-2 flex items-center justify-between gap-2">
+                                <h5 className="text-sm font-semibold text-text-primary">{initiative.parent_idea}</h5>
+                                <span className="text-xs font-semibold text-text-secondary">{progress}% complete</span>
+                              </div>
+                              <div className="mb-3 h-2 overflow-hidden rounded-full bg-bg-primary">
+                                <div
+                                  className="h-full rounded-full bg-hyper-blue transition-all"
+                                  style={{ width: `${progress}%` }}
+                                />
+                              </div>
+                              <div className="space-y-2">
+                                {initiative.tasks.map((task, taskIndex) => (
+                                  <button
+                                    key={task.task}
+                                    onClick={() =>
+                                      setCheckedMetricTasks((current) =>
+                                        current.map((items, idx) =>
+                                          idx === initiativeIndex
+                                            ? items.map((value, valueIdx) => (valueIdx === taskIndex ? !value : value))
+                                            : items
+                                        )
+                                      )
+                                    }
+                                    className="flex w-full items-start gap-2 rounded-lg px-2 py-1 text-left hover:bg-bg-primary"
+                                  >
+                                    {currentChecks[taskIndex] ? (
+                                      <CheckCircle2 className="mt-0.5 h-4 w-4 text-accent-green" />
+                                    ) : (
+                                      <Circle className="mt-0.5 h-4 w-4 text-text-muted" />
+                                    )}
+                                    <span className={`text-sm ${currentChecks[taskIndex] ? 'text-text-primary line-through decoration-text-muted/80' : 'text-text-secondary'}`}>
+                                      {task.task}
+                                    </span>
+                                  </button>
+                                ))}
+                              </div>
+                            </article>
+                          );
+                        })}
+                      </div>
+                    </section>
+
+                    <section className="rounded-xl border border-border-default bg-bg-secondary p-4">
+                      <p className="text-xs uppercase tracking-[0.14em] text-text-muted">Execution Status</p>
+                      <p className="mt-2 text-sm text-text-primary">{structuredBriefing.execution_status.status}</p>
+                      <div className="mt-3 grid gap-2 text-sm text-text-secondary md:grid-cols-2">
+                        <p><span className="font-semibold text-text-primary">Owner:</span> {structuredBriefing.execution_status.owner || 'N/A'}</p>
+                        <p><span className="font-semibold text-text-primary">Timeline:</span> {structuredBriefing.execution_status.timeline || 'N/A'}</p>
+                      </div>
+                    </section>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedBrief.tags.map((tag) => (
+                      <span key={tag} className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold ${getTagClass(tag)}`}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+                    <div className="rounded-xl border border-border-default bg-bg-secondary p-3">
+                      <p className="text-xs uppercase tracking-[0.12em] text-text-muted">Ad Spend</p>
+                      <p className="mt-1 text-lg font-bold text-text-primary">
+                        {selectedBrief.kpis.adSpend.length
+                          ? formatCurrency(selectedBrief.kpis.adSpend.reduce((sum, value) => sum + value, 0))
+                          : 'N/A'}
+                      </p>
+                    </div>
+                    <div className="rounded-xl border border-border-default bg-bg-secondary p-3">
+                      <p className="text-xs uppercase tracking-[0.12em] text-text-muted">CTR</p>
+                      <p className="mt-1 text-lg font-bold text-text-primary">{selectedBrief.kpis.ctr[0] ? `${selectedBrief.kpis.ctr[0]}%` : 'N/A'}</p>
+                    </div>
+                    <div className="rounded-xl border border-border-default bg-bg-secondary p-3">
+                      <p className="text-xs uppercase tracking-[0.12em] text-text-muted">ROI</p>
+                      <p className="mt-1 text-lg font-bold text-text-primary">{selectedBrief.kpis.roi[0] || 'N/A'}</p>
+                    </div>
+                    <div className="rounded-xl border border-border-default bg-bg-secondary p-3">
+                      <p className="text-xs uppercase tracking-[0.12em] text-text-muted">CAC</p>
+                      <p className="mt-1 text-lg font-bold text-text-primary">
+                        {selectedBrief.kpis.cac[0] ? formatCurrency(selectedBrief.kpis.cac[0]) : 'N/A'}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-border-default bg-bg-secondary p-5">
+                    <p className="mb-3 text-xs uppercase tracking-[0.16em] text-text-muted">Raw Briefing</p>
+                    <div className="rounded-xl border border-border-default bg-bg-primary p-4">
+                      <Markdown
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                          a: ({ node, ...props }) => {
+                            void node;
+                            return (
+                              <a
+                                {...props}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(event) => event.stopPropagation()}
+                                className="break-all text-hyper-blue underline decoration-hyper-blue/60 underline-offset-2 hover:text-blue-300"
+                              />
+                            );
+                          },
+                          h1: ({ node, ...props }) => {
+                            void node;
+                            return <h1 {...props} className="mb-3 mt-1 font-display text-2xl font-extrabold text-text-primary" />;
+                          },
+                          h2: ({ node, ...props }) => {
+                            void node;
+                            return <h2 {...props} className="mb-2 mt-5 font-display text-xl font-bold text-text-primary" />;
+                          },
+                          h3: ({ node, ...props }) => {
+                            void node;
+                            return <h3 {...props} className="mb-2 mt-4 text-base font-semibold text-text-primary" />;
+                          },
+                          p: ({ node, ...props }) => {
+                            void node;
+                            return <p {...props} className="mb-3 leading-7 text-text-secondary" />;
+                          },
+                          ul: ({ node, ...props }) => {
+                            void node;
+                            return <ul {...props} className="mb-3 list-disc space-y-1 pl-5 text-text-secondary" />;
+                          },
+                          ol: ({ node, ...props }) => {
+                            void node;
+                            return <ol {...props} className="mb-3 list-decimal space-y-1 pl-5 text-text-secondary" />;
+                          },
+                          li: ({ node, ...props }) => {
+                            void node;
+                            return <li {...props} className="leading-7" />;
+                          },
+                          strong: ({ node, ...props }) => {
+                            void node;
+                            return <strong {...props} className="font-semibold text-text-primary" />;
+                          },
+                          code: ({ node, ...props }) => {
+                            void node;
+                            return (
+                              <code
+                                {...props}
+                                className="rounded bg-bg-secondary px-1.5 py-0.5 font-mono text-[13px] text-text-primary"
+                              />
+                            );
+                          },
+                          pre: ({ node, ...props }) => {
+                            void node;
+                            return (
+                              <pre
+                                {...props}
+                                className="mb-4 overflow-x-auto rounded-lg border border-border-default bg-bg-secondary p-3 font-mono text-[13px] text-text-primary"
+                              />
+                            );
+                          },
+                          hr: ({ node, ...props }) => {
+                            void node;
+                            return <hr {...props} className="my-4 border-border-default" />;
+                          },
+                        }}
+                      >
+                        {selectedBrief.content}
+                      </Markdown>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
