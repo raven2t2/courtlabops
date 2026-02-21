@@ -28,7 +28,9 @@
     "next": "16.1.6",
     "radix-ui": "^1.4.3",
     "react": "19.2.3",
+    "react-markdown": "^10.1.0",
     "react-dom": "19.2.3",
+    "remark-gfm": "^4.0.1",
     "tailwind-merge": "^3.4.0",
     "twitter-api-v2": "^1.29.0"
   },

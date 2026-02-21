@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react';
 import {
   BarChart3,
   CalendarDays,
@@ -12,6 +12,8 @@ import {
   TrendingUp,
   X,
 } from 'lucide-react';
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import type { BriefRecord, BriefingsAnalyticsPayload, TimelinePoint, WordCloudTerm } from '@/lib/briefs-analytics';
 
 const REFRESH_INTERVAL_MS = 180000;
@@ -127,45 +129,23 @@ function metricBadges(brief: BriefRecord) {
   return items.slice(0, 3);
 }
 
-const URL_TOKEN_PATTERN = /(https?:\/\/[^\s<>"']+|www\.[^\s<>"']+)/gi;
+function toReadableSnippet(content: string) {
+  const plain = content
+    .replace(/^#+\s*/gm, '')
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/\*(.*?)\*/g, '$1')
+    .replace(/`{1,3}/g, '')
+    .replace(/\[(.*?)\]\((.*?)\)/g, '$1')
+    .replace(/^\s*[-*+]\s+/gm, '')
+    .replace(/\n{2,}/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 
-function normalizeUrl(url: string) {
-  return /^https?:\/\//i.test(url) ? url : `https://${url}`;
-}
+  if (plain.length <= 280) {
+    return plain;
+  }
 
-function renderContentWithLinks(content: string) {
-  const lines = content.split('\n');
-
-  return lines.map((line, lineIndex) => {
-    const parts = line.split(URL_TOKEN_PATTERN);
-    return (
-      <Fragment key={`line-${lineIndex}`}>
-        {parts.map((part, partIndex) => {
-          if (!part) {
-            return null;
-          }
-          if (!/^(https?:\/\/|www\.)/i.test(part)) {
-            return <Fragment key={`text-${lineIndex}-${partIndex}`}>{part}</Fragment>;
-          }
-
-          const href = normalizeUrl(part);
-          return (
-            <a
-              key={`url-${lineIndex}-${partIndex}`}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="break-all text-hyper-blue underline decoration-hyper-blue/60 underline-offset-2 hover:text-blue-300"
-              onClick={(event) => event.stopPropagation()}
-            >
-              {part}
-            </a>
-          );
-        })}
-        {lineIndex < lines.length - 1 ? '\n' : null}
-      </Fragment>
-    );
-  });
+  return `${plain.slice(0, 277)}...`;
 }
 
 export default function BriefingsHubDashboard() {
@@ -615,7 +595,7 @@ export default function BriefingsHubDashboard() {
                         <span className="inline-flex items-center gap-1"><BarChart3 className="h-3 w-3" />{new Date(brief.timestamp).toLocaleTimeString('en-US')}</span>
                       </div>
 
-                      <p className="mt-3 text-sm text-text-secondary">{brief.snippet}</p>
+                      <p className="mt-3 text-sm leading-6 text-text-secondary">{toReadableSnippet(brief.content)}</p>
 
                       <div className="mt-3 flex flex-wrap gap-2">
                         {brief.tags.map((tag) => (
@@ -698,8 +678,80 @@ export default function BriefingsHubDashboard() {
 
               <div className="rounded-2xl border border-border-default bg-bg-secondary p-5">
                 <p className="mb-3 text-xs uppercase tracking-[0.16em] text-text-muted">Raw Briefing</p>
-                <div className="whitespace-pre-wrap break-words font-mono text-sm text-text-primary">
-                  {renderContentWithLinks(selectedBrief.content)}
+                <div className="rounded-xl border border-border-default bg-bg-primary p-4">
+                  <Markdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      a: ({ node, ...props }) => {
+                        void node;
+                        return (
+                          <a
+                            {...props}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(event) => event.stopPropagation()}
+                            className="break-all text-hyper-blue underline decoration-hyper-blue/60 underline-offset-2 hover:text-blue-300"
+                          />
+                        );
+                      },
+                      h1: ({ node, ...props }) => {
+                        void node;
+                        return <h1 {...props} className="mb-3 mt-1 font-display text-2xl font-extrabold text-text-primary" />;
+                      },
+                      h2: ({ node, ...props }) => {
+                        void node;
+                        return <h2 {...props} className="mb-2 mt-5 font-display text-xl font-bold text-text-primary" />;
+                      },
+                      h3: ({ node, ...props }) => {
+                        void node;
+                        return <h3 {...props} className="mb-2 mt-4 text-base font-semibold text-text-primary" />;
+                      },
+                      p: ({ node, ...props }) => {
+                        void node;
+                        return <p {...props} className="mb-3 leading-7 text-text-secondary" />;
+                      },
+                      ul: ({ node, ...props }) => {
+                        void node;
+                        return <ul {...props} className="mb-3 list-disc space-y-1 pl-5 text-text-secondary" />;
+                      },
+                      ol: ({ node, ...props }) => {
+                        void node;
+                        return <ol {...props} className="mb-3 list-decimal space-y-1 pl-5 text-text-secondary" />;
+                      },
+                      li: ({ node, ...props }) => {
+                        void node;
+                        return <li {...props} className="leading-7" />;
+                      },
+                      strong: ({ node, ...props }) => {
+                        void node;
+                        return <strong {...props} className="font-semibold text-text-primary" />;
+                      },
+                      code: ({ node, ...props }) => {
+                        void node;
+                        return (
+                          <code
+                            {...props}
+                            className="rounded bg-bg-secondary px-1.5 py-0.5 font-mono text-[13px] text-text-primary"
+                          />
+                        );
+                      },
+                      pre: ({ node, ...props }) => {
+                        void node;
+                        return (
+                          <pre
+                            {...props}
+                            className="mb-4 overflow-x-auto rounded-lg border border-border-default bg-bg-secondary p-3 font-mono text-[13px] text-text-primary"
+                          />
+                        );
+                      },
+                      hr: ({ node, ...props }) => {
+                        void node;
+                        return <hr {...props} className="my-4 border-border-default" />;
+                      },
+                    }}
+                  >
+                    {selectedBrief.content}
+                  </Markdown>
                 </div>
               </div>
             </div>
