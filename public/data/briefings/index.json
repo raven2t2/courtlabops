@@ -1,244 +1,249 @@
 {
   "briefings": [
     {
-      "name": "weekly-brief-2026-02-22.md",
-      "updated": "2026-02-21T21:30:31.543Z",
-      "size": 11601
-    },
-    {
       "name": "weekly-strategy-brief-2026-02-15.md",
-      "updated": "2026-02-21T21:30:31.543Z",
+      "updated": "2026-02-22T01:00:31.716Z",
       "size": 11923
     },
     {
-      "name": "morning-ideas-2026-02-22.md",
-      "updated": "2026-02-21T21:30:31.542Z",
-      "size": 5627
+      "name": "weekly-brief-2026-02-22.md",
+      "updated": "2026-02-22T01:00:31.714Z",
+      "size": 11601
     },
     {
       "name": "pain-points-research-2026-02-17.md",
-      "updated": "2026-02-21T21:30:31.542Z",
+      "updated": "2026-02-22T01:00:31.711Z",
       "size": 6391
     },
     {
-      "name": "morning-ideas-2026-02-19.md",
-      "updated": "2026-02-21T21:30:31.541Z",
-      "size": 9740
+      "name": "morning-ideas-2026-02-22.md",
+      "updated": "2026-02-22T01:00:31.710Z",
+      "size": 5627
     },
     {
       "name": "morning-ideas-2026-02-20.md",
-      "updated": "2026-02-21T21:30:31.541Z",
+      "updated": "2026-02-22T01:00:31.709Z",
       "size": 7075
     },
     {
-      "name": "morning-ideas-2026-02-15.md",
-      "updated": "2026-02-21T21:30:31.540Z",
-      "size": 12068
-    },
-    {
-      "name": "morning-ideas-2026-02-16.md",
-      "updated": "2026-02-21T21:30:31.540Z",
-      "size": 9391
+      "name": "morning-ideas-2026-02-19.md",
+      "updated": "2026-02-22T01:00:31.708Z",
+      "size": 9740
     },
     {
       "name": "morning-ideas-2026-02-17.md",
-      "updated": "2026-02-21T21:30:31.540Z",
+      "updated": "2026-02-22T01:00:31.706Z",
       "size": 10664
     },
     {
-      "name": "midday-ideas-2026-02-18.md",
-      "updated": "2026-02-21T21:30:31.539Z",
-      "size": 6904
+      "name": "morning-ideas-2026-02-16.md",
+      "updated": "2026-02-22T01:00:31.705Z",
+      "size": 9391
     },
     {
-      "name": "midday-ideas-2026-02-20.md",
-      "updated": "2026-02-21T21:30:31.539Z",
-      "size": 8218
+      "name": "morning-ideas-2026-02-15.md",
+      "updated": "2026-02-22T01:00:31.703Z",
+      "size": 12068
+    },
+    {
+      "name": "midday-ideas-2026-02-22.md",
+      "updated": "2026-02-22T01:00:31.701Z",
+      "size": 5849
     },
     {
       "name": "morning-ideas-2026-02-12.md",
-      "updated": "2026-02-21T21:30:31.539Z",
+      "updated": "2026-02-22T01:00:31.701Z",
       "size": 5345
     },
     {
+      "name": "midday-ideas-2026-02-20.md",
+      "updated": "2026-02-22T01:00:31.699Z",
+      "size": 8218
+    },
+    {
+      "name": "midday-ideas-2026-02-18.md",
+      "updated": "2026-02-22T01:00:31.697Z",
+      "size": 6904
+    },
+    {
+      "name": "ideas-midday-feb12.md",
+      "updated": "2026-02-22T01:00:31.696Z",
+      "size": 4888
+    },
+    {
       "name": "afternoon-ideas-2026-02-20.md",
-      "updated": "2026-02-21T21:30:31.538Z",
+      "updated": "2026-02-22T01:00:31.694Z",
       "size": 13766
     },
     {
       "name": "afternoon-ideas-2026-02-21.md",
-      "updated": "2026-02-21T21:30:31.538Z",
+      "updated": "2026-02-22T01:00:31.694Z",
       "size": 8617
     },
     {
-      "name": "ideas-midday-feb12.md",
-      "updated": "2026-02-21T21:30:31.538Z",
-      "size": 4888
-    },
-    {
-      "name": "afternoon-ideas-2026-02-17.md",
-      "updated": "2026-02-21T21:30:31.537Z",
-      "size": 7996
-    },
-    {
       "name": "afternoon-ideas-2026-02-19.md",
-      "updated": "2026-02-21T21:30:31.537Z",
+      "updated": "2026-02-22T01:00:31.691Z",
       "size": 7241
     },
     {
-      "name": "2026-02-21-morning-ideas.md",
-      "updated": "2026-02-21T21:30:31.536Z",
-      "size": 14356
+      "name": "afternoon-ideas-2026-02-17.md",
+      "updated": "2026-02-22T01:00:31.688Z",
+      "size": 7996
     },
     {
       "name": "afternoon-ideas-2026-02-16.md",
-      "updated": "2026-02-21T21:30:31.536Z",
+      "updated": "2026-02-22T01:00:31.686Z",
       "size": 15694
     },
     {
-      "name": "2026-02-18-afternoon-ideas.md",
-      "updated": "2026-02-21T21:30:31.535Z",
-      "size": 11498
+      "name": "2026-02-21-morning-ideas.md",
+      "updated": "2026-02-22T01:00:31.684Z",
+      "size": 14356
     },
     {
       "name": "2026-02-18-morning-ideas.md",
-      "updated": "2026-02-21T21:30:31.535Z",
+      "updated": "2026-02-22T01:00:31.682Z",
       "size": 10838
     },
     {
-      "name": "2026-02-14-afternoon-ideas.md",
-      "updated": "2026-02-21T21:30:31.534Z",
-      "size": 7017
-    },
-    {
-      "name": "2026-02-14-midday-ideas.md",
-      "updated": "2026-02-21T21:30:31.534Z",
-      "size": 7413
+      "name": "2026-02-18-afternoon-ideas.md",
+      "updated": "2026-02-22T01:00:31.681Z",
+      "size": 11498
     },
     {
       "name": "2026-02-14-morning-ideas.md",
-      "updated": "2026-02-21T21:30:31.534Z",
+      "updated": "2026-02-22T01:00:31.679Z",
       "size": 6854
     },
     {
-      "name": "pain-point-research-2026-02-11.json",
-      "updated": "2026-02-21T21:30:31.531Z",
-      "size": 776
+      "name": "2026-02-14-midday-ideas.md",
+      "updated": "2026-02-22T01:00:31.677Z",
+      "size": 7413
+    },
+    {
+      "name": "2026-02-14-afternoon-ideas.md",
+      "updated": "2026-02-22T01:00:31.676Z",
+      "size": 7017
     },
     {
       "name": "sales-briefing-2026-02-13.json",
-      "updated": "2026-02-21T21:30:31.531Z",
+      "updated": "2026-02-22T01:00:31.672Z",
       "size": 8305
     },
     {
-      "name": "morning-ideas-2026-02-12.json",
-      "updated": "2026-02-21T21:30:31.530Z",
-      "size": 2294
-    },
-    {
-      "name": "morning-ideas-2026-02-13.json",
-      "updated": "2026-02-21T21:30:31.530Z",
-      "size": 7479
+      "name": "pain-point-research-2026-02-11.json",
+      "updated": "2026-02-22T01:00:31.670Z",
+      "size": 776
     },
     {
       "name": "outreach-drafts-2026-02-11.json",
-      "updated": "2026-02-21T21:30:31.530Z",
+      "updated": "2026-02-22T01:00:31.669Z",
       "size": 872
     },
     {
       "name": "pain-point-outreach-2026-02-11.json",
-      "updated": "2026-02-21T21:30:31.530Z",
+      "updated": "2026-02-22T01:00:31.669Z",
       "size": 897
     },
     {
-      "name": "evening-wrap-2026-02-11.json",
-      "updated": "2026-02-21T21:30:31.529Z",
-      "size": 1055
+      "name": "morning-ideas-2026-02-12.json",
+      "updated": "2026-02-22T01:00:31.668Z",
+      "size": 2294
     },
     {
-      "name": "lead-scoring-2026-02-11.json",
-      "updated": "2026-02-21T21:30:31.529Z",
-      "size": 736
+      "name": "morning-ideas-2026-02-13.json",
+      "updated": "2026-02-22T01:00:31.668Z",
+      "size": 7479
     },
     {
       "name": "midday-ideas-2026-02-11.json",
-      "updated": "2026-02-21T21:30:31.529Z",
+      "updated": "2026-02-22T01:00:31.667Z",
       "size": 1096
     },
     {
       "name": "morning-ideas-2026-02-11.json",
-      "updated": "2026-02-21T21:30:31.529Z",
+      "updated": "2026-02-22T01:00:31.667Z",
       "size": 1096
     },
     {
-      "name": "briefing-2026-02-07.json",
-      "updated": "2026-02-21T21:30:31.528Z",
-      "size": 3422
+      "name": "lead-scoring-2026-02-11.json",
+      "updated": "2026-02-22T01:00:31.666Z",
+      "size": 736
+    },
+    {
+      "name": "evening-wrap-2026-02-11.json",
+      "updated": "2026-02-22T01:00:31.665Z",
+      "size": 1055
     },
     {
       "name": "briefing-2026-02-08.json",
-      "updated": "2026-02-21T21:30:31.528Z",
+      "updated": "2026-02-22T01:00:31.664Z",
       "size": 3687
     },
     {
+      "name": "briefing-2026-02-07.json",
+      "updated": "2026-02-22T01:00:31.663Z",
+      "size": 3422
+    },
+    {
+      "name": "briefing-2026-02-06.json",
+      "updated": "2026-02-22T01:00:31.662Z",
+      "size": 3396
+    },
+    {
+      "name": "briefing-2026-02-05.json",
+      "updated": "2026-02-22T01:00:31.661Z",
+      "size": 3421
+    },
+    {
+      "name": "briefing-2026-02-02.json",
+      "updated": "2026-02-22T01:00:31.660Z",
+      "size": 3422
+    },
+    {
       "name": "briefing-2026-02-03.json",
-      "updated": "2026-02-21T21:30:31.527Z",
+      "updated": "2026-02-22T01:00:31.660Z",
       "size": 3408
     },
     {
       "name": "briefing-2026-02-04.json",
-      "updated": "2026-02-21T21:30:31.527Z",
+      "updated": "2026-02-22T01:00:31.660Z",
       "size": 3436
     },
     {
-      "name": "briefing-2026-02-05.json",
-      "updated": "2026-02-21T21:30:31.527Z",
-      "size": 3421
-    },
-    {
-      "name": "briefing-2026-02-06.json",
-      "updated": "2026-02-21T21:30:31.527Z",
-      "size": 3396
-    },
-    {
-      "name": "autonomous-executor-2026-02-11.json",
-      "updated": "2026-02-21T21:30:31.526Z",
-      "size": 1118
-    },
-    {
       "name": "briefing-2026-02-01.json",
-      "updated": "2026-02-21T21:30:31.526Z",
+      "updated": "2026-02-22T01:00:31.658Z",
       "size": 3408
     },
     {
-      "name": "briefing-2026-02-02.json",
-      "updated": "2026-02-21T21:30:31.526Z",
-      "size": 3422
-    },
-    {
-      "name": "2026-02-09.json",
-      "updated": "2026-02-21T21:30:31.525Z",
-      "size": 2154
-    },
-    {
-      "name": "afternoon-ideas-2026-02-11.json",
-      "updated": "2026-02-21T21:30:31.525Z",
-      "size": 1328
-    },
-    {
       "name": "afternoon-ideas-2026-02-12.json",
-      "updated": "2026-02-21T21:30:31.525Z",
+      "updated": "2026-02-22T01:00:31.657Z",
       "size": 3826
     },
     {
+      "name": "autonomous-executor-2026-02-11.json",
+      "updated": "2026-02-22T01:00:31.657Z",
+      "size": 1118
+    },
+    {
+      "name": "afternoon-ideas-2026-02-11.json",
+      "updated": "2026-02-22T01:00:31.655Z",
+      "size": 1328
+    },
+    {
+      "name": "2026-02-09.json",
+      "updated": "2026-02-22T01:00:31.654Z",
+      "size": 2154
+    },
+    {
       "name": "2026-02-08.json",
-      "updated": "2026-02-21T21:30:31.524Z",
+      "updated": "2026-02-22T01:00:31.653Z",
       "size": 2031
     },
     {
       "name": "index.json",
-      "updated": "2026-02-21T20:30:58.985Z",
-      "size": 5927
+      "updated": "2026-02-21T21:30:31.575Z",
+      "size": 6049
     },
     {
       "name": "2026-02-20-midday-ideas.md",
@@ -246,5 +251,5 @@
       "size": 8218
     }
   ],
-  "lastSync": "2026-02-21T21:30:31.575Z"
+  "lastSync": "2026-02-22T01:00:31.758Z"
 }
