@@ -147,6 +147,21 @@
         "status": "draft"
       },
       {
+        "id": "w2-001c",
+        "date": "2026-02-25",
+        "day": "Wednesday",
+        "scheduledTime": "12:00",
+        "platforms": ["instagram"],
+        "type": "photo",
+        "assetFile": "009_VnKR2nYY42Tq0aTurcHC.jpg",
+        "caption": "Midweek check-in: How's the progress tracking going?\n\nIf you're not measuring it, you're guessing. And champions don't guess.\n\nCourtLab gives you the data. Coaches use the data. Players become undeniable.\n\nWhat's your baseline this week?",
+        "hashtags": "set2",
+        "firstComment": "Track your improvements with verified data 📊",
+        "theme": "Data philosophy / Midweek motivation",
+        "status": "pending",
+        "charCount": 240
+      },
+      {
         "id": "w2-001b",
         "date": "2026-02-20",
         "day": "Friday",
