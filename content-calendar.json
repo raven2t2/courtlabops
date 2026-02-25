@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-20T13:00:00+10:30",
+  "lastUpdated": "2026-02-25T13:00:00+10:30",
   "timezone": "Australia/Adelaide",
   "uploadPostProfile": "courtlab",
   "facebookPageId": "948912778306299",
@@ -205,6 +205,21 @@
         "theme": "Training tips",
         "status": "pending",
         "charCount": 310
+      },
+      {
+        "id": "w2-004",
+        "date": "2026-02-26",
+        "day": "Thursday",
+        "scheduledTime": "12:00",
+        "platforms": ["instagram"],
+        "type": "photo",
+        "assetFile": "016_6nYvXedsKALmTQwHB95c.jpg",
+        "caption": "Mid-week truth: You can't improve what you don't measure. \n\nCoaches know this. The best ones track everything — shooting %, decision speed, off-ball movement. They know their players better than the players know themselves. \n\nThat's not nitpicking. That's excellence. \n\nCourtLab gives you the data. What you do with it is up to you. Become undeniable.",
+        "hashtags": "set2",
+        "firstComment": "Coaches: What's the one stat you wish you could track? 👇",
+        "theme": "Data philosophy / Coach education",
+        "status": "pending",
+        "charCount": 285
       }
     ]
   },

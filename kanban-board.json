@@ -5,7 +5,7 @@
       "id": "drafted",
       "name": "📋 Drafted",
       "color": "#e2e8f0",
-      "leads": ["SA-001", "SA-002", "SA-003", "SA-004", "SA-005", "SA-006", "SA-007", "SA-008", "SA-009", "SA-010", "SA-015", "SA-011", "VIC-006", "VIC-001"],
+      "leads": ["SA-001", "SA-002", "SA-003", "SA-004", "SA-005", "SA-006", "SA-007", "SA-008", "SA-009", "SA-010", "SA-015", "SA-011", "VIC-006", "VIC-001", "VIC-003", "VIC-004"],
       "tasks": ["TW-001", "TW-002", "TW-003", "TW-004", "TW-005", "TW-006"]
     },
     {
@@ -88,5 +88,5 @@
       "account": "@EstherCourtLab"
     }
   },
-  "lastUpdated": "2026-02-20"
+  "lastUpdated": "2026-02-25"
 }
