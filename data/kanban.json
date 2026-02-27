@@ -125,6 +125,28 @@
           "priority": "High",
           "tags": ["outreach", "vic-clubs", "nbl1-south", "metro"],
           "status": "Drafted"
+        },
+        {
+          "id": "kb-011",
+          "title": "Mount Lofty Mustangs outreach (SA-009)",
+          "description": "Personalized outreach to growing Adelaide Hills basketball club. Strong youth development focus, family-oriented culture, new facility investments. Anchor: 'Adelaide Hills fastest-growing basketball region' + dual-gender junior/senior programs.",
+          "org": "Sales",
+          "owner": "Assistant",
+          "due": "Feb 28",
+          "priority": "High",
+          "tags": ["outreach", "sa-clubs", "growth-club", "youth-focus"],
+          "status": "Drafted"
+        },
+        {
+          "id": "kb-012",
+          "title": "Bendigo Braves outreach (VIC-029)",
+          "description": "Personalized outreach to regional Victoria powerhouse. Country basketball leader, 50+ junior teams, strong coach network. Anchor: 'Bendigo's pathway to state/national teams' + coach development opportunity.",
+          "org": "Sales",
+          "owner": "Assistant",
+          "due": "Feb 28",
+          "priority": "High",
+          "tags": ["outreach", "vic-clubs", "regional", "coach-network"],
+          "status": "Drafted"
         }
       ]
     },
