@@ -14,11 +14,19 @@
       "frequency": "1-2 feed posts/day",
       "reelsPerWeek": 3,
       "storiesPerDay": "3-5",
-      "bestTimes": ["07:00", "12:00", "18:00"]
+      "bestTimes": [
+        "07:00",
+        "12:00",
+        "18:00"
+      ]
     },
     "facebook": {
       "frequency": "3-4x/week",
-      "focus": ["Event promos", "Club partnerships", "Parent-focused content"]
+      "focus": [
+        "Event promos",
+        "Club partnerships",
+        "Parent-focused content"
+      ]
     }
   },
   "hashtagSets": {
@@ -58,7 +66,9 @@
         "date": "2026-02-09",
         "day": "Monday",
         "scheduledTime": "07:00",
-        "platforms": ["instagram"],
+        "platforms": [
+          "instagram"
+        ],
         "type": "photo",
         "assetFile": "001_bFA7kaudBWW8x5ch03Qi.jpg",
         "caption": "Monday motivation: The best players don't just practice — they track. \n\nEvery rep counts when you can see your progress in real data. Verified combine times. No guesswork. No AI approximations. Just the truth about where you are and where you're headed. \n\nTag a player who's ready to stop guessing and start improving. \n\nLink in bio to get early access.",
@@ -73,7 +83,10 @@
         "date": "2026-02-10",
         "day": "Tuesday",
         "scheduledTime": "12:00",
-        "platforms": ["instagram", "facebook"],
+        "platforms": [
+          "instagram",
+          "facebook"
+        ],
         "type": "photo",
         "assetFile": "015_vDQj23Q5wIQQueNZ9oSj.jpg",
         "caption": "8 weeks out from Easter Classic 2026. 📍The ARC, Campbelltown. \n\nThis isn't just another tournament. It's where SA's best young players put their verified combine data on the line. \n\nCoaches: Want to see who actually improved this offseason? The numbers don't lie. \n\nPlayers: Be undeniable by April. Start tracking now.",
@@ -88,7 +101,9 @@
         "date": "2026-02-12",
         "day": "Thursday",
         "scheduledTime": "18:00",
-        "platforms": ["instagram"],
+        "platforms": [
+          "instagram"
+        ],
         "type": "photo",
         "assetFile": "022_VmGJgfT3mHSGMVYVl2Ra.jpg",
         "caption": "Your 10,000 hours mean nothing if you don't know what you're improving. \n\nWe've all seen it — players who train constantly but plateau. The difference? Feedback loops. \n\nCourtLab gives coaches (and parents) the data to adjust training before bad habits cement. \n\nVerified times. Measurable progress. Become undeniable.",
@@ -103,7 +118,9 @@
         "date": "2026-02-13",
         "day": "Friday",
         "scheduledTime": "15:00",
-        "platforms": ["instagram"],
+        "platforms": [
+          "instagram"
+        ],
         "type": "photo",
         "assetFile": "003_kPqR7vWxZ2Yj1nFm4Lsb.jpg",
         "caption": "Real question for coaches: Do you know the ONE stat that separates good teams from great teams?\n\nIt's not points. It's not rebounds. \n\nIt's decision-making consistency. Turnovers per possession under pressure. Efficiency in the last 5 minutes of close games.\n\nEvery elite program tracks this. Most programs don't.\n\nThat's the gap. That's where improvement happens.\n\nWhat metric would change your season if you could see it clearly?",
@@ -118,7 +135,10 @@
         "date": "2026-02-14",
         "day": "Saturday",
         "scheduledTime": "08:00",
-        "platforms": ["instagram", "facebook"],
+        "platforms": [
+          "instagram",
+          "facebook"
+        ],
         "type": "photo",
         "assetFile": "008_XB4zHJn8YCeDsE63sBzf.jpg",
         "caption": "Saturday sessions hit different when you have last week's baseline. \n\nCourtLab isn't about replacing coaches — it's about giving them the one thing they can't argue with: The Truth. \n\nData doesn't pick favorites. It just shows who's putting in the work.",
@@ -138,7 +158,9 @@
         "date": "2026-02-16",
         "day": "Monday",
         "scheduledTime": "07:00",
-        "platforms": ["instagram"],
+        "platforms": [
+          "instagram"
+        ],
         "type": "photo",
         "assetFile": "TBD",
         "caption": "New week. New baseline. Same goal: Become undeniable. \n\nWhat metric are you improving this week?",
@@ -151,7 +173,9 @@
         "date": "2026-02-25",
         "day": "Wednesday",
         "scheduledTime": "12:00",
-        "platforms": ["instagram"],
+        "platforms": [
+          "instagram"
+        ],
         "type": "photo",
         "assetFile": "009_VnKR2nYY42Tq0aTurcHC.jpg",
         "caption": "Midweek check-in: How's the progress tracking going?\n\nIf you're not measuring it, you're guessing. And champions don't guess.\n\nCourtLab gives you the data. Coaches use the data. Players become undeniable.\n\nWhat's your baseline this week?",
@@ -166,7 +190,9 @@
         "date": "2026-02-20",
         "day": "Friday",
         "scheduledTime": "17:00",
-        "platforms": ["instagram"],
+        "platforms": [
+          "instagram"
+        ],
         "type": "photo",
         "assetFile": "027_xyz123.jpg",
         "caption": "Friday feels different when you know your numbers. 📊\n\nThis week: Shot selection %. FT consistency. Defensive stops per game. \n\nCoaches see patterns. Players see improvement. Parents see progress.\n\nThat's the compounding effect of verified data.\n\nWhat's your baseline going into Week 3?",
@@ -181,7 +207,10 @@
         "date": "2026-02-18",
         "day": "Wednesday",
         "scheduledTime": "12:00",
-        "platforms": ["instagram", "facebook"],
+        "platforms": [
+          "instagram",
+          "facebook"
+        ],
         "type": "photo",
         "assetFile": "015_vDQj23Q5wIQQueNZ9oSj.jpg",
         "caption": "6 weeks to Easter Classic. The ARC, Campbelltown. \n\nWill your players show up with verified combine data — or just hope they're ready?",
@@ -196,7 +225,9 @@
         "date": "2026-02-21",
         "day": "Saturday",
         "scheduledTime": "18:00",
-        "platforms": ["instagram"],
+        "platforms": [
+          "instagram"
+        ],
         "type": "photo",
         "assetFile": "024_a0FKcWEKRVKTTeih5aKY.jpg",
         "caption": "Training tip: Track the boring stuff. \n\nEveryone posts highlights. But improvement happens in the reps nobody sees. \n\nThe 100 free throws after practice. The 50 sprints when you're already tired. The footwork drills that feel unnecessary — until they save you on defense.",
@@ -211,7 +242,9 @@
         "date": "2026-02-26",
         "day": "Thursday",
         "scheduledTime": "12:00",
-        "platforms": ["instagram"],
+        "platforms": [
+          "instagram"
+        ],
         "type": "photo",
         "assetFile": "016_6nYvXedsKALmTQwHB95c.jpg",
         "caption": "Mid-week truth: You can't improve what you don't measure. \n\nCoaches know this. The best ones track everything — shooting %, decision speed, off-ball movement. They know their players better than the players know themselves. \n\nThat's not nitpicking. That's excellence. \n\nCourtLab gives you the data. What you do with it is up to you. Become undeniable.",
@@ -220,6 +253,45 @@
         "theme": "Data philosophy / Coach education",
         "status": "pending",
         "charCount": 285
+      },
+      {
+        "id": "w2-005",
+        "date": "2026-02-28",
+        "day": "Friday",
+        "scheduledTime": "07:00",
+        "platforms": [
+          "instagram"
+        ],
+        "type": "photo",
+        "assetFile": "014_j9h4aUGWS4WtxGifPC3k.jpg",
+        "caption": "Friday checkin: Real talk about player development. \n\nWe see it all the time — players grinding every day but not seeing progress. Why? Because they're not measuring the right things.\n\nCoaching is about creating feedback loops. Data is what makes those loops real.\n\nCourtLab gives you (and your coaches) the truth: improvement tracked, documented, undeniable.\n\nWhat's one stat you wish you could measure consistently for your players?",
+        "hashtags": "set3",
+        "firstComment": "Tag a coach who tracks their players 👇",
+        "theme": "Data philosophy / Coach education",
+        "status": "pending",
+        "charCount": 285
+      }
+    ]
+  },
+  "week3": {
+    "weekOf": "2026-02-23",
+    "plannedPosts": [
+      {
+        "id": "w3-001",
+        "date": "2026-03-03",
+        "day": "Tuesday",
+        "scheduledTime": "12:00",
+        "platforms": [
+          "instagram"
+        ],
+        "type": "photo",
+        "assetFile": "017_yVgsNn08K4dQN01zwgOn.jpg",
+        "caption": "Tuesday reality check: Progress isn't linear. \n\nBut you know what is? The pattern when you track it. A player shoots 60% one week, 58% the next. Most coaches ignore that. Elite coaches see the trend—maybe it's form, maybe it's confidence, maybe it's pressure.\n\nCourtLab turns noise into signal. That's the edge.\n\nWhat metric would unlock your team's next level?",
+        "hashtags": "set2",
+        "firstComment": "Coaches: What's your most underrated stat? 👇",
+        "theme": "Data philosophy / Coach education",
+        "status": "pending",
+        "charCount": 284
       }
     ]
   },

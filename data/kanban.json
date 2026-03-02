@@ -1,7 +1,7 @@
 {
-  "version": "2026-02-07",
-  "lastUpdated": "2026-02-07T14:06:00+07:00",
-  "updatedBy": "Esther (CourtLab PM)",
+  "version": "2026-03-02",
+  "lastUpdated": "2026-03-02T13:00:00+10:30",
+  "updatedBy": "Afternoon work block executor",
   "columns": [
     {
       "id": "backlog",
@@ -146,6 +146,28 @@
           "due": "Feb 28",
           "priority": "High",
           "tags": ["outreach", "vic-clubs", "regional", "coach-network"],
+          "status": "Drafted"
+        },
+        {
+          "id": "kb-013",
+          "title": "North Adelaide Rockets outreach (SA-018)",
+          "description": "Personalized outreach to NBL1 Central club with strong pathways. NABC major administrative organization, dual-gender competitive program, professional development focus.",
+          "org": "Sales",
+          "owner": "Assistant",
+          "due": "Mar 07",
+          "priority": "High",
+          "tags": ["outreach", "sa-clubs", "nbl1-central", "semi-professional"],
+          "status": "Drafted"
+        },
+        {
+          "id": "kb-014",
+          "title": "Waverley Falcons outreach (VIC-030)",
+          "description": "Personalized outreach to NBL1 South Melbourne metro powerhouse. Strong juniors program, neighborhood location advantage in bayside Melbourne, competitive pathway structure.",
+          "org": "Sales",
+          "owner": "Assistant",
+          "due": "Mar 07",
+          "priority": "High",
+          "tags": ["outreach", "vic-clubs", "nbl1-south", "metro-melbourne"],
           "status": "Drafted"
         }
       ]
